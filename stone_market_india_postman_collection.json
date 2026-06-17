@@ -1,33 +1,38 @@
 {
   "info": {
     "name": "Stone Market India API",
-    "description": "API collection for Stone Market India Backend",
+    "description": "Complete API collection for Stone Market India Backend",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5000/api/v1",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "YOUR_JWT_TOKEN",
+      "type": "string"
+    }
+  ],
   "item": [
     {
-      "name": "Auth",
+      "name": "1. Authentication",
       "item": [
         {
-          "name": "Register",
+          "name": "Register User/Vendor",
           "request": {
             "method": "POST",
-            "header": [],
+            "url": "{{baseUrl}}/auth/register",
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"name\": \"John Doe\",\n    \"mobile\": \"9876543210\",\n    \"role\": \"vendor\"\n}",
+              "raw": "{\n  \"name\": \"John Doe\",\n  \"mobile\": \"9876543210\",\n  \"role\": \"vendor\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
                 }
               }
-            },
-            "url": {
-              "raw": "http://localhost:5000/api/v1/auth/register",
-              "protocol": "http",
-              "host": ["localhost"],
-              "port": "5000",
-              "path": ["api", "v1", "auth", "register"]
             }
           }
         },
@@ -35,48 +40,273 @@
           "name": "Verify OTP",
           "request": {
             "method": "POST",
-            "header": [],
+            "url": "{{baseUrl}}/auth/verify-otp",
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"userId\": \"USER_ID_HERE\",\n    \"otp\": \"123456\"\n}",
+              "raw": "{\n  \"userId\": \"USER_ID\",\n  \"otp\": \"123456\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
                 }
               }
-            },
-            "url": {
-              "raw": "http://localhost:5000/api/v1/auth/verify-otp",
-              "protocol": "http",
-              "host": ["localhost"],
-              "port": "5000",
-              "path": ["api", "v1", "auth", "verify-otp"]
+            }
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/auth/login",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"mobile\": \"9876543210\",\n  \"otp\": \"123456\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Get Current User",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/auth/me",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "2. Vendors",
+      "item": [
+        {
+          "name": "List Active Vendors",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/vendors"
+          }
+        },
+        {
+          "name": "Create/Update Profile",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/vendors/profile",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"businessName\": \"Premium Marble\",\n  \"category\": \"Mining\",\n  \"address\": {\n    \"state\": \"Rajasthan\",\n    \"city\": \"Jaipur\"\n  },\n  \"location\": {\n    \"type\": \"Point\",\n    \"coordinates\": [\n      75.7873,\n      26.9124\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Get Vendor by Slug",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/vendors/premium-marble"
+          }
+        }
+      ]
+    },
+    {
+      "name": "3. Products",
+      "item": [
+        {
+          "name": "List Products",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/products"
+          }
+        },
+        {
+          "name": "Add Product",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/products",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"White Marble Slab\",\n  \"category\": \"Marble\",\n  \"price\": 1500,\n  \"unit\": \"sq_ft\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Get Product by ID",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/products/PRODUCT_ID"
+          }
+        }
+      ]
+    },
+    {
+      "name": "4. Inquiries",
+      "item": [
+        {
+          "name": "Submit Inquiry",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/inquiries",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"productCategory\": \"Marble\",\n  \"message\": \"I need 1000 sq_ft of white marble.\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Get Sent Inquiries",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/inquiries/sent",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Get Received Inquiries",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/inquiries/received",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "5. Admin",
+      "item": [
+        {
+          "name": "Admin Dashboard Stats",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/admin/analytics",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Verify Vendor",
+          "request": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/admin/vendors/VENDOR_ID/verify",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"gstVerified\": true,\n  \"documentsVerified\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
             }
           }
         }
       ]
     },
     {
-      "name": "Search",
+      "name": "6. Advertisements",
+      "item": [
+        {
+          "name": "Get Active Ads",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/ads"
+          }
+        },
+        {
+          "name": "Create Ad (Admin)",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/ads",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Summer Sale\",\n  \"adType\": \"home_banner\",\n  \"imageUrl\": \"http://example.com/img.jpg\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "7. Search",
       "item": [
         {
           "name": "Global Search",
           "request": {
             "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "http://localhost:5000/api/v1/search?q=Marble",
-              "protocol": "http",
-              "host": ["localhost"],
-              "port": "5000",
-              "path": ["api", "v1", "search"],
-              "query": [
-                {
-                  "key": "q",
-                  "value": "Marble"
-                }
-              ]
-            }
+            "url": "{{baseUrl}}/search?q=Marble"
+          }
+        },
+        {
+          "name": "Nearby Search",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/search/nearby?lat=26.9124&lng=75.7873&radius=50"
           }
         }
       ]
