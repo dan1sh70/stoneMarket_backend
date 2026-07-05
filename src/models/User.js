@@ -16,6 +16,8 @@ const userSchema = new mongoose.Schema({
   inquiryHistory: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Inquiry' }],
   preferredState: String,
   preferredCity: String,
+  resetPasswordToken: String,
+  resetPasswordExpire: Date,
 }, { timestamps: true });
 
 module.exports = mongoose.model('User', userSchema);

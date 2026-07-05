@@ -40,6 +40,7 @@ app.use('/api/v1/inquiries', require('./src/routes/inquiries'));
 app.use('/api/v1/search', require('./src/routes/search'));
 app.use('/api/v1/admin', protect, authorize('admin'), require('./src/routes/admin'));
 app.use('/api/v1/ads', require('./src/routes/ads'));
+app.use('/api/v1/users', require('./src/routes/users'));
 // ... other routes
 
 // Base Route

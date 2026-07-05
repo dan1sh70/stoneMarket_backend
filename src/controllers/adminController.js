@@ -117,12 +117,13 @@ exports.updateNews = async (req, res, next) => {
 
 // --- Notifications ---
 
+const { sendPushNotification } = require('../services/fcmService');
+
 exports.sendPushNotification = async (req, res, next) => {
   try {
     const { title, body, target } = req.body;
-    // Mock push notification logic
-    console.log(`[MOCK FCM PUSH] To: ${target} | Title: ${title} | Body: ${body}`);
-    res.json({ message: 'Push notification sent (Mock)' });
+    await sendPushNotification(target, title, body);
+    res.json({ message: 'Push notification sent' });
   } catch (err) { next(err); }
 };
 

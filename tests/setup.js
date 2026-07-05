@@ -1,6 +1,12 @@
 const mongoose = require('mongoose');
 const { MongoMemoryServer } = require('mongodb-memory-server');
 
+jest.mock('nodemailer', () => ({
+  createTransport: jest.fn().mockReturnValue({
+    sendMail: jest.fn().mockResolvedValue({ messageId: 'mock-id' })
+  })
+}));
+
 let mongoServer;
 
 process.env.JWT_SECRET = 'secret';

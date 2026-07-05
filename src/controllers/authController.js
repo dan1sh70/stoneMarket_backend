@@ -2,6 +2,9 @@ const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const Joi = require('joi');
+const crypto = require('crypto');
+const sendSMS = require('../services/smsService');
+const sendEmail = require('../services/emailService');
 
 // Helper to generate JWT
 const generateToken = (id, role) => {
@@ -43,8 +46,7 @@ exports.register = async (req, res, next) => {
     }
 
     const otpCode = generateOTP();
-    // In production, integrate SMS API here
-    console.log(`[MOCK SMS] OTP for ${mobile} is ${otpCode}`);
+    await sendSMS(mobile, `OTP for ${mobile} is ${otpCode}`);
 
     const user = await User.create({
       name,
@@ -163,8 +165,7 @@ exports.resendOTP = async (req, res, next) => {
     if (!user) return res.status(404).json({ message: 'User not found' });
 
     const otpCode = generateOTP();
-    // In production, integrate SMS API here
-    console.log(`[MOCK SMS] Resent OTP for ${mobile} is ${otpCode}`);
+    await sendSMS(mobile, `Resent OTP for ${mobile} is ${otpCode}`);
 
     user.otp = {
       code: otpCode,
@@ -207,23 +208,96 @@ exports.logout = async (req, res, next) => {
   }
 };
 
-// @desc    Forgot password (mock)
+// @desc    Forgot password
 // @route   POST /api/v1/auth/forgot-password
 // @access  Public
 exports.forgotPassword = async (req, res, next) => {
   try {
-    res.json({ message: 'Password reset link sent to email (Mock)' });
+    const { email } = req.body;
+    if (!email) {
+      return res.status(400).json({ message: 'Please provide an email address' });
+    }
+
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ message: 'No account found with this email' });
+    }
+
+    // Generate reset token
+    const resetToken = crypto.randomBytes(20).toString('hex');
+
+    // Hash token and set to resetPasswordToken field
+    user.resetPasswordToken = crypto
+      .createHash('sha256')
+      .update(resetToken)
+      .digest('hex');
+
+    // Set expire (10 minutes)
+    user.resetPasswordExpire = Date.now() + 10 * 60 * 1000;
+
+    await user.save();
+
+    // Create reset URL
+    const clientUrl = process.env.CLIENT_URL || 'http://localhost:3000';
+    const resetUrl = `${clientUrl}/reset-password/${resetToken}`;
+
+    const message = `You are receiving this email because you (or someone else) have requested the reset of a password. Please use the following token or link to reset your password:\n\nToken: ${resetToken}\n\nLink: ${resetUrl}`;
+
+    try {
+      await sendEmail({
+        email: user.email,
+        subject: 'Stone Market India - Password Reset Request',
+        message
+      });
+
+      res.json({ message: 'Password reset link sent to email' });
+    } catch (err) {
+      user.resetPasswordToken = undefined;
+      user.resetPasswordExpire = undefined;
+      await user.save();
+      return res.status(500).json({ message: 'Email could not be sent' });
+    }
   } catch (err) {
     next(err);
   }
 };
 
-// @desc    Reset password (mock)
+// @desc    Reset password
 // @route   POST /api/v1/auth/reset-password
 // @access  Public
 exports.resetPassword = async (req, res, next) => {
   try {
-    res.json({ message: 'Password reset successful (Mock)' });
+    const { token, password } = req.body;
+    if (!token || !password) {
+      return res.status(400).json({ message: 'Token and new password are required' });
+    }
+
+    // Get hashed token
+    const hashedToken = crypto
+      .createHash('sha256')
+      .update(token)
+      .digest('hex');
+
+    const user = await User.findOne({
+      resetPasswordToken: hashedToken,
+      resetPasswordExpire: { $gt: Date.now() }
+    });
+
+    if (!user) {
+      return res.status(400).json({ message: 'Invalid or expired reset token' });
+    }
+
+    // Set new password
+    const salt = await bcrypt.genSalt(10);
+    user.password = await bcrypt.hash(password, salt);
+
+    // Clear reset password fields
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpire = undefined;
+
+    await user.save();
+
+    res.json({ message: 'Password reset successful' });
   } catch (err) {
     next(err);
   }

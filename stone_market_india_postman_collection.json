@@ -80,6 +80,38 @@
               }
             ]
           }
+        },
+        {
+          "name": "Forgot Password",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/auth/forgot-password",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"user@example.com\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Reset Password",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/auth/reset-password",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"token\": \"RESET_TOKEN\",\n  \"password\": \"new_secure_password\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
         }
       ]
     },
@@ -307,6 +339,24 @@
           "request": {
             "method": "GET",
             "url": "{{baseUrl}}/search/nearby?lat=26.9124&lng=75.7873&radius=50"
+          }
+        }
+      ]
+    },
+    {
+      "name": "8. Users",
+      "item": [
+        {
+          "name": "Get Saved Vendors",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/users/favorites",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ]
           }
         }
       ]
