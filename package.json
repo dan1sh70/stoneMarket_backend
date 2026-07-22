@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "dev": "node server.js",
+    "seed": "node src/scripts/seed.js",
     "test": "cross-env NODE_ENV=test jest"
   },
   "dependencies": {

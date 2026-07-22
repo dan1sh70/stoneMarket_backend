@@ -80,12 +80,16 @@ exports.verifyOTP = async (req, res, next) => {
     const user = await User.findOne({ mobile });
     if (!user) return res.status(404).json({ message: 'User not found' });
 
-    if (!user.otp || user.otp.code !== code) {
-      return res.status(400).json({ message: 'Invalid OTP' });
-    }
+    if (mobile === '9999999999' && code === '123456') {
+      // Bypass OTP checks for demo user
+    } else {
+      if (!user.otp || user.otp.code !== code) {
+        return res.status(400).json({ message: 'Invalid OTP' });
+      }
 
-    if (new Date() > user.otp.expiresAt) {
-      return res.status(400).json({ message: 'OTP expired' });
+      if (new Date() > user.otp.expiresAt) {
+        return res.status(400).json({ message: 'OTP expired' });
+      }
     }
 
     // Activate user
@@ -121,11 +125,15 @@ exports.login = async (req, res, next) => {
       user = await User.findOne({ mobile });
       if (!user) return res.status(404).json({ message: 'User not found' });
       
-      if (!user.otp || user.otp.code !== otp || new Date() > user.otp.expiresAt) {
-        return res.status(401).json({ message: 'Invalid or expired OTP' });
+      if (mobile === '9999999999' && otp === '123456') {
+        // Bypass for demo user
+      } else {
+        if (!user.otp || user.otp.code !== otp || new Date() > user.otp.expiresAt) {
+          return res.status(401).json({ message: 'Invalid or expired OTP' });
+        }
+        user.otp = undefined;
+        await user.save();
       }
-      user.otp = undefined;
-      await user.save();
     } else if (email && password) {
       user = await User.findOne({ email });
       if (!user) return res.status(404).json({ message: 'Invalid credentials' });

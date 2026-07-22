@@ -16,8 +16,8 @@ COPY . .
 # Expose the port the app runs on
 EXPOSE 5000
 
-# Set Node environment to production
-ENV NODE_ENV=production
+# Set Node environment to development
+ENV NODE_ENV=development
 
 # Start the application
-CMD ["npm", "start"]
+CMD ["npm", "run", "dev"]

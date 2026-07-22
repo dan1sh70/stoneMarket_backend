@@ -69,6 +69,22 @@
           }
         },
         {
+          "name": "Demo Login",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/auth/login",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"mobile\": \"9999999999\",\n  \"otp\": \"123456\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
           "name": "Get Current User",
           "request": {
             "method": "GET",
