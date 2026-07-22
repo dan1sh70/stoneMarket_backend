@@ -6,7 +6,8 @@ const protect = (req, res, next) => {
   if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
     try {
       token = req.headers.authorization.split(' ')[1];
-      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      const secret = process.env.JWT_SECRET || 'fallback_super_secret_key_for_testing';
+      const decoded = jwt.verify(token, secret);
       
       // We would ideally fetch the user from DB and attach to req.user here
       req.user = decoded; 
