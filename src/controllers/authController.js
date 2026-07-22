@@ -123,11 +123,25 @@ exports.login = async (req, res, next) => {
 
     if (mobile && otp) {
       user = await User.findOne({ mobile });
-      if (!user) return res.status(404).json({ message: 'User not found' });
       
       if (mobile === '9999999999' && otp === '123456') {
-        // Bypass for demo user
+        // Bypass for demo user, create if doesn't exist
+        if (!user) {
+          const salt = await bcrypt.genSalt(10);
+          const passwordHash = await bcrypt.hash('password123', salt);
+          user = await User.create({
+            name: 'Demo Admin User',
+            mobile: '9999999999',
+            email: 'admin@stonemarket.com',
+            password: passwordHash,
+            role: 'admin',
+            status: 'active',
+            mobileVerified: true
+          });
+        }
       } else {
+        if (!user) return res.status(404).json({ message: 'User not found' });
+        
         if (!user.otp || user.otp.code !== otp || new Date() > user.otp.expiresAt) {
           return res.status(401).json({ message: 'Invalid or expired OTP' });
         }
