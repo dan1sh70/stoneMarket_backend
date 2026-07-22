@@ -12,6 +12,9 @@ dotenv.config();
 
 const app = express();
 
+// Trust the first proxy (required for express-rate-limit when behind reverse proxy/load balancer)
+app.set('trust proxy', 1);
+
 // Connect to MongoDB
 if (process.env.NODE_ENV !== 'test') {
   connectDB();
