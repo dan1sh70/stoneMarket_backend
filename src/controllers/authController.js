@@ -8,7 +8,8 @@ const sendEmail = require('../services/emailService');
 
 // Helper to generate JWT
 const generateToken = (id, role) => {
-  return jwt.sign({ id, role }, process.env.JWT_SECRET, {
+  const secret = process.env.JWT_SECRET || 'fallback_super_secret_key_for_testing';
+  return jwt.sign({ id, role }, secret, {
     expiresIn: process.env.JWT_EXPIRY || '7d',
   });
 };
