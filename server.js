@@ -35,16 +35,35 @@ app.use(limiter);
 
 const { protect, authorize } = require('./src/middleware/auth');
 
-// Routes
-app.use('/api/v1/auth', require('./src/routes/auth'));
-app.use('/api/v1/vendors', require('./src/routes/vendors'));
-app.use('/api/v1/products', require('./src/routes/products'));
-app.use('/api/v1/inquiries', require('./src/routes/inquiries'));
-app.use('/api/v1/search', require('./src/routes/search'));
-app.use('/api/v1/admin', protect, authorize('admin'), require('./src/routes/admin'));
-app.use('/api/v1/ads', require('./src/routes/ads'));
-app.use('/api/v1/users', require('./src/routes/users'));
-// ... other routes
+// Route modules
+const authRoutes = require('./src/routes/auth');
+const vendorRoutes = require('./src/routes/vendors');
+const productRoutes = require('./src/routes/products');
+const inquiryRoutes = require('./src/routes/inquiries');
+const searchRoutes = require('./src/routes/search');
+const adminRoutes = require('./src/routes/admin');
+const adRoutes = require('./src/routes/ads');
+const userRoutes = require('./src/routes/users');
+
+// v1 Routes
+app.use('/api/v1/auth', authRoutes);
+app.use('/api/v1/vendors', vendorRoutes);
+app.use('/api/v1/products', productRoutes);
+app.use('/api/v1/inquiries', inquiryRoutes);
+app.use('/api/v1/search', searchRoutes);
+app.use('/api/v1/admin', protect, authorize('admin'), adminRoutes);
+app.use('/api/v1/ads', adRoutes);
+app.use('/api/v1/users', userRoutes);
+
+// Root Routes (for frontend compatibility)
+app.use('/auth', authRoutes);
+app.use('/vendors', vendorRoutes);
+app.use('/products', productRoutes);
+app.use('/inquiries', inquiryRoutes);
+app.use('/search', searchRoutes);
+app.use('/admin', protect, authorize('admin'), adminRoutes);
+app.use('/ads', adRoutes);
+app.use('/users', userRoutes);
 
 // Base Route
 app.get('/', (req, res) => {
