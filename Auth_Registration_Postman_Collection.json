@@ -1,0 +1,1173 @@
+{
+  "info": {
+    "name": "Stone Market - Auth & Registration Upgrade",
+    "description": "Contains all endpoints for Authentication (Email, OTP, Google) and Multi-Step Registration for all 8 business roles.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5000",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "YOUR_AUTH_TOKEN",
+      "type": "string"
+    },
+    {
+      "key": "registration_id",
+      "value": "REG_XXXXXXXX",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Login (Email)",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@stonemarket.com\",\n  \"password\": \"password123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Login (OTP/Mobile)",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"mobile\": \"9999999999\",\n  \"otp\": \"123456\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "OTP Request",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/otp/request",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "otp",
+                "request"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"mobile_number\": \"9876543210\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "OTP Verify",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/otp/verify",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "otp",
+                "verify"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"mobile\": \"9876543210\",\n  \"code\": \"123456\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Google Login",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/google",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "google"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"token\": \"GOOGLE_JWT_TOKEN\",\n  \"role\": \"buyer\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Get Current User Profile",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/me",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "me"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Registration - MINING",
+      "item": [
+        {
+          "name": "Step 1 - Company Info",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/mining/step-1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "mining",
+                "step-1"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"company_name\": \"Example Business Co.\",\n  \"gst_number\": \"22AAAAA0000A1Z5\",\n  \"established_year\": 2020,\n  \"company_details\": \"Leading provider in the market.\",\n  \"ec_number\": \"EC-987654321\",\n  \"granite_colors\": [\n    \"6aaad1586dc9dfd362a76fde\",\n    \"6aaad1586dc9dfd362a76fdf\"\n  ],\n  \"monthly_capacity_ton\": 5000,\n  \"machines\": [\n    {\n      \"machine_name\": \"Excavator\",\n      \"quantity\": 2\n    },\n    {\n      \"machine_name\": \"Driller\",\n      \"quantity\": 1\n    }\n  ],\n  \"working_times\": \"Mon-Sat 9AM-6PM\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Step 2 - Owners",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/mining/step-2",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "mining",
+                "step-2"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"owner_1\": {\n    \"name\": \"John Doe\",\n    \"phone\": \"9876543210\",\n    \"whatsapp\": \"9876543210\",\n    \"birth_date\": \"1985-05-15\",\n    \"anniversary_date\": \"2010-11-20\"\n  },\n  \"owner_2\": {\n    \"name\": \"Jane Doe\",\n    \"phone\": \"9123456780\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Step 3 - Location & Terms",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/mining/step-3",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "mining",
+                "step-3"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"state\": \"Rajasthan\",\n  \"district\": \"Udaipur\",\n  \"area\": \"Sukher\",\n  \"address\": \"Plot 42, Marble Industrial Area\",\n  \"google_map_location\": \"https://maps.google.com/?q=24.5854,73.7125\",\n  \"terms_accepted\": true,\n  \"privacy_policy_accepted\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Registration - MANUFACTURER",
+      "item": [
+        {
+          "name": "Step 1 - Company Info",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/manufacturer/step-1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "manufacturer",
+                "step-1"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"company_name\": \"Example Business Co.\",\n  \"gst_number\": \"22AAAAA0000A1Z5\",\n  \"established_year\": 2020,\n  \"company_details\": \"Leading provider in the market.\",\n  \"iec_number\": \"IEC-123456789\",\n  \"is_export_unit\": true,\n  \"granite_colors\": [\n    \"6aaad1586dc9dfd362a76fde\"\n  ],\n  \"monthly_capacity_sqf\": 15000,\n  \"machines\": [\n    {\n      \"machine_name\": \"Cutter\",\n      \"quantity\": 5\n    }\n  ],\n  \"working_times\": \"24/7 Shift\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Step 2 - Owners",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/manufacturer/step-2",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "manufacturer",
+                "step-2"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"owner_1\": {\n    \"name\": \"John Doe\",\n    \"phone\": \"9876543210\",\n    \"whatsapp\": \"9876543210\",\n    \"birth_date\": \"1985-05-15\",\n    \"anniversary_date\": \"2010-11-20\"\n  },\n  \"owner_2\": {\n    \"name\": \"Jane Doe\",\n    \"phone\": \"9123456780\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Step 3 - Location & Terms",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/manufacturer/step-3",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "manufacturer",
+                "step-3"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"state\": \"Rajasthan\",\n  \"district\": \"Udaipur\",\n  \"area\": \"Sukher\",\n  \"address\": \"Plot 42, Marble Industrial Area\",\n  \"google_map_location\": \"https://maps.google.com/?q=24.5854,73.7125\",\n  \"terms_accepted\": true,\n  \"privacy_policy_accepted\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Registration - SHOWROOM",
+      "item": [
+        {
+          "name": "Step 1 - Company Info",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/showroom/step-1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "showroom",
+                "step-1"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"showroom_name\": \"Premium Stones Gallery\",\n  \"gst_number\": \"22AAAAA0000A1Z5\",\n  \"established_year\": 2018,\n  \"company_details\": \"Exclusive granite showroom\",\n  \"granite_colors\": [\n    \"6aaad1586dc9dfd362a76fde\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Step 2 - Owners",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/showroom/step-2",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "showroom",
+                "step-2"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"owner_1\": {\n    \"name\": \"John Doe\",\n    \"phone\": \"9876543210\",\n    \"whatsapp\": \"9876543210\",\n    \"birth_date\": \"1985-05-15\",\n    \"anniversary_date\": \"2010-11-20\"\n  },\n  \"owner_2\": {\n    \"name\": \"Jane Doe\",\n    \"phone\": \"9123456780\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Step 3 - Location & Terms",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/showroom/step-3",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "showroom",
+                "step-3"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"state\": \"Rajasthan\",\n  \"district\": \"Udaipur\",\n  \"area\": \"Sukher\",\n  \"google_map_location\": \"https://maps.google.com/?q=24.5854,73.7125\",\n  \"premises_status\": \"owned\",\n  \"showroom_address\": \"Shop 12, City Mall\",\n  \"terms_accepted\": true,\n  \"privacy_policy_accepted\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Registration - TRADER",
+      "item": [
+        {
+          "name": "Step 1 - Company Info",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/trader/step-1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "trader",
+                "step-1"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"company_name\": \"Example Business Co.\",\n  \"gst_number\": \"22AAAAA0000A1Z5\",\n  \"established_year\": 2020,\n  \"company_details\": \"Leading provider in the market.\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Step 2 - Owners",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/trader/step-2",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "trader",
+                "step-2"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"owner_1\": {\n    \"name\": \"John Doe\",\n    \"phone\": \"9876543210\",\n    \"whatsapp\": \"9876543210\",\n    \"birth_date\": \"1985-05-15\",\n    \"anniversary_date\": \"2010-11-20\"\n  },\n  \"owner_2\": {\n    \"name\": \"Jane Doe\",\n    \"phone\": \"9123456780\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Step 3 - Location & Terms",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/trader/step-3",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "trader",
+                "step-3"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"state\": \"Rajasthan\",\n  \"district\": \"Udaipur\",\n  \"area\": \"Sukher\",\n  \"address\": \"Plot 42, Marble Industrial Area\",\n  \"google_map_location\": \"https://maps.google.com/?q=24.5854,73.7125\",\n  \"terms_accepted\": true,\n  \"privacy_policy_accepted\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Registration - BUYER",
+      "item": [
+        {
+          "name": "Step 1 - Company Info",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/buyer/step-1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "buyer",
+                "step-1"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"company_name\": \"Example Business Co.\",\n  \"gst_number\": \"22AAAAA0000A1Z5\",\n  \"established_year\": 2020,\n  \"company_details\": \"Leading provider in the market.\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Step 2 - Owners",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/buyer/step-2",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "buyer",
+                "step-2"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"owner_1\": {\n    \"name\": \"John Doe\",\n    \"phone\": \"9876543210\",\n    \"whatsapp\": \"9876543210\",\n    \"birth_date\": \"1985-05-15\",\n    \"anniversary_date\": \"2010-11-20\"\n  },\n  \"owner_2\": {\n    \"name\": \"Jane Doe\",\n    \"phone\": \"9123456780\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Step 3 - Location & Terms",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/buyer/step-3",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "buyer",
+                "step-3"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"state\": \"Rajasthan\",\n  \"district\": \"Udaipur\",\n  \"area\": \"Sukher\",\n  \"address\": \"Plot 42, Marble Industrial Area\",\n  \"google_map_location\": \"https://maps.google.com/?q=24.5854,73.7125\",\n  \"terms_accepted\": true,\n  \"privacy_policy_accepted\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Registration - TRANSPORT_NATIONAL",
+      "item": [
+        {
+          "name": "Step 1 - Company Info",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/transport_national/step-1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "transport_national",
+                "step-1"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"company_name\": \"Example Business Co.\",\n  \"gst_number\": \"22AAAAA0000A1Z5\",\n  \"established_year\": 2020,\n  \"company_details\": \"Leading provider in the market.\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Step 2 - Owners",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/transport_national/step-2",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "transport_national",
+                "step-2"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"owner_1\": {\n    \"name\": \"John Doe\",\n    \"phone\": \"9876543210\",\n    \"whatsapp\": \"9876543210\",\n    \"birth_date\": \"1985-05-15\",\n    \"anniversary_date\": \"2010-11-20\"\n  },\n  \"owner_2\": {\n    \"name\": \"Jane Doe\",\n    \"phone\": \"9123456780\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Step 3 - Location & Terms",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/transport_national/step-3",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "transport_national",
+                "step-3"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"state\": \"Rajasthan\",\n  \"district\": \"Udaipur\",\n  \"area\": \"Sukher\",\n  \"address\": \"Plot 42, Marble Industrial Area\",\n  \"google_map_location\": \"https://maps.google.com/?q=24.5854,73.7125\",\n  \"terms_accepted\": true,\n  \"privacy_policy_accepted\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Registration - TRANSPORT_LOCAL",
+      "item": [
+        {
+          "name": "Step 1 - Company Info",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/transport_local/step-1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "transport_local",
+                "step-1"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"company_name\": \"Example Business Co.\",\n  \"gst_number\": \"22AAAAA0000A1Z5\",\n  \"established_year\": 2020,\n  \"company_details\": \"Leading provider in the market.\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Step 2 - Owners",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/transport_local/step-2",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "transport_local",
+                "step-2"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"owner_1\": {\n    \"name\": \"John Doe\",\n    \"phone\": \"9876543210\",\n    \"whatsapp\": \"9876543210\",\n    \"birth_date\": \"1985-05-15\",\n    \"anniversary_date\": \"2010-11-20\"\n  },\n  \"owner_2\": {\n    \"name\": \"Jane Doe\",\n    \"phone\": \"9123456780\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Step 3 - Location & Terms",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/transport_local/step-3",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "transport_local",
+                "step-3"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"state\": \"Rajasthan\",\n  \"district\": \"Udaipur\",\n  \"area\": \"Sukher\",\n  \"address\": \"Plot 42, Marble Industrial Area\",\n  \"google_map_location\": \"https://maps.google.com/?q=24.5854,73.7125\",\n  \"terms_accepted\": true,\n  \"privacy_policy_accepted\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Registration - CUSTOMER",
+      "item": [
+        {
+          "name": "Step 1 - Company Info",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/customer/step-1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "customer",
+                "step-1"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"company_name\": \"Example Business Co.\",\n  \"gst_number\": \"22AAAAA0000A1Z5\",\n  \"established_year\": 2020,\n  \"company_details\": \"Leading provider in the market.\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Step 2 - Owners",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/customer/step-2",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "customer",
+                "step-2"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"owner_1\": {\n    \"name\": \"John Doe\",\n    \"phone\": \"9876543210\",\n    \"whatsapp\": \"9876543210\",\n    \"birth_date\": \"1985-05-15\",\n    \"anniversary_date\": \"2010-11-20\"\n  },\n  \"owner_2\": {\n    \"name\": \"Jane Doe\",\n    \"phone\": \"9123456780\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Step 3 - Location & Terms",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/customer/step-3",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "customer",
+                "step-3"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"state\": \"Rajasthan\",\n  \"district\": \"Udaipur\",\n  \"area\": \"Sukher\",\n  \"address\": \"Plot 42, Marble Industrial Area\",\n  \"google_map_location\": \"https://maps.google.com/?q=24.5854,73.7125\",\n  \"terms_accepted\": true,\n  \"privacy_policy_accepted\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Registration Submission",
+      "item": [
+        {
+          "name": "Resume / Get Draft",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/{{registration_id}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "{{registration_id}}"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Submit Final Registration",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/{{registration_id}}/submit",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "{{registration_id}}",
+                "submit"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Master Data",
+      "item": [
+        {
+          "name": "Get Granite Colors",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/granite-colors",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "granite-colors"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get States",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/locations/states",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "locations",
+                "states"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Districts",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/locations/states/STATE_ID/districts",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "locations",
+                "states",
+                "STATE_ID",
+                "districts"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Areas",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/locations/districts/DISTRICT_ID/areas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "locations",
+                "districts",
+                "DISTRICT_ID",
+                "areas"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

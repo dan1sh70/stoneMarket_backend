@@ -22,7 +22,7 @@ describe('Inquiry API', () => {
     vendorUser = await User.create({
       name: 'Test Vendor User',
       mobile: '2222222222',
-      role: 'vendor',
+      role: 'manufacturer',
       status: 'active'
     });
     vendor = await Vendor.create({

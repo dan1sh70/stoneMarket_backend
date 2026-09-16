@@ -17,14 +17,14 @@ const { inquirySchema } = require('../validations/inquiry.validation');
 
 router.post('/', protect, validate(inquirySchema), submitInquiry);
 router.get('/sent', protect, getSentInquiries);
-router.get('/received', protect, authorize('vendor'), getReceivedInquiries);
+router.get('/received', protect, authorize('manufacturer', 'mining', 'showroom', 'trader'), getReceivedInquiries);
 
 // Admin
 router.get('/admin/all', protect, authorize('admin'), getAllInquiriesAdmin);
 
 // ID-based routes
 router.get('/:id', protect, getInquiryById);
-router.put('/:id/status', protect, authorize('vendor'), updateInquiryStatus);
-router.post('/:id/respond', protect, authorize('vendor'), respondToInquiry);
+router.put('/:id/status', protect, authorize('manufacturer', 'mining', 'showroom', 'trader'), updateInquiryStatus);
+router.post('/:id/respond', protect, authorize('manufacturer', 'mining', 'showroom', 'trader'), respondToInquiry);
 
 module.exports = router;

@@ -22,7 +22,7 @@ describe('Users API (Favorites)', () => {
     vendorUser = await User.create({
       name: 'Test Vendor User',
       mobile: '2222222222',
-      role: 'vendor',
+      role: 'manufacturer',
       status: 'active'
     });
 

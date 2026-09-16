@@ -21,10 +21,10 @@ router.get('/:slug', getVendorBySlug);
 router.get('/:id/products', getVendorProducts);
 
 // Protected routes (Vendor)
-router.post('/profile', protect, authorize('vendor'), validate(vendorProfileSchema), upsertProfile);
-router.put('/profile', protect, authorize('vendor'), validate(vendorProfileSchema), upsertProfile);
-router.post('/upload-docs', protect, authorize('vendor'), upload.array('documents', 5), uploadDocs);
-router.get('/dashboard/stats', protect, authorize('vendor'), getStats);
+router.post('/profile', protect, authorize('manufacturer', 'mining', 'showroom', 'trader'), validate(vendorProfileSchema), upsertProfile);
+router.put('/profile', protect, authorize('manufacturer', 'mining', 'showroom', 'trader'), validate(vendorProfileSchema), upsertProfile);
+router.post('/upload-docs', protect, authorize('manufacturer', 'mining', 'showroom', 'trader'), upload.array('documents', 5), uploadDocs);
+router.get('/dashboard/stats', protect, authorize('manufacturer', 'mining', 'showroom', 'trader'), getStats);
 
 // Protected routes (User)
 router.post('/:id/save', protect, saveVendor);

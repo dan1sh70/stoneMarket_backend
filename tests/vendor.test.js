@@ -12,7 +12,7 @@ describe('Vendor API', () => {
     user = await User.create({
       name: 'Test Vendor User',
       mobile: '1234567890',
-      role: 'vendor',
+      role: 'manufacturer',
       status: 'active'
     });
     token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET || 'secret', { expiresIn: '1h' });

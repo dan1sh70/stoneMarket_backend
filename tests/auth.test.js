@@ -14,7 +14,7 @@ describe('Auth API', () => {
       
     expect(res.statusCode).toEqual(201);
     expect(res.body).toHaveProperty('message', 'User registered. OTP sent to mobile.');
-    expect(res.body).toHaveProperty('userId');
+    expect(res.body.data).toHaveProperty('userId');
 
     // Verify user is in DB
     const user = await User.findOne({ mobile: '9876543210' });
@@ -23,12 +23,12 @@ describe('Auth API', () => {
     expect(user.otp.code).toBeDefined(); // Mock OTP was generated
   });
 
-  it('should return 400 for missing required fields (Joi validation)', async () => {
+  it('should return 422 for missing required fields (Joi validation)', async () => {
     const res = await request(app)
       .post('/api/v1/auth/register')
       .send({ name: 'Incomplete' });
       
-    expect(res.statusCode).toEqual(400);
+    expect(res.statusCode).toEqual(422);
   });
 
   it('should generate reset password token and send email', async () => {

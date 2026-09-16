@@ -14,7 +14,7 @@ describe('Product API', () => {
     user = await User.create({
       name: 'Test Vendor User',
       mobile: '1234567890',
-      role: 'vendor',
+      role: 'manufacturer',
       status: 'active'
     });
     

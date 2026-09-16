@@ -26,7 +26,7 @@ exports.globalSearch = async (req, res, next) => {
         
       const count = await Vendor.countDocuments(vQuery);
       
-      results = [...results, ...vendors.map(v => ({ type: 'vendor', data: v }))];
+      results = [...results, ...vendors.map(v => ({ type: 'manufacturer', data: v }))];
       totalPages = Math.max(totalPages, Math.ceil(count / limit));
     }
 

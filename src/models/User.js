@@ -5,7 +5,22 @@ const userSchema = new mongoose.Schema({
   mobile: { type: String, unique: true, required: true, index: true },
   email: { type: String, unique: true, sparse: true },
   password: { type: String }, // bcrypt-hashed
-  role: { type: String, enum: ['buyer', 'vendor', 'admin'], default: 'buyer' },
+  role: { 
+    type: String, 
+    enum: [
+      'admin', 
+      'mining', 
+      'manufacturer', 
+      'showroom', 
+      'trader', 
+      'buyer', 
+      'transport_national', 
+      'transport_local', 
+      'customer'
+    ], 
+    default: 'customer' 
+  },
+  googleProviderId: { type: String, sparse: true, unique: true },
   status: { type: String, enum: ['active', 'suspended', 'pending'], default: 'pending' },
   otp: {
     code: String,

@@ -9,7 +9,7 @@ describe('Search API', () => {
     const user = await User.create({
       name: 'Test Vendor User',
       mobile: '1234567890',
-      role: 'vendor',
+      role: 'manufacturer',
       status: 'active'
     });
     
@@ -37,7 +37,7 @@ describe('Search API', () => {
     const res = await request(app).get('/api/v1/search?q=Global');
     expect(res.statusCode).toEqual(200);
     expect(res.body.results.length).toBeGreaterThan(0);
-    expect(res.body.results[0].type).toEqual('vendor');
+    expect(res.body.results[0].type).toEqual('manufacturer');
   });
 
   it('should find product via global search', async () => {

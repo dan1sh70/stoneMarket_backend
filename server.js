@@ -44,6 +44,8 @@ const searchRoutes = require('./src/routes/search');
 const adminRoutes = require('./src/routes/admin');
 const adRoutes = require('./src/routes/ads');
 const userRoutes = require('./src/routes/users');
+const masterDataRoutes = require('./src/routes/masterData');
+const registrationRoutes = require('./src/routes/registration');
 
 // v1 Routes
 app.use('/api/v1/auth', authRoutes);
@@ -54,6 +56,11 @@ app.use('/api/v1/search', searchRoutes);
 app.use('/api/v1/admin', protect, authorize('admin'), adminRoutes);
 app.use('/api/v1/ads', adRoutes);
 app.use('/api/v1/users', userRoutes);
+
+// New unified /api routes for the upgrade
+app.use('/api', masterDataRoutes);
+app.use('/api/registration', registrationRoutes);
+app.use('/api/auth', authRoutes); // also mount auth on root /api/auth as requested
 
 // Root Routes (for frontend compatibility)
 app.use('/auth', authRoutes);
