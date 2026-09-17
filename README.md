@@ -91,5 +91,7 @@ The API is versioned at `/api/v1`. The major route categories are:
 - `/api/v1/search` - Global text search and geospatial nearby search
 - `/api/v1/admin` - Super admin dashboard, user management, moderation, and logs
 - `/api/v1/ads` - Banner and popup advertisement delivery and tracking
+- `/api/service-categories` - Service categories master data
+- `/api/registration` - Unified 3-step registration workflow for service providers
 
 Detailed endpoints and payload structures are documented in the provided Postman Collection.

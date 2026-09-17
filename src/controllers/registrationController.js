@@ -25,6 +25,15 @@ exports.processStep = async (req, res, next) => {
       return errorResponse(res, 'Validation failed', errors, 422);
     }
 
+    // Additional database validation for service_provider
+    if (type === 'service_provider' && stepNumber === 1) {
+      const ServiceCategory = require('../models/ServiceCategory');
+      const categoryExists = await ServiceCategory.exists({ _id: value.service_category_id, status: 'active' });
+      if (!categoryExists) {
+        return errorResponse(res, 'Validation failed', { service_category_id: ['The selected service category is invalid.'] }, 422);
+      }
+    }
+
     // Check for existing draft or create new
     let draft = await RegistrationDraft.findOne({ userId: req.user.id, type, status: { $ne: 'submitted' } });
     
@@ -118,6 +127,7 @@ exports.submitRegistration = async (req, res, next) => {
       monthly_capacity: step1.monthly_capacity_ton || step1.monthly_capacity_sqf,
       machines: step1.machines,
       working_times: step1.working_times,
+      service_categories: step1.service_category_id ? [step1.service_category_id] : [],
       
       // Step 2 mapping
       owners,

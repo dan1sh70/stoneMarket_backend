@@ -376,6 +376,110 @@
           }
         }
       ]
+    },
+    {
+      "name": "8. Service Provider Registration",
+      "item": [
+        {
+          "name": "Get Service Categories",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/../service-categories"
+          }
+        },
+        {
+          "name": "Seed Service Categories (Admin)",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/../service-categories/seed",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Registration Step 1",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/../registration/service_provider/step-1",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"service_category_id\": \"CATEGORY_ID\",\n  \"company_name\": \"My Services\",\n  \"established_year\": 2015,\n  \"company_details\": \"Details\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Registration Step 2 (Owners)",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/../registration/service_provider/step-2",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"owner_1\": {\n    \"name\": \"John Doe\",\n    \"phone\": \"9876543210\",\n    \"whatsapp\": \"9876543210\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Registration Step 3 (Location)",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/../registration/service_provider/step-3",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"state\": \"Rajasthan\",\n  \"district\": \"Jaipur\",\n  \"area\": \"Sitapura\",\n  \"address\": \"Plot 42\",\n  \"terms_accepted\": true,\n  \"privacy_policy_accepted\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Submit Registration",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/../registration/REG_ID/submit",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ]
+          }
+        }
+      ]
     }
   ]
 }

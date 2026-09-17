@@ -18,7 +18,7 @@ const businessProfileSchema = new mongoose.Schema({
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   business_type: { 
     type: String, 
-    enum: ['mining', 'manufacturer', 'showroom', 'trader', 'buyer', 'transport_national', 'transport_local', 'customer'],
+    enum: ['mining', 'manufacturer', 'showroom', 'trader', 'buyer', 'transport_national', 'transport_local', 'customer', 'service_provider'],
     required: true,
     index: true
   },
@@ -51,6 +51,9 @@ const businessProfileSchema = new mongoose.Schema({
     state_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Location' }, // Using Location for state
     district_ids: [{ type: mongoose.Schema.Types.ObjectId }]
   }],
+
+  // Specific to Service Providers
+  service_categories: [{ type: mongoose.Schema.Types.ObjectId, ref: 'ServiceCategory' }],
 
   // Owners (Step 2)
   owners: [ownerSchema], // Usually up to 2

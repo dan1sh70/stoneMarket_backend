@@ -67,9 +67,17 @@ exports.showroomStep3 = Joi.object({
   showroom_address: Joi.string().required()
 });
 
+// Service Provider Validation
+exports.serviceProviderStep1 = Joi.object({
+  ...commonStep1,
+  service_category_id: Joi.string().required(), // MongoDB ObjectId
+});
+
 // Generic Step 2 (Owners)
 exports.step2Schema = Joi.object({
-  owner_1: commonOwnerSchema.required(),
+  owner_1: commonOwnerSchema.keys({
+    whatsapp: Joi.string().pattern(/^[6-9]\d{9}$/).required() // Specific requirement for Owner 1
+  }).required(),
   owner_2: commonOwnerSchema.optional()
 });
 
@@ -87,6 +95,7 @@ exports.getSchema = (type, step) => {
     if (type === 'mining') return exports.miningStep1;
     if (type === 'manufacturer') return exports.manufacturerStep1;
     if (type === 'showroom') return exports.showroomStep1;
+    if (type === 'service_provider') return exports.serviceProviderStep1;
     // For trader, buyer, transport we could add specifics, falling back to a generic for now:
     return Joi.object({ ...commonStep1 }).unknown(true); 
   }
