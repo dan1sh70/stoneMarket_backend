@@ -1168,6 +1168,2250 @@
           }
         }
       ]
+    },
+    {
+      "name": "Registration - Service Provider: MACHINE MANUFACTURER",
+      "item": [
+        {
+          "name": "Step 1 - Company Info",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/service_provider/step-1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "service_provider",
+                "step-1"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"service_category_id\": \"ID_FOR_MACHINE-MANUFACTURER\",\n  \"company_name\": \"Machine Manufacturer Co.\",\n  \"gst_number\": \"22AAAAA0000A1Z5\",\n  \"established_year\": 2015,\n  \"company_details\": \"We provide top-notch Machine Manufacturer services.\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Step 2 - Owners",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/service_provider/step-2",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "service_provider",
+                "step-2"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"owner_1\": {\n    \"name\": \"John Doe\",\n    \"phone\": \"9876543210\",\n    \"whatsapp\": \"9876543210\",\n    \"birth_date\": \"1985-05-15\",\n    \"anniversary_date\": \"2010-11-20\"\n  },\n  \"owner_2\": {\n    \"name\": \"Jane Doe\",\n    \"phone\": \"9123456780\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Step 3 - Location & Terms",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/service_provider/step-3",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "service_provider",
+                "step-3"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"state\": \"Rajasthan\",\n  \"district\": \"Jaipur\",\n  \"area\": \"Sitapura\",\n  \"address\": \"Plot 42\",\n  \"google_map_location\": \"https://maps.google.com/?q=26.9124,75.7873\",\n  \"terms_accepted\": true,\n  \"privacy_policy_accepted\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Submit Registration",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/{{registration_id}}/submit",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "{{registration_id}}",
+                "submit"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Registration - Service Provider: MACHINE REPAIRING",
+      "item": [
+        {
+          "name": "Step 1 - Company Info",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/service_provider/step-1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "service_provider",
+                "step-1"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"service_category_id\": \"ID_FOR_MACHINE-REPAIRING\",\n  \"company_name\": \"Machine Repairing Co.\",\n  \"gst_number\": \"22AAAAA0000A1Z5\",\n  \"established_year\": 2015,\n  \"company_details\": \"We provide top-notch Machine Repairing services.\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Step 2 - Owners",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/service_provider/step-2",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "service_provider",
+                "step-2"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"owner_1\": {\n    \"name\": \"John Doe\",\n    \"phone\": \"9876543210\",\n    \"whatsapp\": \"9876543210\",\n    \"birth_date\": \"1985-05-15\",\n    \"anniversary_date\": \"2010-11-20\"\n  },\n  \"owner_2\": {\n    \"name\": \"Jane Doe\",\n    \"phone\": \"9123456780\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Step 3 - Location & Terms",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/service_provider/step-3",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "service_provider",
+                "step-3"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"state\": \"Rajasthan\",\n  \"district\": \"Jaipur\",\n  \"area\": \"Sitapura\",\n  \"address\": \"Plot 42\",\n  \"google_map_location\": \"https://maps.google.com/?q=26.9124,75.7873\",\n  \"terms_accepted\": true,\n  \"privacy_policy_accepted\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Submit Registration",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/{{registration_id}}/submit",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "{{registration_id}}",
+                "submit"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Registration - Service Provider: BLADES & SEGMENTS",
+      "item": [
+        {
+          "name": "Step 1 - Company Info",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/service_provider/step-1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "service_provider",
+                "step-1"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"service_category_id\": \"ID_FOR_BLADES-SEGMENTS\",\n  \"company_name\": \"Blades & Segments Co.\",\n  \"gst_number\": \"22AAAAA0000A1Z5\",\n  \"established_year\": 2015,\n  \"company_details\": \"We provide top-notch Blades & Segments services.\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Step 2 - Owners",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/service_provider/step-2",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "service_provider",
+                "step-2"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"owner_1\": {\n    \"name\": \"John Doe\",\n    \"phone\": \"9876543210\",\n    \"whatsapp\": \"9876543210\",\n    \"birth_date\": \"1985-05-15\",\n    \"anniversary_date\": \"2010-11-20\"\n  },\n  \"owner_2\": {\n    \"name\": \"Jane Doe\",\n    \"phone\": \"9123456780\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Step 3 - Location & Terms",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/service_provider/step-3",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "service_provider",
+                "step-3"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"state\": \"Rajasthan\",\n  \"district\": \"Jaipur\",\n  \"area\": \"Sitapura\",\n  \"address\": \"Plot 42\",\n  \"google_map_location\": \"https://maps.google.com/?q=26.9124,75.7873\",\n  \"terms_accepted\": true,\n  \"privacy_policy_accepted\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Submit Registration",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/{{registration_id}}/submit",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "{{registration_id}}",
+                "submit"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Registration - Service Provider: ABRASIVES & EPOXY",
+      "item": [
+        {
+          "name": "Step 1 - Company Info",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/service_provider/step-1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "service_provider",
+                "step-1"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"service_category_id\": \"ID_FOR_ABRASIVES-EPOXY\",\n  \"company_name\": \"Abrasives & Epoxy Co.\",\n  \"gst_number\": \"22AAAAA0000A1Z5\",\n  \"established_year\": 2015,\n  \"company_details\": \"We provide top-notch Abrasives & Epoxy services.\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Step 2 - Owners",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/service_provider/step-2",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "service_provider",
+                "step-2"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"owner_1\": {\n    \"name\": \"John Doe\",\n    \"phone\": \"9876543210\",\n    \"whatsapp\": \"9876543210\",\n    \"birth_date\": \"1985-05-15\",\n    \"anniversary_date\": \"2010-11-20\"\n  },\n  \"owner_2\": {\n    \"name\": \"Jane Doe\",\n    \"phone\": \"9123456780\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Step 3 - Location & Terms",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/service_provider/step-3",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "service_provider",
+                "step-3"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"state\": \"Rajasthan\",\n  \"district\": \"Jaipur\",\n  \"area\": \"Sitapura\",\n  \"address\": \"Plot 42\",\n  \"google_map_location\": \"https://maps.google.com/?q=26.9124,75.7873\",\n  \"terms_accepted\": true,\n  \"privacy_policy_accepted\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Submit Registration",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/{{registration_id}}/submit",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "{{registration_id}}",
+                "submit"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Registration - Service Provider: MACHINERY PARTS",
+      "item": [
+        {
+          "name": "Step 1 - Company Info",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/service_provider/step-1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "service_provider",
+                "step-1"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"service_category_id\": \"ID_FOR_MACHINERY-PARTS\",\n  \"company_name\": \"Machinery Parts Co.\",\n  \"gst_number\": \"22AAAAA0000A1Z5\",\n  \"established_year\": 2015,\n  \"company_details\": \"We provide top-notch Machinery Parts services.\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Step 2 - Owners",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/service_provider/step-2",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "service_provider",
+                "step-2"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"owner_1\": {\n    \"name\": \"John Doe\",\n    \"phone\": \"9876543210\",\n    \"whatsapp\": \"9876543210\",\n    \"birth_date\": \"1985-05-15\",\n    \"anniversary_date\": \"2010-11-20\"\n  },\n  \"owner_2\": {\n    \"name\": \"Jane Doe\",\n    \"phone\": \"9123456780\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Step 3 - Location & Terms",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/service_provider/step-3",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "service_provider",
+                "step-3"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"state\": \"Rajasthan\",\n  \"district\": \"Jaipur\",\n  \"area\": \"Sitapura\",\n  \"address\": \"Plot 42\",\n  \"google_map_location\": \"https://maps.google.com/?q=26.9124,75.7873\",\n  \"terms_accepted\": true,\n  \"privacy_policy_accepted\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Submit Registration",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/{{registration_id}}/submit",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "{{registration_id}}",
+                "submit"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Registration - Service Provider: MINING EQUIPMENT",
+      "item": [
+        {
+          "name": "Step 1 - Company Info",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/service_provider/step-1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "service_provider",
+                "step-1"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"service_category_id\": \"ID_FOR_MINING-EQUIPMENT\",\n  \"company_name\": \"Mining Equipment Co.\",\n  \"gst_number\": \"22AAAAA0000A1Z5\",\n  \"established_year\": 2015,\n  \"company_details\": \"We provide top-notch Mining Equipment services.\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Step 2 - Owners",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/service_provider/step-2",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "service_provider",
+                "step-2"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"owner_1\": {\n    \"name\": \"John Doe\",\n    \"phone\": \"9876543210\",\n    \"whatsapp\": \"9876543210\",\n    \"birth_date\": \"1985-05-15\",\n    \"anniversary_date\": \"2010-11-20\"\n  },\n  \"owner_2\": {\n    \"name\": \"Jane Doe\",\n    \"phone\": \"9123456780\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Step 3 - Location & Terms",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/service_provider/step-3",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "service_provider",
+                "step-3"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"state\": \"Rajasthan\",\n  \"district\": \"Jaipur\",\n  \"area\": \"Sitapura\",\n  \"address\": \"Plot 42\",\n  \"google_map_location\": \"https://maps.google.com/?q=26.9124,75.7873\",\n  \"terms_accepted\": true,\n  \"privacy_policy_accepted\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Submit Registration",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/{{registration_id}}/submit",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "{{registration_id}}",
+                "submit"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Registration - Service Provider: ELECTRIC PANEL & REPAIRING",
+      "item": [
+        {
+          "name": "Step 1 - Company Info",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/service_provider/step-1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "service_provider",
+                "step-1"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"service_category_id\": \"ID_FOR_ELECTRIC-PANEL-REPAIRING\",\n  \"company_name\": \"Electric Panel & Repairing Co.\",\n  \"gst_number\": \"22AAAAA0000A1Z5\",\n  \"established_year\": 2015,\n  \"company_details\": \"We provide top-notch Electric Panel & Repairing services.\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Step 2 - Owners",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/service_provider/step-2",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "service_provider",
+                "step-2"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"owner_1\": {\n    \"name\": \"John Doe\",\n    \"phone\": \"9876543210\",\n    \"whatsapp\": \"9876543210\",\n    \"birth_date\": \"1985-05-15\",\n    \"anniversary_date\": \"2010-11-20\"\n  },\n  \"owner_2\": {\n    \"name\": \"Jane Doe\",\n    \"phone\": \"9123456780\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Step 3 - Location & Terms",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/service_provider/step-3",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "service_provider",
+                "step-3"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"state\": \"Rajasthan\",\n  \"district\": \"Jaipur\",\n  \"area\": \"Sitapura\",\n  \"address\": \"Plot 42\",\n  \"google_map_location\": \"https://maps.google.com/?q=26.9124,75.7873\",\n  \"terms_accepted\": true,\n  \"privacy_policy_accepted\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Submit Registration",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/{{registration_id}}/submit",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "{{registration_id}}",
+                "submit"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Registration - Service Provider: BRAZING SERVICES",
+      "item": [
+        {
+          "name": "Step 1 - Company Info",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/service_provider/step-1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "service_provider",
+                "step-1"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"service_category_id\": \"ID_FOR_BRAZING-SERVICES\",\n  \"company_name\": \"Brazing Services Co.\",\n  \"gst_number\": \"22AAAAA0000A1Z5\",\n  \"established_year\": 2015,\n  \"company_details\": \"We provide top-notch Brazing Services services.\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Step 2 - Owners",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/service_provider/step-2",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "service_provider",
+                "step-2"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"owner_1\": {\n    \"name\": \"John Doe\",\n    \"phone\": \"9876543210\",\n    \"whatsapp\": \"9876543210\",\n    \"birth_date\": \"1985-05-15\",\n    \"anniversary_date\": \"2010-11-20\"\n  },\n  \"owner_2\": {\n    \"name\": \"Jane Doe\",\n    \"phone\": \"9123456780\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Step 3 - Location & Terms",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/service_provider/step-3",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "service_provider",
+                "step-3"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"state\": \"Rajasthan\",\n  \"district\": \"Jaipur\",\n  \"area\": \"Sitapura\",\n  \"address\": \"Plot 42\",\n  \"google_map_location\": \"https://maps.google.com/?q=26.9124,75.7873\",\n  \"terms_accepted\": true,\n  \"privacy_policy_accepted\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Submit Registration",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/{{registration_id}}/submit",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "{{registration_id}}",
+                "submit"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Registration - Service Provider: WATER SUPPLIER",
+      "item": [
+        {
+          "name": "Step 1 - Company Info",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/service_provider/step-1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "service_provider",
+                "step-1"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"service_category_id\": \"ID_FOR_WATER-SUPPLIER\",\n  \"company_name\": \"Water Supplier Co.\",\n  \"gst_number\": \"22AAAAA0000A1Z5\",\n  \"established_year\": 2015,\n  \"company_details\": \"We provide top-notch Water Supplier services.\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Step 2 - Owners",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/service_provider/step-2",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "service_provider",
+                "step-2"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"owner_1\": {\n    \"name\": \"John Doe\",\n    \"phone\": \"9876543210\",\n    \"whatsapp\": \"9876543210\",\n    \"birth_date\": \"1985-05-15\",\n    \"anniversary_date\": \"2010-11-20\"\n  },\n  \"owner_2\": {\n    \"name\": \"Jane Doe\",\n    \"phone\": \"9123456780\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Step 3 - Location & Terms",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/service_provider/step-3",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "service_provider",
+                "step-3"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"state\": \"Rajasthan\",\n  \"district\": \"Jaipur\",\n  \"area\": \"Sitapura\",\n  \"address\": \"Plot 42\",\n  \"google_map_location\": \"https://maps.google.com/?q=26.9124,75.7873\",\n  \"terms_accepted\": true,\n  \"privacy_policy_accepted\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Submit Registration",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/{{registration_id}}/submit",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "{{registration_id}}",
+                "submit"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Registration - Service Provider: HOTELS & RESTAURANTS",
+      "item": [
+        {
+          "name": "Step 1 - Company Info",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/service_provider/step-1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "service_provider",
+                "step-1"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"service_category_id\": \"ID_FOR_HOTELS-RESTAURANTS\",\n  \"company_name\": \"Hotels & Restaurants Co.\",\n  \"gst_number\": \"22AAAAA0000A1Z5\",\n  \"established_year\": 2015,\n  \"company_details\": \"We provide top-notch Hotels & Restaurants services.\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Step 2 - Owners",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/service_provider/step-2",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "service_provider",
+                "step-2"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"owner_1\": {\n    \"name\": \"John Doe\",\n    \"phone\": \"9876543210\",\n    \"whatsapp\": \"9876543210\",\n    \"birth_date\": \"1985-05-15\",\n    \"anniversary_date\": \"2010-11-20\"\n  },\n  \"owner_2\": {\n    \"name\": \"Jane Doe\",\n    \"phone\": \"9123456780\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Step 3 - Location & Terms",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/service_provider/step-3",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "service_provider",
+                "step-3"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"state\": \"Rajasthan\",\n  \"district\": \"Jaipur\",\n  \"area\": \"Sitapura\",\n  \"address\": \"Plot 42\",\n  \"google_map_location\": \"https://maps.google.com/?q=26.9124,75.7873\",\n  \"terms_accepted\": true,\n  \"privacy_policy_accepted\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Submit Registration",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/{{registration_id}}/submit",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "{{registration_id}}",
+                "submit"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Registration - Service Provider: CA & TAX ADVISORS",
+      "item": [
+        {
+          "name": "Step 1 - Company Info",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/service_provider/step-1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "service_provider",
+                "step-1"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"service_category_id\": \"ID_FOR_CA-TAX-ADVISORS\",\n  \"company_name\": \"CA & Tax Advisors Co.\",\n  \"gst_number\": \"22AAAAA0000A1Z5\",\n  \"established_year\": 2015,\n  \"company_details\": \"We provide top-notch CA & Tax Advisors services.\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Step 2 - Owners",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/service_provider/step-2",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "service_provider",
+                "step-2"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"owner_1\": {\n    \"name\": \"John Doe\",\n    \"phone\": \"9876543210\",\n    \"whatsapp\": \"9876543210\",\n    \"birth_date\": \"1985-05-15\",\n    \"anniversary_date\": \"2010-11-20\"\n  },\n  \"owner_2\": {\n    \"name\": \"Jane Doe\",\n    \"phone\": \"9123456780\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Step 3 - Location & Terms",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/service_provider/step-3",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "service_provider",
+                "step-3"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"state\": \"Rajasthan\",\n  \"district\": \"Jaipur\",\n  \"area\": \"Sitapura\",\n  \"address\": \"Plot 42\",\n  \"google_map_location\": \"https://maps.google.com/?q=26.9124,75.7873\",\n  \"terms_accepted\": true,\n  \"privacy_policy_accepted\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Submit Registration",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/{{registration_id}}/submit",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "{{registration_id}}",
+                "submit"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Registration - Service Provider: BANKING & LOAN SERVICES",
+      "item": [
+        {
+          "name": "Step 1 - Company Info",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/service_provider/step-1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "service_provider",
+                "step-1"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"service_category_id\": \"ID_FOR_BANKING-LOAN-SERVICES\",\n  \"company_name\": \"Banking & Loan Services Co.\",\n  \"gst_number\": \"22AAAAA0000A1Z5\",\n  \"established_year\": 2015,\n  \"company_details\": \"We provide top-notch Banking & Loan Services services.\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Step 2 - Owners",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/service_provider/step-2",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "service_provider",
+                "step-2"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"owner_1\": {\n    \"name\": \"John Doe\",\n    \"phone\": \"9876543210\",\n    \"whatsapp\": \"9876543210\",\n    \"birth_date\": \"1985-05-15\",\n    \"anniversary_date\": \"2010-11-20\"\n  },\n  \"owner_2\": {\n    \"name\": \"Jane Doe\",\n    \"phone\": \"9123456780\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Step 3 - Location & Terms",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/service_provider/step-3",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "service_provider",
+                "step-3"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"state\": \"Rajasthan\",\n  \"district\": \"Jaipur\",\n  \"area\": \"Sitapura\",\n  \"address\": \"Plot 42\",\n  \"google_map_location\": \"https://maps.google.com/?q=26.9124,75.7873\",\n  \"terms_accepted\": true,\n  \"privacy_policy_accepted\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Submit Registration",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/{{registration_id}}/submit",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "{{registration_id}}",
+                "submit"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Registration - Service Provider: LOCAL TAXI SERVICES",
+      "item": [
+        {
+          "name": "Step 1 - Company Info",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/service_provider/step-1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "service_provider",
+                "step-1"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"service_category_id\": \"ID_FOR_LOCAL-TAXI-SERVICES\",\n  \"company_name\": \"Local Taxi Services Co.\",\n  \"gst_number\": \"22AAAAA0000A1Z5\",\n  \"established_year\": 2015,\n  \"company_details\": \"We provide top-notch Local Taxi Services services.\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Step 2 - Owners",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/service_provider/step-2",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "service_provider",
+                "step-2"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"owner_1\": {\n    \"name\": \"John Doe\",\n    \"phone\": \"9876543210\",\n    \"whatsapp\": \"9876543210\",\n    \"birth_date\": \"1985-05-15\",\n    \"anniversary_date\": \"2010-11-20\"\n  },\n  \"owner_2\": {\n    \"name\": \"Jane Doe\",\n    \"phone\": \"9123456780\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Step 3 - Location & Terms",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/service_provider/step-3",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "service_provider",
+                "step-3"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"state\": \"Rajasthan\",\n  \"district\": \"Jaipur\",\n  \"area\": \"Sitapura\",\n  \"address\": \"Plot 42\",\n  \"google_map_location\": \"https://maps.google.com/?q=26.9124,75.7873\",\n  \"terms_accepted\": true,\n  \"privacy_policy_accepted\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Submit Registration",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/{{registration_id}}/submit",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "{{registration_id}}",
+                "submit"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Registration - Service Provider: IMPORTANT CONTACTS",
+      "item": [
+        {
+          "name": "Step 1 - Company Info",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/service_provider/step-1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "service_provider",
+                "step-1"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"service_category_id\": \"ID_FOR_IMPORTANT-CONTACTS\",\n  \"company_name\": \"Important Contacts Co.\",\n  \"gst_number\": \"22AAAAA0000A1Z5\",\n  \"established_year\": 2015,\n  \"company_details\": \"We provide top-notch Important Contacts services.\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Step 2 - Owners",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/service_provider/step-2",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "service_provider",
+                "step-2"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"owner_1\": {\n    \"name\": \"John Doe\",\n    \"phone\": \"9876543210\",\n    \"whatsapp\": \"9876543210\",\n    \"birth_date\": \"1985-05-15\",\n    \"anniversary_date\": \"2010-11-20\"\n  },\n  \"owner_2\": {\n    \"name\": \"Jane Doe\",\n    \"phone\": \"9123456780\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Step 3 - Location & Terms",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/service_provider/step-3",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "service_provider",
+                "step-3"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"state\": \"Rajasthan\",\n  \"district\": \"Jaipur\",\n  \"area\": \"Sitapura\",\n  \"address\": \"Plot 42\",\n  \"google_map_location\": \"https://maps.google.com/?q=26.9124,75.7873\",\n  \"terms_accepted\": true,\n  \"privacy_policy_accepted\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Submit Registration",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/{{registration_id}}/submit",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "{{registration_id}}",
+                "submit"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Registration - Service Provider: SOLAR SERVICES",
+      "item": [
+        {
+          "name": "Step 1 - Company Info",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/service_provider/step-1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "service_provider",
+                "step-1"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"service_category_id\": \"ID_FOR_SOLAR-SERVICES\",\n  \"company_name\": \"Solar Services Co.\",\n  \"gst_number\": \"22AAAAA0000A1Z5\",\n  \"established_year\": 2015,\n  \"company_details\": \"We provide top-notch Solar Services services.\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Step 2 - Owners",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/service_provider/step-2",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "service_provider",
+                "step-2"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"owner_1\": {\n    \"name\": \"John Doe\",\n    \"phone\": \"9876543210\",\n    \"whatsapp\": \"9876543210\",\n    \"birth_date\": \"1985-05-15\",\n    \"anniversary_date\": \"2010-11-20\"\n  },\n  \"owner_2\": {\n    \"name\": \"Jane Doe\",\n    \"phone\": \"9123456780\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Step 3 - Location & Terms",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/service_provider/step-3",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "service_provider",
+                "step-3"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"state\": \"Rajasthan\",\n  \"district\": \"Jaipur\",\n  \"area\": \"Sitapura\",\n  \"address\": \"Plot 42\",\n  \"google_map_location\": \"https://maps.google.com/?q=26.9124,75.7873\",\n  \"terms_accepted\": true,\n  \"privacy_policy_accepted\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Submit Registration",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/{{registration_id}}/submit",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "{{registration_id}}",
+                "submit"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Registration - Service Provider: POWDER SUPPLIER",
+      "item": [
+        {
+          "name": "Step 1 - Company Info",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/service_provider/step-1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "service_provider",
+                "step-1"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"service_category_id\": \"ID_FOR_POWDER-SUPPLIER\",\n  \"company_name\": \"Powder Supplier Co.\",\n  \"gst_number\": \"22AAAAA0000A1Z5\",\n  \"established_year\": 2015,\n  \"company_details\": \"We provide top-notch Powder Supplier services.\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Step 2 - Owners",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/service_provider/step-2",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "service_provider",
+                "step-2"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"owner_1\": {\n    \"name\": \"John Doe\",\n    \"phone\": \"9876543210\",\n    \"whatsapp\": \"9876543210\",\n    \"birth_date\": \"1985-05-15\",\n    \"anniversary_date\": \"2010-11-20\"\n  },\n  \"owner_2\": {\n    \"name\": \"Jane Doe\",\n    \"phone\": \"9123456780\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Step 3 - Location & Terms",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/service_provider/step-3",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "service_provider",
+                "step-3"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"state\": \"Rajasthan\",\n  \"district\": \"Jaipur\",\n  \"area\": \"Sitapura\",\n  \"address\": \"Plot 42\",\n  \"google_map_location\": \"https://maps.google.com/?q=26.9124,75.7873\",\n  \"terms_accepted\": true,\n  \"privacy_policy_accepted\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Submit Registration",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/{{registration_id}}/submit",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "{{registration_id}}",
+                "submit"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Registration - Service Provider: HYDRO & CRANE",
+      "item": [
+        {
+          "name": "Step 1 - Company Info",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/service_provider/step-1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "service_provider",
+                "step-1"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"service_category_id\": \"ID_FOR_HYDRO-CRANE\",\n  \"company_name\": \"Hydro & Crane Co.\",\n  \"gst_number\": \"22AAAAA0000A1Z5\",\n  \"established_year\": 2015,\n  \"company_details\": \"We provide top-notch Hydro & Crane services.\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Step 2 - Owners",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/service_provider/step-2",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "service_provider",
+                "step-2"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"owner_1\": {\n    \"name\": \"John Doe\",\n    \"phone\": \"9876543210\",\n    \"whatsapp\": \"9876543210\",\n    \"birth_date\": \"1985-05-15\",\n    \"anniversary_date\": \"2010-11-20\"\n  },\n  \"owner_2\": {\n    \"name\": \"Jane Doe\",\n    \"phone\": \"9123456780\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Step 3 - Location & Terms",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/service_provider/step-3",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "service_provider",
+                "step-3"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"state\": \"Rajasthan\",\n  \"district\": \"Jaipur\",\n  \"area\": \"Sitapura\",\n  \"address\": \"Plot 42\",\n  \"google_map_location\": \"https://maps.google.com/?q=26.9124,75.7873\",\n  \"terms_accepted\": true,\n  \"privacy_policy_accepted\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Submit Registration",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/registration/{{registration_id}}/submit",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "registration",
+                "{{registration_id}}",
+                "submit"
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ]
+          }
+        }
+      ]
     }
   ]
 }
