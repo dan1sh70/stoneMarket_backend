@@ -3412,6 +3412,385 @@
           }
         }
       ]
+    },
+    {
+      "name": "Home Aggregation",
+      "item": [
+        {
+          "name": "Get Home Data",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:5000/api/home",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "home"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Home Banners",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:5000/api/home/banners",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "home",
+                "banners"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Main Categories",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:5000/api/home/categories",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "home",
+                "categories"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Stone Gallery (Top 10)",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:5000/api/home/stone-gallery",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "home",
+                "stone-gallery"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Support Services",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:5000/api/home/support-services",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "home",
+                "support-services"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Nearby Businesses",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:5000/api/home/nearby-businesses?latitude=26&longitude=73",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "home",
+                "nearby-businesses"
+              ],
+              "query": [
+                {
+                  "key": "latitude",
+                  "value": "26"
+                },
+                {
+                  "key": "longitude",
+                  "value": "73"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Feed",
+      "item": [
+        {
+          "name": "Get Unified Feed",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:5000/api/feed?page=1&per_page=20",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "feed"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "per_page",
+                  "value": "20"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Mining Discovery",
+      "item": [
+        {
+          "name": "Get Mining Categories",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:5000/api/mining/categories",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "mining",
+                "categories"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Mining States by Category",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:5000/api/mining/granite-mining/states",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "mining",
+                "granite-mining",
+                "states"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Search Mining Locations",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:5000/api/mining/granite-mining/locations/search?state_id=1&search=Jalore",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "mining",
+                "granite-mining",
+                "locations",
+                "search"
+              ],
+              "query": [
+                {
+                  "key": "state_id",
+                  "value": "1"
+                },
+                {
+                  "key": "search",
+                  "value": "Jalore"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Mining Businesses List",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:5000/api/mining/businesses?page=1",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "mining",
+                "businesses"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Mining Stone Gallery",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:5000/api/mining/gallery?page=1",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "mining",
+                "gallery"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Businesses & Interactions",
+      "item": [
+        {
+          "name": "Get Public Business Profile",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:5000/api/businesses/BUSINESS_ID",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "businesses",
+                "BUSINESS_ID"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Toggle Business Favorite (POST)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer YOUR_TOKEN"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:5000/api/businesses/BUSINESS_ID/favorite",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "businesses",
+                "BUSINESS_ID",
+                "favorite"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Toggle Business Favorite (DELETE)",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer YOUR_TOKEN"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:5000/api/businesses/BUSINESS_ID/favorite",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "businesses",
+                "BUSINESS_ID",
+                "favorite"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Submit Quote Request",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer YOUR_TOKEN"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"business_id\": \"BUSINESS_ID\",\n  \"product_id\": \"PRODUCT_ID\",\n  \"quantity\": 1500,\n  \"unit\": \"Sq.Ft\",\n  \"message\": \"Need best price for Granite\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/quote-requests",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "quote-requests"
+              ]
+            }
+          }
+        }
+      ]
     }
   ]
 }
