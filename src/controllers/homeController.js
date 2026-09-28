@@ -124,11 +124,7 @@ exports.getNearbyBusinesses = async (req, res, next) => {
 
 exports.getHome = async (req, res, next) => {
   try {
-    // Run queries in parallel
-    const [banners, categories, gallery, services, nearby] = await Promise.all([
-      this.getBanners({ ...req }, res, err => err, true), // Passing a flag or using raw fetches
-    ]);
-    // A better approach is to refactor the logic out of req/res, but for brevity we'll just fetch directly here.
+    // We fetch data directly to avoid double response headers
     
     const hero_sliders = await HomeBanner.find({ status: 'active' }).sort({ sort_order: 1 }).lean();
     const catData = await MainCategory.find({ status: 'active' }).sort({ sort_order: 1 }).lean();
