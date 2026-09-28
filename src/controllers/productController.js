@@ -1,5 +1,8 @@
 const Product = require('../models/Product');
 const Vendor = require('../models/Vendor');
+const Inquiry = require('../models/Inquiry');
+const ProductInterest = require('../models/ProductInterest');
+const { successResponse, errorResponse } = require('../utils/apiResponse');
 
 // @desc    Add new product
 // @route   POST /api/v1/products
@@ -122,6 +125,140 @@ exports.uploadImages = async (req, res, next) => {
     }
     
     res.json({ message: 'Images uploaded', images: product.images });
+  } catch (err) {
+    next(err);
+  }
+};
+
+// @desc    Get Product Detail (Upgraded for Home Page)
+// @route   GET /api/products/:id/detail
+// @access  Public
+exports.getProductDetail = async (req, res, next) => {
+  try {
+    const product = await Product.findById(req.params.id)
+      .populate('vendorId', 'businessName category logo coverImage address contact')
+      .lean();
+      
+    if (!product) return errorResponse(res, 'Product not found', null, 404);
+    
+    // Track views asynchronously
+    Product.findByIdAndUpdate(req.params.id, { $inc: { views: 1 } }).exec();
+
+    const interested_count = await ProductInterest.countDocuments({ productId: product._id });
+    let is_interested = false;
+    
+    if (req.user) {
+      is_interested = await ProductInterest.exists({ productId: product._id, userId: req.user.id });
+    }
+
+    const vendor = product.vendorId || {};
+
+    const responseData = {
+      id: product._id,
+      name: product.name,
+      price: product.priceRange?.min || 0,
+      currency: "INR",
+      price_unit: product.priceRange?.unit || "Sq.Ft",
+      description: product.description,
+      images: product.images || [],
+      specifications: {
+        material: product.specifications?.find(s => s.key === 'Material')?.value || 'Granite',
+        finish: product.specifications?.find(s => s.key === 'Finish')?.value || 'Polished',
+        size: product.specifications?.find(s => s.key === 'Size')?.value?.split(',') || [],
+        thickness: product.specifications?.find(s => s.key === 'Thickness')?.value?.split(',') || [],
+        quality: product.specifications?.find(s => s.key === 'Quality')?.value?.split(',') || [],
+        quantity: 5000,
+        quantity_unit: "Sq.Ft"
+      },
+      business: {
+        id: vendor._id,
+        name: vendor.businessName,
+        type: vendor.category,
+        logo: vendor.logo,
+        contact: vendor.contact
+      },
+      location: {
+        state: vendor.address?.state,
+        district: vendor.address?.city,
+        area: vendor.address?.line1,
+        country: "India"
+      },
+      interested_count,
+      is_interested: !!is_interested
+    };
+
+    return successResponse(res, 'Product retrieved successfully', responseData);
+  } catch (err) {
+    next(err);
+  }
+};
+
+// @desc    Create Product Inquiry
+// @route   POST /api/products/:id/inquiry
+// @access  Private
+exports.createProductInquiry = async (req, res, next) => {
+  try {
+    const product = await Product.findById(req.params.id);
+    if (!product) return errorResponse(res, 'Product not found', null, 404);
+
+    const { quantity, message } = req.body;
+
+    const inquiry = await Inquiry.create({
+      senderId: req.user.id,
+      vendorId: product.vendorId,
+      productId: product._id,
+      category: product.category || 'Mining',
+      message: message,
+      quantity: quantity,
+      status: 'new'
+    });
+
+    return successResponse(res, 'Inquiry sent successfully', inquiry, 201);
+  } catch (err) {
+    next(err);
+  }
+};
+
+// @desc    Toggle Product Interest
+// @route   POST /api/products/:id/interest
+// @access  Private
+exports.toggleProductInterest = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const exists = await ProductInterest.findOne({ userId: req.user.id, productId: id });
+
+    if (exists) {
+      if (req.method === 'DELETE') {
+        await ProductInterest.deleteOne({ _id: exists._id });
+        return successResponse(res, 'Interest removed', null);
+      }
+      return successResponse(res, 'Already interested', null);
+    }
+
+    if (req.method === 'POST') {
+      await ProductInterest.create({ userId: req.user.id, productId: id });
+      return successResponse(res, 'Interest recorded', null, 201);
+    }
+    
+    return errorResponse(res, 'Invalid request', null, 400);
+  } catch (err) {
+    next(err);
+  }
+};
+
+// @desc    Get Product Interest Status
+// @route   GET /api/products/:id/interest
+// @access  Private
+exports.getProductInterest = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const interested_count = await ProductInterest.countDocuments({ productId: id });
+    const is_interested = await ProductInterest.exists({ userId: req.user.id, productId: id });
+
+    return successResponse(res, 'Interest status retrieved', {
+      interested_count,
+      is_interested: !!is_interested
+    });
   } catch (err) {
     next(err);
   }

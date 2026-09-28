@@ -47,6 +47,11 @@ const userRoutes = require('./src/routes/users');
 const masterDataRoutes = require('./src/routes/masterData');
 const registrationRoutes = require('./src/routes/registration');
 const serviceCategoriesRoutes = require('./src/routes/serviceCategories');
+const homeRoutes = require('./src/routes/home');
+const feedRoutes = require('./src/routes/feed');
+const businessRoutes = require('./src/routes/businesses');
+const miningRoutes = require('./src/routes/mining');
+const quoteRoutes = require('./src/routes/quotes');
 
 // v1 Routes
 app.use('/api/v1/auth', authRoutes);
@@ -60,6 +65,12 @@ app.use('/api/v1/users', userRoutes);
 
 // New unified /api routes for the upgrade
 app.use('/api', masterDataRoutes);
+app.use('/api/home', homeRoutes);
+app.use('/api/feed', feedRoutes);
+app.use('/api/mining', miningRoutes);
+app.use('/api/businesses', businessRoutes);
+app.use('/api/quote-requests', quoteRoutes);
+app.use('/api/service-providers', businessRoutes);
 app.use('/api/registration', registrationRoutes);
 app.use('/api/service-categories', serviceCategoriesRoutes);
 app.use('/api/auth', authRoutes); // also mount auth on root /api/auth as requested

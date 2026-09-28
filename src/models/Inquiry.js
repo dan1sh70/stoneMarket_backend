@@ -8,6 +8,7 @@ const inquirySchema = new mongoose.Schema({
   subject: String,
   message: String,
   requirements: String, // Detailed requirement text
+  quantity: Number, // Requested quantity
   contactInfo: {
     name: String,
     mobile: String,
