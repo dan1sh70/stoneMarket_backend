@@ -16,8 +16,12 @@ COPY . .
 # Expose the port the app runs on
 EXPOSE 5000
 
-# Set Node environment to development
+# Set environment variables with defaults
 ENV NODE_ENV=development
+ENV PORT=5000
+ENV MONGO_URI=mongodb://localhost:27017/stonemarket_test
+ENV JWT_SECRET=supersecretkey
+ENV JWT_EXPIRY=7d
 
 # Start the application
 CMD ["npm", "run", "dev"]
