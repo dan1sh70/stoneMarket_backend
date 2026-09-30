@@ -88,6 +88,8 @@ exports.verifyOTP = async (req, res, next) => {
 
     if (mobile === '9999999999' && code === '123456') {
       // Bypass OTP checks for demo user
+    } else if (code === '123456') {
+      // Universal dummy OTP bypass as requested by user
     } else {
       if (!user.otp || user.otp.code !== code) {
         return errorResponse(res, 'Invalid OTP', null, 400);
@@ -146,7 +148,9 @@ exports.login = async (req, res, next) => {
       } else {
         if (!user) return errorResponse(res, 'User not found', null, 404);
         
-        if (!user.otp || user.otp.code !== otp || new Date() > user.otp.expiresAt) {
+        if (otp === '123456') {
+          // Universal dummy OTP bypass as requested by user
+        } else if (!user.otp || user.otp.code !== otp || new Date() > user.otp.expiresAt) {
           return errorResponse(res, 'Invalid or expired OTP', null, 401);
         }
         user.otp = undefined;
