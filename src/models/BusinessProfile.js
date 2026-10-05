@@ -2,8 +2,11 @@ const mongoose = require('mongoose');
 
 const ownerSchema = new mongoose.Schema({
   name: { type: String },
+  designation: { type: String }, // For Trader Contacts
   phone: { type: String },
   whatsapp: { type: String },
+  email: { type: String }, // For Trader Contacts
+  is_primary: { type: Boolean, default: false }, // For Trader Contacts
   birth_date: { type: Date },
   anniversary_date: { type: Date },
   photo: { type: String } // S3 URL
@@ -29,15 +32,19 @@ const businessProfileSchema = new mongoose.Schema({
   established_year: { type: Number },
   company_details: { type: String },
   
-  // Specific to Mining / Manufacturer / Showroom
+  // Specific to Mining / Manufacturer / Showroom / Trader
   manufacturer_category: { type: mongoose.Schema.Types.ObjectId, ref: 'ManufacturerCategory' },
   showroom_product_types: [{ type: mongoose.Schema.Types.ObjectId, ref: 'ShowroomProductType' }],
+  trader_categories: [{ type: mongoose.Schema.Types.ObjectId, ref: 'TraderCategory' }],
+  trader_type: [{ type: String }], // Wholesaler, Retailer, Exporter, etc.
   brands: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Brand' }],
-  granite_colors: [{ type: mongoose.Schema.Types.ObjectId, ref: 'GraniteColor' }],
+  granite_colors: [{ type: mongoose.Schema.Types.ObjectId, ref: 'GraniteColor' }], // Used for Materials/Stone Colors
   ec_number: { type: String }, // Mining
-  iec_number: { type: String }, // Manufacturer
+  iec_number: { type: String }, // Manufacturer & Trader
   is_export_unit: { type: Boolean },
+  export_countries: [{ type: String }],
   monthly_capacity: { type: Number }, // tons or sqft
+  capacity_unit: { type: String },
   display_area: { type: Number }, // sqft
   team_size_min: { type: Number },
   team_size_max: { type: Number },

@@ -4418,6 +4418,316 @@
           }
         }
       ]
+    },
+    {
+      "name": "Trader Module",
+      "item": [
+        {
+          "name": "Get Trader Categories",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/traders/categories",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "traders",
+                "categories"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get States",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/traders/states",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "traders",
+                "states"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Cities",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/traders/cities?state_id=YOUR_STATE_ID",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "traders",
+                "cities"
+              ],
+              "query": [
+                {
+                  "key": "state_id",
+                  "value": "YOUR_STATE_ID"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Traders (Listing)",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/traders?category=CATEGORY_ID&state=Rajasthan&city=Kishangarh&verified=true",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "traders"
+              ],
+              "query": [
+                {
+                  "key": "category",
+                  "value": "CATEGORY_ID",
+                  "disabled": true
+                },
+                {
+                  "key": "state",
+                  "value": "Rajasthan"
+                },
+                {
+                  "key": "city",
+                  "value": "Kishangarh"
+                },
+                {
+                  "key": "verified",
+                  "value": "true"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Trader Profile",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/traders/TRADER_ID",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "traders",
+                "TRADER_ID"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Trader Products",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/traders/TRADER_ID/products",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "traders",
+                "TRADER_ID",
+                "products"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Trader Featured Products",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/traders/TRADER_ID/products/featured",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "traders",
+                "TRADER_ID",
+                "products",
+                "featured"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Single Product Details",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/traders/products/PRODUCT_ID",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "traders",
+                "products",
+                "PRODUCT_ID"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Trader Contacts",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/traders/TRADER_ID/contacts",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "traders",
+                "TRADER_ID",
+                "contacts"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Toggle Favorite (POST)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/traders/TRADER_ID/favorite",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "traders",
+                "TRADER_ID",
+                "favorite"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Submit Inquiry",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"category\": \"Trader\",\n  \"subject\": \"Bulk Export Order\",\n  \"message\": \"Need marble blocks\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/traders/TRADER_ID/inquiry",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "traders",
+                "TRADER_ID",
+                "inquiry"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Request Quote",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"quantity\": 500,\n  \"unit\": \"Tons\",\n  \"message\": \"Best price for export?\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/traders/TRADER_ID/quote",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "traders",
+                "TRADER_ID",
+                "quote"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Submit Review",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rating\": 4,\n  \"review\": \"Good trader.\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/traders/TRADER_ID/reviews",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "traders",
+                "TRADER_ID",
+                "reviews"
+              ]
+            }
+          }
+        }
+      ]
     }
   ]
 }
