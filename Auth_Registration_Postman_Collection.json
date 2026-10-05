@@ -3845,6 +3845,284 @@
           }
         }
       ]
+    },
+    {
+      "name": "Manufacturer Module",
+      "item": [
+        {
+          "name": "Get Manufacturer Categories",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/manufacturers/categories",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "manufacturers",
+                "categories"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Manufacturer Types",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/manufacturers/types",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "manufacturers",
+                "types"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Manufacturer States",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/manufacturers/states",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "manufacturers",
+                "states"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Manufacturer Cities",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/manufacturers/cities?state_id=YOUR_STATE_ID",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "manufacturers",
+                "cities"
+              ],
+              "query": [
+                {
+                  "key": "state_id",
+                  "value": "YOUR_STATE_ID"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Manufacturer Colours",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/manufacturers/colours",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "manufacturers",
+                "colours"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Manufacturers (Listing / Filter)",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/manufacturers?category=YOUR_CATEGORY_ID&state=Rajasthan&city=Jalore&search=Shree&export_unit=true&page=1&per_page=20",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "manufacturers"
+              ],
+              "query": [
+                {
+                  "key": "category",
+                  "value": "YOUR_CATEGORY_ID",
+                  "disabled": true
+                },
+                {
+                  "key": "state",
+                  "value": "Rajasthan",
+                  "disabled": true
+                },
+                {
+                  "key": "city",
+                  "value": "Jalore",
+                  "disabled": true
+                },
+                {
+                  "key": "search",
+                  "value": "Shree",
+                  "disabled": true
+                },
+                {
+                  "key": "export_unit",
+                  "value": "true",
+                  "disabled": true
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "per_page",
+                  "value": "20"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Manufacturer Profile",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/manufacturers/MANUFACTURER_ID",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "manufacturers",
+                "MANUFACTURER_ID"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Toggle Manufacturer Favorite (POST)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/manufacturers/MANUFACTURER_ID/favorite",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "manufacturers",
+                "MANUFACTURER_ID",
+                "favorite"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Toggle Manufacturer Favorite (DELETE)",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/manufacturers/MANUFACTURER_ID/favorite",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "manufacturers",
+                "MANUFACTURER_ID",
+                "favorite"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Submit Inquiry to Manufacturer",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"productId\": \"OPTIONAL_PRODUCT_ID\",\n  \"category\": \"Granite Manufacturer\",\n  \"subject\": \"Bulk Order Inquiry\",\n  \"message\": \"I want 5000 sqft of Black Galaxy\",\n  \"requirements\": \"Delivery in 10 days\",\n  \"contactInfo\": {\n    \"phone\": \"9876543210\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/manufacturers/MANUFACTURER_ID/inquiry",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "manufacturers",
+                "MANUFACTURER_ID",
+                "inquiry"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Request Quote from Manufacturer",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"product_id\": \"OPTIONAL_PRODUCT_ID\",\n  \"quantity\": 5000,\n  \"unit\": \"Sqft\",\n  \"message\": \"Need best price for Black Galaxy\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/manufacturers/MANUFACTURER_ID/quote",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "manufacturers",
+                "MANUFACTURER_ID",
+                "quote"
+              ]
+            }
+          }
+        }
+      ]
     }
   ]
 }
