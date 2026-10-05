@@ -9,7 +9,8 @@ const {
   getManufacturers,
   getManufacturerProfile
 } = require('../controllers/manufacturerController');
-const { toggleBusinessFavorite } = require('../controllers/quoteController'); // Using existing favorite controller
+const { toggleBusinessFavorite, createQuoteRequest } = require('../controllers/quoteController'); 
+const { submitInquiry } = require('../controllers/inquiryController');
 const { protect } = require('../middleware/auth');
 
 router.get('/categories', getCategories);
@@ -20,11 +21,21 @@ router.get('/colours', getColours);
 router.get('/', getManufacturers);
 router.get('/:id', getManufacturerProfile);
 
-// Favourites (using quoteController logic that already handles BusinessFavorite)
+// Favourites
 router.post('/:id/favorite', protect, toggleBusinessFavorite);
 router.delete('/:id/favorite', protect, toggleBusinessFavorite);
 
-// Inquiries / Quotes can be routed to the general quote endpoint 
-// POST /api/quote-requests handles it well from the frontend side
+// Inquiries / Quotes
+router.post('/:id/inquiry', protect, (req, res, next) => {
+  // Map manufacturer id from URL to vendorId for existing logic
+  req.body.vendorId = req.params.id;
+  return submitInquiry(req, res, next);
+});
+
+router.post('/:id/quote', protect, (req, res, next) => {
+  // Map manufacturer id from URL to business_id for existing logic
+  req.body.business_id = req.params.id;
+  return createQuoteRequest(req, res, next);
+});
 
 module.exports = router;
