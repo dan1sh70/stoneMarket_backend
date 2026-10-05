@@ -4728,6 +4728,220 @@
           }
         }
       ]
+    },
+    {
+      "name": "Vendor CMS / Dashboard",
+      "item": [
+        {
+          "name": "Mining CMS",
+          "item": [
+            {
+              "name": "Update Mining Profile",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"company_name\":\"My Mining Co\",\"established_year\":2010}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/cms/mining/profile",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "cms",
+                    "mining",
+                    "profile"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Mining Products",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/cms/mining/products",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "cms",
+                    "mining",
+                    "products"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Add Mining Product",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"name\":\"Rough Block A\",\"priceRange\":{\"min\":50,\"unit\":\"ton\"}}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/cms/mining/products",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "cms",
+                    "mining",
+                    "products"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Manufacturer CMS",
+          "item": [
+            {
+              "name": "Update Manufacturer Profile",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"company_name\":\"My Factory\",\"is_export_unit\":true}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/cms/manufacturer/profile",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "cms",
+                    "manufacturer",
+                    "profile"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Showroom CMS",
+          "item": [
+            {
+              "name": "Update Showroom Profile",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"company_name\":\"My Showroom\",\"display_area\":5000}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/cms/showroom/profile",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "cms",
+                    "showroom",
+                    "profile"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Trader CMS",
+          "item": [
+            {
+              "name": "Update Trader Profile",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"company_name\":\"My Trading Co\",\"export_countries\":[\"USA\",\"UK\"]}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/cms/trader/profile",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "cms",
+                    "trader",
+                    "profile"
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
     }
   ]
 }

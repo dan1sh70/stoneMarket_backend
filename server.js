@@ -56,6 +56,12 @@ const manufacturerRoutes = require('./src/routes/manufacturers');
 const showroomRoutes = require('./src/routes/showrooms');
 const traderRoutes = require('./src/routes/traders');
 
+// CMS Routes
+const miningCmsRoutes = require('./src/routes/cms/mining');
+const manufacturerCmsRoutes = require('./src/routes/cms/manufacturer');
+const showroomCmsRoutes = require('./src/routes/cms/showroom');
+const traderCmsRoutes = require('./src/routes/cms/trader');
+
 // v1 Routes
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/vendors', vendorRoutes);
@@ -80,6 +86,12 @@ app.use('/api/auth', authRoutes); // also mount auth on root /api/auth as reques
 app.use('/api/manufacturers', manufacturerRoutes);
 app.use('/api/showrooms', showroomRoutes);
 app.use('/api/traders', traderRoutes);
+
+// Mount CMS API Routes
+app.use('/api/cms/mining', miningCmsRoutes);
+app.use('/api/cms/manufacturer', manufacturerCmsRoutes);
+app.use('/api/cms/showroom', showroomCmsRoutes);
+app.use('/api/cms/trader', traderCmsRoutes);
 
 // Root Routes (for frontend compatibility)
 app.use('/auth', authRoutes);
