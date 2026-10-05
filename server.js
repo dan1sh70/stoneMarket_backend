@@ -52,6 +52,7 @@ const feedRoutes = require('./src/routes/feed');
 const businessRoutes = require('./src/routes/businesses');
 const miningRoutes = require('./src/routes/mining');
 const quoteRoutes = require('./src/routes/quotes');
+const manufacturerRoutes = require('./src/routes/manufacturers');
 
 // v1 Routes
 app.use('/api/v1/auth', authRoutes);
@@ -74,6 +75,7 @@ app.use('/api/service-providers', businessRoutes);
 app.use('/api/registration', registrationRoutes);
 app.use('/api/service-categories', serviceCategoriesRoutes);
 app.use('/api/auth', authRoutes); // also mount auth on root /api/auth as requested
+app.use('/api/manufacturers', manufacturerRoutes);
 
 // Root Routes (for frontend compatibility)
 app.use('/auth', authRoutes);

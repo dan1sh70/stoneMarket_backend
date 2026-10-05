@@ -30,6 +30,7 @@ const businessProfileSchema = new mongoose.Schema({
   company_details: { type: String },
   
   // Specific to Mining / Manufacturer / Showroom
+  manufacturer_category: { type: mongoose.Schema.Types.ObjectId, ref: 'ManufacturerCategory' },
   granite_colors: [{ type: mongoose.Schema.Types.ObjectId, ref: 'GraniteColor' }],
   ec_number: { type: String }, // Mining
   iec_number: { type: String }, // Manufacturer
