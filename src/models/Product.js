@@ -19,6 +19,8 @@ const productSchema = new mongoose.Schema({
   },
   graniteColors: [String], // Stone-specific field
   miningLocation: String, // Source location for mining products
+  stock_status: { type: String, enum: ['in_stock', 'out_of_stock', 'on_order'], default: 'in_stock' },
+  featured: { type: Boolean, default: false },
   status: { type: String, enum: ['active', 'inactive'], default: 'active' },
   views: { type: Number, default: 0 }
 }, { timestamps: true });

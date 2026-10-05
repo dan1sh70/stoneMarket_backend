@@ -31,13 +31,33 @@ const businessProfileSchema = new mongoose.Schema({
   
   // Specific to Mining / Manufacturer / Showroom
   manufacturer_category: { type: mongoose.Schema.Types.ObjectId, ref: 'ManufacturerCategory' },
+  showroom_product_types: [{ type: mongoose.Schema.Types.ObjectId, ref: 'ShowroomProductType' }],
+  brands: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Brand' }],
   granite_colors: [{ type: mongoose.Schema.Types.ObjectId, ref: 'GraniteColor' }],
   ec_number: { type: String }, // Mining
   iec_number: { type: String }, // Manufacturer
   is_export_unit: { type: Boolean },
   monthly_capacity: { type: Number }, // tons or sqft
+  display_area: { type: Number }, // sqft
+  team_size_min: { type: Number },
+  team_size_max: { type: Number },
   machines: [machineSchema],
-  working_times: { type: String },
+  working_times: { type: String }, // Legacy
+  
+  // Structured working hours
+  working_hours: {
+    monday: { is_open: { type: Boolean, default: true }, open: { type: String, default: '09:00' }, close: { type: String, default: '20:00' } },
+    tuesday: { is_open: { type: Boolean, default: true }, open: { type: String, default: '09:00' }, close: { type: String, default: '20:00' } },
+    wednesday: { is_open: { type: Boolean, default: true }, open: { type: String, default: '09:00' }, close: { type: String, default: '20:00' } },
+    thursday: { is_open: { type: Boolean, default: true }, open: { type: String, default: '09:00' }, close: { type: String, default: '20:00' } },
+    friday: { is_open: { type: Boolean, default: true }, open: { type: String, default: '09:00' }, close: { type: String, default: '20:00' } },
+    saturday: { is_open: { type: Boolean, default: true }, open: { type: String, default: '09:00' }, close: { type: String, default: '20:00' } },
+    sunday: { is_open: { type: Boolean, default: false }, open: { type: String, default: '10:00' }, close: { type: String, default: '16:00' } }
+  },
+
+  virtual_tour_url: { type: String },
+  rating: { type: Number, default: 0 },
+  review_count: { type: Number, default: 0 },
   
   // Specific to Transport
   vehicle_type: { type: String },

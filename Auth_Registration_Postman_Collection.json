@@ -4123,6 +4123,301 @@
           }
         }
       ]
+    },
+    {
+      "name": "Showroom Module",
+      "item": [
+        {
+          "name": "Get Product Types",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/showrooms/product-types",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "showrooms",
+                "product-types"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get States",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/showrooms/states",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "showrooms",
+                "states"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Cities",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/showrooms/cities?state_id=YOUR_STATE_ID",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "showrooms",
+                "cities"
+              ],
+              "query": [
+                {
+                  "key": "state_id",
+                  "value": "YOUR_STATE_ID"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Showrooms (Listing)",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/showrooms?product_type=marble&state=Rajasthan&city=Kishangarh&property_status=owned&verified=true",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "showrooms"
+              ],
+              "query": [
+                {
+                  "key": "product_type",
+                  "value": "marble"
+                },
+                {
+                  "key": "state",
+                  "value": "Rajasthan"
+                },
+                {
+                  "key": "city",
+                  "value": "Kishangarh"
+                },
+                {
+                  "key": "property_status",
+                  "value": "owned"
+                },
+                {
+                  "key": "verified",
+                  "value": "true"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Showroom Profile",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/showrooms/SHOWROOM_ID",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "showrooms",
+                "SHOWROOM_ID"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Showroom Products",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/showrooms/SHOWROOM_ID/products",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "showrooms",
+                "SHOWROOM_ID",
+                "products"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Showroom Featured Products",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/showrooms/SHOWROOM_ID/products/featured",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "showrooms",
+                "SHOWROOM_ID",
+                "products",
+                "featured"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Single Product Details",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/showrooms/products/PRODUCT_ID",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "showrooms",
+                "products",
+                "PRODUCT_ID"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Toggle Favorite (POST)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/showrooms/SHOWROOM_ID/favorite",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "showrooms",
+                "SHOWROOM_ID",
+                "favorite"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Submit Inquiry",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"category\": \"Showroom\",\n  \"subject\": \"Bulk Order\",\n  \"message\": \"Need marble slabs\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/showrooms/SHOWROOM_ID/inquiry",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "showrooms",
+                "SHOWROOM_ID",
+                "inquiry"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Request Quote",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"quantity\": 500,\n  \"unit\": \"Sqft\",\n  \"message\": \"Best price?\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/showrooms/SHOWROOM_ID/quote",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "showrooms",
+                "SHOWROOM_ID",
+                "quote"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Submit Review",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rating\": 5,\n  \"review\": \"Great showroom!\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/showrooms/SHOWROOM_ID/reviews",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "showrooms",
+                "SHOWROOM_ID",
+                "reviews"
+              ]
+            }
+          }
+        }
+      ]
     }
   ]
 }
