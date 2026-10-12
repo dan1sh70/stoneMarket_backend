@@ -5,7 +5,8 @@ const showroomReviewSchema = new mongoose.Schema({
   showroomId: { type: mongoose.Schema.Types.ObjectId, ref: 'BusinessProfile', required: true },
   rating: { type: Number, required: true, min: 1, max: 5 },
   review: { type: String },
-  status: { type: String, enum: ['pending', 'approved', 'rejected'], default: 'approved' } // Auto-approve for now
+  status: { type: String, enum: ['pending', 'approved', 'rejected'], default: 'approved' },
+  is_mock: { type: Boolean, default: false }
 }, { timestamps: true });
 
 showroomReviewSchema.index({ userId: 1, showroomId: 1 }, { unique: true }); // Prevent duplicate reviews

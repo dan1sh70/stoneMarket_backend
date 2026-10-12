@@ -22,7 +22,8 @@ const productSchema = new mongoose.Schema({
   stock_status: { type: String, enum: ['in_stock', 'out_of_stock', 'on_order'], default: 'in_stock' },
   featured: { type: Boolean, default: false },
   status: { type: String, enum: ['active', 'inactive'], default: 'active' },
-  views: { type: Number, default: 0 }
+  views: { type: Number, default: 0 },
+  is_mock: { type: Boolean, default: false }
 }, { timestamps: true });
 
 // Indexes

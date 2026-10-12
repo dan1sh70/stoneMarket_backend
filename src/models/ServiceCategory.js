@@ -6,7 +6,8 @@ const serviceCategorySchema = new mongoose.Schema({
   description: { type: String, default: null },
   icon: { type: String, default: null }, // S3 URL or icon identifier
   status: { type: String, enum: ['active', 'inactive'], default: 'active' },
-  sort_order: { type: Number, default: 0 }
+  sort_order: { type: Number, default: 0 },
+  is_mock: { type: Boolean, default: false }
 }, { timestamps: true });
 
 module.exports = mongoose.model('ServiceCategory', serviceCategorySchema);

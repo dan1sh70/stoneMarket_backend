@@ -13,7 +13,8 @@ const homeBannerSchema = new mongoose.Schema({
   sort_order: { type: Number, default: 0 },
   status: { type: String, enum: ['active', 'inactive', 'scheduled'], default: 'active' },
   start_date: { type: Date },
-  end_date: { type: Date }
+  end_date: { type: Date },
+  is_mock: { type: Boolean, default: false }
 }, { timestamps: true });
 
 // Scope for active/valid banners

@@ -109,7 +109,8 @@ const businessProfileSchema = new mongoose.Schema({
     type: String,
     enum: ['pending', 'active', 'suspended'],
     default: 'pending'
-  }
+  },
+  is_mock: { type: Boolean, default: false }
 }, { timestamps: true });
 
 businessProfileSchema.index({ company_name: 'text' });

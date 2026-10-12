@@ -6,7 +6,8 @@ const traderCategorySchema = new mongoose.Schema({
   description: { type: String },
   image: { type: String },
   sort_order: { type: Number, default: 0 },
-  status: { type: String, enum: ['active', 'inactive'], default: 'active' }
+  status: { type: String, enum: ['active', 'inactive'], default: 'active' },
+  is_mock: { type: Boolean, default: false }
 }, { timestamps: true });
 
 module.exports = mongoose.model('TraderCategory', traderCategorySchema);

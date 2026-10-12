@@ -8,8 +8,8 @@ const mainCategorySchema = new mongoose.Schema({
   icon: { type: String },
   sort_order: { type: Number, default: 0 },
   status: { type: String, enum: ['active', 'inactive'], default: 'active' },
-  // Optional: keep track of counts asynchronously
-  business_count: { type: Number, default: 0 }
+  business_count: { type: Number, default: 0 },
+  is_mock: { type: Boolean, default: false }
 }, { timestamps: true });
 
 module.exports = mongoose.model('MainCategory', mainCategorySchema);

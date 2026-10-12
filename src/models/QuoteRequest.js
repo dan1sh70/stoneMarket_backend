@@ -7,7 +7,8 @@ const quoteRequestSchema = new mongoose.Schema({
   quantity: { type: Number, required: true },
   unit: { type: String, default: 'Sq.Ft' },
   message: { type: String, required: true },
-  status: { type: String, enum: ['pending', 'viewed', 'responded', 'accepted', 'rejected', 'closed'], default: 'pending' }
+  status: { type: String, enum: ['pending', 'viewed', 'responded', 'accepted', 'rejected', 'closed'], default: 'pending' },
+  is_mock: { type: Boolean, default: false }
 }, { timestamps: true });
 
 module.exports = mongoose.model('QuoteRequest', quoteRequestSchema);

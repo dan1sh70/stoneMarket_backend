@@ -9,6 +9,7 @@ const vendorSchema = new mongoose.Schema({
     enum: [
       'Mining',
       'Granite Manufacturer',
+      'Showroom',
       'Traders & Suppliers',
       'Transporters',
       'Machinery',
@@ -79,7 +80,8 @@ const vendorSchema = new mongoose.Schema({
     verified: { type: Boolean, default: false },
     premium: { type: Boolean, default: false }
   },
-  subscriptionId: { type: mongoose.Schema.Types.ObjectId, ref: 'Subscription' }
+  subscriptionId: { type: mongoose.Schema.Types.ObjectId, ref: 'Subscription' },
+  is_mock: { type: Boolean, default: false }
 }, { timestamps: true });
 
 // Compound indexes

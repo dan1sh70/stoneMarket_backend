@@ -20,7 +20,8 @@ const newsSchema = new mongoose.Schema({
   targetAudience: { type: String, enum: ['all', 'vendors', 'buyers'], default: 'all' },
   publishedAt: Date,
   expiresAt: Date,
-  createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' } // admin
+  createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }, // admin
+  is_mock: { type: Boolean, default: false }
 }, { timestamps: true });
 
 module.exports = mongoose.model('News', newsSchema);

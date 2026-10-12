@@ -33,6 +33,7 @@ const userSchema = new mongoose.Schema({
   preferredCity: String,
   resetPasswordToken: String,
   resetPasswordExpire: Date,
+  is_mock: { type: Boolean, default: false }
 }, { timestamps: true });
 
 module.exports = mongoose.model('User', userSchema);

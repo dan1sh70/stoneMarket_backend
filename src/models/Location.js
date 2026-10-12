@@ -12,7 +12,8 @@ const districtSchema = new mongoose.Schema({
 
 const stateSchema = new mongoose.Schema({
   name: { type: String, required: true, unique: true },
-  districts: [districtSchema]
+  districts: [districtSchema],
+  is_mock: { type: Boolean, default: false }
 });
 
 module.exports = mongoose.model('Location', stateSchema);

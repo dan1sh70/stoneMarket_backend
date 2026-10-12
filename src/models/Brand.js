@@ -5,7 +5,8 @@ const brandSchema = new mongoose.Schema({
   logo: { type: String },
   description: { type: String },
   website: { type: String },
-  status: { type: String, enum: ['active', 'inactive'], default: 'active' }
+  status: { type: String, enum: ['active', 'inactive'], default: 'active' },
+  is_mock: { type: Boolean, default: false }
 }, { timestamps: true });
 
 module.exports = mongoose.model('Brand', brandSchema);

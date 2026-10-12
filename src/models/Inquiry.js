@@ -19,7 +19,8 @@ const inquirySchema = new mongoose.Schema({
     message: String,
     respondedAt: Date
   },
-  isWhatsAppSent: { type: Boolean, default: false }
+  isWhatsAppSent: { type: Boolean, default: false },
+  is_mock: { type: Boolean, default: false }
 }, { timestamps: true });
 
 // Indexes

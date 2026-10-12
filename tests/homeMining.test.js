@@ -15,8 +15,10 @@ beforeAll(async () => {
     await mongoose.disconnect();
   }
   await mongoose.connect(uri);
+});
 
-  // Seed minimal data
+beforeEach(async () => {
+  // Seed minimal data before each test
   await HomeBanner.create({
     title: 'Test Banner',
     image: 'test.jpg',
