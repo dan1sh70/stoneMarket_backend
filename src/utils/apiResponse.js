@@ -3,6 +3,10 @@
  */
 
 exports.successResponse = (res, message, data = {}, meta = {}, statusCode = 200) => {
+  if (typeof meta === 'number') {
+    statusCode = meta;
+    meta = {};
+  }
   return res.status(statusCode).json({
     success: true,
     message,

@@ -33,4 +33,19 @@ const authorize = (...roles) => {
   };
 };
 
-module.exports = { protect, authorize };
+const optionalAuth = (req, res, next) => {
+  let token;
+  if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
+    try {
+      token = req.headers.authorization.split(' ')[1];
+      const secret = process.env.JWT_SECRET || 'fallback_super_secret_key_for_testing';
+      const decoded = jwt.verify(token, secret);
+      req.user = decoded;
+    } catch (error) {
+      // Continue without user if token is invalid
+    }
+  }
+  next();
+};
+
+module.exports = { protect, authorize, optionalAuth };

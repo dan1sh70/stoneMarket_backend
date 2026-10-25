@@ -4942,6 +4942,1038 @@
           ]
         }
       ]
+    },
+    {
+      "name": "Buyer Marketplace Module",
+      "item": [
+        {
+          "name": "1. Buyer Discovery Flow",
+          "item": [
+            {
+              "name": "Get Buyer States",
+              "request": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/buyers/states",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "buyers",
+                    "states"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "Rajasthan",
+                      "disabled": true
+                    },
+                    {
+                      "key": "verified",
+                      "value": "true",
+                      "disabled": true
+                    },
+                    {
+                      "key": "buyer_type",
+                      "value": "construction-company",
+                      "disabled": true
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Buyer Cities",
+              "request": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/buyers/cities?state_id=STATE_ID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "buyers",
+                    "cities"
+                  ],
+                  "query": [
+                    {
+                      "key": "state_id",
+                      "value": "STATE_ID"
+                    },
+                    {
+                      "key": "search",
+                      "value": "Jaipur",
+                      "disabled": true
+                    },
+                    {
+                      "key": "verified",
+                      "value": "true",
+                      "disabled": true
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Buyer Types (Configurable)",
+              "request": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/buyers/types",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "buyers",
+                    "types"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Verified Buyers (Listing & Filters)",
+              "request": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/buyers?state=Rajasthan&city=Jaipur&verified=true&page=1&per_page=20",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "buyers"
+                  ],
+                  "query": [
+                    {
+                      "key": "state",
+                      "value": "Rajasthan"
+                    },
+                    {
+                      "key": "city",
+                      "value": "Jaipur"
+                    },
+                    {
+                      "key": "buyer_type",
+                      "value": "construction-company",
+                      "disabled": true
+                    },
+                    {
+                      "key": "material",
+                      "value": "Granite",
+                      "disabled": true
+                    },
+                    {
+                      "key": "verified",
+                      "value": "true"
+                    },
+                    {
+                      "key": "search",
+                      "value": "Global Infra",
+                      "disabled": true
+                    },
+                    {
+                      "key": "sort",
+                      "value": "rating",
+                      "disabled": true
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Buyer Profile (Public / Authorized)",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "disabled": true
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/buyers/BUYER_ID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "buyers",
+                    "BUYER_ID"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Buyer Requirements",
+              "request": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/buyers/BUYER_ID/requirements",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "buyers",
+                    "BUYER_ID",
+                    "requirements"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Buyer Reviews",
+              "request": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/buyers/BUYER_ID/reviews",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "buyers",
+                    "BUYER_ID",
+                    "reviews"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Submit Review for Buyer",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"rating\": 5,\n  \"review\": \"Outstanding buyer! Prompt payments and smooth site delivery coordination.\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/buyers/BUYER_ID/reviews",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "buyers",
+                    "BUYER_ID",
+                    "reviews"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Toggle Buyer Favorite",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/buyers/BUYER_ID/favorite",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "buyers",
+                    "BUYER_ID",
+                    "favorite"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get My Saved Buyers",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/buyers/favorites",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "buyers",
+                    "favorites"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "2. Buyer Self Requirements Management",
+          "item": [
+            {
+              "name": "Get My Requirements (Buyer)",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/buyer/requirements",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "buyer",
+                    "requirements"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "open",
+                      "disabled": true
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Create Purchasing Requirement",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Bulk 20mm Steel Grey Gangsaw Granite Slabs\",\n  \"description\": \"Export quality gangsaw slabs needed for IT park flooring in Jaipur.\",\n  \"material\": \"Granite\",\n  \"product_type\": \"Slabs\",\n  \"stone_type\": \"Granite\",\n  \"colour\": \"Steel Grey\",\n  \"finish\": \"Polished\",\n  \"grade\": \"First Quality Export\",\n  \"required_size\": \"300cm x 180cm+\",\n  \"thickness_mm\": 20,\n  \"quantity\": 15000,\n  \"quantity_unit\": \"sqft\",\n  \"budget\": {\n    \"min\": 65,\n    \"max\": 80,\n    \"currency\": \"INR\"\n  },\n  \"delivery_location\": {\n    \"city\": \"Jaipur\",\n    \"state\": \"Rajasthan\",\n    \"area\": \"Mansarovar\",\n    \"full_address\": \"Phase 3, Mansarovar, Jaipur\"\n  },\n  \"required_delivery_date\": \"2026-12-01\",\n  \"order_frequency\": \"monthly\",\n  \"status\": \"open\",\n  \"visibility\": \"public\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/buyer/requirements",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "buyer",
+                    "requirements"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Requirement Detail",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/buyer/requirements/REQUIREMENT_ID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "buyer",
+                    "requirements",
+                    "REQUIREMENT_ID"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Update Requirement",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"quantity\": 20000,\n  \"status\": \"open\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/buyer/requirements/REQUIREMENT_ID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "buyer",
+                    "requirements",
+                    "REQUIREMENT_ID"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Delete Requirement",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/buyer/requirements/REQUIREMENT_ID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "buyer",
+                    "requirements",
+                    "REQUIREMENT_ID"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "3. Inquiries & Quotation Marketplace",
+          "item": [
+            {
+              "name": "Get Marketplace Form Options",
+              "request": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/marketplace/form-options",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "marketplace",
+                    "form-options"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Upload Attachments (PDF/Images up to 10MB)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "files",
+                      "type": "file",
+                      "src": []
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/marketplace/upload",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "marketplace",
+                    "upload"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Send Inquiry (Product / Supplier Linked)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "disabled": true
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Amit Kumar\",\n  \"mobile\": \"9111111112\",\n  \"email\": \"buyer.amit@mockstonemarket.com\",\n  \"city\": \"Jaipur\",\n  \"businessId\": \"SUPPLIER_BUSINESS_ID\",\n  \"productId\": \"PRODUCT_ID\",\n  \"quantity\": 10000,\n  \"unit\": \"sqft\",\n  \"thickness\": \"20mm\",\n  \"finish\": \"Polished\",\n  \"delivery_location\": \"Mansarovar, Jaipur\",\n  \"message\": \"Please share best FOB price for 10,000 sqft Steel Grey Gangsaw slabs.\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/inquiries",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "inquiries"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Request Quote (Single or Multi-supplier Broadcast)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"supplier_ids\": [\n    \"SUPPLIER_ID_1\",\n    \"SUPPLIER_ID_2\"\n  ],\n  \"quantity\": 12000,\n  \"unit\": \"sqft\",\n  \"size\": \"Gangsaw Slabs\",\n  \"thickness\": \"20mm\",\n  \"finish\": \"Polished\",\n  \"delivery_location\": \"Mansarovar, Jaipur\",\n  \"message\": \"Please quote ex-factory rates for 12,000 sqft premium gangsaw slabs.\",\n  \"buyer_contact\": {\n    \"name\": \"Amit Kumar\",\n    \"phone\": \"9111111112\",\n    \"email\": \"buyer.amit@mockstonemarket.com\",\n    \"city\": \"Jaipur\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/quotes",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "quotes"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Single Quote Detail",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/quotes/QUOTE_ID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "quotes",
+                    "QUOTE_ID"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Buyer My Quotes",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/buyer/quotes",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "buyer",
+                    "quotes"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Supplier Assigned Quote Requests",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/supplier/quote-requests",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "supplier",
+                    "quote-requests"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Supplier Submit Quote Response",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"offered_price\": 72,\n  \"currency\": \"INR\",\n  \"unit\": \"sqft\",\n  \"available_quantity\": 15000,\n  \"taxes\": 18,\n  \"shipping_cost\": 0,\n  \"estimated_delivery_time\": \"7-10 days\",\n  \"offer_validity\": \"2026-11-30\",\n  \"terms_and_conditions\": \"30% advance on PO confirmation, balance on dispatch.\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/quotes/QUOTE_ID/responses",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "quotes",
+                    "QUOTE_ID",
+                    "responses"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Quote Responses (Confidential)",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/quotes/QUOTE_ID/responses",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "quotes",
+                    "QUOTE_ID",
+                    "responses"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "4. Admin Buyer Management",
+          "item": [
+            {
+              "name": "Admin List Buyers",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/admin/buyers?verification_status=pending&page=1&per_page=20",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "admin",
+                    "buyers"
+                  ],
+                  "query": [
+                    {
+                      "key": "verification_status",
+                      "value": "pending"
+                    },
+                    {
+                      "key": "search",
+                      "value": "Global Infra",
+                      "disabled": true
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Admin Get Buyer Detail (Includes Verification Docs)",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/admin/buyers/BUYER_ID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "admin",
+                    "buyers",
+                    "BUYER_ID"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Admin Verify / Reject Buyer",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"approved\",\n  \"rejection_reason\": \"\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/admin/buyers/BUYER_ID/verify",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "admin",
+                    "buyers",
+                    "BUYER_ID",
+                    "verify"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Admin Update Buyer Profile",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company_name\": \"Global Infra Buildcon Limited\",\n  \"status\": \"active\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/admin/buyers/BUYER_ID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "admin",
+                    "buyers",
+                    "BUYER_ID"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Admin Moderate Requirement Status",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"open\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/admin/buyers/requirements/REQUIREMENT_ID/status",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "admin",
+                    "buyers",
+                    "requirements",
+                    "REQUIREMENT_ID",
+                    "status"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Admin Moderate Review Status",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"approved\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/admin/buyers/reviews/REVIEW_ID/status",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "admin",
+                    "buyers",
+                    "reviews",
+                    "REVIEW_ID",
+                    "status"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Admin Create Buyer Type",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Turnkey Infrastructure Contractor\",\n  \"description\": \"Large EPC contractors executing national infrastructure projects\",\n  \"icon\": \"shield\",\n  \"sort_order\": 14\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/admin/buyers/types",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "admin",
+                    "buyers",
+                    "types"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Admin Update Buyer Type",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Turnkey EPC Contractor\",\n  \"status\": \"active\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/admin/buyers/types/TYPE_ID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "admin",
+                    "buyers",
+                    "types",
+                    "TYPE_ID"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Admin Delete Buyer Type",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/admin/buyers/types/TYPE_ID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "admin",
+                    "buyers",
+                    "types",
+                    "TYPE_ID"
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
     }
   ]
 }

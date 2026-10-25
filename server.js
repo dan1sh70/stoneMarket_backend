@@ -55,6 +55,11 @@ const quoteRoutes = require('./src/routes/quotes');
 const manufacturerRoutes = require('./src/routes/manufacturers');
 const showroomRoutes = require('./src/routes/showrooms');
 const traderRoutes = require('./src/routes/traders');
+const buyerRoutes = require('./src/routes/buyers');
+const buyerSelfRoutes = require('./src/routes/buyerSelf');
+const supplierRoutes = require('./src/routes/suppliers');
+const marketplaceRoutes = require('./src/routes/marketplace');
+const adminBuyerRoutes = require('./src/routes/adminBuyer');
 
 // CMS Routes
 const miningCmsRoutes = require('./src/routes/cms/mining');
@@ -86,6 +91,13 @@ app.use('/api/auth', authRoutes); // also mount auth on root /api/auth as reques
 app.use('/api/manufacturers', manufacturerRoutes);
 app.use('/api/showrooms', showroomRoutes);
 app.use('/api/traders', traderRoutes);
+app.use('/api/buyers', buyerRoutes);
+app.use('/api/buyer', buyerSelfRoutes);
+app.use('/api/supplier', supplierRoutes);
+app.use('/api/quotes', quoteRoutes);
+app.use('/api/inquiries', inquiryRoutes);
+app.use('/api/marketplace', marketplaceRoutes);
+app.use('/api/admin/buyers', adminBuyerRoutes);
 
 // Mount CMS API Routes
 app.use('/api/cms/mining', miningCmsRoutes);

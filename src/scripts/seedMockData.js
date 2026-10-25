@@ -20,6 +20,11 @@ const HomeBanner = require('../models/HomeBanner');
 const News = require('../models/News');
 const Inquiry = require('../models/Inquiry');
 const QuoteRequest = require('../models/QuoteRequest');
+const BuyerType = require('../models/BuyerType');
+const BuyerRequirement = require('../models/BuyerRequirement');
+const BuyerReview = require('../models/BuyerReview');
+const QuoteResponse = require('../models/QuoteResponse');
+const BusinessFavorite = require('../models/BusinessFavorite');
 
 const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/stone_market';
 
@@ -44,7 +49,12 @@ const cleanMockData = async () => {
     HomeBanner.deleteMany({ is_mock: true }),
     News.deleteMany({ is_mock: true }),
     Inquiry.deleteMany({ is_mock: true }),
-    QuoteRequest.deleteMany({ is_mock: true })
+    QuoteRequest.deleteMany({ is_mock: true }),
+    BuyerType.deleteMany({ is_mock: true }),
+    BuyerRequirement.deleteMany({ is_mock: true }),
+    BuyerReview.deleteMany({ is_mock: true }),
+    QuoteResponse.deleteMany({ is_mock: true }),
+    BusinessFavorite.deleteMany({ is_mock: true })
   ]);
   console.log('All mock data has been successfully deleted.');
 };
@@ -203,6 +213,26 @@ const seedMockData = async () => {
       { name: 'Stone Transportation', slug: 'stone-transportation', description: 'Heavy trailer & open body logistics for stone blocks', is_mock: true, sort_order: 4 }
     ]);
 
+    // Buyer Types
+    console.log('\n4b. Seeding Buyer Types...');
+    const buyerTypesData = [
+      { name: 'Construction Company', slug: 'construction-company', description: 'Infrastructure, commercial & residential developers', icon: 'building', sort_order: 1, status: 'active', is_mock: true },
+      { name: 'Builder / Developer', slug: 'builder-developer', description: 'Real estate residential township builders', icon: 'home', sort_order: 2, status: 'active', is_mock: true },
+      { name: 'Architect / Interior Designer', slug: 'architect-interior-designer', description: 'Architecture studios and luxury interior planners', icon: 'compass', sort_order: 3, status: 'active', is_mock: true },
+      { name: 'Stone Wholesaler', slug: 'stone-wholesaler', description: 'Regional stockists & bulk stone buyers', icon: 'truck', sort_order: 4, status: 'active', is_mock: true },
+      { name: 'Stone Retailer', slug: 'stone-retailer', description: 'Local stone showroom & retail counter operators', icon: 'shopping-bag', sort_order: 5, status: 'active', is_mock: true },
+      { name: 'Importer', slug: 'importer', description: 'International stone and block procurement companies', icon: 'globe', sort_order: 6, status: 'active', is_mock: true },
+      { name: 'Exporter', slug: 'exporter', description: 'Stone merchant exporters looking for domestic factory sourcing', icon: 'ship', sort_order: 7, status: 'active', is_mock: true },
+      { name: 'Project Contractor', slug: 'project-contractor', description: 'Government and turnkey civil contractors', icon: 'briefcase', sort_order: 8, status: 'active', is_mock: true },
+      { name: 'Hotel / Hospitality Business', slug: 'hotel-hospitality-business', description: 'Hotels, resorts, and premium hospitality chains', icon: 'coffee', sort_order: 9, status: 'active', is_mock: true },
+      { name: 'Fabricator', slug: 'fabricator', description: 'Countertop and stone cut-to-size workshops', icon: 'tool', sort_order: 10, status: 'active', is_mock: true },
+      { name: 'Distributor', slug: 'distributor', description: 'Exclusive territory distribution partners', icon: 'share-2', sort_order: 11, status: 'active', is_mock: true },
+      { name: 'Individual Buyer', slug: 'individual-buyer', description: 'Homeowners building private villas and residences', icon: 'user', sort_order: 12, status: 'active', is_mock: true },
+      { name: 'Other', slug: 'other', description: 'Institutional and specialized stone purchasers', icon: 'more-horizontal', sort_order: 13, status: 'active', is_mock: true }
+    ];
+    const createdBuyerTypes = await BuyerType.insertMany(buyerTypesData);
+    console.log(`Created ${createdBuyerTypes.length} Buyer Types.`);
+
     console.log('\n5. Seeding Banners and News...');
     await HomeBanner.insertMany([
       {
@@ -283,8 +313,10 @@ const seedMockData = async () => {
       { name: 'Gautam Hegde (Showroom 3)', mobile: '9111111109', email: 'gautam.showroom@mockstonemarket.com', role: 'showroom' },
       { name: 'Manoj Gupta (Trader 1)', mobile: '9111111110', email: 'manoj.trader@mockstonemarket.com', role: 'trader' },
       { name: 'Devendra Singh (Trader 2)', mobile: '9111111111', email: 'devendra.trader@mockstonemarket.com', role: 'trader' },
-      { name: 'Amit Kumar (Buyer 1)', mobile: '9111111112', email: 'buyer.amit@mockstonemarket.com', role: 'customer' },
-      { name: 'Neha Verma (Buyer 2)', mobile: '9111111113', email: 'buyer.neha@mockstonemarket.com', role: 'customer' }
+      { name: 'Amit Kumar (Buyer 1 - Infra)', mobile: '9111111112', email: 'buyer.amit@mockstonemarket.com', role: 'buyer' },
+      { name: 'Neha Verma (Buyer 2 - Hospitality)', mobile: '9111111113', email: 'buyer.neha@mockstonemarket.com', role: 'buyer' },
+      { name: 'Rohan Mehta (Buyer 3 - Architect)', mobile: '9111111114', email: 'buyer.rohan@mockstonemarket.com', role: 'buyer' },
+      { name: 'Sunil Agarwal (Buyer 4 - Distributor)', mobile: '9111111115', email: 'buyer.sunil@mockstonemarket.com', role: 'buyer' }
     ];
 
     const createdUsers = [];
@@ -303,7 +335,16 @@ const seedMockData = async () => {
     console.log(`Created ${createdUsers.length} test users (Password: password123, OTP: 123456).`);
 
     // Helper references
-    const [uAdmin, uMining1, uMining2, uMfg1, uMfg2, uMfg3, uShow1, uShow2, uShow3, uTrade1, uTrade2, uBuyer1, uBuyer2] = createdUsers;
+    const [
+      uAdmin, uMining1, uMining2, uMfg1, uMfg2, uMfg3,
+      uShow1, uShow2, uShow3, uTrade1, uTrade2,
+      uBuyer1, uBuyer2, uBuyer3, uBuyer4
+    ] = createdUsers;
+    const [
+      btConst, btBuilder, btArchitect, btWholesaler, btRetailer,
+      btImporter, btExporter, btContractor, btHotel, btFabricator,
+      btDistributor, btIndividual, btOther
+    ] = createdBuyerTypes;
     const [cGalaxy, cAbsBlack, cSteelGrey, cTanBrown, cKashmirWhite, cColonialWhite, cImpRed, cLakhaRed, cAlaskaWhite, cYellow, cGreen, cViscon] = createdColors;
     const [bRK, bCMC, bAClass, bNitco, bAsian, bPokarna] = createdBrands;
     const [mfgSlabs, mfgMarble, mfgSandstone, mfgQuartz, mfgCNC, mfgCountertop] = mfgCategories;
@@ -553,6 +594,104 @@ const seedMockData = async () => {
         review_count: 29,
         status: 'active',
         is_mock: true
+      },
+
+      // Buyer 1: Global Infra Buildcon (Construction Company - Jaipur)
+      {
+        userId: uBuyer1._id,
+        business_type: 'buyer',
+        company_name: 'Global Infra Buildcon Pvt Ltd',
+        gst_number: '08AAACG1122K1Z5',
+        established_year: 2012,
+        company_details: 'Leading residential high-rise and commercial infrastructure developer in North & Western India. Procuring over 200,000 sqft granite and marble annually.',
+        buyer_types: [btConst._id, btBuilder._id],
+        preferred_materials: ['Granite', 'Sandstone', 'Limestone'],
+        preferred_products: ['Slabs', 'Tiles', 'Cobbles'],
+        requirement_summary: 'Bulk Slabs & Rough Blocks for Commercial Projects',
+        industry: 'Infrastructure & Commercial Real Estate',
+        website: 'https://globalinfrabuildcon.mock',
+        preferred_communication: 'phone',
+        verification_status: 'approved',
+        is_verified: true,
+        verified_at: new Date(),
+        rating: 4.9,
+        review_count: 25,
+        address: { state: 'Rajasthan', district: 'Jaipur', area: 'Mansarovar', full_address: 'Plot 101-105, Corporate Tower, Mansarovar, Jaipur, Rajasthan 302020' },
+        status: 'active',
+        is_mock: true
+      },
+
+      // Buyer 2: Heritage Palace & Hospitality Group (Udaipur)
+      {
+        userId: uBuyer2._id,
+        business_type: 'buyer',
+        company_name: 'Heritage Palace & Hospitality Group',
+        gst_number: '08AAACH4455L1Z8',
+        established_year: 2015,
+        company_details: 'Luxury 5-star heritage hotel and resort chain expanding across Rajasthan and Goa. High demand for bookmatch Italian marble and exotic quartz.',
+        buyer_types: [btHotel._id, btArchitect._id],
+        preferred_materials: ['Italian Marble', 'Onyx', 'Quartz'],
+        preferred_products: ['Bookmatch Slabs', 'Countertops', 'Custom Inlays'],
+        requirement_summary: 'Premium Bookmatched Italian Marble & Onyx',
+        industry: 'Hospitality & Luxury Resorts',
+        website: 'https://heritagepalaceresorts.mock',
+        preferred_communication: 'whatsapp',
+        verification_status: 'approved',
+        is_verified: true,
+        verified_at: new Date(),
+        rating: 4.8,
+        review_count: 14,
+        address: { state: 'Rajasthan', district: 'Udaipur', area: 'Fateh Sagar', full_address: 'Heritage Lake Palace, Fateh Sagar Road, Udaipur, Rajasthan 313001' },
+        status: 'active',
+        is_mock: true
+      },
+
+      // Buyer 3: Mehta Design & Architecture Studio (Ahmedabad)
+      {
+        userId: uBuyer3._id,
+        business_type: 'buyer',
+        company_name: 'Mehta Design & Architecture Studio',
+        gst_number: '24AAACM7788P1Z3',
+        established_year: 2018,
+        company_details: 'Award-winning architectural studio specializing in luxury private villas, boutique corporate offices, and landscape stone architecture.',
+        buyer_types: [btArchitect._id],
+        preferred_materials: ['Sandstone', 'Granite', 'Travertine'],
+        preferred_products: ['Cladding Tiles', 'Jali & CNC Carvings', 'Floor Slabs'],
+        requirement_summary: 'Handcrafted Sandstone & Natural Travertine Slabs',
+        industry: 'Architecture & Interior Planning',
+        website: 'https://mehtadesignstudio.mock',
+        preferred_communication: 'email',
+        verification_status: 'approved',
+        is_verified: true,
+        verified_at: new Date(),
+        rating: 4.7,
+        review_count: 9,
+        address: { state: 'Gujarat', district: 'Ahmedabad', area: 'SG Highway', full_address: 'Studio 402, Signature One, SG Highway, Ahmedabad, Gujarat 380054' },
+        status: 'active',
+        is_mock: true
+      },
+
+      // Buyer 4: Shree Ram Stone Distributors (Kishangarh - Pending Verification)
+      {
+        userId: uBuyer4._id,
+        business_type: 'buyer',
+        company_name: 'Shree Ram Stone Distributors',
+        gst_number: '08AAACS9900M1Z2',
+        established_year: 2021,
+        company_details: 'Emerging regional stone and tile distributor catering to local contractors and residential builders across central Rajasthan.',
+        buyer_types: [btDistributor._id, btRetailer._id],
+        preferred_materials: ['Granite', 'Marble'],
+        preferred_products: ['Cut-to-size Tiles', 'Steps & Risers'],
+        requirement_summary: 'Granite Tiles and Countertop Blanks',
+        industry: 'Building Materials Distribution',
+        preferred_communication: 'phone',
+        verification_status: 'pending',
+        is_verified: false,
+        rating: 4.2,
+        review_count: 3,
+        address: { state: 'Rajasthan', district: 'Kishangarh', area: 'Madanganj', full_address: 'Godown 8, Stone Hub, Madanganj, Kishangarh, Rajasthan 305801' },
+        status: 'active',
+        is_mock: true
       }
     ];
 
@@ -561,6 +700,7 @@ const seedMockData = async () => {
 
     // Also create matching Vendor models for backwards compatibility
     for (const b of createdBusinesses) {
+      if (b.business_type === 'buyer') continue;
       await Vendor.create({
         userId: b.userId,
         businessName: b.company_name,
@@ -997,6 +1137,196 @@ const seedMockData = async () => {
     ]);
     console.log('Created sample Inquiries and Quote Requests.');
 
+    console.log('\n10. Seeding Buyer Purchasing Requirements...');
+    const [bReq1, bReq2, bReq3, bReq4] = await BuyerRequirement.insertMany([
+      {
+        buyerId: createdBusinesses[10]._id, // Global Infra
+        userId: uBuyer1._id,
+        title: 'Bulk 20mm Steel Grey Granite Gangsaw Slabs',
+        description: 'Need export quality 20mm line polished Steel Grey Gangsaw slabs for our 30-acre commercial IT park in Jaipur.',
+        material: 'Granite',
+        product_type: 'Slabs',
+        stone_type: 'Granite',
+        colour: 'Steel Grey',
+        finish: 'Polished',
+        grade: 'First Quality Export',
+        required_size: 'Gangsaw (300cm x 180cm+)',
+        thickness_mm: 20,
+        quantity: 25000,
+        quantity_unit: 'sqft',
+        budget: { min: 65, max: 80, currency: 'INR' },
+        delivery_location: {
+          city: 'Jaipur',
+          state: 'Rajasthan',
+          area: 'Mansarovar',
+          full_address: 'Site Office, IT Park Phase 3, Mansarovar, Jaipur'
+        },
+        required_delivery_date: new Date(Date.now() + 30 * 86400000),
+        order_frequency: 'monthly',
+        status: 'open',
+        visibility: 'public',
+        is_mock: true
+      },
+      {
+        buyerId: createdBusinesses[11]._id, // Heritage Palace
+        userId: uBuyer2._id,
+        title: 'Statuario & Botticino Bookmatch Marble for Presidential Suites',
+        description: 'Requirement for ultra-luxury flawless white marble slabs with continuous grey veining for 5-star resort suites flooring.',
+        material: 'Italian Marble',
+        product_type: 'Slabs',
+        stone_type: 'Marble',
+        colour: 'White / Cream',
+        finish: 'Mirror Polished',
+        grade: 'Premium Select',
+        required_size: 'Jumbo Slabs',
+        thickness_mm: 18,
+        quantity: 4500,
+        quantity_unit: 'sqft',
+        budget: { min: 450, max: 700, currency: 'INR' },
+        delivery_location: {
+          city: 'Udaipur',
+          state: 'Rajasthan',
+          area: 'Fateh Sagar',
+          full_address: 'Heritage Lake Palace Resort, Fateh Sagar Lake, Udaipur'
+        },
+        required_delivery_date: new Date(Date.now() + 45 * 86400000),
+        order_frequency: 'one_time',
+        status: 'open',
+        visibility: 'public',
+        is_mock: true
+      },
+      {
+        buyerId: createdBusinesses[12]._id, // Mehta Design
+        userId: uBuyer3._id,
+        title: 'Dholpur Beige Sandstone Wall Cladding Tiles',
+        description: 'Hand-chiseled and shot-blasted natural beige sandstone panels for luxury private villa facades in Ahmedabad.',
+        material: 'Sandstone',
+        product_type: 'Tiles',
+        stone_type: 'Sandstone',
+        colour: 'Beige',
+        finish: 'Shot Blasted',
+        grade: 'Uniform Grade',
+        required_size: '600mm x 300mm',
+        thickness_mm: 25,
+        quantity: 8000,
+        quantity_unit: 'sqft',
+        budget: { min: 40, max: 55, currency: 'INR' },
+        delivery_location: {
+          city: 'Ahmedabad',
+          state: 'Gujarat',
+          area: 'SG Highway',
+          full_address: 'Villa 14, Sky Sanctuary, SG Highway, Ahmedabad'
+        },
+        required_delivery_date: new Date(Date.now() + 20 * 86400000),
+        order_frequency: 'one_time',
+        status: 'open',
+        visibility: 'public',
+        is_mock: true
+      },
+      {
+        buyerId: createdBusinesses[13]._id, // Shree Ram Distributors
+        userId: uBuyer4._id,
+        title: 'Calibrated Granite Steps & Risers',
+        description: 'Standard 30mm bullnosed steps and 20mm polished risers in Tan Brown and Lakha Red for central Rajasthan distribution.',
+        material: 'Granite',
+        product_type: 'Cut-to-size',
+        stone_type: 'Granite',
+        colour: 'Tan Brown / Lakha Red',
+        finish: 'One Long Edge Bullnosed & Polished',
+        grade: 'Standard Commercial',
+        required_size: '4ft x 1ft Steps, 4ft x 8in Risers',
+        thickness_mm: 30,
+        quantity: 6000,
+        quantity_unit: 'sqft',
+        budget: { min: 70, max: 95, currency: 'INR' },
+        delivery_location: {
+          city: 'Kishangarh',
+          state: 'Rajasthan',
+          area: 'Madanganj',
+          full_address: 'Godown 8, Stone Hub, Madanganj, Kishangarh'
+        },
+        required_delivery_date: new Date(Date.now() + 15 * 86400000),
+        order_frequency: 'quarterly',
+        status: 'open',
+        visibility: 'public',
+        is_mock: true
+      }
+    ]);
+    console.log('Created 4 Buyer Purchasing Requirements.');
+
+    console.log('\n11. Seeding Buyer Reviews...');
+    await BuyerReview.insertMany([
+      {
+        userId: uMfg1._id,
+        buyerId: createdBusinesses[10]._id, // Global Infra
+        rating: 5,
+        review: 'Exceptional buyer! Regular high-volume requirements, crystal clear technical specs, and instant payments upon dispatch confirmation.',
+        status: 'approved',
+        is_mock: true
+      },
+      {
+        userId: uTrade1._id,
+        buyerId: createdBusinesses[10]._id, // Global Infra
+        rating: 5,
+        review: 'Smooth offloading at their Jaipur site. Transparent inspection team and courteous site engineers. A pleasure to do business with.',
+        status: 'approved',
+        is_mock: true
+      },
+      {
+        userId: uShow1._id,
+        buyerId: createdBusinesses[11]._id, // Heritage Palace
+        rating: 5,
+        review: 'High-end hospitality client with great taste for premium bookmatched Italian marble. Immediate RTGS payment upon billing.',
+        status: 'approved',
+        is_mock: true
+      }
+    ]);
+    console.log('Created 3 Buyer Reviews.');
+
+    console.log('\n12. Seeding Sample Quotes & Responses...');
+    const sampleQuote = await QuoteRequest.create({
+      userId: uBuyer1._id,
+      businessId: createdBusinesses[2]._id, // Royal Rajasthan Granite (Mfg 1)
+      buyerProfileId: createdBusinesses[10]._id,
+      requirementId: bReq1._id,
+      buyerContact: {
+        name: 'Amit Kumar',
+        phone: '9111111112',
+        email: 'buyer.amit@mockstonemarket.com',
+        city: 'Jaipur'
+      },
+      quantity: 10000,
+      unit: 'sqft',
+      size: 'Gangsaw (300cm x 180cm)',
+      thickness: '20mm',
+      finish: 'Line Polished',
+      grade: 'Export Grade 1',
+      delivery_location: 'Mansarovar, Jaipur',
+      required_delivery_date: new Date(Date.now() + 25 * 86400000),
+      additional_specifications: 'Need uniform grey grain with zero pinholes or cracks. Calibrated thickness required.',
+      message: 'Looking for 10,000 sqft Steel Grey Gangsaw slabs for delivery to Mansarovar, Jaipur.',
+      status: 'responded',
+      is_mock: true
+    });
+
+    await QuoteResponse.create({
+      quoteRequestId: sampleQuote._id,
+      supplierId: createdBusinesses[2]._id,
+      supplierUserId: uMfg1._id,
+      offered_price: 72,
+      currency: 'INR',
+      unit: 'sqft',
+      available_quantity: 15000,
+      taxes: 18,
+      shipping_cost: 0,
+      estimated_delivery_time: '7-10 days',
+      offer_validity: new Date(Date.now() + 15 * 86400000),
+      terms_and_conditions: '30% advance on PO confirmation, balance against loading pictures before gate pass. GST extra as applicable.',
+      status: 'submitted',
+      is_mock: true
+    });
+    console.log('Created sample Quotation and Supplier Quote Response.');
+
     console.log('\n======================================================');
     console.log('>>> MOCK DATA SEEDING COMPLETED SUCCESSFULLY! <<<');
     console.log('======================================================');
@@ -1012,8 +1342,10 @@ const seedMockData = async () => {
     console.log('  - Showroom 3:   Mobile 9111111109 (Silicon City Stones, Bengaluru)');
     console.log('  - Trader 1:     Mobile 9111111110 (North India Stone Trading, Kishangarh)');
     console.log('  - Trader 2:     Mobile 9111111111 (Shekhawati Stone Exporters, Jaipur)');
-    console.log('  - Buyer 1:      Mobile 9111111112 (Amit Kumar)');
-    console.log('  - Buyer 2:      Mobile 9111111113 (Neha Verma)');
+    console.log('  - Buyer 1:      Mobile 9111111112 (Global Infra Buildcon, Jaipur - Verified)');
+    console.log('  - Buyer 2:      Mobile 9111111113 (Heritage Palace Resorts, Udaipur - Verified)');
+    console.log('  - Buyer 3:      Mobile 9111111114 (Mehta Design Architects, Ahmedabad - Verified)');
+    console.log('  - Buyer 4:      Mobile 9111111115 (Shree Ram Distributors, Kishangarh - Pending)');
     console.log('------------------------------------------------------');
     console.log('All mock records tagged with { is_mock: true } for clean deletion.');
     console.log('Run `npm run clean:mock` anytime when testing finishes.');

@@ -32,11 +32,42 @@ const businessProfileSchema = new mongoose.Schema({
   established_year: { type: Number },
   company_details: { type: String },
   
-  // Specific to Mining / Manufacturer / Showroom / Trader
+  // Specific to Mining / Manufacturer / Showroom / Trader / Buyer
   manufacturer_category: { type: mongoose.Schema.Types.ObjectId, ref: 'ManufacturerCategory' },
   showroom_product_types: [{ type: mongoose.Schema.Types.ObjectId, ref: 'ShowroomProductType' }],
   trader_categories: [{ type: mongoose.Schema.Types.ObjectId, ref: 'TraderCategory' }],
   trader_type: [{ type: String }], // Wholesaler, Retailer, Exporter, etc.
+  buyer_types: [{ type: mongoose.Schema.Types.ObjectId, ref: 'BuyerType' }],
+  preferred_materials: [{ type: String }],
+  preferred_products: [{ type: String }],
+  requirement_summary: { type: String },
+  industry: { type: String },
+  website: { type: String },
+  preferred_communication: { type: String, enum: ['phone', 'whatsapp', 'email'], default: 'phone' },
+  
+  // Buyer & Business Verification
+  verification_status: { 
+    type: String, 
+    enum: ['pending', 'under_review', 'approved', 'rejected', 'suspended'], 
+    default: 'pending' 
+  },
+  is_verified: { type: Boolean, default: false },
+  verified_at: { type: Date },
+  verified_by: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+  rejection_reason: { type: String },
+  verification_documents: [{
+    title: { type: String },
+    url: { type: String },
+    file_type: { type: String },
+    status: { type: String, enum: ['pending', 'approved', 'rejected'], default: 'pending' },
+    uploaded_at: { type: Date, default: Date.now }
+  }],
+  business_registration: {
+    registration_type: { type: String },
+    registration_number: { type: String },
+    document_url: { type: String }
+  },
+
   brands: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Brand' }],
   granite_colors: [{ type: mongoose.Schema.Types.ObjectId, ref: 'GraniteColor' }], // Used for Materials/Stone Colors
   ec_number: { type: String }, // Mining

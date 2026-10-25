@@ -1,13 +1,47 @@
 const mongoose = require('mongoose');
 
 const quoteRequestSchema = new mongoose.Schema({
-  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-  businessId: { type: mongoose.Schema.Types.ObjectId, ref: 'BusinessProfile', required: true },
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true, index: true },
+  businessId: { type: mongoose.Schema.Types.ObjectId, ref: 'BusinessProfile' }, // Target supplier
+  buyerProfileId: { type: mongoose.Schema.Types.ObjectId, ref: 'BusinessProfile' }, // Buyer profile if registered
+  assignedSuppliers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'BusinessProfile' }], // Multi-supplier broadcast
+  parentQuoteId: { type: mongoose.Schema.Types.ObjectId, ref: 'QuoteRequest' },
   productId: { type: mongoose.Schema.Types.ObjectId, ref: 'Product' },
+  requirementId: { type: mongoose.Schema.Types.ObjectId, ref: 'BuyerRequirement' },
+  
+  buyerContact: {
+    name: { type: String },
+    mobile: { type: String },
+    email: { type: String },
+    city: { type: String }
+  },
+
   quantity: { type: Number, required: true },
   unit: { type: String, default: 'Sq.Ft' },
-  message: { type: String, required: true },
-  status: { type: String, enum: ['pending', 'viewed', 'responded', 'accepted', 'rejected', 'closed'], default: 'pending' },
+  size: { type: String },
+  thickness: { type: String },
+  finish: { type: String },
+  grade: { type: String },
+  delivery_location: {
+    city: { type: String },
+    state: { type: String },
+    address: { type: String }
+  },
+  required_delivery_date: { type: Date },
+  additional_specifications: { type: String },
+  message: { type: String, default: 'Request for quotation' },
+  attachments: [{
+    url: { type: String },
+    filename: { type: String },
+    size: { type: Number },
+    mimetype: { type: String }
+  }],
+  status: { 
+    type: String, 
+    enum: ['submitted', 'sent_to_suppliers', 'pending', 'viewed', 'responded', 'accepted', 'rejected', 'cancelled', 'closed', 'expired'], 
+    default: 'submitted',
+    index: true
+  },
   is_mock: { type: Boolean, default: false }
 }, { timestamps: true });
 
