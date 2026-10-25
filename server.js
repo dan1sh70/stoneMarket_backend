@@ -63,6 +63,7 @@ const adminBuyerRoutes = require('./src/routes/adminBuyer');
 const transportPublicRoutes = require('./src/routes/transportPublic');
 const providerTransportRoutes = require('./src/routes/providerTransport');
 const adminTransportRoutes = require('./src/routes/adminTransport');
+const estimateRoutes = require('./src/routes/estimates');
 
 // CMS Routes
 const miningCmsRoutes = require('./src/routes/cms/mining');
@@ -83,6 +84,7 @@ app.use('/api/v1', masterDataRoutes); // locations/states & locations/cities
 app.use('/api/v1', transportPublicRoutes);
 app.use('/api/v1/provider', providerTransportRoutes);
 app.use('/api/v1/admin', adminTransportRoutes);
+app.use('/api/v1/estimates', estimateRoutes);
 
 // New unified /api routes for the upgrade
 app.use('/api', masterDataRoutes);
@@ -108,6 +110,7 @@ app.use('/api/admin/buyers', adminBuyerRoutes);
 app.use('/api', transportPublicRoutes);
 app.use('/api/provider', providerTransportRoutes);
 app.use('/api/admin', adminTransportRoutes);
+app.use('/api/estimates', estimateRoutes);
 
 // Mount CMS API Routes
 app.use('/api/cms/mining', miningCmsRoutes);

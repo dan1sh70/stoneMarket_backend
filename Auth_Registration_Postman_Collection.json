@@ -7142,6 +7142,628 @@
           ]
         }
       ]
+    },
+    {
+      "name": "Estimation Module",
+      "item": [
+        {
+          "name": "1. Measurement Units Catalogue",
+          "item": [
+            {
+              "name": "Get Measurement Units",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/estimates/units",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "estimates",
+                    "units"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "2. Slab Estimates",
+          "item": [
+            {
+              "name": "Create Slab Estimate",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/estimates/slab",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "estimates",
+                    "slab"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company_details_enabled\": true,\n  \"company_name\": \"Royal Rajasthan Granite Processors\",\n  \"company_mobile\": \"9111111104\",\n  \"company_email\": \"mfg1@mockstonemarket.com\",\n  \"company_address\": \"Phase 1 Industrial Area, Jalore, Rajasthan\",\n  \"payment_terms\": \"50% advance, balance against inspection before truck gate-pass.\",\n  \"party_name\": \"Sharma Luxury Infra Pvt Ltd\",\n  \"party_address\": \"C-Scheme, Jaipur, Rajasthan\",\n  \"party_contact\": \"9829011223\",\n  \"estimate_date\": \"2026-10-26\",\n  \"colour_quality\": \"Premium Steel Grey - Gangsaw Cut\",\n  \"vehicle_number\": \"RJ-19-GB-4422\",\n  \"block_lot_number\": \"LOT-JAL-2026-44\",\n  \"measured_by\": \"Kailash Choudhary (Quality Lead)\",\n  \"measurement_unit\": \"inch\",\n  \"area_unit\": \"sqft\",\n  \"unit_price\": 68,\n  \"notes\": \"All slabs calibrated to 18mm thickness. Surface mirror polished.\",\n  \"measurement_rows\": [\n    {\n      \"length\": 120,\n      \"width\": 60\n    },\n    {\n      \"length\": 120,\n      \"width\": 60\n    },\n    {\n      \"length\": 118,\n      \"width\": 59\n    },\n    {\n      \"length\": 118,\n      \"width\": 59\n    }\n  ]\n}"
+                }
+              }
+            },
+            {
+              "name": "List Slab Estimates",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/estimates/slab?page=1&limit=20&search=Sharma",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "estimates",
+                    "slab"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "search",
+                      "value": "Sharma"
+                    },
+                    {
+                      "key": "status",
+                      "value": "draft",
+                      "disabled": true
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Single Slab Estimate",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/estimates/slab/ESTIMATE_ID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "estimates",
+                    "slab",
+                    "ESTIMATE_ID"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Update Slab Estimate",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/estimates/slab/ESTIMATE_ID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "estimates",
+                    "slab",
+                    "ESTIMATE_ID"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"unit_price\": 70,\n  \"measurement_rows\": [\n    {\n      \"length\": 120,\n      \"width\": 60\n    },\n    {\n      \"length\": 120,\n      \"width\": 60\n    }\n  ]\n}"
+                }
+              }
+            },
+            {
+              "name": "Delete Slab Estimate",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/estimates/slab/ESTIMATE_ID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "estimates",
+                    "slab",
+                    "ESTIMATE_ID"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Download Slab Estimate PDF",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/estimates/slab/ESTIMATE_ID/pdf",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "estimates",
+                    "slab",
+                    "ESTIMATE_ID",
+                    "pdf"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "3. Particular Estimates",
+          "item": [
+            {
+              "name": "Create Particular Estimate",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/estimates/particular",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "estimates",
+                    "particular"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company_details_enabled\": true,\n  \"company_name\": \"Royal Rajasthan Granite Processors\",\n  \"company_mobile\": \"9111111104\",\n  \"party_name\": \"Heritage Palace Resorts & Spa\",\n  \"party_address\": \"Lake Pichola Road, Udaipur, Rajasthan\",\n  \"party_contact\": \"9829144556\",\n  \"estimate_date\": \"2026-10-26\",\n  \"items\": [\n    {\n      \"particular_name\": \"Imperial Black Granite Countertops (32mm laminated)\",\n      \"quantity\": 500,\n      \"unit\": \"sqft\",\n      \"unit_price\": 180\n    },\n    {\n      \"particular_name\": \"Hand-Carved Stone Baluster Railings (3ft height)\",\n      \"quantity\": 30,\n      \"unit\": \"pieces\",\n      \"unit_price\": 1500\n    }\n  ],\n  \"initial_payment\": {\n    \"amount\": 50000,\n    \"payment_method\": \"bank_transfer\",\n    \"transaction_reference\": \"NEFT-88992211\",\n    \"notes\": \"Advance booking payment confirmed via HDFC Bank\"\n  }\n}"
+                }
+              }
+            },
+            {
+              "name": "List Particular Estimates",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/estimates/particular?payment_status=partially_paid",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "estimates",
+                    "particular"
+                  ],
+                  "query": [
+                    {
+                      "key": "payment_status",
+                      "value": "partially_paid"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Single Particular Estimate",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/estimates/particular/ESTIMATE_ID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "estimates",
+                    "particular",
+                    "ESTIMATE_ID"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Update Particular Estimate",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/estimates/particular/ESTIMATE_ID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "estimates",
+                    "particular",
+                    "ESTIMATE_ID"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"items\": [\n    {\n      \"particular_name\": \"Imperial Black Granite Countertops\",\n      \"quantity\": 600,\n      \"unit\": \"sqft\",\n      \"unit_price\": 180\n    }\n  ]\n}"
+                }
+              }
+            },
+            {
+              "name": "Delete Particular Estimate",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/estimates/particular/ESTIMATE_ID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "estimates",
+                    "particular",
+                    "ESTIMATE_ID"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Download Particular Estimate PDF",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/estimates/particular/ESTIMATE_ID/pdf",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "estimates",
+                    "particular",
+                    "ESTIMATE_ID",
+                    "pdf"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "4. Payments & Financial Ledger",
+          "item": [
+            {
+              "name": "Record Advance / Partial Payment",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/estimates/particular/ESTIMATE_ID/payments",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "estimates",
+                    "particular",
+                    "ESTIMATE_ID",
+                    "payments"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": 35000,\n  \"payment_method\": \"upi\",\n  \"transaction_reference\": \"UPI-449911\",\n  \"notes\": \"Stage 2 progress installment\"\n}"
+                }
+              }
+            },
+            {
+              "name": "Get Payments for Estimate",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/estimates/particular/ESTIMATE_ID/payments",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "estimates",
+                    "particular",
+                    "ESTIMATE_ID",
+                    "payments"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Reverse a Payment Record",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/estimates/particular/ESTIMATE_ID/payments/PAYMENT_ID/reverse",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "estimates",
+                    "particular",
+                    "ESTIMATE_ID",
+                    "payments",
+                    "PAYMENT_ID",
+                    "reverse"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "5. Shared Operations & Status Transitions",
+          "item": [
+            {
+              "name": "List All Estimates (Unified)",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/estimates?page=1&limit=20",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "estimates"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "type",
+                      "value": "slab",
+                      "disabled": true
+                    },
+                    {
+                      "key": "status",
+                      "value": "finalized",
+                      "disabled": true
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Estimate by ID (Unified)",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/estimates/ESTIMATE_ID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "estimates",
+                    "ESTIMATE_ID"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Finalize Estimate",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/estimates/ESTIMATE_ID/finalize",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "estimates",
+                    "ESTIMATE_ID",
+                    "finalize"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Cancel Estimate",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/estimates/ESTIMATE_ID/cancel",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "estimates",
+                    "ESTIMATE_ID",
+                    "cancel"
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
     }
   ]
 }

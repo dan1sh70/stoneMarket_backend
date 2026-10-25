@@ -29,6 +29,9 @@ const VehicleType = require('../models/VehicleType');
 const TransportVehicle = require('../models/TransportVehicle');
 const TransportRoute = require('../models/TransportRoute');
 const FreightRate = require('../models/FreightRate');
+const Estimate = require('../models/Estimate');
+const EstimateAuditLog = require('../models/EstimateAuditLog');
+const MeasurementUnit = require('../models/MeasurementUnit');
 
 const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/stone_market';
 
@@ -62,7 +65,10 @@ const cleanMockData = async () => {
     VehicleType.deleteMany({ is_mock: true }),
     TransportVehicle.deleteMany({ is_mock: true }),
     TransportRoute.deleteMany({ is_mock: true }),
-    FreightRate.deleteMany({ is_mock: true })
+    FreightRate.deleteMany({ is_mock: true }),
+    Estimate.deleteMany({ is_mock: true }),
+    EstimateAuditLog.deleteMany({}),
+    MeasurementUnit.deleteMany({ is_mock: true })
   ]);
   console.log('All mock data has been successfully deleted.');
 };
@@ -1667,6 +1673,16 @@ const seedMockData = async () => {
       offered_capacity: 25,
       pickup_estimate: 'Within 24 hours of confirmation',
       delivery_estimate: 'Same-day or next morning in Delhi',
+      quote_type: 'transport',
+      offered_price: 1800,
+      currency: 'INR',
+      unit: 'per_ton',
+      estimated_total: 43200,
+      additional_charges: 1200,
+      vehicle_type: '12-Wheeler Heavy Truck',
+      offered_capacity: 25,
+      pickup_estimate: 'Within 24 hours of confirmation',
+      delivery_estimate: 'Same-day or next morning in Delhi',
       offer_validity: new Date(Date.now() + 10 * 86400000),
       terms_and_conditions: 'Toll included. Loading/unloading extra or arranged by buyer. GST extra as applicable.',
       reference_number: 'TR-QT-MOCK-001',
@@ -1674,6 +1690,123 @@ const seedMockData = async () => {
       is_mock: true
     });
     console.log('Created Sample Transport Quote Request & Quote Response.');
+
+    console.log('\n14. Seeding Estimation Module Data...');
+    // A. Measurement Units
+    await MeasurementUnit.insertMany([
+      { name: 'Centimetre', symbol: 'cm', unit_category: 'dimension', conversion_factor: 0.01, is_mock: true },
+      { name: 'Inch', symbol: 'inch', unit_category: 'dimension', conversion_factor: 0.0254, is_mock: true },
+      { name: 'Foot', symbol: 'feet', unit_category: 'dimension', conversion_factor: 0.3048, is_mock: true },
+      { name: 'Square Feet', symbol: 'sqft', unit_category: 'area', conversion_factor: 0.092903, is_mock: true },
+      { name: 'Square Metre', symbol: 'sqm', unit_category: 'area', conversion_factor: 1, is_mock: true },
+      { name: 'Pieces', symbol: 'pcs', unit_category: 'count', conversion_factor: 1, is_mock: true },
+      { name: 'Tonnes', symbol: 'ton', unit_category: 'weight', conversion_factor: 1000, is_mock: true },
+      { name: 'Running Feet', symbol: 'rft', unit_category: 'length', conversion_factor: 0.3048, is_mock: true }
+    ]);
+    console.log('Created 8 Configurable Measurement Units.');
+
+    // B. Sample Slab Estimate
+    await Estimate.create({
+      reference_number: 'EST-SLAB-2026-MOCK-001',
+      owner_user_id: uMfg1._id,
+      estimate_type: 'slab',
+      company_details_enabled: true,
+      company_name_snapshot: 'Royal Rajasthan Granite Processors',
+      company_mobile_snapshot: '9111111104',
+      company_email_snapshot: 'mfg1@mockstonemarket.com',
+      company_address_snapshot: 'Phase 1 Industrial Area, Jalore, Rajasthan',
+      payment_terms_snapshot: '50% advance, balance against inspection before truck gate-pass.',
+      party_name: 'Sharma Luxury Infra Pvt Ltd',
+      party_address: 'C-Scheme, Jaipur, Rajasthan',
+      party_contact: '9829011223',
+      estimate_date: new Date(),
+      currency: 'INR',
+      notes: 'All slabs calibrated to 18mm thickness. Surface mirror polished with 12-head line polishing machine.',
+      subtotal: 54400,
+      total_amount: 54400,
+      status: 'finalized',
+      slab_details: {
+        colour_quality: 'Premium Steel Grey - Gangsaw Cut',
+        vehicle_number: 'RJ-19-GB-4422',
+        block_lot_number: 'LOT-JAL-2026-44',
+        measured_by: 'Kailash Choudhary (Quality Lead)',
+        measurement_unit: 'inch',
+        area_unit: 'sqft',
+        unit_price: 68,
+        total_area: 800,
+        measurement_rows: [
+          { serial_number: 1, length: 120, width: 60, calculated_area: 50 },
+          { serial_number: 2, length: 120, width: 60, calculated_area: 50 },
+          { serial_number: 3, length: 118, width: 59, calculated_area: 48.347 },
+          { serial_number: 4, length: 118, width: 59, calculated_area: 48.347 }
+        ]
+      },
+      is_mock: true
+    });
+    console.log('Created Sample Slab Estimate.');
+
+    // C. Sample Particular Estimate with Advance Payment
+    await Estimate.create({
+      reference_number: 'EST-PART-2026-MOCK-001',
+      owner_user_id: uMfg1._id,
+      estimate_type: 'particular',
+      company_details_enabled: true,
+      company_name_snapshot: 'Royal Rajasthan Granite Processors',
+      company_mobile_snapshot: '9111111104',
+      company_address_snapshot: 'Phase 1 Industrial Area, Jalore, Rajasthan',
+      payment_terms_snapshot: 'Immediate settlement on delivery verification.',
+      party_name: 'Heritage Palace Resorts & Spa',
+      party_address: 'Lake Pichola Road, Udaipur, Rajasthan',
+      party_contact: '9829144556',
+      estimate_date: new Date(),
+      currency: 'INR',
+      notes: 'Includes edge chamfering, water-repellent sealer application, and wooden crating.',
+      subtotal: 135000,
+      total_amount: 135000,
+      status: 'draft',
+      particular_details: {
+        items: [
+          {
+            serial_number: 1,
+            particular_name: 'Imperial Black Granite Countertops (32mm laminated edge)',
+            quantity: 500,
+            unit: 'sqft',
+            unit_price: 180,
+            calculated_amount: 90000
+          },
+          {
+            serial_number: 2,
+            particular_name: 'Hand-Carved Stone Baluster Railings (3ft height)',
+            quantity: 30,
+            unit: 'pieces',
+            unit_price: 1500,
+            calculated_amount: 45000
+          }
+        ],
+        total_quantity: 530,
+        quantity_summary: [
+          { unit: 'sqft', total_quantity: 500 },
+          { unit: 'pieces', total_quantity: 30 }
+        ],
+        payments: [
+          {
+            amount: 50000,
+            payment_date: new Date(),
+            payment_method: 'bank_transfer',
+            transaction_reference: 'NEFT-88992211',
+            notes: 'Advance booking payment confirmed via HDFC Bank',
+            status: 'completed',
+            created_by: uMfg1._id
+          }
+        ],
+        total_paid: 50000,
+        remaining_balance: 85000,
+        payment_status: 'partially_paid',
+        amount_in_words: 'Eighty Five Thousand Rupees Only'
+      },
+      is_mock: true
+    });
+    console.log('Created Sample Particular Estimate with Payment Ledger.');
 
     console.log('\n======================================================');
     console.log('>>> MOCK DATA SEEDING COMPLETED SUCCESSFULLY! <<<');

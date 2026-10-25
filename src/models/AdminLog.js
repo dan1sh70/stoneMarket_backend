@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const adminLogSchema = new mongoose.Schema({
   adminId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   action: { type: String, required: true }, // e.g. "VENDOR_APPROVED", "USER_SUSPENDED", "AD_REJECTED"
-  targetType: { type: String, enum: ['user', 'vendor', 'ad', 'news', 'inquiry', 'transport_provider', 'transport_vehicle', 'freight_rate', 'transport_quote'], required: true },
+  targetType: { type: String, enum: ['user', 'vendor', 'ad', 'news', 'inquiry', 'transport_provider', 'transport_vehicle', 'freight_rate', 'transport_quote', 'estimate'], required: true },
   targetId: { type: mongoose.Schema.Types.ObjectId, required: true },
   details: { type: mongoose.Schema.Types.Mixed }, // Before/after state or action details
   ip: String
