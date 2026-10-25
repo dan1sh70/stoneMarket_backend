@@ -22,6 +22,19 @@ const inquirySchema = new mongoose.Schema({
     state: String,
     address: String
   },
+  pickupLocation: {
+    city: String,
+    state: String,
+    address: String
+  },
+  transport_type: { type: String, enum: ['national', 'local', null] },
+  vehicle_type: String,
+  vehicle_quantity: { type: Number, default: 1 },
+  cargo_type: String,
+  pickup_date: Date,
+  expected_delivery_date: Date,
+  special_handling: String,
+  reference_number: String,
   attachments: [{
     url: String,
     filename: String,
@@ -35,7 +48,7 @@ const inquirySchema = new mongoose.Schema({
     email: String,
     city: String
   },
-  status: { type: String, enum: ['new', 'viewed', 'responded', 'closed'], default: 'new' },
+  status: { type: String, enum: ['new', 'submitted', 'under_review', 'provider_contacted', 'quotation_received', 'viewed', 'responded', 'accepted', 'rejected', 'cancelled', 'closed'], default: 'new' },
   vendorResponse: {
     message: String,
     respondedAt: Date

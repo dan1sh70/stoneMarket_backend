@@ -25,6 +25,10 @@ const BuyerRequirement = require('../models/BuyerRequirement');
 const BuyerReview = require('../models/BuyerReview');
 const QuoteResponse = require('../models/QuoteResponse');
 const BusinessFavorite = require('../models/BusinessFavorite');
+const VehicleType = require('../models/VehicleType');
+const TransportVehicle = require('../models/TransportVehicle');
+const TransportRoute = require('../models/TransportRoute');
+const FreightRate = require('../models/FreightRate');
 
 const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/stone_market';
 
@@ -54,7 +58,11 @@ const cleanMockData = async () => {
     BuyerRequirement.deleteMany({ is_mock: true }),
     BuyerReview.deleteMany({ is_mock: true }),
     QuoteResponse.deleteMany({ is_mock: true }),
-    BusinessFavorite.deleteMany({ is_mock: true })
+    BusinessFavorite.deleteMany({ is_mock: true }),
+    VehicleType.deleteMany({ is_mock: true }),
+    TransportVehicle.deleteMany({ is_mock: true }),
+    TransportRoute.deleteMany({ is_mock: true }),
+    FreightRate.deleteMany({ is_mock: true })
   ]);
   console.log('All mock data has been successfully deleted.');
 };
@@ -1327,6 +1335,346 @@ const seedMockData = async () => {
     });
     console.log('Created sample Quotation and Supplier Quote Response.');
 
+    console.log('\n13. Seeding Transport Module Data...');
+    // A. Vehicle Types
+    const vTypes = await VehicleType.insertMany([
+      {
+        name: '10-Wheeler Heavy Truck',
+        slug: '10-wheeler-truck',
+        configuration: '10-Wheeler Rigid Open Body / High Side',
+        default_payload_capacity: 16,
+        capacity_unit: 'ton',
+        description: 'Ideal for local and regional block & gangsaw slab transport up to 16 tons.',
+        is_active: true,
+        is_mock: true
+      },
+      {
+        name: '12-Wheeler Heavy Truck',
+        slug: '12-wheeler-truck',
+        configuration: '12-Wheeler Heavy Multi-Axle',
+        default_payload_capacity: 25,
+        capacity_unit: 'ton',
+        description: 'High capacity long-haul truck suited for granite & marble transport up to 25 tons.',
+        is_active: true,
+        is_mock: true
+      },
+      {
+        name: 'Multi-Axle Flatbed Trailer',
+        slug: 'multi-axle-trailer',
+        configuration: 'Semi-Trailer Flatbed 40ft',
+        default_payload_capacity: 40,
+        capacity_unit: 'ton',
+        description: 'Heavy duty flatbed trailer for raw mining blocks and export container loading up to 40 tons.',
+        is_active: true,
+        is_mock: true
+      },
+      {
+        name: 'Heavy Dump Truck (Tipper)',
+        slug: 'heavy-dump-truck',
+        configuration: 'Heavy Duty 6x4 Tipper',
+        default_payload_capacity: 18,
+        capacity_unit: 'ton',
+        description: 'Mining overburden, raw crushed stone, ballast, and cobble boulder transport.',
+        is_active: true,
+        is_mock: true
+      }
+    ]);
+    console.log(`Created ${vTypes.length} Transport Vehicle Types.`);
+
+    // B. Transport Users
+    const uTransNational = await User.create({
+      full_name: 'Rajesh Gurjar',
+      mobile: '9111111116',
+      email: 'national.transport@mockstonemarket.com',
+      password: hashedPassword,
+      role: 'transport_national',
+      roles: ['transport_national'],
+      is_phone_verified: true,
+      status: 'active',
+      is_mock: true
+    });
+
+    const uTransLocal = await User.create({
+      full_name: 'Mahesh Choudhary',
+      mobile: '9111111117',
+      email: 'local.transport@mockstonemarket.com',
+      password: hashedPassword,
+      role: 'transport_local',
+      roles: ['transport_local'],
+      is_phone_verified: true,
+      status: 'active',
+      is_mock: true
+    });
+
+    // C. Transport Provider Business Profiles
+    const bTransNational = await BusinessProfile.create({
+      user: uTransNational._id,
+      business_name: 'Apex Bharat Heavy Logistics',
+      business_type: 'transport_national',
+      transport_category: 'heavy_fleet',
+      description: 'Premier All-India stone transportation specialist with dedicated fleet of 10-wheelers, 12-wheelers and multi-axle trailers. Serving Kishangarh, Jalore, Makrana to all Indian ports and major metropolitan hubs.',
+      established_year: 2011,
+      registered_address: 'Plot 45, Transport Nagar, Marble Mandi, Kishangarh, Rajasthan - 305801',
+      operational_address: 'Plot 45, Transport Nagar, Marble Mandi, Kishangarh, Rajasthan - 305801',
+      state: 'Rajasthan',
+      city: 'Kishangarh',
+      area: 'Marble Mandi',
+      pincode: '305801',
+      location: {
+        type: 'Point',
+        coordinates: [74.8655, 26.5744] // Kishangarh coordinates
+      },
+      contact_persons: [
+        {
+          name: 'Rajesh Gurjar',
+          designation: 'Managing Director',
+          phone: '9111111116',
+          whatsapp_phone: '9111111116',
+          is_public: true,
+          contact_consent_status: true
+        },
+        {
+          name: 'Vikram Singh',
+          designation: 'Fleet Operations Manager',
+          phone: '9111111120',
+          whatsapp_phone: '9111111120',
+          is_public: true,
+          contact_consent_status: true
+        }
+      ],
+      gstin: '08AAAAA0000A1Z5',
+      verification_status: 'verified',
+      public_listing_status: 'approved',
+      working_hours: '08:00 AM - 09:00 PM (24/7 Dispatch)',
+      has_all_india_permit: true,
+      has_national_coverage: true,
+      fleet_summary: '45+ Trucks including 10-wheelers, 12-wheelers, and hydraulic heavy trailers',
+      supported_vehicle_types: [vTypes[0]._id, vTypes[1]._id, vTypes[2]._id],
+      operational_states: ['Rajasthan', 'Gujarat', 'Maharashtra', 'Delhi', 'Karnataka'],
+      operational_cities: ['Kishangarh', 'Jalore', 'Jaipur', 'Ahmedabad', 'Mumbai', 'Delhi'],
+      logo: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=300&q=80',
+      cover_images: [
+        'https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=1200&q=80'
+      ],
+      is_mock: true
+    });
+
+    const bTransLocal = await BusinessProfile.create({
+      user: uTransLocal._id,
+      business_name: 'Jaipur City Stone Express',
+      business_type: 'transport_local',
+      transport_category: 'local_fleet',
+      description: 'Reliable intra-city and nearby quarry stone hauling service. Prompt dispatch within Jaipur, Sitapura, Mansarovar and Bagru industrial zones.',
+      established_year: 2018,
+      registered_address: '12, New Aatish Market, Mansarovar, Jaipur, Rajasthan - 302020',
+      operational_address: '12, New Aatish Market, Mansarovar, Jaipur, Rajasthan - 302020',
+      state: 'Rajasthan',
+      city: 'Jaipur',
+      area: 'Mansarovar Industrial Area',
+      pincode: '302020',
+      location: {
+        type: 'Point',
+        coordinates: [75.7683, 26.8522] // Mansarovar, Jaipur
+      },
+      contact_persons: [
+        {
+          name: 'Mahesh Choudhary',
+          designation: 'Owner & Fleet Lead',
+          phone: '9111111117',
+          whatsapp_phone: '9111111117',
+          is_public: true,
+          contact_consent_status: true
+        }
+      ],
+      gstin: '08BBBBB1111B1Z9',
+      verification_status: 'verified',
+      public_listing_status: 'approved',
+      working_hours: '07:00 AM - 10:00 PM',
+      has_all_india_permit: false,
+      has_national_coverage: false,
+      fleet_summary: '8 Local High-Side Trucks and Tippers',
+      supported_vehicle_types: [vTypes[0]._id, vTypes[3]._id],
+      operational_states: ['Rajasthan'],
+      operational_cities: ['Jaipur'],
+      logo: 'https://images.unsplash.com/photo-1519003722824-194d4455a60c?auto=format&fit=crop&w=300&q=80',
+      is_mock: true
+    });
+
+    // D. Vehicles
+    const vehicles = await TransportVehicle.insertMany([
+      {
+        provider_id: bTransNational._id,
+        vehicle_type_id: vTypes[0]._id,
+        vehicle_category: '10-Wheeler Truck',
+        registration_number: 'RJ-01-GB-4501',
+        payload_capacity: 16,
+        capacity_unit: 'ton',
+        dimensions: { length_ft: 22, width_ft: 7.5, height_ft: 7 },
+        permit_type: 'all_india',
+        permit_valid_until: new Date(Date.now() + 365 * 86400000),
+        availability_status: 'available_now',
+        location: { type: 'Point', coordinates: [74.8655, 26.5744] },
+        current_location_name: 'Marble Mandi, Kishangarh',
+        is_verified: true,
+        is_mock: true
+      },
+      {
+        provider_id: bTransNational._id,
+        vehicle_type_id: vTypes[1]._id,
+        vehicle_category: '12-Wheeler Truck',
+        registration_number: 'RJ-01-GB-4502',
+        payload_capacity: 25,
+        capacity_unit: 'ton',
+        dimensions: { length_ft: 28, width_ft: 8, height_ft: 8 },
+        permit_type: 'all_india',
+        permit_valid_until: new Date(Date.now() + 300 * 86400000),
+        availability_status: 'available_now',
+        location: { type: 'Point', coordinates: [74.8655, 26.5744] },
+        current_location_name: 'Marble Mandi, Kishangarh',
+        is_verified: true,
+        is_mock: true
+      },
+      {
+        provider_id: bTransLocal._id,
+        vehicle_type_id: vTypes[0]._id,
+        vehicle_category: '10-Wheeler Truck',
+        registration_number: 'RJ-14-GH-8812',
+        payload_capacity: 15,
+        capacity_unit: 'ton',
+        permit_type: 'state_only',
+        availability_status: 'available_now',
+        location: { type: 'Point', coordinates: [75.7683, 26.8522] },
+        current_location_name: 'Mansarovar, Jaipur',
+        is_verified: true,
+        is_mock: true
+      },
+      {
+        provider_id: bTransLocal._id,
+        vehicle_type_id: vTypes[3]._id,
+        vehicle_category: 'Heavy Dump Truck',
+        registration_number: 'RJ-14-GH-8815',
+        payload_capacity: 18,
+        capacity_unit: 'ton',
+        permit_type: 'local_only',
+        availability_status: 'in_service',
+        location: { type: 'Point', coordinates: [75.7800, 26.8600] },
+        current_location_name: 'Sitapura Industrial Area, Jaipur',
+        is_verified: true,
+        is_mock: true
+      }
+    ]);
+    console.log(`Created ${vehicles.length} Transport Vehicles.`);
+
+    // E. Routes
+    const sampleRoute = await TransportRoute.create({
+      provider_id: bTransNational._id,
+      origin_city_id: 'Kishangarh',
+      origin_state_id: 'Rajasthan',
+      destination_city_id: 'Delhi',
+      destination_state_id: 'Delhi',
+      route_type: 'regular',
+      directionality: 'bidirectional',
+      direct_route_only: false,
+      estimated_transit_hours: 10,
+      indicative_freight_rate: 1850,
+      pricing_unit: 'per_ton',
+      is_active: true,
+      is_mock: true
+    });
+    console.log('Created Transport Route: Kishangarh <-> Delhi.');
+
+    // F. Freight Rates
+    await FreightRate.create({
+      provider_id: bTransNational._id,
+      vehicle_type_id: vTypes[0]._id,
+      route_id: sampleRoute._id,
+      origin_location_name: 'Kishangarh, Rajasthan',
+      destination_location_name: 'Delhi NCR',
+      pricing_model: 'per_ton',
+      amount: 1850,
+      currency: 'INR',
+      unit: 'per_ton',
+      minimum_charge: 15000,
+      status: 'active',
+      is_mock: true
+    });
+    console.log('Created Freight Rate for Kishangarh -> Delhi.');
+
+    // G. Sample Transport Inquiry
+    await Inquiry.create({
+      inquirer_user_id: uBuyer1._id,
+      business_id: bTransNational._id,
+      transport_provider_id: bTransNational._id,
+      inquiry_type: 'transport',
+      transport_type: 'national',
+      contact_name: 'Amit Kumar',
+      contact_phone: '9111111112',
+      contact_email: 'buyer.amit@mockstonemarket.com',
+      contact_city: 'Jaipur',
+      origin_location: 'Kishangarh, Rajasthan',
+      destination_location: 'Mansarovar, Jaipur, Rajasthan',
+      vehicle_type: '10-Wheeler Heavy Truck',
+      vehicle_quantity: 2,
+      cargo_type: 'Gangsaw Granite Slabs',
+      cargo_quantity: 30,
+      cargo_unit: 'ton',
+      pickup_date: new Date(Date.now() + 5 * 86400000),
+      expected_delivery_date: new Date(Date.now() + 6 * 86400000),
+      special_handling: 'Careful loading required. Slings & wood spacers compulsory.',
+      status: 'submitted',
+      reference_number: 'TR-INQ-MOCK-001',
+      is_mock: true
+    });
+    console.log('Created Sample Transport Inquiry.');
+
+    // H. Sample Transport Quote Request & Provider Response
+    const transQuoteReq = await QuoteRequest.create({
+      userId: uBuyer1._id,
+      businessId: bTransNational._id,
+      transport_provider_id: bTransNational._id,
+      request_type: 'transport',
+      buyerContact: {
+        name: 'Amit Kumar',
+        phone: '9111111112',
+        email: 'buyer.amit@mockstonemarket.com',
+        city: 'Jaipur'
+      },
+      pickup_location: 'Kishangarh Marble Mandi',
+      delivery_location: 'Delhi Sanjay Gandhi Transport Nagar',
+      cargo_type: 'Polished Marble Slabs',
+      cargo_weight: 24,
+      required_vehicle_type: '12-Wheeler Heavy Truck',
+      vehicle_quantity: 1,
+      preferred_pickup_date: new Date(Date.now() + 7 * 86400000),
+      budget: 45000,
+      message: 'Need 12-wheeler for 24 tons polished marble slabs dispatch to Delhi.',
+      reference_number: 'TR-QR-MOCK-001',
+      status: 'responded',
+      is_mock: true
+    });
+
+    await QuoteResponse.create({
+      quoteRequestId: transQuoteReq._id,
+      supplierId: bTransNational._id,
+      supplierUserId: uTransNational._id,
+      quote_type: 'transport',
+      offered_price: 1800,
+      currency: 'INR',
+      unit: 'per_ton',
+      estimated_total: 43200,
+      additional_charges: 1200,
+      vehicle_type: '12-Wheeler Heavy Truck',
+      offered_capacity: 25,
+      pickup_estimate: 'Within 24 hours of confirmation',
+      delivery_estimate: 'Same-day or next morning in Delhi',
+      offer_validity: new Date(Date.now() + 10 * 86400000),
+      terms_and_conditions: 'Toll included. Loading/unloading extra or arranged by buyer. GST extra as applicable.',
+      reference_number: 'TR-QT-MOCK-001',
+      status: 'submitted',
+      is_mock: true
+    });
+    console.log('Created Sample Transport Quote Request & Quote Response.');
+
     console.log('\n======================================================');
     console.log('>>> MOCK DATA SEEDING COMPLETED SUCCESSFULLY! <<<');
     console.log('======================================================');
@@ -1346,6 +1694,8 @@ const seedMockData = async () => {
     console.log('  - Buyer 2:      Mobile 9111111113 (Heritage Palace Resorts, Udaipur - Verified)');
     console.log('  - Buyer 3:      Mobile 9111111114 (Mehta Design Architects, Ahmedabad - Verified)');
     console.log('  - Buyer 4:      Mobile 9111111115 (Shree Ram Distributors, Kishangarh - Pending)');
+    console.log('  - Trans Nat:    Mobile 9111111116 (Apex Bharat Heavy Logistics - All India)');
+    console.log('  - Trans Local:  Mobile 9111111117 (Jaipur City Stone Express - Local Nearby)');
     console.log('------------------------------------------------------');
     console.log('All mock records tagged with { is_mock: true } for clean deletion.');
     console.log('Run `npm run clean:mock` anytime when testing finishes.');

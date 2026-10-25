@@ -98,6 +98,13 @@ const businessProfileSchema = new mongoose.Schema({
   review_count: { type: Number, default: 0 },
   
   // Specific to Transport
+  transport_category: { type: String, enum: ['national', 'local', 'both'], default: 'national' },
+  fleet_summary: { type: String }, // e.g. "Fleet of 25+ 10-wheeler and 12-wheeler trailers"
+  has_all_india_permit: { type: Boolean, default: true },
+  has_national_coverage: { type: Boolean, default: true },
+  supported_vehicle_types: [{ type: mongoose.Schema.Types.ObjectId, ref: 'VehicleType' }],
+  cover_images: [{ type: String }],
+  gallery: [{ type: String }],
   vehicle_type: { type: String },
   vehicle_quantity: { type: Number },
   vehicle_name: { type: String },
@@ -110,6 +117,9 @@ const businessProfileSchema = new mongoose.Schema({
     state_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Location' }, // Using Location for state
     district_ids: [{ type: mongoose.Schema.Types.ObjectId }]
   }],
+  operational_states: [{ type: String }], // List of state names e.g. ["Rajasthan", "Gujarat", "Delhi"]
+  operational_cities: [{ type: String }], // List of city names e.g. ["Jaipur", "Kishangarh", "Ahmedabad"]
+
 
   // Specific to Service Providers
   service_categories: [{ type: mongoose.Schema.Types.ObjectId, ref: 'ServiceCategory' }],

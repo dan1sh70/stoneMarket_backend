@@ -5974,6 +5974,1174 @@
           ]
         }
       ]
+    },
+    {
+      "name": "Transport Module",
+      "item": [
+        {
+          "name": "1. National Transport Discovery",
+          "item": [
+            {
+              "name": "All National Transport Providers",
+              "request": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/transports/national?search=Bharat&permit_type=all_india&page=1&per_page=20",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "transports",
+                    "national"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "Bharat",
+                      "disabled": false
+                    },
+                    {
+                      "key": "permit_type",
+                      "value": "all_india",
+                      "disabled": false
+                    },
+                    {
+                      "key": "vehicle_type",
+                      "value": "",
+                      "disabled": true
+                    },
+                    {
+                      "key": "origin_city_id",
+                      "value": "",
+                      "disabled": true
+                    },
+                    {
+                      "key": "destination_city_id",
+                      "value": "",
+                      "disabled": true
+                    },
+                    {
+                      "key": "verified",
+                      "value": "true",
+                      "disabled": true
+                    },
+                    {
+                      "key": "available",
+                      "value": "true",
+                      "disabled": true
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    },
+                    {
+                      "key": "sort_by",
+                      "value": "created_at",
+                      "disabled": true
+                    },
+                    {
+                      "key": "sort_order",
+                      "value": "desc",
+                      "disabled": true
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Area Wise - States with Active Transporters",
+              "request": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/locations/states?transport_type=national",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "locations",
+                    "states"
+                  ],
+                  "query": [
+                    {
+                      "key": "transport_type",
+                      "value": "national"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Area Wise - Cities with Active Transporters",
+              "request": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/locations/cities?state_id=Rajasthan&transport_type=national",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "locations",
+                    "cities"
+                  ],
+                  "query": [
+                    {
+                      "key": "state_id",
+                      "value": "Rajasthan"
+                    },
+                    {
+                      "key": "transport_type",
+                      "value": "national"
+                    },
+                    {
+                      "key": "search",
+                      "value": "Kishangarh",
+                      "disabled": true
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Area Wise - Destinations from Origin City",
+              "request": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/transports/national/destinations?origin_city_id=Kishangarh",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "transports",
+                    "national",
+                    "destinations"
+                  ],
+                  "query": [
+                    {
+                      "key": "origin_city_id",
+                      "value": "Kishangarh"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Area Wise - Providers by Area/Route",
+              "request": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/transports/national/area-wise?origin_city_id=Kishangarh&destination_city_id=Delhi",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "transports",
+                    "national",
+                    "area-wise"
+                  ],
+                  "query": [
+                    {
+                      "key": "origin_city_id",
+                      "value": "Kishangarh"
+                    },
+                    {
+                      "key": "destination_city_id",
+                      "value": "Delhi"
+                    },
+                    {
+                      "key": "state_id",
+                      "value": "Rajasthan",
+                      "disabled": true
+                    },
+                    {
+                      "key": "vehicle_type",
+                      "value": "",
+                      "disabled": true
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "List Published Transport Routes",
+              "request": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/transports/national/routes?origin_city_id=Kishangarh&destination_city_id=Delhi",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "transports",
+                    "national",
+                    "routes"
+                  ],
+                  "query": [
+                    {
+                      "key": "origin_city_id",
+                      "value": "Kishangarh"
+                    },
+                    {
+                      "key": "destination_city_id",
+                      "value": "Delhi"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Transport Route by ID",
+              "request": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/transports/national/routes/ROUTE_ID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "transports",
+                    "national",
+                    "routes",
+                    "ROUTE_ID"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "2. Local Transport Discovery",
+          "item": [
+            {
+              "name": "Nearby Local Vehicles (Coordinates / Haversine)",
+              "request": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/transports/local/nearby?latitude=26.8522&longitude=75.7683&radius_km=15&availability=available_now",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "transports",
+                    "local",
+                    "nearby"
+                  ],
+                  "query": [
+                    {
+                      "key": "latitude",
+                      "value": "26.8522"
+                    },
+                    {
+                      "key": "longitude",
+                      "value": "75.7683"
+                    },
+                    {
+                      "key": "radius_km",
+                      "value": "15"
+                    },
+                    {
+                      "key": "availability",
+                      "value": "available_now"
+                    },
+                    {
+                      "key": "city_id",
+                      "value": "Jaipur",
+                      "disabled": true
+                    },
+                    {
+                      "key": "vehicle_type",
+                      "value": "",
+                      "disabled": true
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "List Local Vehicles (Filtered)",
+              "request": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/transports/local/vehicles?city_id=Jaipur&availability=available_now",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "transports",
+                    "local",
+                    "vehicles"
+                  ],
+                  "query": [
+                    {
+                      "key": "city_id",
+                      "value": "Jaipur"
+                    },
+                    {
+                      "key": "availability",
+                      "value": "available_now"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Local Vehicle Details",
+              "request": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/transports/local/vehicles/VEHICLE_ID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "transports",
+                    "local",
+                    "vehicles",
+                    "VEHICLE_ID"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "3. Transport Provider Profile & Freight Rates",
+          "item": [
+            {
+              "name": "Get Transport Provider Profile (Detailed)",
+              "request": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/transport-providers/PROVIDER_ID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "transport-providers",
+                    "PROVIDER_ID"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Provider Freight Rates",
+              "request": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/transport-providers/PROVIDER_ID/freight-rates",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "transport-providers",
+                    "PROVIDER_ID",
+                    "freight-rates"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Single Freight Rate",
+              "request": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/freight-rates/RATE_ID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "freight-rates",
+                    "RATE_ID"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "4. Transport Inquiries Workflow",
+          "item": [
+            {
+              "name": "Submit Transport Inquiry",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/transport-inquiries",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "transport-inquiries"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"provider_id\": \"PROVIDER_ID\",\n  \"transport_type\": \"national\",\n  \"contact_name\": \"Amit Kumar\",\n  \"contact_phone\": \"9111111112\",\n  \"contact_email\": \"amit@buildcon.com\",\n  \"contact_city\": \"Jaipur\",\n  \"origin_location\": \"Kishangarh Marble Mandi\",\n  \"destination_location\": \"Mansarovar, Jaipur\",\n  \"vehicle_type\": \"10-Wheeler Heavy Truck\",\n  \"vehicle_quantity\": 2,\n  \"cargo_type\": \"Gangsaw Granite Slabs\",\n  \"cargo_quantity\": 30,\n  \"cargo_unit\": \"ton\",\n  \"pickup_date\": \"2026-11-01\",\n  \"special_handling\": \"Careful loading required. Slings & wood spacers compulsory.\"\n}"
+                }
+              }
+            },
+            {
+              "name": "List My Inquiries (Buyer)",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/transport-inquiries",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "transport-inquiries"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Transport Inquiry Details",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/transport-inquiries/INQUIRY_ID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "transport-inquiries",
+                    "INQUIRY_ID"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "5. Get Quotes Workflow",
+          "item": [
+            {
+              "name": "Create Transport Quote Request",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/transport-quote-requests",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "transport-quote-requests"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"provider_id\": \"PROVIDER_ID\",\n  \"buyerContact\": {\n    \"name\": \"Amit Kumar\",\n    \"phone\": \"9111111112\",\n    \"email\": \"amit@buildcon.com\",\n    \"city\": \"Jaipur\"\n  },\n  \"pickup_location\": \"Kishangarh Marble Mandi\",\n  \"delivery_location\": \"Delhi Sanjay Gandhi Transport Nagar\",\n  \"cargo_type\": \"Polished Marble Slabs\",\n  \"cargo_weight\": 24,\n  \"required_vehicle_type\": \"12-Wheeler Heavy Truck\",\n  \"vehicle_quantity\": 1,\n  \"preferred_pickup_date\": \"2026-11-05\",\n  \"budget\": 45000,\n  \"message\": \"Need 12-wheeler for 24 tons polished marble slabs dispatch to Delhi.\"\n}"
+                }
+              }
+            },
+            {
+              "name": "List Quote Requests (Buyer)",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/transport-quote-requests",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "transport-quote-requests"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Quote Request Details",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/transport-quote-requests/REQUEST_ID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "transport-quote-requests",
+                    "REQUEST_ID"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Submit Quote Response (Provider)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/transport-quote-requests/REQUEST_ID/quotes",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "transport-quote-requests",
+                    "REQUEST_ID",
+                    "quotes"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"offered_price\": 1800,\n  \"pricing_unit\": \"per_ton\",\n  \"estimated_total\": 43200,\n  \"additional_charges\": 1200,\n  \"vehicle_type\": \"12-Wheeler Heavy Truck\",\n  \"offered_capacity\": 25,\n  \"pickup_estimate\": \"Within 24 hours of confirmation\",\n  \"delivery_estimate\": \"Same-day or next morning in Delhi\",\n  \"valid_until\": \"2026-11-15\",\n  \"terms\": \"Toll included. Loading/unloading extra or arranged by buyer. GST extra as applicable.\"\n}"
+                }
+              }
+            },
+            {
+              "name": "List Quotes for Request",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/transport-quote-requests/REQUEST_ID/quotes",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "transport-quote-requests",
+                    "REQUEST_ID",
+                    "quotes"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Accept Transport Quote",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/transport-quotes/QUOTE_ID/accept",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "transport-quotes",
+                    "QUOTE_ID",
+                    "accept"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Reject Transport Quote",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/transport-quotes/QUOTE_ID/reject",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "transport-quotes",
+                    "QUOTE_ID",
+                    "reject"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reason\": \"Freight rate too high compared to alternatives.\"\n}"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "6. Favorites / Saved Providers",
+          "item": [
+            {
+              "name": "Save Transport Provider to Favorites",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/favorites/transports/PROVIDER_ID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "favorites",
+                    "transports",
+                    "PROVIDER_ID"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Saved Transport Favorites",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/favorites/transports",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "favorites",
+                    "transports"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Remove Transport Provider from Favorites",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/favorites/transports/PROVIDER_ID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "favorites",
+                    "transports",
+                    "PROVIDER_ID"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "7. Provider Dashboard (CMS)",
+          "item": [
+            {
+              "name": "Get Provider Transport Profile",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/provider/transport/profile",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "provider",
+                    "transport",
+                    "profile"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Update Provider Transport Profile",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/provider/transport/profile",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "provider",
+                    "transport",
+                    "profile"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"has_all_india_permit\": true,\n  \"fleet_summary\": \"50+ Trucks & Multi-Axle Trailers\",\n  \"working_hours\": \"24/7 Operations\"\n}"
+                }
+              }
+            },
+            {
+              "name": "List Provider Fleet Vehicles",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/provider/transport/vehicles",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "provider",
+                    "transport",
+                    "vehicles"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Add Vehicle to Fleet",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/provider/transport/vehicles",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "provider",
+                    "transport",
+                    "vehicles"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"vehicle_category\": \"12-Wheeler Truck\",\n  \"registration_number\": \"RJ-14-GB-9999\",\n  \"payload_capacity\": 25,\n  \"capacity_unit\": \"ton\",\n  \"permit_type\": \"all_india\",\n  \"availability_status\": \"available_now\",\n  \"latitude\": 26.5744,\n  \"longitude\": 74.8655,\n  \"current_location_name\": \"Marble Mandi, Kishangarh\"\n}"
+                }
+              }
+            },
+            {
+              "name": "Toggle Vehicle Availability",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/provider/transport/vehicles/VEHICLE_ID/availability",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "provider",
+                    "transport",
+                    "vehicles",
+                    "VEHICLE_ID",
+                    "availability"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"availability_status\": \"in_service\",\n  \"available_in_minutes\": 120\n}"
+                }
+              }
+            },
+            {
+              "name": "Add Transport Route",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/provider/transport/routes",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "provider",
+                    "transport",
+                    "routes"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"origin_city_id\": \"Kishangarh\",\n  \"origin_state_id\": \"Rajasthan\",\n  \"destination_city_id\": \"Mumbai\",\n  \"destination_state_id\": \"Maharashtra\",\n  \"directionality\": \"bidirectional\",\n  \"route_type\": \"regular\",\n  \"estimated_transit_hours\": 24,\n  \"indicative_freight_rate\": 3200,\n  \"pricing_unit\": \"per_ton\"\n}"
+                }
+              }
+            },
+            {
+              "name": "Add Freight Rate",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/provider/freight-rates",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "provider",
+                    "freight-rates"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"origin_location_name\": \"Kishangarh\",\n  \"destination_location_name\": \"Mumbai\",\n  \"pricing_model\": \"per_ton\",\n  \"amount\": 3200,\n  \"currency\": \"INR\",\n  \"unit\": \"per_ton\",\n  \"minimum_charge\": 25000,\n  \"status\": \"active\"\n}"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "8. Admin Transport Management",
+          "item": [
+            {
+              "name": "List Transport Providers (Admin)",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/admin/transport/providers?verification_status=pending&page=1&limit=20",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "admin",
+                    "transport",
+                    "providers"
+                  ],
+                  "query": [
+                    {
+                      "key": "verification_status",
+                      "value": "pending"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Verify / Reject Transport Provider",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/admin/transport/providers/PROVIDER_ID/verification",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "admin",
+                    "transport",
+                    "providers",
+                    "PROVIDER_ID",
+                    "verification"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"verification_status\": \"verified\",\n  \"reason\": \"Valid transport GST and All-India permits verified.\"\n}"
+                }
+              }
+            },
+            {
+              "name": "Update Provider Status (Active / Suspended)",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/admin/transport/providers/PROVIDER_ID/status",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "admin",
+                    "transport",
+                    "providers",
+                    "PROVIDER_ID",
+                    "status"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"active\"\n}"
+                }
+              }
+            },
+            {
+              "name": "Transport Analytics (Admin)",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/admin/transport/analytics",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "admin",
+                    "transport",
+                    "analytics"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Create Vehicle Type (Admin)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/admin/transport/vehicle-types",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "admin",
+                    "transport",
+                    "vehicle-types"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"16-Wheeler Extra Heavy Hauler\",\n  \"slug\": \"16-wheeler-truck\",\n  \"configuration\": \"16-Wheeler Multi-Axle\",\n  \"default_payload_capacity\": 35,\n  \"capacity_unit\": \"ton\",\n  \"description\": \"Heavy block transportation from remote quarries to port hubs.\"\n}"
+                }
+              }
+            }
+          ]
+        }
+      ]
     }
   ]
 }

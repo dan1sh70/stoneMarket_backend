@@ -10,6 +10,7 @@ const {
 router.get('/granite-colors', getGraniteColors);
 router.get('/locations/states', getStates);
 router.get('/locations/states/:stateId/districts', getDistricts);
+router.get('/locations/cities', getDistricts);
 router.get('/locations/districts/:districtId/areas', getAreas);
 
 module.exports = router;

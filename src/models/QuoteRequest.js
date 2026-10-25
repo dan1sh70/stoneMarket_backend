@@ -27,7 +27,19 @@ const quoteRequestSchema = new mongoose.Schema({
     state: { type: String },
     address: { type: String }
   },
+  pickup_location: {
+    city: { type: String },
+    state: { type: String },
+    address: { type: String }
+  },
+  cargo_type: { type: String },
+  cargo_weight: { type: Number },
+  required_vehicle_type: { type: String },
+  vehicle_quantity: { type: Number, default: 1 },
+  budget: { type: Number },
+  reference_number: { type: String },
   required_delivery_date: { type: Date },
+  preferred_pickup_date: { type: Date },
   additional_specifications: { type: String },
   message: { type: String, default: 'Request for quotation' },
   attachments: [{
@@ -38,7 +50,7 @@ const quoteRequestSchema = new mongoose.Schema({
   }],
   status: { 
     type: String, 
-    enum: ['submitted', 'sent_to_suppliers', 'pending', 'viewed', 'responded', 'accepted', 'rejected', 'cancelled', 'closed', 'expired'], 
+    enum: ['draft', 'submitted', 'sent_to_suppliers', 'pending', 'viewed', 'responded', 'accepted', 'rejected', 'cancelled', 'closed', 'expired', 'withdrawn'], 
     default: 'submitted',
     index: true
   },
