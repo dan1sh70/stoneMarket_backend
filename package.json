@@ -9,7 +9,7 @@
     "seed": "node src/scripts/seed.js",
     "seed:mock": "node src/scripts/seedMockData.js",
     "clean:mock": "node src/scripts/cleanMockData.js",
-    "test": "cross-env NODE_ENV=test jest"
+    "test": "cross-env NODE_ENV=test jest --runInBand"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.1070.0",
