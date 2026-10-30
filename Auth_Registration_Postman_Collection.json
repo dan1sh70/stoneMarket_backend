@@ -7764,6 +7764,1939 @@
           ]
         }
       ]
+    },
+    {
+      "name": "Customer Module",
+      "item": [
+        {
+          "name": "1. Profile & Dashboard",
+          "item": [
+            {
+              "name": "GET Customer Profile",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/customer/profile",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "customer",
+                    "profile"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "PUT Update Customer Profile",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/customer/profile",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "customer",
+                    "profile"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"full_name\": \"Vikram Malhotra\",\n  \"whatsapp_number\": \"9111111118\",\n  \"email\": \"vikram.malhotra@gmail.com\",\n  \"city\": \"Jaipur\",\n  \"state\": \"Rajasthan\",\n  \"bio\": \"Architectural stone buyer & developer\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "POST Upload Profile Photo (URL)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/customer/profile/photo",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "customer",
+                    "profile",
+                    "photo"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"photo_url\": \"https://images.unsplash.com/photo-1534528741775-53994a69daeb\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "DELETE Remove Profile Photo",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/customer/profile/photo",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "customer",
+                    "profile",
+                    "photo"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "GET Customer Dashboard Metrics",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/customer/dashboard",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "customer",
+                    "dashboard"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "2. Personal Details Management",
+          "item": [
+            {
+              "name": "GET Personal Details",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/customer/personal-details",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "customer",
+                    "personal-details"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "PUT Update Personal Details",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/customer/personal-details",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "customer",
+                    "personal-details"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"full_name\": \"Vikram R. Malhotra\",\n  \"whatsapp_number\": \"9111111118\",\n  \"date_of_birth\": \"1990-05-15\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "POST Request Mobile Change OTP",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/customer/personal-details/verify-mobile",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "customer",
+                    "personal-details",
+                    "verify-mobile"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"new_mobile\": \"9829012345\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "POST Verify Mobile Change OTP",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/customer/personal-details/verify-otp",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "customer",
+                    "personal-details",
+                    "verify-otp"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"code\": \"123456\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "3. My Inquiries Module",
+          "item": [
+            {
+              "name": "GET Customer Inquiries (Search & Filter)",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/customer/inquiries",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "customer",
+                    "inquiries"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "All",
+                      "description": ""
+                    },
+                    {
+                      "key": "search",
+                      "value": "Granite",
+                      "description": ""
+                    },
+                    {
+                      "key": "page",
+                      "value": "1",
+                      "description": ""
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10",
+                      "description": ""
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "GET Inquiry Details",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/customer/inquiries/{{inquiry_id}}/details",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "customer",
+                    "inquiries",
+                    "{{inquiry_id}}",
+                    "details"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "GET Inquiry Progress Tracking",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/customer/inquiries/{{inquiry_id}}/tracking",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "customer",
+                    "inquiries",
+                    "{{inquiry_id}}",
+                    "tracking"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "GET Inquiry Status History",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/customer/inquiries/{{inquiry_id}}/status-history",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "customer",
+                    "inquiries",
+                    "{{inquiry_id}}",
+                    "status-history"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "GET Inquiry Attachments",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/customer/inquiries/{{inquiry_id}}/attachments",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "customer",
+                    "inquiries",
+                    "{{inquiry_id}}",
+                    "attachments"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "GET Download Inquiry PDF",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/customer/inquiries/{{inquiry_id}}/download",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "customer",
+                    "inquiries",
+                    "{{inquiry_id}}",
+                    "download"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "POST Close Inquiry",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/customer/inquiries/{{inquiry_id}}/close",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "customer",
+                    "inquiries",
+                    "{{inquiry_id}}",
+                    "close"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"remarks\": \"Requirement fulfilled locally in Kishangarh\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "4. Get Quotes Module",
+          "item": [
+            {
+              "name": "GET Quote Request Dropdown Options",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/customer/quotes/request-options",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "customer",
+                    "quotes",
+                    "request-options"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "POST Submit Quotation Request (RFQ)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/customer/quotes/request",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "customer",
+                    "quotes",
+                    "request"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"category\": \"Granite\",\n  \"product_name\": \"Imperial Black Granite\",\n  \"quantity\": 2000,\n  \"unit\": \"Sq.Ft\",\n  \"size\": \"10x6 ft slabs\",\n  \"thickness\": \"20mm\",\n  \"finish\": \"Polished\",\n  \"edge_profile\": \"Full Bullnose\",\n  \"quality\": \"Premium Export Grade\",\n  \"delivery_location\": {\n    \"city\": \"Jaipur\",\n    \"state\": \"Rajasthan\",\n    \"address\": \"Sitapura Industrial Area Phase 3\",\n    \"pin_code\": \"302022\"\n  },\n  \"budget_range\": \"Rs. 180 - 220 per Sq.Ft\",\n  \"delivery_timeline\": \"Within 15 Days\",\n  \"additional_specifications\": \"Pre-seal with high-grade stone penetrant. Export crating required.\",\n  \"referral_source\": \"Trade Exhibition\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "GET Submitted Quote Requests",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/customer/quotes/requests",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "customer",
+                    "quotes",
+                    "requests"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1",
+                      "description": ""
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10",
+                      "description": ""
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "GET Quote Request Details",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/customer/quotes/requests/{{quote_request_id}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "customer",
+                    "quotes",
+                    "requests",
+                    "{{quote_request_id}}"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "5. Customer Quotations & Comparison",
+          "item": [
+            {
+              "name": "GET Received Quotations",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/customer/quotations",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "customer",
+                    "quotations"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1",
+                      "description": ""
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10",
+                      "description": ""
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "GET Quotation Details",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/customer/quotations/{{quote_id}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "customer",
+                    "quotations",
+                    "{{quote_id}}"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "GET Quotations for Inquiry",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/customer/inquiries/{{inquiry_id}}/quotations",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "customer",
+                    "inquiries",
+                    "{{inquiry_id}}",
+                    "quotations"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "GET Download Quotation PDF",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/customer/quotations/{{quote_id}}/download",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "customer",
+                    "quotations",
+                    "{{quote_id}}",
+                    "download"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "POST Compare Multiple Quotations",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/customer/quotations/compare",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "customer",
+                    "quotations",
+                    "compare"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"quote_ids\": [\n    \"QUOTE_ID_1\",\n    \"QUOTE_ID_2\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "GET Compare All Inquiry Quotations",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/customer/inquiries/{{inquiry_id}}/quotations/compare",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "customer",
+                    "inquiries",
+                    "{{inquiry_id}}",
+                    "quotations",
+                    "compare"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "6. Quotes & Estimates History",
+          "item": [
+            {
+              "name": "GET Customer Estimates",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/customer/estimates",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "customer",
+                    "estimates"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "slab",
+                      "description": ""
+                    },
+                    {
+                      "key": "page",
+                      "value": "1",
+                      "description": ""
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "POST Create Slab Estimate",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/customer/estimates",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "customer",
+                    "estimates"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"estimate_type\": \"slab\",\n  \"party_name\": \"Royal Palace Villa Project\",\n  \"party_address\": \"Civil Lines, Jaipur\",\n  \"party_contact\": \"9829011223\",\n  \"slab_details\": {\n    \"colour_quality\": \"Imperial Black First Choice\",\n    \"measurement_unit\": \"inch\",\n    \"area_unit\": \"sqft\",\n    \"unit_price\": 160,\n    \"measurement_rows\": [\n      {\n        \"length\": 120,\n        \"width\": 60\n      },\n      {\n        \"length\": 110,\n        \"width\": 55\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "POST Create Particular Estimate",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/customer/estimates",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "customer",
+                    "estimates"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"estimate_type\": \"particular\",\n  \"party_name\": \"Heritage Resorts\",\n  \"particular_details\": {\n    \"items\": [\n      {\n        \"particular_name\": \"Black Granite Countertop\",\n        \"quantity\": 300,\n        \"unit\": \"sqft\",\n        \"unit_price\": 180\n      },\n      {\n        \"particular_name\": \"Baluster Pillar Railings\",\n        \"quantity\": 25,\n        \"unit\": \"pieces\",\n        \"unit_price\": 1400\n      }\n    ],\n    \"payments\": [\n      {\n        \"amount\": 35000,\n        \"payment_method\": \"upi\",\n        \"notes\": \"Token advance payment\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "GET Download Estimate PDF",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/customer/estimates/{{estimate_id}}/download",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "customer",
+                    "estimates",
+                    "{{estimate_id}}",
+                    "download"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "DELETE Customer Estimate",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/customer/estimates/{{estimate_id}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "customer",
+                    "estimates",
+                    "{{estimate_id}}"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "7. Saved Stones & Favorites",
+          "item": [
+            {
+              "name": "GET Saved Stones List",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/customer/favorites",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "customer",
+                    "favorites"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1",
+                      "description": ""
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10",
+                      "description": ""
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "POST Save Stone to Favorites",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/customer/favorites",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "customer",
+                    "favorites"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"product_id\": \"{{product_id}}\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "GET Check Favorite Status",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/customer/favorites/check/{{product_id}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "customer",
+                    "favorites",
+                    "check",
+                    "{{product_id}}"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "DELETE Remove Stone from Favorites",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/customer/favorites/{{product_id}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "customer",
+                    "favorites",
+                    "{{product_id}}"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "8. Delivery & Project Addresses",
+          "item": [
+            {
+              "name": "GET Saved Addresses",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/customer/addresses",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "customer",
+                    "addresses"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "POST Add New Delivery Address",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/customer/addresses",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "customer",
+                    "addresses"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"state\": \"Rajasthan\",\n  \"district\": \"Jaipur\",\n  \"area\": \"C-Scheme\",\n  \"full_address\": \"B-14 Subhash Marg, C-Scheme\",\n  \"pin_code\": \"302001\",\n  \"address_label\": \"Home\",\n  \"is_default\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "PUT Update Delivery Address",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/customer/addresses/{{address_id}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "customer",
+                    "addresses",
+                    "{{address_id}}"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"full_address\": \"B-14 Subhash Marg, 2nd Floor\",\n  \"address_label\": \"Office\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "PATCH Set Address as Default",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/customer/addresses/{{address_id}}/default",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "customer",
+                    "addresses",
+                    "{{address_id}}",
+                    "default"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "DELETE Delivery Address",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/customer/addresses/{{address_id}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "customer",
+                    "addresses",
+                    "{{address_id}}"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "9. Notifications & Notification Preferences",
+          "item": [
+            {
+              "name": "GET Notifications List",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/customer/notifications",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "customer",
+                    "notifications"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1",
+                      "description": ""
+                    },
+                    {
+                      "key": "limit",
+                      "value": "15",
+                      "description": ""
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "GET Unread Notification Count",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/customer/notifications/unread-count",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "customer",
+                    "notifications",
+                    "unread-count"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "PATCH Mark Single Notification Read",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/customer/notifications/{{notification_id}}/read",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "customer",
+                    "notifications",
+                    "{{notification_id}}",
+                    "read"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "PATCH Mark All Notifications Read",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/customer/notifications/read-all",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "customer",
+                    "notifications",
+                    "read-all"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "GET Notification Preferences",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/customer/settings/notifications",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "customer",
+                    "settings",
+                    "notifications"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "PUT Update Notification Preferences",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/customer/settings/notifications",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "customer",
+                    "settings",
+                    "notifications"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"new_inquiry\": true,\n  \"lead_messages\": true,\n  \"quote_requests\": true,\n  \"ad_performance\": true,\n  \"subscription_billing\": true,\n  \"marketing_emails\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "GET Quiet Hours Configuration",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/customer/settings/quiet-hours",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "customer",
+                    "settings",
+                    "quiet-hours"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "PUT Update Quiet Hours",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/customer/settings/quiet-hours",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "customer",
+                    "settings",
+                    "quiet-hours"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"enabled\": true,\n  \"start_time\": \"22:00\",\n  \"end_time\": \"08:00\",\n  \"timezone\": \"Asia/Kolkata\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "10. Account Security, Sessions & Settings",
+          "item": [
+            {
+              "name": "GET Account Information",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/customer/account-information",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "customer",
+                    "account-information"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "PUT Change Password",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/customer/security/change-password",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "customer",
+                    "security",
+                    "change-password"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"current_password\": \"password123\",\n  \"new_password\": \"NewStrongPassword123\",\n  \"confirm_new_password\": \"NewStrongPassword123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "GET Active Login Sessions",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/customer/security/sessions",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "customer",
+                    "security",
+                    "sessions"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "DELETE Revoke Single Session",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/customer/security/sessions/{{session_id}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "customer",
+                    "security",
+                    "sessions",
+                    "{{session_id}}"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "DELETE Revoke All Other Sessions",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/customer/security/sessions",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "customer",
+                    "security",
+                    "sessions"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "GET Language & Appearance Preferences",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/customer/settings/preferences",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "customer",
+                    "settings",
+                    "preferences"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "PUT Update Language & Appearance",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/customer/settings/preferences",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "customer",
+                    "settings",
+                    "preferences"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"language\": \"en\",\n  \"appearance\": \"dark\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "POST Customer Logout",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/customer/logout",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "customer",
+                    "logout"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "11. Help & Support",
+          "item": [
+            {
+              "name": "GET Categorized FAQs",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/customer/support/faqs",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "customer",
+                    "support",
+                    "faqs"
+                  ],
+                  "query": [
+                    {
+                      "key": "category",
+                      "value": "Orders & Delivery",
+                      "description": ""
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "GET Customer Support Tickets",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/customer/support/tickets",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "customer",
+                    "support",
+                    "tickets"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1",
+                      "description": ""
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10",
+                      "description": ""
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "POST Create Support Ticket",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/customer/support/tickets",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "customer",
+                    "support",
+                    "tickets"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"subject\": \"Inquiry regarding transit insurance for stone transport\",\n  \"category\": \"Orders & Delivery\",\n  \"description\": \"Does the transport partner provide insurance for fragile white marble slabs?\",\n  \"priority\": \"medium\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "GET Support Ticket Details",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/customer/support/tickets/{{ticket_id}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "customer",
+                    "support",
+                    "tickets",
+                    "{{ticket_id}}"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "POST Add Message to Ticket Thread",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/customer/support/tickets/{{ticket_id}}/messages",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "customer",
+                    "support",
+                    "tickets",
+                    "{{ticket_id}}",
+                    "messages"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"message\": \"Attached delivery receipt for reference\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "12. About Stone Market & Legal Policies",
+          "item": [
+            {
+              "name": "GET About App Information",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/app/about",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "app",
+                    "about"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "GET App Version & Updates",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/app/version",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "app",
+                    "version"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "GET Legal Policies & Terms",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/app/policies",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "app",
+                    "policies"
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
     }
   ]
 }
