@@ -64,6 +64,8 @@ const transportPublicRoutes = require('./src/routes/transportPublic');
 const providerTransportRoutes = require('./src/routes/providerTransport');
 const adminTransportRoutes = require('./src/routes/adminTransport');
 const estimateRoutes = require('./src/routes/estimates');
+const customerRoutes = require('./src/routes/customer');
+const appInfoRoutes = require('./src/routes/appInfo');
 
 // CMS Routes
 const miningCmsRoutes = require('./src/routes/cms/mining');
@@ -73,6 +75,8 @@ const traderCmsRoutes = require('./src/routes/cms/trader');
 
 // v1 Routes
 app.use('/api/v1/auth', authRoutes);
+app.use('/api/v1/customer', customerRoutes);
+app.use('/api/v1/app', appInfoRoutes);
 app.use('/api/v1/vendors', vendorRoutes);
 app.use('/api/v1/products', productRoutes);
 app.use('/api/v1/inquiries', inquiryRoutes);
@@ -111,6 +115,8 @@ app.use('/api', transportPublicRoutes);
 app.use('/api/provider', providerTransportRoutes);
 app.use('/api/admin', adminTransportRoutes);
 app.use('/api/estimates', estimateRoutes);
+app.use('/api/customer', customerRoutes);
+app.use('/api/app', appInfoRoutes);
 
 // Mount CMS API Routes
 app.use('/api/cms/mining', miningCmsRoutes);

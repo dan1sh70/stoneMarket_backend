@@ -106,7 +106,7 @@ function calculateParticularTotals(items = [], payments = []) {
   const totalQuantity = items.reduce((acc, curr) => acc + (Number(curr.quantity) || 0), 0);
 
   // Active Payments calculation (exclude reversed)
-  const validPayments = (payments || []).filter(p => p.status === 'completed');
+  const validPayments = (payments || []).filter(p => !p.status || p.status === 'completed');
   const totalPaid = Math.round(validPayments.reduce((acc, p) => acc + (Number(p.amount) || 0), 0) * 100) / 100;
   const remainingBalance = Math.round((totalAmount - totalPaid) * 100) / 100;
 

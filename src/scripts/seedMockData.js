@@ -32,6 +32,13 @@ const FreightRate = require('../models/FreightRate');
 const Estimate = require('../models/Estimate');
 const EstimateAuditLog = require('../models/EstimateAuditLog');
 const MeasurementUnit = require('../models/MeasurementUnit');
+const CustomerAddress = require('../models/CustomerAddress');
+const CustomerFavorite = require('../models/CustomerFavorite');
+const CustomerNotification = require('../models/CustomerNotification');
+const UserSession = require('../models/UserSession');
+const SupportTicket = require('../models/SupportTicket');
+const SupportFaq = require('../models/SupportFaq');
+const AppConfig = require('../models/AppConfig');
 
 const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/stone_market';
 
@@ -68,7 +75,14 @@ const cleanMockData = async () => {
     FreightRate.deleteMany({ is_mock: true }),
     Estimate.deleteMany({ is_mock: true }),
     EstimateAuditLog.deleteMany({}),
-    MeasurementUnit.deleteMany({ is_mock: true })
+    MeasurementUnit.deleteMany({ is_mock: true }),
+    CustomerAddress.deleteMany({ is_mock: true }),
+    CustomerFavorite.deleteMany({ is_mock: true }),
+    CustomerNotification.deleteMany({ is_mock: true }),
+    UserSession.deleteMany({ is_mock: true }),
+    SupportTicket.deleteMany({ is_mock: true }),
+    SupportFaq.deleteMany({ is_mock: true }),
+    AppConfig.deleteMany({ is_mock: true })
   ]);
   console.log('All mock data has been successfully deleted.');
 };
@@ -1851,6 +1865,178 @@ const seedMockData = async () => {
     });
     console.log('Created Sample Particular Estimate with Payment Ledger.');
 
+    console.log('\n15. Seeding Customer Module Data (Customer Account, Addresses, Favorites, Notifications, Tickets, FAQs, AppConfig)...');
+    const uCustomer = await User.create({
+      name: 'Vikram Malhotra',
+      mobile: '9111111118',
+      email: 'customer.test@stonemarketindia.com',
+      password: passwordHash,
+      role: 'customer',
+      city: 'Jaipur',
+      state: 'Rajasthan',
+      whatsapp_number: '9111111118',
+      date_of_birth: new Date('1990-05-15'),
+      verification_status: 'verified',
+      rating: 4.8,
+      review_count: 5,
+      preferences: { language: 'en', appearance: 'system' },
+      notification_preferences: {
+        new_inquiry: true,
+        lead_messages: true,
+        quote_requests: true,
+        ad_performance: true,
+        subscription_billing: true,
+        marketing_emails: false
+      },
+      quiet_hours: {
+        enabled: true,
+        start_time: '22:00',
+        end_time: '08:00',
+        timezone: 'Asia/Kolkata'
+      },
+      status: 'active',
+      is_mock: true
+    });
+
+    await CustomerAddress.create([
+      {
+        userId: uCustomer._id,
+        state: 'Rajasthan',
+        district: 'Jaipur',
+        area: 'C-Scheme',
+        full_address: 'B-14, Subhash Marg, C-Scheme, Jaipur',
+        pin_code: '302001',
+        address_label: 'Home',
+        is_default: true,
+        is_mock: true
+      },
+      {
+        userId: uCustomer._id,
+        state: 'Rajasthan',
+        district: 'Kishangarh',
+        area: 'Madanganj Industrial Area',
+        full_address: 'Plot 42, Marble Mandi Phase 2',
+        pin_code: '305801',
+        address_label: 'Project Site',
+        is_default: false,
+        is_mock: true
+      }
+    ]);
+
+    // Customer favorites
+    const sampleProducts = await Product.find({ is_mock: true }).limit(3);
+    for (const prod of sampleProducts) {
+      await CustomerFavorite.create({
+        userId: uCustomer._id,
+        productId: prod._id,
+        is_mock: true
+      });
+    }
+
+    // Customer notifications
+    await CustomerNotification.create([
+      {
+        userId: uCustomer._id,
+        title: 'New Quotation Received',
+        description: 'Royal Rajasthan Granite submitted a quote for your Imperial Black Granite inquiry.',
+        category: 'Quote Requests',
+        is_read: false,
+        deep_link: '/customer/quotations',
+        is_mock: true
+      },
+      {
+        userId: uCustomer._id,
+        title: 'Welcome to Stone Market India',
+        description: 'Discover certified quarries, manufacturers, and transport partners.',
+        category: 'System',
+        is_read: true,
+        deep_link: '/customer/profile',
+        is_mock: true
+      }
+    ]);
+
+    // Active session
+    await UserSession.create({
+      userId: uCustomer._id,
+      session_id: 'mock_sess_cust_1118',
+      device_name: 'OnePlus 11 5G (Android 14)',
+      device_type: 'mobile',
+      ip_address: '103.212.144.10',
+      location: 'Jaipur, Rajasthan',
+      is_active: true,
+      is_mock: true
+    });
+
+    // Support ticket
+    await SupportTicket.create({
+      ticket_number: 'TKT-20261030-001',
+      userId: uCustomer._id,
+      subject: 'Inquiry regarding transit insurance for stone transport',
+      category: 'Orders & Delivery',
+      description: 'Does the national transport partner cover transit insurance for delicate marble slabs?',
+      priority: 'medium',
+      status: 'open',
+      messages: [
+        {
+          sender_id: uCustomer._id,
+          sender_role: 'customer',
+          sender_name: uCustomer.name,
+          message: 'Does the national transport partner cover transit insurance for delicate marble slabs?',
+          created_at: new Date()
+        }
+      ],
+      is_mock: true
+    });
+
+    // Support FAQs
+    const faqCount = await SupportFaq.countDocuments();
+    if (faqCount === 0) {
+      await SupportFaq.insertMany([
+        {
+          category: 'Orders & Delivery',
+          question: 'How do I track my stone delivery?',
+          answer: 'Once a supplier or transport partner confirms your order dispatch, you can view real-time transit updates from the inquiry tracking screen.',
+          sort_order: 1,
+          is_mock: true
+        },
+        {
+          category: 'Stone Types & Pricing',
+          question: 'How is natural stone area calculated?',
+          answer: 'Stone slabs are measured by length and width. Area is calculated in square feet or square meters based on standard commercial dimensions.',
+          sort_order: 2,
+          is_mock: true
+        },
+        {
+          category: 'Quotations & Estimates',
+          question: 'Can I request quotations from multiple suppliers simultaneously?',
+          answer: 'Yes! When submitting a quotation request, select multi-supplier dispatch to receive competitive quotes from eligible verified suppliers.',
+          sort_order: 3,
+          is_mock: true
+        }
+      ]);
+    }
+
+    // App Config
+    await AppConfig.findOneAndUpdate(
+      { key: 'global_config' },
+      {
+        key: 'global_config',
+        app_name: 'Stone Market India',
+        app_version: '1.0.0',
+        min_supported_version: '1.0.0',
+        force_update: false,
+        update_url: 'https://play.google.com/store/apps/details?id=com.stonemarketindia.app',
+        privacy_policy_url: 'https://stonemarketindia.com/privacy-policy',
+        terms_and_conditions_url: 'https://stonemarketindia.com/terms-and-conditions',
+        refund_policy_url: 'https://stonemarketindia.com/refund-policy',
+        support_email: 'support@stonemarketindia.com',
+        support_phone: '+91 9999999999',
+        is_mock: true
+      },
+      { upsert: true, new: true }
+    );
+    console.log('Created Customer Account (Vikram Malhotra - 9111111118) with addresses, favorites, notifications, tickets & config.');
+
     console.log('\n======================================================');
     console.log('>>> MOCK DATA SEEDING COMPLETED SUCCESSFULLY! <<<');
     console.log('======================================================');
@@ -1872,6 +2058,7 @@ const seedMockData = async () => {
     console.log('  - Buyer 4:      Mobile 9111111115 (Shree Ram Distributors, Kishangarh - Pending)');
     console.log('  - Trans Nat:    Mobile 9111111116 (Apex Bharat Heavy Logistics - All India)');
     console.log('  - Trans Local:  Mobile 9111111117 (Jaipur City Stone Express - Local Nearby)');
+    console.log('  - Customer:     Mobile 9111111118 (Vikram Malhotra - Jaipur Customer)');
     console.log('------------------------------------------------------');
     console.log('All mock records tagged with { is_mock: true } for clean deletion.');
     console.log('Run `npm run clean:mock` anytime when testing finishes.');

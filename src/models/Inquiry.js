@@ -48,7 +48,45 @@ const inquirySchema = new mongoose.Schema({
     email: String,
     city: String
   },
-  status: { type: String, enum: ['new', 'submitted', 'under_review', 'provider_contacted', 'quotation_received', 'viewed', 'responded', 'accepted', 'rejected', 'cancelled', 'closed'], default: 'new' },
+  edge_profile: String,
+  quality: String,
+  delivery_timeline: String,
+  additional_specifications: String,
+  color_requirements: String,
+  pattern_requirements: String,
+  packaging_requirements: String,
+  budget_range: String,
+  closed_reason: String,
+  closed_at: Date,
+  status: { 
+    type: String, 
+    enum: [
+      'new', 
+      'submitted', 
+      'pending', 
+      'in_review', 
+      'quotes_received', 
+      'under_review', 
+      'provider_contacted', 
+      'quotation_received', 
+      'viewed', 
+      'responded', 
+      'accepted', 
+      'rejected', 
+      'cancelled', 
+      'completed', 
+      'closed'
+    ], 
+    default: 'pending' 
+  },
+  status_history: [{
+    previous_status: { type: String },
+    new_status: { type: String },
+    updated_by: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    remarks: { type: String },
+    timestamp: { type: Date, default: Date.now }
+  }],
+  quotations_count: { type: Number, default: 0 },
   vendorResponse: {
     message: String,
     respondedAt: Date
