@@ -39,6 +39,7 @@ const UserSession = require('../models/UserSession');
 const SupportTicket = require('../models/SupportTicket');
 const SupportFaq = require('../models/SupportFaq');
 const AppConfig = require('../models/AppConfig');
+const AnalyticsEvent = require('../models/AnalyticsEvent');
 
 const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/stone_market';
 
@@ -50,6 +51,7 @@ const cleanMockData = async () => {
     Vendor.deleteMany({ $or: [{ is_mock: true }, { 'contact.mobile': { $regex: '^91111111' } }] }),
     BusinessProfile.deleteMany({ is_mock: true }),
     Product.deleteMany({ is_mock: true }),
+    AnalyticsEvent.deleteMany({ is_mock: true }),
     Location.deleteMany({ is_mock: true }),
     GraniteColor.deleteMany({ is_mock: true }),
     Brand.deleteMany({ is_mock: true }),
@@ -438,26 +440,100 @@ const seedMockData = async () => {
         userId: uMfg1._id,
         business_type: 'manufacturer',
         company_name: 'Royal Rajasthan Granite Factory',
+        logo: 'https://images.unsplash.com/photo-1541888946425-d0fbb186156f?auto=format&fit=crop&w=300&q=80',
+        cover_image: 'https://images.unsplash.com/photo-1590402494682-cd3fb53b1f70?auto=format&fit=crop&w=1200&q=80',
         gst_number: '08AAACR9988C1Z3',
         established_year: 2015,
+        property_type: 'Owned Factory',
+        factory_type: 'owned',
+        premises_status: 'owned',
+        unit_status: 'export',
+        factory_timings: '08:00 AM - 08:00 PM (Monday to Saturday)',
         company_details: 'Export-oriented modern granite processing factory with gangsaw and multi-head line polishers.',
+        about_business: 'Royal Rajasthan Granite Factory is an export-oriented modern granite processing factory with gangsaw and multi-head line polishers located in the RIICO industrial hub of Jalore.',
         manufacturer_category: mfgSlabs._id,
         iec_number: '0512034918',
         is_export_unit: true,
         export_countries: ['USA', 'UAE', 'United Kingdom', 'Germany', 'Australia'],
         granite_colors: [cAbsBlack._id, cSteelGrey._id, cLakhaRed._id, cAlaskaWhite._id],
+        custom_stone_varieties: [
+          { name: 'Rajasthan Black', category: 'Black Granite', finish: 'Polished' },
+          { name: 'Rosy Pink', category: 'Pink Granite', finish: 'Flamed' },
+          { name: 'Tan Brown', category: 'Brown Granite', finish: 'Honed' }
+        ],
         monthly_capacity: 250000,
         capacity_unit: 'Sq.Ft',
         machines: [
-          { machine_name: 'Multi-Blade Gangsaw', quantity: 4 },
-          { machine_name: '16-Head Line Polisher', quantity: 2 },
-          { machine_name: 'Automated Bridge Cutter', quantity: 6 },
-          { machine_name: 'Diamond Wire Saw', quantity: 2 }
+          { machine_name: 'Multi-Blade Gangsaw', quantity: 4, category: 'Cutting', description: 'Heavy gangsaw frames for processing rough granite blocks' },
+          { machine_name: '16-Head Line Polisher', quantity: 2, category: 'Polishing', description: 'Automatic abrasive line polisher achieving 90+ gloss' },
+          { machine_name: 'Automated Bridge Cutter', quantity: 6, category: 'Sizing', description: 'CNC diamond bridge cutters for calibrated edge cutting' },
+          { machine_name: 'Diamond Wire Saw', quantity: 2, category: 'Squaring', description: 'High speed block squaring and profiling wire saw' }
         ],
-        owners: [{ name: 'Suresh Sharma', phone: '9111111104', whatsapp: '9111111104', photo: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=300&q=80' }],
-        address: { state: 'Rajasthan', district: 'Jalore', area: 'Phase 1 Industrial Area', full_address: 'F-142, RIICO Industrial Area Phase 1, Jalore, Rajasthan 343001' },
+        owners: [
+          {
+            name: 'Suresh Sharma',
+            designation: 'Managing Director',
+            phone: '9111111104',
+            whatsapp: '9111111104',
+            email: 'suresh.mfg@mockstonemarket.com',
+            is_primary: true,
+            photo: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=300&q=80'
+          },
+          {
+            name: 'Kailash Sharma',
+            designation: 'Plant Head & Quality Director',
+            phone: '9111111124',
+            whatsapp: '9111111124',
+            email: 'kailash@mockstonemarket.com',
+            is_primary: false,
+            photo: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80'
+          }
+        ],
+        gallery_photos: [
+          { url: 'https://images.unsplash.com/photo-1590402494682-cd3fb53b1f70?auto=format&fit=crop&w=800&q=80', is_cover: true, title: 'Main Factory Complex & Stockyard' },
+          { url: 'https://images.unsplash.com/photo-1590402494587-44b71d7772f6?auto=format&fit=crop&w=800&q=80', is_cover: false, title: 'Multi-Blade Gangsaw Line' },
+          { url: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80', is_cover: false, title: 'Polished Granite Slabs Stockyard' }
+        ],
+        gallery_videos: [
+          {
+            title: 'Factory Production Tour & Gangsaw Slicing in Action',
+            youtube_url: 'https://www.youtube.com/watch?v=mock-tour',
+            duration: '3:45',
+            thumbnail: 'https://images.unsplash.com/photo-1590402494682-cd3fb53b1f70?auto=format&fit=crop&w=800&q=80',
+            source_type: 'youtube'
+          }
+        ],
+        verification_steps: {
+          phone: { phone: '9111111104', status: 'verified', verified_at: new Date('2026-01-15') },
+          email: { email: 'suresh.mfg@mockstonemarket.com', status: 'verified', verified_at: new Date('2026-01-16') },
+          business: { registration_type: 'Private Limited', registration_number: 'U14101RJ2015PTC048991', document_url: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=800&q=80', status: 'verified', reviewed_at: new Date('2026-01-20') },
+          gst: { gstin: '08AAACR9988C1Z3', certificate_url: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=800&q=80', status: 'verified', reviewed_at: new Date('2026-01-20') },
+          bank: { account_holder_name: 'Royal Rajasthan Granite Factory', bank_name: 'State Bank of India', account_number: '38192837491', ifsc_code: 'SBIN0001234', cheque_document_url: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=800&q=80', status: 'verified', reviewed_at: new Date('2026-01-22') }
+        },
+        verification_timeline: [
+          { step: 'phone', status: 'verified', title: 'Phone Verified', description: 'Phone 9111111104 verified via OTP' },
+          { step: 'email', status: 'verified', title: 'Email Verified', description: 'suresh.mfg@mockstonemarket.com confirmed' },
+          { step: 'gst', status: 'verified', title: 'GSTIN Verified', description: '08AAACR9988C1Z3 verified via GST portal' },
+          { step: 'bank', status: 'verified', title: 'Bank Account Verified', description: 'SBI A/C verified via Penny Drop' },
+          { step: 'business', status: 'verified', title: 'Business Registration Verified', description: 'MCA registration documents verified by admin' }
+        ],
+        verification_documents: [
+          { title: 'GST Registration Certificate', url: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=800&q=80', file_type: 'application/pdf', status: 'approved' },
+          { title: 'Factory License & Pollution Board NOC', url: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=800&q=80', file_type: 'application/pdf', status: 'approved' }
+        ],
+        is_verified: true,
+        verification_status: 'approved',
+        address: {
+          state: 'Rajasthan',
+          district: 'Jalore',
+          area: 'Phase 1 Industrial Area',
+          industrial_area: 'RIICO Industrial Area Phase 1',
+          full_address: 'F-142, RIICO Industrial Area Phase 1, Jalore, Rajasthan 343001',
+          postal_code: '343001',
+          country: 'India'
+        },
         working_hours: standardHours,
-        rating: 4.7,
+        rating: 4.8,
         review_count: 32,
         status: 'active',
         is_mock: true
@@ -810,11 +886,36 @@ const seedMockData = async () => {
     productsToCreate.push(
       {
         vendorId: createdBusinesses[2]._id,
+        businessProfileId: createdBusinesses[2]._id,
         name: 'Export Quality Steel Grey Granite Slab',
+        material: 'Granite',
         description: 'Mirror polished 18mm & 20mm Gangsaw slabs with epoxy resin backing and sharp edge calibration.',
         category: 'Manufacturer',
         subcategory: 'Granite Slabs',
         graniteColors: ['Steel Grey'],
+        pattern: 'Consistent Grain & Micro Flecks',
+        finish: 'High Gloss Line Polished (90+ Glossometer)',
+        size: '10ft x 6ft (Gangsaw)',
+        thickness: '18mm / 20mm',
+        quality: 'Premium First Choice',
+        approx_weight: '75 kg/sq.m',
+        country_of_origin: 'India',
+        applications: ['Kitchen Countertops', 'Flooring', 'Commercial Cladding'],
+        selling_price: 110,
+        pricing_unit: 'Sq.ft',
+        quantity: 35000,
+        quantity_unit: 'Sq.ft',
+        available_stock: 18000,
+        stock_unit: 'Sq.ft',
+        availability_status: 'in_stock',
+        target_publishing: {
+          states: ['Rajasthan', 'Gujarat', 'Maharashtra', 'Karnataka'],
+          districts: ['Jaipur', 'Kishangarh', 'Ahmedabad', 'Mumbai'],
+          categories: ['Granite Manufacturer', 'Showroom']
+        },
+        publishing_status: 'published',
+        views: 480,
+        inquiry_count: 24,
         priceRange: { min: 95, max: 140, unit: 'Sq.Ft', visible: true },
         specifications: [
           { key: 'Thickness', value: '18mm / 20mm' },
@@ -826,6 +927,7 @@ const seedMockData = async () => {
           'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80',
           'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80'
         ],
+        cover_image: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80',
         stock_status: 'in_stock',
         featured: true,
         status: 'active',
@@ -833,11 +935,36 @@ const seedMockData = async () => {
       },
       {
         vendorId: createdBusinesses[2]._id,
+        businessProfileId: createdBusinesses[2]._id,
         name: 'Lakha Red Premium Granite Slab',
+        material: 'Granite',
         description: 'Vibrant deep-red granite slabs ideal for exterior wall cladding and monumental staircases.',
         category: 'Manufacturer',
         subcategory: 'Granite Slabs',
         graniteColors: ['Lakha Red'],
+        pattern: 'Speckled Ruby Red Matrix',
+        finish: 'Polished / Flamed available',
+        size: '250 x 140 cm up',
+        thickness: '20mm',
+        quality: 'First Choice Export Quality',
+        approx_weight: '78 kg/sq.m',
+        country_of_origin: 'India',
+        applications: ['Monuments', 'Exterior Cladding', 'Stairs & Risers'],
+        selling_price: 165,
+        pricing_unit: 'Sq.ft',
+        quantity: 20000,
+        quantity_unit: 'Sq.ft',
+        available_stock: 9500,
+        stock_unit: 'Sq.ft',
+        availability_status: 'in_stock',
+        target_publishing: {
+          states: ['Rajasthan', 'Delhi', 'Punjab', 'Haryana'],
+          districts: ['Jaipur', 'Delhi NCR', 'Chandigarh'],
+          categories: ['Granite Manufacturer', 'Showroom']
+        },
+        publishing_status: 'published',
+        views: 320,
+        inquiry_count: 14,
         priceRange: { min: 145, max: 190, unit: 'Sq.Ft', visible: true },
         specifications: [
           { key: 'Thickness', value: '20mm' },
@@ -847,6 +974,7 @@ const seedMockData = async () => {
         images: [
           'https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=800&q=80'
         ],
+        cover_image: 'https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=800&q=80',
         stock_status: 'in_stock',
         featured: false,
         status: 'active',
@@ -854,11 +982,36 @@ const seedMockData = async () => {
       },
       {
         vendorId: createdBusinesses[2]._id,
+        businessProfileId: createdBusinesses[2]._id,
         name: 'Alaska White Exotic Granite Slab',
+        material: 'Granite',
         description: 'Striking silver-white background with frost highlights and dark onyx veining.',
         category: 'Manufacturer',
         subcategory: 'Granite Slabs',
         graniteColors: ['Alaska White'],
+        pattern: 'Flowing Silver & Onyx Veining',
+        finish: 'Leather / Polish',
+        size: '300 x 180 cm Jumbo Gangsaw',
+        thickness: '20mm',
+        quality: 'Super Luxury Bookmatch',
+        approx_weight: '75 kg/sq.m',
+        country_of_origin: 'India',
+        applications: ['Kitchen Islands', 'Feature Walls', 'Luxury Bathrooms'],
+        selling_price: 210,
+        pricing_unit: 'Sq.ft',
+        quantity: 15000,
+        quantity_unit: 'Sq.ft',
+        available_stock: 6200,
+        stock_unit: 'Sq.ft',
+        availability_status: 'in_stock',
+        target_publishing: {
+          states: ['Rajasthan', 'Maharashtra', 'Karnataka', 'Telangana'],
+          districts: ['Jaipur', 'Mumbai', 'Bengaluru', 'Hyderabad'],
+          categories: ['Granite Manufacturer', 'Showroom']
+        },
+        publishing_status: 'published',
+        views: 610,
+        inquiry_count: 38,
         priceRange: { min: 180, max: 260, unit: 'Sq.Ft', visible: true },
         specifications: [
           { key: 'Thickness', value: '20mm' },
@@ -868,6 +1021,7 @@ const seedMockData = async () => {
         images: [
           'https://images.unsplash.com/photo-1615529182904-14819c35db37?auto=format&fit=crop&w=800&q=80'
         ],
+        cover_image: 'https://images.unsplash.com/photo-1615529182904-14819c35db37?auto=format&fit=crop&w=800&q=80',
         stock_status: 'in_stock',
         featured: true,
         status: 'active',
@@ -1161,9 +1315,73 @@ const seedMockData = async () => {
         message: 'Please provide quotation for bookmatched Statuario lot #402 including delivery to Civil Lines, Jaipur.',
         status: 'pending',
         is_mock: true
+      },
+      {
+        userId: uBuyer1._id,
+        businessId: createdBusinesses[2]._id, // Royal Rajasthan Granite
+        productId: createdProducts[2]._id,
+        quantity: 15000,
+        unit: 'Sq.Ft',
+        message: 'Export tender quotation for 20mm Gangsaw Steel Grey slabs with mirror finish.',
+        status: 'pending',
+        is_mock: true
       }
     ]);
     console.log('Created sample Inquiries and Quote Requests.');
+
+    console.log('\n9b. Seeding Manufacturer Analytics Events...');
+    const now = new Date();
+    const analyticsEventsToCreate = [];
+
+    for (let d = 0; d < 7; d++) {
+      const eventDate = new Date(now);
+      eventDate.setDate(now.getDate() - d);
+
+      for (let v = 0; v < 8 + (d % 4) * 3; v++) {
+        analyticsEventsToCreate.push({
+          businessId: createdBusinesses[2]._id,
+          eventType: 'profile_view',
+          visitorId: `visitor-${d}-${v}`,
+          visitorType: v % 2 === 0 ? 'new' : 'returning',
+          source: v % 3 === 0 ? 'Marketplace Search' : v % 3 === 1 ? 'Category Pages' : 'Service Detail',
+          location: {
+            city: ['Jaipur', 'Kishangarh', 'Ahmedabad', 'Bengaluru', 'Delhi NCR'][v % 5],
+            state: ['Rajasthan', 'Rajasthan', 'Gujarat', 'Karnataka', 'Delhi'][v % 5],
+            country: 'India'
+          },
+          timestamp: eventDate,
+          is_mock: true
+        });
+      }
+
+      for (let p = 0; p < 12 + (d % 3) * 4; p++) {
+        analyticsEventsToCreate.push({
+          businessId: createdBusinesses[2]._id,
+          eventType: 'product_view',
+          productId: createdProducts[2]._id,
+          visitorId: `visitor-prod-${d}-${p}`,
+          source: p % 2 === 0 ? 'Marketplace Search' : 'Advertisement',
+          location: { city: 'Jaipur', state: 'Rajasthan' },
+          timestamp: eventDate,
+          is_mock: true
+        });
+      }
+
+      if (d % 2 === 0) {
+        analyticsEventsToCreate.push({
+          businessId: createdBusinesses[2]._id,
+          eventType: 'contact_click',
+          visitorId: `visitor-click-${d}`,
+          source: 'Marketplace Search',
+          location: { city: 'Ahmedabad', state: 'Gujarat' },
+          timestamp: eventDate,
+          is_mock: true
+        });
+      }
+    }
+
+    await AnalyticsEvent.insertMany(analyticsEventsToCreate);
+    console.log(`Created ${analyticsEventsToCreate.length} Analytics Events for Manufacturer.`);
 
     console.log('\n10. Seeding Buyer Purchasing Requirements...');
     const [bReq1, bReq2, bReq3, bReq4] = await BuyerRequirement.insertMany([

@@ -66,6 +66,7 @@ const adminTransportRoutes = require('./src/routes/adminTransport');
 const estimateRoutes = require('./src/routes/estimates');
 const customerRoutes = require('./src/routes/customer');
 const appInfoRoutes = require('./src/routes/appInfo');
+const manufacturerProfileRoutes = require('./src/routes/manufacturerProfile');
 
 // CMS Routes
 const miningCmsRoutes = require('./src/routes/cms/mining');
@@ -76,6 +77,7 @@ const traderCmsRoutes = require('./src/routes/cms/trader');
 // v1 Routes
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/customer', customerRoutes);
+app.use('/api/v1/manufacturer', manufacturerProfileRoutes);
 app.use('/api/v1/app', appInfoRoutes);
 app.use('/api/v1/vendors', vendorRoutes);
 app.use('/api/v1/products', productRoutes);
@@ -116,11 +118,12 @@ app.use('/api/provider', providerTransportRoutes);
 app.use('/api/admin', adminTransportRoutes);
 app.use('/api/estimates', estimateRoutes);
 app.use('/api/customer', customerRoutes);
+app.use('/api/manufacturer', manufacturerProfileRoutes);
 app.use('/api/app', appInfoRoutes);
 
 // Mount CMS API Routes
 app.use('/api/cms/mining', miningCmsRoutes);
-app.use('/api/cms/manufacturer', manufacturerCmsRoutes);
+app.use('/api/cms/manufacturer', manufacturerProfileRoutes);
 app.use('/api/cms/showroom', showroomCmsRoutes);
 app.use('/api/cms/trader', traderCmsRoutes);
 

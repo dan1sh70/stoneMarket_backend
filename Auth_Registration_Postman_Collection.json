@@ -3850,277 +3850,2137 @@
       "name": "Manufacturer Module",
       "item": [
         {
-          "name": "Get Manufacturer Categories",
-          "request": {
-            "method": "GET",
-            "url": {
-              "raw": "{{baseUrl}}/api/manufacturers/categories",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "manufacturers",
-                "categories"
-              ]
-            }
-          }
-        },
-        {
-          "name": "Get Manufacturer Types",
-          "request": {
-            "method": "GET",
-            "url": {
-              "raw": "{{baseUrl}}/api/manufacturers/types",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "manufacturers",
-                "types"
-              ]
-            }
-          }
-        },
-        {
-          "name": "Get Manufacturer States",
-          "request": {
-            "method": "GET",
-            "url": {
-              "raw": "{{baseUrl}}/api/manufacturers/states",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "manufacturers",
-                "states"
-              ]
-            }
-          }
-        },
-        {
-          "name": "Get Manufacturer Cities",
-          "request": {
-            "method": "GET",
-            "url": {
-              "raw": "{{baseUrl}}/api/manufacturers/cities?state_id=YOUR_STATE_ID",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "manufacturers",
-                "cities"
-              ],
-              "query": [
-                {
-                  "key": "state_id",
-                  "value": "YOUR_STATE_ID"
-                }
-              ]
-            }
-          }
-        },
-        {
-          "name": "Get Manufacturer Colours",
-          "request": {
-            "method": "GET",
-            "url": {
-              "raw": "{{baseUrl}}/api/manufacturers/colours",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "manufacturers",
-                "colours"
-              ]
-            }
-          }
-        },
-        {
-          "name": "Get Manufacturers (Listing / Filter)",
-          "request": {
-            "method": "GET",
-            "url": {
-              "raw": "{{baseUrl}}/api/manufacturers?category=YOUR_CATEGORY_ID&state=Rajasthan&city=Jalore&search=Shree&export_unit=true&page=1&per_page=20",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "manufacturers"
-              ],
-              "query": [
-                {
-                  "key": "category",
-                  "value": "YOUR_CATEGORY_ID",
-                  "disabled": true
-                },
-                {
-                  "key": "state",
-                  "value": "Rajasthan",
-                  "disabled": true
-                },
-                {
-                  "key": "city",
-                  "value": "Jalore",
-                  "disabled": true
-                },
-                {
-                  "key": "search",
-                  "value": "Shree",
-                  "disabled": true
-                },
-                {
-                  "key": "export_unit",
-                  "value": "true",
-                  "disabled": true
-                },
-                {
-                  "key": "page",
-                  "value": "1"
-                },
-                {
-                  "key": "per_page",
-                  "value": "20"
-                }
-              ]
-            }
-          }
-        },
-        {
-          "name": "Get Manufacturer Profile",
-          "request": {
-            "method": "GET",
-            "url": {
-              "raw": "{{baseUrl}}/api/manufacturers/MANUFACTURER_ID",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "manufacturers",
-                "MANUFACTURER_ID"
-              ]
-            }
-          }
-        },
-        {
-          "name": "Toggle Manufacturer Favorite (POST)",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/manufacturers/MANUFACTURER_ID/favorite",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "manufacturers",
-                "MANUFACTURER_ID",
-                "favorite"
-              ]
-            }
-          }
-        },
-        {
-          "name": "Toggle Manufacturer Favorite (DELETE)",
-          "request": {
-            "method": "DELETE",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/manufacturers/MANUFACTURER_ID/favorite",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "manufacturers",
-                "MANUFACTURER_ID",
-                "favorite"
-              ]
-            }
-          }
-        },
-        {
-          "name": "Submit Inquiry to Manufacturer",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"productId\": \"OPTIONAL_PRODUCT_ID\",\n  \"category\": \"Granite Manufacturer\",\n  \"subject\": \"Bulk Order Inquiry\",\n  \"message\": \"I want 5000 sqft of Black Galaxy\",\n  \"requirements\": \"Delivery in 10 days\",\n  \"contactInfo\": {\n    \"phone\": \"9876543210\"\n  }\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
+          "name": "0. Public Discovery & Buyer Interactions",
+          "item": [
+            {
+              "name": "Get Manufacturer Categories",
+              "request": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturers/categories",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturers",
+                    "categories"
+                  ]
                 }
               }
             },
-            "url": {
-              "raw": "{{baseUrl}}/api/manufacturers/MANUFACTURER_ID/inquiry",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "manufacturers",
-                "MANUFACTURER_ID",
-                "inquiry"
-              ]
-            }
-          }
-        },
-        {
-          "name": "Request Quote from Manufacturer",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"product_id\": \"OPTIONAL_PRODUCT_ID\",\n  \"quantity\": 5000,\n  \"unit\": \"Sqft\",\n  \"message\": \"Need best price for Black Galaxy\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
+            {
+              "name": "Get Manufacturer Types",
+              "request": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturers/types",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturers",
+                    "types"
+                  ]
                 }
               }
             },
-            "url": {
-              "raw": "{{baseUrl}}/api/manufacturers/MANUFACTURER_ID/quote",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "manufacturers",
-                "MANUFACTURER_ID",
-                "quote"
-              ]
+            {
+              "name": "Get Manufacturer States",
+              "request": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturers/states",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturers",
+                    "states"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Manufacturer Cities",
+              "request": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturers/cities?state_id=YOUR_STATE_ID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturers",
+                    "cities"
+                  ],
+                  "query": [
+                    {
+                      "key": "state_id",
+                      "value": "YOUR_STATE_ID"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Manufacturer Colours",
+              "request": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturers/colours",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturers",
+                    "colours"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Manufacturers (Listing / Filter)",
+              "request": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturers?category=YOUR_CATEGORY_ID&state=Rajasthan&city=Jalore&search=Shree&export_unit=true&page=1&per_page=20",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturers"
+                  ],
+                  "query": [
+                    {
+                      "key": "category",
+                      "value": "YOUR_CATEGORY_ID",
+                      "disabled": true
+                    },
+                    {
+                      "key": "state",
+                      "value": "Rajasthan",
+                      "disabled": true
+                    },
+                    {
+                      "key": "city",
+                      "value": "Jalore",
+                      "disabled": true
+                    },
+                    {
+                      "key": "search",
+                      "value": "Shree",
+                      "disabled": true
+                    },
+                    {
+                      "key": "export_unit",
+                      "value": "true",
+                      "disabled": true
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Manufacturer Profile",
+              "request": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturers/MANUFACTURER_ID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturers",
+                    "MANUFACTURER_ID"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Toggle Manufacturer Favorite (POST)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturers/MANUFACTURER_ID/favorite",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturers",
+                    "MANUFACTURER_ID",
+                    "favorite"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Toggle Manufacturer Favorite (DELETE)",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturers/MANUFACTURER_ID/favorite",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturers",
+                    "MANUFACTURER_ID",
+                    "favorite"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Submit Inquiry to Manufacturer",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"productId\": \"OPTIONAL_PRODUCT_ID\",\n  \"category\": \"Granite Manufacturer\",\n  \"subject\": \"Bulk Order Inquiry\",\n  \"message\": \"I want 5000 sqft of Black Galaxy\",\n  \"requirements\": \"Delivery in 10 days\",\n  \"contactInfo\": {\n    \"phone\": \"9876543210\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturers/MANUFACTURER_ID/inquiry",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturers",
+                    "MANUFACTURER_ID",
+                    "inquiry"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Request Quote from Manufacturer",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"product_id\": \"OPTIONAL_PRODUCT_ID\",\n  \"quantity\": 5000,\n  \"unit\": \"Sqft\",\n  \"message\": \"Need best price for Black Galaxy\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturers/MANUFACTURER_ID/quote",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturers",
+                    "MANUFACTURER_ID",
+                    "quote"
+                  ]
+                }
+              }
             }
-          }
+          ]
+        },
+        {
+          "name": "1. Dashboard & Business Switcher",
+          "item": [
+            {
+              "name": "Get Manufacturer Dashboard",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/dashboard",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "dashboard"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Available Business Types",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/business-types",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "business-types"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Switch Business Type Context",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/switch-business-type",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "switch-business-type"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"target_business_type\": \"manufacturer\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "2. Business Profile Management",
+          "item": [
+            {
+              "name": "Get Manufacturer Profile",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/profile",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "profile"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Update Manufacturer Profile",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/profile",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "profile"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company_name\": \"Royal Rajasthan Granite Factory\",\n  \"property_type\": \"Owned Factory\",\n  \"factory_type\": \"owned\",\n  \"unit_status\": \"export\",\n  \"factory_timings\": \"08:00 AM - 08:00 PM (Monday to Saturday)\",\n  \"about_business\": \"Export-oriented modern granite processing factory with gangsaw and multi-head line polishers.\",\n  \"monthly_capacity\": 250000,\n  \"capacity_unit\": \"Sq.Ft\",\n  \"iec_number\": \"0512034918\",\n  \"gst_number\": \"08AAACR9988C1Z3\",\n  \"address\": {\n    \"industrial_area\": \"RIICO Industrial Area Phase 1\",\n    \"full_address\": \"F-142, RIICO Industrial Area Phase 1, Jalore, Rajasthan 343001\",\n    \"district\": \"Jalore\",\n    \"state\": \"Rajasthan\",\n    \"postal_code\": \"343001\",\n    \"country\": \"India\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Get Business Details (Alias)",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/business-details",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "business-details"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Update Business Details (Alias)",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/business-details",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "business-details"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company_name\": \"Royal Rajasthan Granite Factory\",\n  \"about_business\": \"Updated granite factory information\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Update Factory Operational Specifications",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/factory-specs",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "factory-specs"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"monthly_capacity\": 300000,\n  \"capacity_unit\": \"Sq.Ft\",\n  \"unit_status\": \"both\",\n  \"iec_number\": \"0512034918\",\n  \"premises_status\": \"owned\",\n  \"factory_type\": \"owned\",\n  \"factory_timings\": \"24 Hours Operational\",\n  \"export_countries\": [\n    \"USA\",\n    \"UAE\",\n    \"Germany\",\n    \"Australia\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Get Factory Machinery Line",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/machinery",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "machinery"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Add Machine to Factory Line",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/machinery",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "machinery"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"machine_name\": \"16-Head Automatic Line Polisher\",\n  \"quantity\": 2,\n  \"category\": \"Polishing\",\n  \"description\": \"Breton line polisher achieving 90+ glossometer finish\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Update Machine Entry",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/machinery/MACHINE_ID_HERE",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "machinery",
+                    "MACHINE_ID_HERE"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"quantity\": 3,\n  \"description\": \"Upgraded with high-durability diamond segments\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Delete Machine Entry",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/machinery/MACHINE_ID_HERE",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "machinery",
+                    "MACHINE_ID_HERE"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Stone Varieties Catalogue",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/stone-varieties",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "stone-varieties"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Add Custom Stone Variety",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/stone-varieties",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "stone-varieties"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Alaska White Granite\",\n  \"category\": \"White Granite\",\n  \"finish\": \"Polished\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Delete Stone Variety",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/stone-varieties/VARIETY_ID_HERE",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "stone-varieties",
+                    "VARIETY_ID_HERE"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Contacts & Owners",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/contacts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "contacts"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Add Contact / Partner / Director",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/contacts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "contacts"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Kailash Sharma\",\n  \"designation\": \"Plant Head & Quality Director\",\n  \"phone\": \"9111111124\",\n  \"whatsapp\": \"9111111124\",\n  \"email\": \"kailash@mockstonemarket.com\",\n  \"is_primary\": false,\n  \"photo\": \"https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Update Contact / Partner / Director",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/contacts/CONTACT_ID_HERE",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "contacts",
+                    "CONTACT_ID_HERE"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"designation\": \"Executive Operations Director\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Delete Contact Entry",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/contacts/CONTACT_ID_HERE",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "contacts",
+                    "CONTACT_ID_HERE"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "3. Product Management (4-Step Wizard & Publishing)",
+          "item": [
+            {
+              "name": "List Products (Search & Filter)",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/products?status_tab=all&page=1&limit=10",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "products"
+                  ],
+                  "query": [
+                    {
+                      "key": "status_tab",
+                      "value": "all"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Create Product (Step 1-4 Wizard)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/products",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "products"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Black Galaxy Premium Gangsaw Slab\",\n  \"material\": \"Granite\",\n  \"description\": \"Deep black granite with golden bronze specks for luxury interiors and export.\",\n  \"images\": [\n    \"https://images.unsplash.com/photo-1590402494682-cd3fb53b1f70?auto=format&fit=crop&w=800&q=80\",\n    \"https://images.unsplash.com/photo-1590402494587-44b71d7772f6?auto=format&fit=crop&w=800&q=80\"\n  ],\n  \"cover_image\": \"https://images.unsplash.com/photo-1590402494682-cd3fb53b1f70?auto=format&fit=crop&w=800&q=80\",\n  \"pattern\": \"Speckled Golden Flecks\",\n  \"finish\": \"High Gloss Line Polished\",\n  \"size\": \"10ft x 6ft (Gangsaw)\",\n  \"thickness\": \"20mm\",\n  \"quality\": \"Premium First Choice\",\n  \"approx_weight\": \"75 kg/sq.m\",\n  \"country_of_origin\": \"India\",\n  \"applications\": [\n    \"Countertops\",\n    \"Flooring\",\n    \"Wall Cladding\"\n  ],\n  \"selling_price\": 185,\n  \"pricing_unit\": \"Sq.ft\",\n  \"quantity\": 25000,\n  \"quantity_unit\": \"Sq.ft\",\n  \"available_stock\": 12000,\n  \"stock_unit\": \"Sq.ft\",\n  \"availability_status\": \"in_stock\",\n  \"target_publishing\": {\n    \"states\": [\n      \"Rajasthan\",\n      \"Gujarat\",\n      \"Maharashtra\",\n      \"Karnataka\"\n    ],\n    \"districts\": [\n      \"Jaipur\",\n      \"Kishangarh\",\n      \"Ahmedabad\",\n      \"Mumbai\"\n    ],\n    \"categories\": [\n      \"Granite Manufacturer\",\n      \"Showroom\"\n    ]\n  },\n  \"publishing_status\": \"draft\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Get Product Details by ID",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/products/PRODUCT_ID_HERE",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "products",
+                    "PRODUCT_ID_HERE"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Update Product",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/products/PRODUCT_ID_HERE",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "products",
+                    "PRODUCT_ID_HERE"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"selling_price\": 190,\n  \"available_stock\": 15000\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Publish Product (Make Publicly Active)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/products/PRODUCT_ID_HERE/publish",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "products",
+                    "PRODUCT_ID_HERE",
+                    "publish"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Upload Product Image (Max 5)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/products/PRODUCT_ID_HERE/images",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "products",
+                    "PRODUCT_ID_HERE",
+                    "images"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"url\": \"https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Delete Product Image",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/products/PRODUCT_ID_HERE/images/0",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "products",
+                    "PRODUCT_ID_HERE",
+                    "images",
+                    "0"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Delete Product",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/products/PRODUCT_ID_HERE",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "products",
+                    "PRODUCT_ID_HERE"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "4. Gallery Management (Photos, Videos, Owners)",
+          "item": [
+            {
+              "name": "Get Full Gallery (Photos, Videos, Owners & Counts)",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/gallery",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "gallery"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Upload Photo to Gallery",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/gallery/photos",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "gallery",
+                    "photos"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"url\": \"https://images.unsplash.com/photo-1590402494682-cd3fb53b1f70?auto=format&fit=crop&w=800&q=80\",\n  \"title\": \"Main Factory Complex & Stockyard\",\n  \"is_cover\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Update Gallery Photo (Set as Cover)",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/gallery/photos/PHOTO_ID_HERE",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "gallery",
+                    "photos",
+                    "PHOTO_ID_HERE"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Updated Factory Front Elevation\",\n  \"is_cover\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Delete Gallery Photo",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/gallery/photos/PHOTO_ID_HERE",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "gallery",
+                    "photos",
+                    "PHOTO_ID_HERE"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Add Video to Gallery (YouTube or File)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/gallery/videos",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "gallery",
+                    "videos"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Factory Production Tour & Gangsaw Slicing in Action\",\n  \"youtube_url\": \"https://www.youtube.com/watch?v=mock-tour\",\n  \"thumbnail\": \"https://images.unsplash.com/photo-1590402494682-cd3fb53b1f70?auto=format&fit=crop&w=800&q=80\",\n  \"duration\": \"3:45\",\n  \"source_type\": \"youtube\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Delete Gallery Video",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/gallery/videos/VIDEO_ID_HERE",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "gallery",
+                    "videos",
+                    "VIDEO_ID_HERE"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Registered Owners & Profile Pictures",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/gallery/owners",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "gallery",
+                    "owners"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Update Owner Profile Picture",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/gallery/owners/OWNER_ID_HERE/photo",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "gallery",
+                    "owners",
+                    "OWNER_ID_HERE",
+                    "photo"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"photo_url\": \"https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=300&q=80\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "5. Verification Center & Dynamic Checklist",
+          "item": [
+            {
+              "name": "Get Verification Overview & Dynamic Status",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/verification",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "verification"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Send Phone Verification OTP",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/verification/phone/send-otp",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "verification",
+                    "phone",
+                    "send-otp"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"phone\": \"9111111104\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Verify Phone OTP",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/verification/phone/verify-otp",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "verification",
+                    "phone",
+                    "verify-otp"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"otp\": \"123456\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Send Verification Email",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/verification/email/send",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "verification",
+                    "email",
+                    "send"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"suresh.mfg@mockstonemarket.com\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Verify Email Token",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/verification/email/verify",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "verification",
+                    "email",
+                    "verify"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"token\": \"VERIFICATION_TOKEN_HERE\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Submit Business Registration Verification",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/verification/business",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "verification",
+                    "business"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"registration_type\": \"Private Limited Company\",\n  \"registration_number\": \"U14101RJ2015PTC048991\",\n  \"document_url\": \"https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=800&q=80\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Submit GST Verification",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/verification/gst",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "verification",
+                    "gst"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"gstin\": \"08AAACR9988C1Z3\",\n  \"certificate_url\": \"https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=800&q=80\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Submit Bank Account Verification",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/verification/bank",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "verification",
+                    "bank"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account_holder_name\": \"Royal Rajasthan Granite Factory\",\n  \"bank_name\": \"State Bank of India\",\n  \"account_number\": \"38192837491\",\n  \"ifsc_code\": \"SBIN0001234\",\n  \"cheque_document_url\": \"https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=800&q=80\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Get Verification Documents",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/verification/documents",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "verification",
+                    "documents"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Upload Verification Document",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/verification/documents",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "verification",
+                    "documents"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"document_type\": \"gst_certificate\",\n  \"title\": \"Official GST Certificate\",\n  \"url\": \"https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=800&q=80\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "6. Manufacturer Analytics (Overview, Leads, Profile)",
+          "item": [
+            {
+              "name": "Get Overview Analytics (This Week / Custom)",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/analytics/overview?timeframe=this_week",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "analytics",
+                    "overview"
+                  ],
+                  "query": [
+                    {
+                      "key": "timeframe",
+                      "value": "this_week"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Lead Analytics",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/analytics/leads?timeframe=this_week",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "analytics",
+                    "leads"
+                  ],
+                  "query": [
+                    {
+                      "key": "timeframe",
+                      "value": "this_week"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Profile Analytics & Engagement",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/analytics/profile?timeframe=this_week",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "analytics",
+                    "profile"
+                  ],
+                  "query": [
+                    {
+                      "key": "timeframe",
+                      "value": "this_week"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Top Products Analytics",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/analytics/top-products",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "analytics",
+                    "top-products"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Top Services Analytics",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/analytics/top-services",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "analytics",
+                    "top-services"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Inquiry Sources Breakdown (Doughnut)",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/analytics/sources",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "analytics",
+                    "sources"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Audience Locations Breakdown",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/analytics/locations",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "analytics",
+                    "locations"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Profile Engagement Metrics",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/analytics/engagement",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "analytics",
+                    "engagement"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Follower Growth History",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/analytics/followers",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "analytics",
+                    "followers"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Record Analytics Event (Frontend Interaction)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/analytics/event",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "analytics",
+                    "event"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"eventType\": \"profile_view\",\n  \"source\": \"Marketplace Search\",\n  \"location\": {\n    \"city\": \"Jaipur\",\n    \"state\": \"Rajasthan\"\n  },\n  \"metadata\": {\n    \"duration_seconds\": 60\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "7. Business Activity (Inquiries & Leads)",
+          "item": [
+            {
+              "name": "Get Manufacturer Inquiries",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/inquiries?page=1&limit=10",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "inquiries"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Manufacturer Leads (Quote Requests)",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/leads?page=1&limit=10",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "leads"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
         }
       ]
     },

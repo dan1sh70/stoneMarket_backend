@@ -13,8 +13,10 @@ const ownerSchema = new mongoose.Schema({
 });
 
 const machineSchema = new mongoose.Schema({
-  machine_name: { type: String },
-  quantity: { type: Number, min: 1 }
+  machine_name: { type: String, required: true },
+  quantity: { type: Number, min: 1, default: 1 },
+  description: { type: String },
+  category: { type: String }
 });
 
 const businessProfileSchema = new mongoose.Schema({
@@ -28,9 +30,16 @@ const businessProfileSchema = new mongoose.Schema({
   
   // Common Fields
   company_name: { type: String },
+  logo: { type: String },
+  cover_image: { type: String },
   gst_number: { type: String },
   established_year: { type: Number },
   company_details: { type: String },
+  about_business: { type: String },
+  property_type: { type: String }, // Owned, Rented, Leased
+  factory_type: { type: String, enum: ['owned', 'rented'], default: 'owned' },
+  unit_status: { type: String, enum: ['domestic', 'export', 'both'], default: 'domestic' },
+  factory_timings: { type: String },
   
   // Specific to Mining / Manufacturer / Showroom / Trader / Buyer
   manufacturer_category: { type: mongoose.Schema.Types.ObjectId, ref: 'ManufacturerCategory' },
@@ -70,6 +79,77 @@ const businessProfileSchema = new mongoose.Schema({
 
   brands: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Brand' }],
   granite_colors: [{ type: mongoose.Schema.Types.ObjectId, ref: 'GraniteColor' }], // Used for Materials/Stone Colors
+  custom_stone_varieties: [{
+    name: { type: String },
+    category: { type: String },
+    finish: { type: String }
+  }],
+  gallery_photos: [{
+    url: { type: String, required: true },
+    is_cover: { type: Boolean, default: false },
+    title: { type: String },
+    uploaded_at: { type: Date, default: Date.now }
+  }],
+  gallery_videos: [{
+    title: { type: String, required: true },
+    url: { type: String },
+    youtube_url: { type: String },
+    thumbnail: { type: String },
+    duration: { type: String },
+    source_type: { type: String, enum: ['upload', 'youtube'], default: 'upload' },
+    uploaded_at: { type: Date, default: Date.now }
+  }],
+  verification_steps: {
+    phone: {
+      phone: { type: String },
+      status: { type: String, enum: ['not_started', 'submitted', 'pending_review', 'verified', 'rejected'], default: 'not_started' },
+      verified_at: { type: Date },
+      otp: { type: String },
+      otp_expires: { type: Date }
+    },
+    email: {
+      email: { type: String },
+      status: { type: String, enum: ['not_started', 'submitted', 'pending_review', 'verified', 'rejected'], default: 'not_started' },
+      verified_at: { type: Date },
+      token: { type: String },
+      token_expires: { type: Date }
+    },
+    business: {
+      registration_type: { type: String },
+      registration_number: { type: String },
+      document_url: { type: String },
+      status: { type: String, enum: ['not_started', 'submitted', 'pending_review', 'verified', 'rejected'], default: 'not_started' },
+      rejection_reason: { type: String },
+      submitted_at: { type: Date },
+      reviewed_at: { type: Date }
+    },
+    gst: {
+      gstin: { type: String },
+      certificate_url: { type: String },
+      status: { type: String, enum: ['not_started', 'submitted', 'pending_review', 'verified', 'rejected'], default: 'not_started' },
+      rejection_reason: { type: String },
+      submitted_at: { type: Date },
+      reviewed_at: { type: Date }
+    },
+    bank: {
+      account_holder_name: { type: String },
+      bank_name: { type: String },
+      account_number: { type: String },
+      ifsc_code: { type: String },
+      cheque_document_url: { type: String },
+      status: { type: String, enum: ['not_started', 'submitted', 'pending_review', 'verified', 'rejected'], default: 'not_started' },
+      rejection_reason: { type: String },
+      submitted_at: { type: Date },
+      reviewed_at: { type: Date }
+    }
+  },
+  verification_timeline: [{
+    step: { type: String },
+    status: { type: String },
+    title: { type: String },
+    description: { type: String },
+    timestamp: { type: Date, default: Date.now }
+  }],
   ec_number: { type: String }, // Mining
   iec_number: { type: String }, // Manufacturer & Trader
   is_export_unit: { type: Boolean },
@@ -132,7 +212,10 @@ const businessProfileSchema = new mongoose.Schema({
     state: { type: String },
     district: { type: String },
     area: { type: String },
+    industrial_area: { type: String },
     full_address: { type: String },
+    postal_code: { type: String },
+    country: { type: String, default: 'India' },
     google_map_location: { type: String },
     latitude: { type: Number },
     longitude: { type: Number }
