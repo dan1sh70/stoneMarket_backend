@@ -21,6 +21,26 @@ const productSchema = new mongoose.Schema({
   miningLocation: String, // Source location for mining products
   stock_status: { type: String, enum: ['in_stock', 'out_of_stock', 'on_order'], default: 'in_stock' },
   businessProfileId: { type: mongoose.Schema.Types.ObjectId, ref: 'BusinessProfile' },
+  business_type: { type: String, enum: ['manufacturer', 'mining', 'showroom', 'trader'], default: 'manufacturer', index: true },
+  sku: { type: String, index: true },
+  color_name: String,
+  block_dimensions: {
+    length: Number,
+    width: Number,
+    height: Number,
+    dimension_unit: { type: String, enum: ['CM', 'MM', 'METER', 'FEET'], default: 'FEET' }
+  },
+  volume_cbm: Number,
+  additional_sizes: [{
+    length: Number,
+    width: Number,
+    height: Number,
+    dimension_unit: String,
+    volume_cbm: Number
+  }],
+  weight: Number,
+  weight_unit: { type: String, default: 'TON' },
+  min_order_quantity: { type: Number, default: 1 },
   material: String,
   cover_image: String,
   pattern: String,
@@ -31,10 +51,12 @@ const productSchema = new mongoose.Schema({
   approx_weight: String,
   country_of_origin: { type: String, default: 'India' },
   applications: [String],
+  price: Number,
   selling_price: Number,
   pricing_unit: { type: String, default: 'Sq.ft' },
   quantity: Number,
   quantity_unit: { type: String, default: 'Sq.ft' },
+  stock: Number,
   available_stock: Number,
   stock_unit: { type: String, default: 'Sq.ft' },
   availability_status: { type: String, enum: ['in_stock', 'out_of_stock', 'made_to_order'], default: 'in_stock' },
@@ -53,6 +75,21 @@ const productSchema = new mongoose.Schema({
   views: { type: Number, default: 0 },
   is_mock: { type: Boolean, default: false }
 }, { timestamps: true });
+
+// Pre-save synchronization hook
+productSchema.pre('save', function (next) {
+  if (this.price !== undefined && this.selling_price === undefined) {
+    this.selling_price = this.price;
+  } else if (this.selling_price !== undefined && this.price === undefined) {
+    this.price = this.selling_price;
+  }
+  if (this.stock !== undefined && this.available_stock === undefined) {
+    this.available_stock = this.stock;
+  } else if (this.available_stock !== undefined && this.stock === undefined) {
+    this.stock = this.available_stock;
+  }
+  next();
+});
 
 // Indexes
 productSchema.index({ name: 'text', description: 'text' });

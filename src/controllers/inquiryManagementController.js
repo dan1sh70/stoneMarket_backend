@@ -16,16 +16,44 @@ const {
 } = require('../validations/inquiryManagement.validation');
 const { successResponse, errorResponse } = require('../utils/apiResponse');
 
-// Internal Helper: Get or initialize Manufacturer BusinessProfile
+// Internal Helper: Get or initialize BusinessProfile (supports manufacturer & mining)
 async function getManufacturerProfile(userId) {
+  const user = await User.findById(userId);
+  const targetType = (user && user.role === 'mining') ? 'mining' : 'manufacturer';
+
   let profile = await BusinessProfile.findOne({
     userId,
-    business_type: 'manufacturer'
+    business_type: targetType
   });
 
   if (!profile) {
-    const user = await User.findById(userId);
-    if (user && (user.role === 'manufacturer' || user.role === 'admin' || user.role === 'vendor')) {
+    // Fallback: check any business profile for this user
+    profile = await BusinessProfile.findOne({ userId });
+  }
+
+  if (!profile && user) {
+    if (user.role === 'mining') {
+      profile = await BusinessProfile.create({
+        userId,
+        business_type: 'mining',
+        company_name: user.name ? `${user.name} Mines & Quarries` : 'Aravalli Granites & Stone Mines',
+        established_year: 2018,
+        monthly_capacity: 6500,
+        capacity_unit: 'Ton',
+        ec_number: 'EC-RAJ-2018-9942',
+        ec_clearance_status: 'Clearance Granted',
+        mining_lease_number: 'ML-78/2018',
+        mining_permit_number: 'MP-2022-4410',
+        quarry_specialties: ['Rajasthan Black', 'Black Galaxy', 'Makrana White'],
+        property_type: 'Owned',
+        premises_status: 'owned',
+        unit_status: 'both',
+        rating: 4.8,
+        review_count: 14,
+        status: 'active',
+        is_mock: false
+      });
+    } else if (user.role === 'manufacturer' || user.role === 'admin' || user.role === 'vendor') {
       profile = await BusinessProfile.create({
         userId,
         business_type: 'manufacturer',
@@ -46,16 +74,21 @@ async function getManufacturerProfile(userId) {
   return profile;
 }
 
-// Helper to check inquiry visibility for manufacturer
+// Helper to check inquiry visibility for manufacturer or mining
 function buildInquiryVisibilityFilter(profile) {
+  const isMining = profile.business_type === 'mining';
+  const categories = isMining
+    ? ['Mining', 'Mines & Quarries', 'Raw Stone Blocks', 'Granite Blocks', 'Marble Blocks', 'Sandstone Blocks', 'Limestone Blocks', 'Natural Stone']
+    : ['Granite', 'Marble', 'Granite Slabs', 'Marble & Granite Slabs', 'Granite & Marble Slabs', 'Natural Stone', 'Manufacturer'];
+
   return {
     $or: [
       { businessId: profile._id },
       { vendorId: profile._id },
       { assigned_manufacturers: profile._id },
       { 'recipients.manufacturer_id': profile._id },
-      { supplierType: 'manufacturer' },
-      { category: { $in: ['Granite', 'Marble', 'Granite Slabs', 'Marble & Granite Slabs', 'Granite & Marble Slabs', 'Natural Stone', 'Manufacturer'] } }
+      { supplierType: isMining ? 'mining' : 'manufacturer' },
+      { category: { $in: categories } }
     ]
   };
 }

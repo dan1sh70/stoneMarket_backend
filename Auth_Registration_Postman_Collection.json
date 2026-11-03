@@ -14597,6 +14597,1344 @@
           ]
         }
       ]
+    },
+    {
+      "name": "Mining Business Module (Phase 1)",
+      "item": [
+        {
+          "name": "1. Business Type Switching",
+          "item": [
+            {
+              "name": "Get Business Types",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/mining/business-types",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "mining",
+                    "business-types"
+                  ]
+                },
+                "description": "Fetch available business types (Customer, Manufacturer, Mining, Showroom, Trader) with active state."
+              }
+            },
+            {
+              "name": "Switch Business Type",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/mining/switch-business-type",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "mining",
+                    "switch-business-type"
+                  ]
+                },
+                "description": "Switch active business module with shared user identity.",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"target_business_type\": \"mining\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "2. Mining Business Dashboard",
+          "item": [
+            {
+              "name": "Get Mining Dashboard",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/mining/dashboard",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "mining",
+                    "dashboard"
+                  ]
+                },
+                "description": "Retrieve complete mining dashboard: summary card, quick stats (blocks, tons, inquiries, leads), and navigation menus."
+              }
+            }
+          ]
+        },
+        {
+          "name": "3. Mining Business Profile & Operational Specs",
+          "item": [
+            {
+              "name": "Get Mining Profile",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/mining/profile",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "mining",
+                    "profile"
+                  ]
+                },
+                "description": "Get detailed mining business profile and enterprise tax information."
+              }
+            },
+            {
+              "name": "Update Mining Profile",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/mining/profile",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "mining",
+                    "profile"
+                  ]
+                },
+                "description": "Update mining profile identity and enterprise registration details.",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company_name\": \"Aravalli Granites & Stone Mines Pvt Ltd\",\n  \"gst_number\": \"08AAACA1234A1Z1\",\n  \"mining_permit_number\": \"MP-2022-4410\",\n  \"about_business\": \"Premier granite mine lease holder and block excavation operator in Jalore mining zone.\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Update Operational Specifications",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/mining/operational-specs",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "mining",
+                    "operational-specs"
+                  ]
+                },
+                "description": "Update monthly output, EC clearance status, quarry specialties, and operating hours.",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"monthly_capacity\": 8000,\n  \"capacity_unit\": \"Ton\",\n  \"ec_number\": \"EC-RAJ-2018-9942\",\n  \"ec_clearance_status\": \"Clearance Granted\",\n  \"quarry_specialties\": [\n    \"Rajasthan Black\",\n    \"Black Galaxy\",\n    \"Makrana White\"\n  ],\n  \"factory_timings\": \"07:00 AM – 06:00 PM (Monday to Saturday)\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "4. Mining Machinery & Equipment",
+          "item": [
+            {
+              "name": "List Machinery",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/mining/machinery",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "mining",
+                    "machinery"
+                  ]
+                },
+                "description": "Retrieve list of all mining machinery and excavation equipment."
+              }
+            },
+            {
+              "name": "Add Machinery",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/mining/machinery",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "mining",
+                    "machinery"
+                  ]
+                },
+                "description": "Add a new mining machine record with operational status.",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"machine_name\": \"Diamond Wire Saw Machine\",\n  \"quantity\": 4,\n  \"category\": \"Cutting\",\n  \"description\": \"High-speed quarry block cutting wire saw\",\n  \"operational_status\": \"Operational\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Update Machinery",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/mining/machinery/{{machineId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "mining",
+                    "machinery",
+                    "{{machineId}}"
+                  ]
+                },
+                "description": "Update machinery specifications and maintenance status.",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"operational_status\": \"Maintenance\",\n  \"quantity\": 5\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Delete Machinery",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/mining/machinery/{{machineId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "mining",
+                    "machinery",
+                    "{{machineId}}"
+                  ]
+                },
+                "description": "Remove machinery record."
+              }
+            }
+          ]
+        },
+        {
+          "name": "5. Excavated Stone Varieties",
+          "item": [
+            {
+              "name": "List Stone Varieties",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/mining/stone-varieties",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "mining",
+                    "stone-varieties"
+                  ]
+                },
+                "description": "List all stone varieties extracted from the mine."
+              }
+            },
+            {
+              "name": "Add Stone Variety",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/mining/stone-varieties",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "mining",
+                    "stone-varieties"
+                  ]
+                },
+                "description": "Add newly extracted stone variety with available stock.",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Black Galaxy Raw Block\",\n  \"color\": \"Black with Golden Flecks\",\n  \"stone_type\": \"Granite\",\n  \"description\": \"Quarry face extracted rough blocks\",\n  \"available_quantity\": \"1,200 Tons\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Delete Stone Variety",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/mining/stone-varieties/{{varietyId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "mining",
+                    "stone-varieties",
+                    "{{varietyId}}"
+                  ]
+                },
+                "description": "Remove excavated stone variety."
+              }
+            }
+          ]
+        },
+        {
+          "name": "6. Ownership & Key Contacts",
+          "item": [
+            {
+              "name": "List Key Contacts",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/mining/contacts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "mining",
+                    "contacts"
+                  ]
+                },
+                "description": "List mine owners, partners, and key operational directors."
+              }
+            },
+            {
+              "name": "Add Contact",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/mining/contacts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "mining",
+                    "contacts"
+                  ]
+                },
+                "description": "Add a key contact person for the mine.",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Prakash Choudhary\",\n  \"designation\": \"Quarry Operations Partner\",\n  \"phone\": \"9414011223\",\n  \"email\": \"prakash@aravallimines.com\",\n  \"is_primary\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Update Contact",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/mining/contacts/{{contactId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "mining",
+                    "contacts",
+                    "{{contactId}}"
+                  ]
+                },
+                "description": "Update contact designation and info.",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"designation\": \"Senior Mining Partner & General Manager\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Delete Contact",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/mining/contacts/{{contactId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "mining",
+                    "contacts",
+                    "{{contactId}}"
+                  ]
+                },
+                "description": "Remove key contact."
+              }
+            }
+          ]
+        },
+        {
+          "name": "7. Mining Product Management & 4-Step Wizard",
+          "item": [
+            {
+              "name": "List Mining Products",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/mining/products?material=Granite&status=active",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "mining",
+                    "products"
+                  ],
+                  "query": [
+                    {
+                      "key": "material",
+                      "value": "Granite"
+                    },
+                    {
+                      "key": "status",
+                      "value": "active"
+                    }
+                  ]
+                },
+                "description": "List mining products with search, material, and status filters."
+              }
+            },
+            {
+              "name": "Create Mining Block (4-Step Wizard)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/mining/products",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "mining",
+                    "products"
+                  ]
+                },
+                "description": "Create raw block with 4-step wizard attributes, dynamic dimensions, and automated CBM volume calculation.",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Rajasthan Black Raw Granite Block #01\",\n  \"color_name\": \"Rajasthan Black\",\n  \"material\": \"Granite\",\n  \"description\": \"Uniform textured block cut using wire saw. Gangsaw size block.\",\n  \"price\": 45000,\n  \"pricing_unit\": \"CU.MTR\",\n  \"block_dimensions\": {\n    \"length\": 10,\n    \"width\": 5,\n    \"height\": 5,\n    \"dimension_unit\": \"FEET\"\n  },\n  \"additional_sizes\": [\n    {\n      \"length\": 12,\n      \"width\": 6,\n      \"height\": 5,\n      \"dimension_unit\": \"FEET\"\n    }\n  ],\n  \"finish\": \"Natural Block\",\n  \"quality\": \"Export Grade\",\n  \"pattern\": \"Natural Pattern\",\n  \"available_stock\": 40,\n  \"stock_unit\": \"BLOCK\",\n  \"weight\": 22,\n  \"weight_unit\": \"TON\",\n  \"country_of_origin\": \"India\",\n  \"min_order_quantity\": 1,\n  \"target_publishing\": {\n    \"states\": [\n      \"Rajasthan\",\n      \"Gujarat\"\n    ],\n    \"districts\": [\n      \"Jalore\",\n      \"Udaipur\"\n    ],\n    \"categories\": [\n      \"Raw Stone Blocks\",\n      \"Granite Blocks\"\n    ]\n  },\n  \"categories\": [\n    \"Raw Stone Blocks\",\n    \"Granite Blocks\",\n    \"Mining\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Get Product Details",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/mining/products/{{productId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "mining",
+                    "products",
+                    "{{productId}}"
+                  ]
+                },
+                "description": "Retrieve complete mining block specifications."
+              }
+            },
+            {
+              "name": "Update Product",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/mining/products/{{productId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "mining",
+                    "products",
+                    "{{productId}}"
+                  ]
+                },
+                "description": "Update product details and recalculate CBM volume.",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"price\": 48000,\n  \"block_dimensions\": {\n    \"length\": 12,\n    \"width\": 5,\n    \"height\": 5,\n    \"dimension_unit\": \"FEET\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Duplicate Product",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/mining/products/{{productId}}/duplicate",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "mining",
+                    "products",
+                    "{{productId}}",
+                    "duplicate"
+                  ]
+                },
+                "description": "Clone mining block with new SKU in draft status."
+              }
+            },
+            {
+              "name": "Update Stock",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/mining/products/{{productId}}/stock",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "mining",
+                    "products",
+                    "{{productId}}",
+                    "stock"
+                  ]
+                },
+                "description": "Update available stock count and availability status.",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"available_stock\": 55,\n  \"availability_status\": \"in_stock\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Publish / Unpublish Product",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/mining/products/{{productId}}/publish",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "mining",
+                    "products",
+                    "{{productId}}",
+                    "publish"
+                  ]
+                },
+                "description": "Toggle product publishing status."
+              }
+            },
+            {
+              "name": "Delete Product",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/mining/products/{{productId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "mining",
+                    "products",
+                    "{{productId}}"
+                  ]
+                },
+                "description": "Delete mining product record."
+              }
+            }
+          ]
+        },
+        {
+          "name": "8. Gallery Management",
+          "item": [
+            {
+              "name": "Get Mining Gallery",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/mining/gallery",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "mining",
+                    "gallery"
+                  ]
+                },
+                "description": "Fetch photos, videos, and owners gallery collections."
+              }
+            },
+            {
+              "name": "Upload Gallery Photo",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/mining/gallery/photos",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "mining",
+                    "gallery",
+                    "photos"
+                  ]
+                },
+                "description": "Add photo to mining gallery.",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"url\": \"https://images.unsplash.com/photo-1590402494682-cd3fb53b1f70\",\n  \"title\": \"Quarry Face Excavation Wire Saw Work\",\n  \"is_cover\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Add Gallery Video",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/mining/gallery/videos",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "mining",
+                    "gallery",
+                    "videos"
+                  ]
+                },
+                "description": "Add YouTube or uploaded video to mining gallery.",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Heavy Block Extraction using Diamond Wire Saw\",\n  \"youtube_url\": \"https://www.youtube.com/watch?v=mockQuarryVideo\",\n  \"source_type\": \"youtube\",\n  \"duration\": \"04:15\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Delete Gallery Photo",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/mining/gallery/photos/{{photoId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "mining",
+                    "gallery",
+                    "photos",
+                    "{{photoId}}"
+                  ]
+                },
+                "description": "Delete gallery photo."
+              }
+            },
+            {
+              "name": "Delete Gallery Video",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/mining/gallery/videos/{{videoId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "mining",
+                    "gallery",
+                    "videos",
+                    "{{videoId}}"
+                  ]
+                },
+                "description": "Delete gallery video."
+              }
+            }
+          ]
+        },
+        {
+          "name": "9. Verification Center",
+          "item": [
+            {
+              "name": "Get Verification Status",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/mining/verification",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "mining",
+                    "verification"
+                  ]
+                },
+                "description": "Retrieve verification checklist, progress percentage, and mining document requirements."
+              }
+            },
+            {
+              "name": "Send Phone OTP",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/mining/verification/phone/send-otp",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "mining",
+                    "verification",
+                    "phone",
+                    "send-otp"
+                  ]
+                },
+                "description": "Request phone verification OTP.",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"phone\": \"9829011223\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Verify Phone OTP",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/mining/verification/phone/verify-otp",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "mining",
+                    "verification",
+                    "phone",
+                    "verify-otp"
+                  ]
+                },
+                "description": "Submit phone OTP verification.",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"phone\": \"9829011223\",\n  \"otp\": \"123456\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Submit GST Verification",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/mining/verification/gst",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "mining",
+                    "verification",
+                    "gst"
+                  ]
+                },
+                "description": "Submit GST verification.",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"gstin\": \"08AAACA1234A1Z1\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Upload Mining Verification Document",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/mining/verification/documents",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "mining",
+                    "verification",
+                    "documents"
+                  ]
+                },
+                "description": "Upload mining lease, permit, EC certificate, or pollution NOC.",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Government Mining Lease Deed ML-78/2018\",\n  \"document_type\": \"mining_lease\",\n  \"document_url\": \"https://example.com/mining-lease.pdf\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "10. Mining Analytics",
+          "item": [
+            {
+              "name": "Overview Analytics",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/mining/analytics/overview",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "mining",
+                    "analytics",
+                    "overview"
+                  ]
+                },
+                "description": "Fetch KPI cards, views over time, top products, and audience locations."
+              }
+            },
+            {
+              "name": "Lead Analytics",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/mining/analytics/leads",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "mining",
+                    "analytics",
+                    "leads"
+                  ]
+                },
+                "description": "Fetch lead volume, conversion rate, and sources."
+              }
+            },
+            {
+              "name": "Profile Analytics",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/mining/analytics/profile",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "mining",
+                    "analytics",
+                    "profile"
+                  ]
+                },
+                "description": "Fetch profile views, saves, and visitor breakdown."
+              }
+            },
+            {
+              "name": "Record Analytics Event",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/mining/analytics/event",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "mining",
+                    "analytics",
+                    "event"
+                  ]
+                },
+                "description": "Record user engagement analytics event.",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"event_type\": \"product_view\",\n  \"entity_type\": \"profile\",\n  \"metadata\": {\n    \"block_name\": \"Rajasthan Black Raw Block\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "11. Integrated Submodules (Shared Engines)",
+          "item": [
+            {
+              "name": "Mining Inquiries",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/mining/inquiries",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "mining",
+                    "inquiries"
+                  ]
+                },
+                "description": "Access shared inquiry engine for mining business."
+              }
+            },
+            {
+              "name": "Mining Leads",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/mining/leads",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "mining",
+                    "leads"
+                  ]
+                },
+                "description": "Access shared lead management engine for mining business."
+              }
+            },
+            {
+              "name": "Mining Settings",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/mining/settings",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "mining",
+                    "settings"
+                  ]
+                },
+                "description": "Access account security and notification preferences for mining business."
+              }
+            },
+            {
+              "name": "Mining Promotions Packages",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/mining/promotions/packages",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "mining",
+                    "promotions",
+                    "packages"
+                  ]
+                },
+                "description": "Access shared advertisement and promotion packages."
+              }
+            }
+          ]
+        }
+      ]
     }
   ]
 }

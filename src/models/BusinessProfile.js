@@ -16,7 +16,9 @@ const machineSchema = new mongoose.Schema({
   machine_name: { type: String, required: true },
   quantity: { type: Number, min: 1, default: 1 },
   description: { type: String },
-  category: { type: String }
+  category: { type: String },
+  operational_status: { type: String, default: 'Operational' },
+  image: { type: String }
 });
 
 const businessProfileSchema = new mongoose.Schema({
@@ -84,7 +86,11 @@ const businessProfileSchema = new mongoose.Schema({
   custom_stone_varieties: [{
     name: { type: String },
     category: { type: String },
-    finish: { type: String }
+    finish: { type: String },
+    color: { type: String },
+    stone_type: { type: String },
+    available_quantity: { type: String },
+    description: { type: String }
   }],
   gallery_photos: [{
     url: { type: String, required: true },
@@ -153,6 +159,11 @@ const businessProfileSchema = new mongoose.Schema({
     timestamp: { type: Date, default: Date.now }
   }],
   ec_number: { type: String }, // Mining
+  ec_clearance_status: { type: String, default: 'Clearance Granted' },
+  mining_lease_number: { type: String },
+  mining_permit_number: { type: String },
+  quarry_specialties: [{ type: String }],
+  mining_category: { type: mongoose.Schema.Types.ObjectId, ref: 'MiningCategory' },
   iec_number: { type: String }, // Manufacturer & Trader
   is_export_unit: { type: Boolean },
   export_countries: [{ type: String }],
