@@ -33,6 +33,8 @@ const businessProfileSchema = new mongoose.Schema({
   logo: { type: String },
   cover_image: { type: String },
   gst_number: { type: String },
+  email: { type: String },
+  phone: { type: String },
   established_year: { type: Number },
   company_details: { type: String },
   about_business: { type: String },

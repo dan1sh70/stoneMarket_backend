@@ -48,6 +48,7 @@ const inquirySchema = new mongoose.Schema({
   referralSource: String,
   contactInfo: {
     name: String,
+    company: String,
     mobile: String,
     email: String,
     city: String

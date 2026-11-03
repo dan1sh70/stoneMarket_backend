@@ -50,6 +50,12 @@ const CampaignActivityLog = require('../models/CampaignActivityLog');
 const InquiryQuotation = require('../models/InquiryQuotation');
 const InquiryActivityLog = require('../models/InquiryActivityLog');
 const InquiryMessage = require('../models/InquiryMessage');
+const Lead = require('../models/Lead');
+const LeadNote = require('../models/LeadNote');
+const LeadActivityLog = require('../models/LeadActivityLog');
+const NotificationPreference = require('../models/NotificationPreference');
+const QuietHours = require('../models/QuietHours');
+const UserPreferences = require('../models/UserPreferences');
 
 const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/stone_market';
 
@@ -104,7 +110,13 @@ const cleanMockData = async () => {
     CampaignActivityLog.deleteMany({}),
     InquiryQuotation.deleteMany({ is_mock: true }),
     InquiryActivityLog.deleteMany({}),
-    InquiryMessage.deleteMany({ is_mock: true })
+    InquiryMessage.deleteMany({ is_mock: true }),
+    Lead.deleteMany({ is_mock: true }),
+    LeadNote.deleteMany({ is_mock: true }),
+    LeadActivityLog.deleteMany({}),
+    NotificationPreference.deleteMany({}),
+    QuietHours.deleteMany({}),
+    UserPreferences.deleteMany({})
   ]);
   console.log('All mock data has been successfully deleted.');
 };
@@ -2916,6 +2928,244 @@ const seedMockData = async () => {
       ]);
 
       console.log('Seeded Phase 3 Inquiries (INQ-2026-9041, INQ-2026-9042, INQ-2026-8800), Quotations, Activity Logs, and Messages.');
+    }
+
+    // ==========================================
+    // 18. SEED PHASE 4: LEADS, NOTES, ACCOUNT SETTINGS & PREFERENCES
+    // ==========================================
+    console.log('--- 18. Seeding Phase 4 Leads & Account Settings ---');
+    const mfgProf1 = await BusinessProfile.findOne({ business_type: 'manufacturer', is_mock: true });
+    const buyerProf1 = await User.findOne({ role: 'buyer', is_mock: true });
+    const buyerCust1 = await User.findOne({ role: 'customer', is_mock: true });
+
+    if (mfgProf1) {
+      // 1. Notification Preferences
+      await NotificationPreference.findOneAndUpdate(
+        { user_id: mfgProf1.userId },
+        {
+          user_id: mfgProf1.userId,
+          new_inquiry: true,
+          lead_messages: true,
+          quote_requests: true,
+          ad_performance: true,
+          subscription_billing: true,
+          marketing_emails: false,
+          channels: { in_app: true, push: true, email: true, sms: false }
+        },
+        { upsert: true, new: true }
+      );
+
+      // 2. Quiet Hours (10:00 PM – 8:00 AM)
+      await QuietHours.findOneAndUpdate(
+        { user_id: mfgProf1.userId },
+        {
+          user_id: mfgProf1.userId,
+          enabled: true,
+          start_time: '22:00',
+          end_time: '08:00',
+          timezone: 'Asia/Kolkata'
+        },
+        { upsert: true, new: true }
+      );
+
+      // 3. User Preferences (Language: English, Appearance: System)
+      await UserPreferences.findOneAndUpdate(
+        { user_id: mfgProf1.userId },
+        {
+          user_id: mfgProf1.userId,
+          language: 'en',
+          appearance: 'system',
+          timezone: 'Asia/Kolkata'
+        },
+        { upsert: true, new: true }
+      );
+
+      // 4. Active Sessions for Manufacturer
+      await UserSession.create([
+        {
+          userId: mfgProf1.userId,
+          session_id: 'mfg_sess_mobile_01',
+          device_name: 'Samsung Galaxy S24 Ultra (Android 14)',
+          device_type: 'mobile',
+          ip_address: '103.212.144.15',
+          location: 'Jalore, Rajasthan, India',
+          last_active: new Date(),
+          is_active: true,
+          is_mock: true
+        },
+        {
+          userId: mfgProf1.userId,
+          session_id: 'mfg_sess_desktop_02',
+          device_name: 'MacBook Pro 16" (macOS Sequoia)',
+          device_type: 'desktop',
+          ip_address: '103.212.144.18',
+          location: 'Jaipur, Rajasthan, India',
+          last_active: new Date(Date.now() - 3600000),
+          is_active: true,
+          is_mock: true
+        }
+      ]);
+
+      // 5. Seed Leads linked to Inquiries
+      const existingInqs = await Inquiry.find({ is_mock: true }).limit(5);
+      if (existingInqs.length > 0) {
+        // Lead 1: #LD12345 (New)
+        const lead1 = await Lead.create({
+          lead_number: '#LD12345',
+          inquiry_id: existingInqs[0]._id,
+          buyer_id: buyerCust1?._id || buyerProf1?._id,
+          manufacturer_id: mfgProf1._id,
+          lead_status: 'new',
+          priority: 'urgent',
+          urgency: 'within_15_days',
+          usage_application: 'Flooring',
+          budget_min: 250000,
+          budget_max: 350000,
+          currency: 'INR',
+          budget_type: 'estimated',
+          assigned_at: new Date(Date.now() - 120000), // 2 mins ago
+          share_token: 'share_ld12345_token',
+          is_mock: true
+        });
+
+        // Activity Log for Lead 1
+        await LeadActivityLog.create([
+          {
+            lead_id: lead1._id,
+            actor_id: buyerCust1?._id,
+            actor_type: 'buyer',
+            event_type: 'lead_received',
+            previous_status: null,
+            new_status: 'new',
+            title: 'Lead Received',
+            description: 'Requirement lead received from Vikram Rathore for 500 Sq.ft Black Galaxy Granite.'
+          },
+          {
+            lead_id: lead1._id,
+            actor_id: mfgProf1.userId,
+            actor_type: 'manufacturer',
+            event_type: 'lead_viewed',
+            previous_status: 'new',
+            new_status: 'new',
+            title: 'Lead Viewed',
+            description: 'Manufacturer opened and reviewed lead specifications.'
+          }
+        ]);
+
+        // Private Internal Notes on Lead 1
+        await LeadNote.create([
+          {
+            lead_id: lead1._id,
+            manufacturer_id: mfgProf1._id,
+            author_id: mfgProf1.userId,
+            note: 'Buyer requested premium material samples with dense gold specks before finalizing gangsaw slabs.',
+            is_mock: true
+          },
+          {
+            lead_id: lead1._id,
+            manufacturer_id: mfgProf1._id,
+            author_id: mfgProf1.userId,
+            note: 'Checked yard stock: 2,400 sq.ft mirror polished 20mm slabs available for immediate dispatch.',
+            is_mock: true
+          }
+        ]);
+
+        // Lead 2: #LD12346 (In Discussion)
+        if (existingInqs[1]) {
+          const lead2 = await Lead.create({
+            lead_number: '#LD12346',
+            inquiry_id: existingInqs[1]._id,
+            buyer_id: buyerProf1?._id,
+            manufacturer_id: mfgProf1._id,
+            lead_status: 'in_discussion',
+            priority: 'high',
+            urgency: 'immediate',
+            usage_application: 'Wall Cladding',
+            budget_min: 1800000,
+            budget_max: 2500000,
+            currency: 'INR',
+            budget_type: 'estimated',
+            assigned_at: new Date(Date.now() - 86400000),
+            share_token: 'share_ld12346_token',
+            is_mock: true
+          });
+
+          await LeadNote.create({
+            lead_id: lead2._id,
+            manufacturer_id: mfgProf1._id,
+            author_id: mfgProf1.userId,
+            note: 'Architect site visit scheduled for next Tuesday at Kishangarh processing plant.',
+            is_mock: true
+          });
+
+          await LeadActivityLog.create({
+            lead_id: lead2._id,
+            actor_id: mfgProf1.userId,
+            actor_type: 'manufacturer',
+            event_type: 'lead_marked_in_discussion',
+            previous_status: 'new',
+            new_status: 'in_discussion',
+            title: 'Moved to In Discussion',
+            description: 'Manufacturer initiated technical discussion with buyer.'
+          });
+        }
+
+        // Lead 3: #LD12347 (Quote Sent)
+        if (existingInqs[2]) {
+          await Lead.create({
+            lead_number: '#LD12347',
+            inquiry_id: existingInqs[2]._id,
+            buyer_id: buyerProf1?._id,
+            manufacturer_id: mfgProf1._id,
+            lead_status: 'quote_sent',
+            priority: 'normal',
+            urgency: 'within_30_days',
+            usage_application: 'Commercial Flooring',
+            budget_min: 1500000,
+            budget_max: 2000000,
+            currency: 'INR',
+            budget_type: 'estimated',
+            assigned_at: new Date(Date.now() - 172800000),
+            share_token: 'share_ld12347_token',
+            is_mock: true
+          });
+        }
+
+        // Lead 4: #LD12348 (Converted)
+        await Lead.create({
+          lead_number: '#LD12348',
+          inquiry_id: existingInqs[0]._id,
+          buyer_id: buyerProf1?._id,
+          manufacturer_id: mfgProf1._id,
+          lead_status: 'converted',
+          priority: 'high',
+          urgency: 'immediate',
+          usage_application: 'Villa Construction',
+          budget_min: 800000,
+          budget_max: 1200000,
+          currency: 'INR',
+          converted_at: new Date(Date.now() - 3600000),
+          share_token: 'share_ld12348_token',
+          is_mock: true
+        });
+
+        // Lead 5: #LD12349 (Closed)
+        await Lead.create({
+          lead_number: '#LD12349',
+          inquiry_id: existingInqs[0]._id,
+          buyer_id: buyerProf1?._id,
+          manufacturer_id: mfgProf1._id,
+          lead_status: 'closed',
+          priority: 'normal',
+          urgency: 'flexible',
+          closure_reason: 'Buyer purchased locally',
+          closure_comments: 'Project started ahead of planned delivery date.',
+          closed_at: new Date(Date.now() - 7200000),
+          share_token: 'share_ld12349_token',
+          is_mock: true
+        });
+      }
+      console.log('Seeded Phase 4 Leads (#LD12345 to #LD12349), Notes, Activity Logs, Notification Preferences, Quiet Hours, and User Preferences.');
     }
 
     console.log('\n======================================================');

@@ -19,6 +19,26 @@
       "key": "registration_id",
       "value": "REG_XXXXXXXX",
       "type": "string"
+    },
+    {
+      "key": "lead_id",
+      "value": "6aea0fd011390c1b9cc72604",
+      "type": "string"
+    },
+    {
+      "key": "note_id",
+      "value": "6aea0fd011390c1b9cc72710",
+      "type": "string"
+    },
+    {
+      "key": "share_token",
+      "value": "share_ld12345_token",
+      "type": "string"
+    },
+    {
+      "key": "session_id",
+      "value": "mfg_sess_mobile_01",
+      "type": "string"
     }
   ],
   "item": [
@@ -13460,6 +13480,1118 @@
                     "read"
                   ]
                 }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Lead Management & Account Settings Module",
+      "item": [
+        {
+          "name": "Module A - Lead Management",
+          "item": [
+            {
+              "name": "1. Received Inquiries (Main Screen)",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/leads",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "leads"
+                  ]
+                },
+                "description": "Retrieve incoming requirement leads assigned to authenticated manufacturer with dynamic counts and filter chips."
+              }
+            },
+            {
+              "name": "2. Filter Leads by Status (New)",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/leads?status=new",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "leads"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "new"
+                    }
+                  ]
+                },
+                "description": "Filter leads with status: new."
+              }
+            },
+            {
+              "name": "3. Filter Leads by Status (In Discussion)",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/leads?status=in_discussion",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "leads"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "in_discussion"
+                    }
+                  ]
+                },
+                "description": "Filter leads with status: in_discussion."
+              }
+            },
+            {
+              "name": "4. Filter Leads by Status (Quote Sent)",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/leads?status=quote_sent",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "leads"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "quote_sent"
+                    }
+                  ]
+                },
+                "description": "Filter leads with status: quote_sent."
+              }
+            },
+            {
+              "name": "5. Filter Leads by Status (Closed)",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/leads?status=closed",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "leads"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "closed"
+                    }
+                  ]
+                },
+                "description": "Filter leads with status: closed."
+              }
+            },
+            {
+              "name": "6. Search Leads (Debounced)",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/leads/search?q=Black Galaxy",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "leads",
+                    "search"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "Black Galaxy"
+                    }
+                  ]
+                },
+                "description": "Search leads by buyer name, company, stone/material, city, or lead number."
+              }
+            },
+            {
+              "name": "7. Lead Statistics & Conversion KPIs",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/leads/statistics",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "leads",
+                    "statistics"
+                  ]
+                },
+                "description": "Retrieve dynamic counts, active pipeline value, and conversion rate percentage."
+              }
+            },
+            {
+              "name": "8. Lead Details (Complete Overview & 4-Stage Timeline)",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/leads/{{lead_id}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "leads",
+                    "{{lead_id}}"
+                  ]
+                },
+                "description": "Retrieve complete Lead Details screen: summary card, requirements, 4-stage progression tracker, buyer contact card, budget card, product info, notes, and action bar."
+              }
+            },
+            {
+              "name": "9. Lead Requirements Tab",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/leads/{{lead_id}}/requirements",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "leads",
+                    "{{lead_id}}",
+                    "requirements"
+                  ]
+                },
+                "description": "Structured technical requirement specifications for product, size, finish, and delivery."
+              }
+            },
+            {
+              "name": "10. Lead Messages (Chat Thread)",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/leads/{{lead_id}}/messages",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "leads",
+                    "{{lead_id}}",
+                    "messages"
+                  ]
+                },
+                "description": "Retrieve inquiry-linked conversation thread between manufacturer and buyer."
+              }
+            },
+            {
+              "name": "11. Send Message to Buyer",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/leads/{{lead_id}}/messages",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "leads",
+                    "{{lead_id}}",
+                    "messages"
+                  ]
+                },
+                "description": "Send inquiry-linked chat message to buyer.",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"message\": \"Hello Vikram, we have 2,000 sq.ft ready stock of 20mm Black Galaxy Gangsaw slabs in Jaipur. Can dispatch samples immediately.\",\n  \"attachments\": []\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "12. Lead Quotations List",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/leads/{{lead_id}}/quotes",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "leads",
+                    "{{lead_id}}",
+                    "quotes"
+                  ]
+                },
+                "description": "View quotations submitted against this requirement lead."
+              }
+            },
+            {
+              "name": "13. Send Quote Integration (Prefilled)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/leads/{{lead_id}}/quotes",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "leads",
+                    "{{lead_id}}",
+                    "quotes"
+                  ]
+                },
+                "description": "Submit formal quotation directly against lead, calculate financials, update lead status to quote_sent and log activity.",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"quoted_quantity\": 500,\n  \"quantity_unit\": \"Sq.ft\",\n  \"unit_price\": 650,\n  \"tax_rate\": 18,\n  \"shipping_charges\": 12000,\n  \"discount\": 5000,\n  \"material\": \"Black Galaxy Granite Gangsaw Slabs (20mm)\",\n  \"size\": \"10 × 6 ft\",\n  \"thickness\": \"20 mm\",\n  \"finish\": \"Mirror Polished\",\n  \"delivery_timeline\": \"7-10 Business Days\",\n  \"payment_terms\": \"50% Advance, 50% on Delivery\",\n  \"validity_days\": 15,\n  \"notes\": \"Super premium export grade with zero hairline cracks.\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "14. Get Private Internal Notes",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/leads/{{lead_id}}/notes",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "leads",
+                    "{{lead_id}}",
+                    "notes"
+                  ]
+                },
+                "description": "Retrieve private internal notes strictly visible to manufacturer team."
+              }
+            },
+            {
+              "name": "15. Add Private Internal Note",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/leads/{{lead_id}}/notes",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "leads",
+                    "{{lead_id}}",
+                    "notes"
+                  ]
+                },
+                "description": "Add private internal note (never visible to buyers).",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"note\": \"Buyer requested premium material samples with dense gold specks before finalizing gangsaw slabs.\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "16. Update Internal Note",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/leads/{{lead_id}}/notes/{{note_id}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "leads",
+                    "{{lead_id}}",
+                    "notes",
+                    "{{note_id}}"
+                  ]
+                },
+                "description": "Update internal note.",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"note\": \"Samples dispatched via courier. Tracking shared with buyer.\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "17. Delete Internal Note",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/leads/{{lead_id}}/notes/{{note_id}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "leads",
+                    "{{lead_id}}",
+                    "notes",
+                    "{{note_id}}"
+                  ]
+                },
+                "description": "Delete internal note with audit verification."
+              }
+            },
+            {
+              "name": "18. Lead Chronological Activity History",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/leads/{{lead_id}}/history",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "leads",
+                    "{{lead_id}}",
+                    "history"
+                  ]
+                },
+                "description": "Retrieve auditable chronological activity history feed."
+              }
+            },
+            {
+              "name": "19. Update Lead Status (Mark As)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/leads/{{lead_id}}/status",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "leads",
+                    "{{lead_id}}",
+                    "status"
+                  ]
+                },
+                "description": "Update lead stage through validated state machine transitions (new, in_discussion, quote_sent, converted, closed).",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lead_status\": \"in_discussion\",\n  \"closure_reason\": null,\n  \"closure_comments\": null\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "20. Share Lead (Sanitized Link & Token)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/leads/{{lead_id}}/share",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "leads",
+                    "{{lead_id}}",
+                    "share"
+                  ]
+                },
+                "description": "Generate sanitized shareable lead link protecting confidential buyer phone and email.",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"channel\": \"copy_link\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "21. Public Shared Lead Preview (No Auth)",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/public/leads/shared/{{share_token}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "public",
+                    "leads",
+                    "shared",
+                    "{{share_token}}"
+                  ]
+                },
+                "description": "Public preview of shared lead specifications with confidential buyer details safely hidden."
+              }
+            },
+            {
+              "name": "22. Download Lead PDF Specification",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/leads/{{lead_id}}/download",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "leads",
+                    "{{lead_id}}",
+                    "download"
+                  ]
+                },
+                "description": "Stream branded PDF specification sheet for requirement lead."
+              }
+            },
+            {
+              "name": "23. Log Buyer Contact Action (Phone / WhatsApp)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/leads/{{lead_id}}/contact-log",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "leads",
+                    "{{lead_id}}",
+                    "contact-log"
+                  ]
+                },
+                "description": "Record buyer contact action in lead activity feed.",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"action_type\": \"call\",\n  \"notes\": \"Spoke with buyer regarding slab delivery schedule.\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Module B - Account Settings",
+          "item": [
+            {
+              "name": "1. Settings Main Screen Overview",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/settings",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "settings"
+                  ]
+                },
+                "description": "Retrieve Business Profile card, Account & Security overview, Notification Preferences, Quiet Hours, and More Settings."
+              }
+            },
+            {
+              "name": "2. Get Notification Preferences",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/settings/notifications",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "settings",
+                    "notifications"
+                  ]
+                },
+                "description": "Retrieve independent notification toggles (new inquiry, lead messages, quotes, ads, billing, marketing emails)."
+              }
+            },
+            {
+              "name": "3. Update Notification Preferences",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/settings/notifications",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "settings",
+                    "notifications"
+                  ]
+                },
+                "description": "Update independent notification preference toggles immediately in database.",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"new_inquiry\": true,\n  \"lead_messages\": true,\n  \"quote_requests\": true,\n  \"ad_performance\": true,\n  \"subscription_billing\": true,\n  \"marketing_emails\": false,\n  \"channels\": {\n    \"in_app\": true,\n    \"push\": true,\n    \"email\": true,\n    \"sms\": false\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "4. Get Quiet Hours Schedule",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/settings/quiet-hours",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "settings",
+                    "quiet-hours"
+                  ]
+                },
+                "description": "Retrieve Quiet Hours configuration (e.g. 10:00 PM – 8:00 AM) and active status."
+              }
+            },
+            {
+              "name": "5. Update Quiet Hours Schedule",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/settings/quiet-hours",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "settings",
+                    "quiet-hours"
+                  ]
+                },
+                "description": "Update Quiet Hours schedule with support for overnight time ranges.",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"enabled\": true,\n  \"start_time\": \"22:00\",\n  \"end_time\": \"08:00\",\n  \"timezone\": \"Asia/Kolkata\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "6. Get User Preferences (Language & Appearance)",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/settings/preferences",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "settings",
+                    "preferences"
+                  ]
+                },
+                "description": "Retrieve preferred language (English, Hindi, Urdu) and theme (Light, Dark, System Default)."
+              }
+            },
+            {
+              "name": "7. Update User Preferences",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/settings/preferences",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "settings",
+                    "preferences"
+                  ]
+                },
+                "description": "Persist selected language and theme appearance per user.",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"language\": \"en\",\n  \"appearance\": \"system\",\n  \"timezone\": \"Asia/Kolkata\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "8. Change Password",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/settings/change-password",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "settings",
+                    "change-password"
+                  ]
+                },
+                "description": "Securely change password with bcrypt comparison, strength validation, and session invalidation.",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"current_password\": \"password123\",\n  \"new_password\": \"newPassword456\",\n  \"confirm_password\": \"newPassword456\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "9. Get Active Sessions",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/settings/sessions",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "settings",
+                    "sessions"
+                  ]
+                },
+                "description": "List active logged-in device sessions with device info, IP, location, and current session flag."
+              }
+            },
+            {
+              "name": "10. Terminate Individual Session",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/settings/sessions/{{session_id}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "settings",
+                    "sessions",
+                    "{{session_id}}"
+                  ]
+                },
+                "description": "Revoke specific user session from Security management."
+              }
+            },
+            {
+              "name": "11. Logout From All Devices",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/settings/logout-all",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "settings",
+                    "logout-all"
+                  ]
+                },
+                "description": "Invalidate all active sessions across all devices."
+              }
+            },
+            {
+              "name": "12. Logout Current Session",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/settings/logout",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "settings",
+                    "logout"
+                  ]
+                },
+                "description": "End current authentication session."
+              }
+            },
+            {
+              "name": "13. About Stone Market Application Info",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/settings/about",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "settings",
+                    "about"
+                  ]
+                },
+                "description": "Retrieve app name, version (1.4.0), build number (2026.11.03), company info, terms and privacy URLs."
+              }
+            },
+            {
+              "name": "14. Help & Support (FAQs & Tickets)",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/settings/help-support",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "settings",
+                    "help-support"
+                  ]
+                },
+                "description": "Retrieve FAQs, customer support contacts, and submitted ticket count."
               }
             }
           ]

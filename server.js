@@ -85,10 +85,13 @@ const promotionController = require('./src/controllers/promotionController');
 const inquiryManagementRoutes = require('./src/routes/inquiryManagementRoutes');
 const quotationManagementRoutes = require('./src/routes/quotationManagementRoutes');
 
+// Phase 4 Lead Management & Account Settings Routes
+const leadManagementRoutes = require('./src/routes/leadManagementRoutes');
+const accountSettingsRoutes = require('./src/routes/accountSettingsRoutes');
+
 // v1 Routes
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/customer', customerRoutes);
-app.use('/api/v1/manufacturer', manufacturerProfileRoutes);
 app.use('/api/v1/app', appInfoRoutes);
 app.use('/api/v1/vendors', vendorRoutes);
 app.use('/api/v1/products', productRoutes);
@@ -148,8 +151,17 @@ app.use('/api/manufacturer/quotes', quotationManagementRoutes);
 app.use('/api/v1/manufacturer/inquiries', inquiryManagementRoutes);
 app.use('/api/v1/manufacturer/quotes', quotationManagementRoutes);
 
+// Phase 4 Lead Management & Account Settings Routes (mounted before /api/manufacturer)
+app.use('/api/manufacturer/leads', leadManagementRoutes);
+app.use('/api/manufacturer/settings', accountSettingsRoutes);
+app.use('/api/v1/manufacturer/leads', leadManagementRoutes);
+app.use('/api/v1/manufacturer/settings', accountSettingsRoutes);
+app.use('/api/public/leads', leadManagementRoutes);
+app.use('/api/v1/public/leads', leadManagementRoutes);
+
 app.use('/api/customer', customerRoutes);
 app.use('/api/manufacturer', manufacturerProfileRoutes);
+app.use('/api/v1/manufacturer', manufacturerProfileRoutes);
 app.use('/api/app', appInfoRoutes);
 
 // Mount CMS API Routes
