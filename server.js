@@ -68,6 +68,7 @@ const customerRoutes = require('./src/routes/customer');
 const appInfoRoutes = require('./src/routes/appInfo');
 const manufacturerProfileRoutes = require('./src/routes/manufacturerProfile');
 const miningProfileRoutes = require('./src/routes/miningProfileRoutes');
+const showroomProfileRoutes = require('./src/routes/showroomProfileRoutes');
 
 // CMS Routes
 const miningCmsRoutes = require('./src/routes/cms/mining');
@@ -130,44 +131,56 @@ app.use('/api/admin/buyers', adminBuyerRoutes);
 app.use('/api', transportPublicRoutes);
 app.use('/api/provider', providerTransportRoutes);
 app.use('/api/admin', adminTransportRoutes);
-// Phase 2 Ads & Promotion Management Routes (mounted before /api/manufacturer & /api/mining)
+// Phase 2 Ads & Promotion Management Routes (mounted before /api/manufacturer & /api/mining & /api/showroom)
 app.use('/api/manufacturer/promotions', promotionRoutes);
 app.use('/api/mining/promotions', promotionRoutes);
+app.use('/api/showroom/promotions', promotionRoutes);
 app.use('/api/promotions', promotionRoutes);
 app.get('/api/promotion-packages', promotionController.getPromotionPackages);
 app.get('/api/promotion-packages/:id', promotionController.getPromotionPackageById);
 app.use('/api/payments', paymentRoutes);
 app.use('/api/manufacturer/invoices', promotionInvoiceRoutes);
 app.use('/api/mining/invoices', promotionInvoiceRoutes);
+app.use('/api/showroom/invoices', promotionInvoiceRoutes);
 app.use('/api/admin/promotions', adminPromotionRoutes);
 
 // v1 aliases
 app.use('/api/v1/manufacturer/promotions', promotionRoutes);
 app.use('/api/v1/mining/promotions', promotionRoutes);
+app.use('/api/v1/showroom/promotions', promotionRoutes);
 app.use('/api/v1/payments', paymentRoutes);
 app.use('/api/v1/manufacturer/invoices', promotionInvoiceRoutes);
 app.use('/api/v1/mining/invoices', promotionInvoiceRoutes);
+app.use('/api/v1/showroom/invoices', promotionInvoiceRoutes);
 app.use('/api/v1/admin/promotions', adminPromotionRoutes);
 
-// Phase 3 My Inquiries & Lead Management Routes (mounted before /api/manufacturer & /api/mining)
+// Phase 3 My Inquiries & Lead Management Routes (mounted before /api/manufacturer & /api/mining & /api/showroom)
 app.use('/api/manufacturer/inquiries', inquiryManagementRoutes);
 app.use('/api/mining/inquiries', inquiryManagementRoutes);
+app.use('/api/showroom/inquiries', inquiryManagementRoutes);
 app.use('/api/manufacturer/quotes', quotationManagementRoutes);
 app.use('/api/mining/quotes', quotationManagementRoutes);
+app.use('/api/showroom/quotes', quotationManagementRoutes);
 app.use('/api/v1/manufacturer/inquiries', inquiryManagementRoutes);
 app.use('/api/v1/mining/inquiries', inquiryManagementRoutes);
+app.use('/api/v1/showroom/inquiries', inquiryManagementRoutes);
 app.use('/api/v1/manufacturer/quotes', quotationManagementRoutes);
 app.use('/api/v1/mining/quotes', quotationManagementRoutes);
+app.use('/api/v1/showroom/quotes', quotationManagementRoutes);
 
-// Phase 4 Lead Management & Account Settings Routes (mounted before /api/manufacturer & /api/mining)
+// Phase 4 Lead Management & Account Settings Routes (mounted before /api/manufacturer & /api/mining & /api/showroom)
 app.use('/api/manufacturer/leads', leadManagementRoutes);
 app.use('/api/mining/leads', leadManagementRoutes);
+app.use('/api/showroom/leads', leadManagementRoutes);
 app.use('/api/manufacturer/settings', accountSettingsRoutes);
 app.use('/api/mining/settings', accountSettingsRoutes);
+app.use('/api/showroom/settings', accountSettingsRoutes);
 app.use('/api/v1/manufacturer/leads', leadManagementRoutes);
 app.use('/api/v1/mining/leads', leadManagementRoutes);
+app.use('/api/v1/showroom/leads', leadManagementRoutes);
 app.use('/api/v1/manufacturer/settings', accountSettingsRoutes);
 app.use('/api/v1/mining/settings', accountSettingsRoutes);
+app.use('/api/v1/showroom/settings', accountSettingsRoutes);
 app.use('/api/public/leads', leadManagementRoutes);
 app.use('/api/v1/public/leads', leadManagementRoutes);
 
@@ -176,12 +189,14 @@ app.use('/api/manufacturer', manufacturerProfileRoutes);
 app.use('/api/v1/manufacturer', manufacturerProfileRoutes);
 app.use('/api/mining', miningProfileRoutes);
 app.use('/api/v1/mining', miningProfileRoutes);
+app.use('/api/showroom', showroomProfileRoutes);
+app.use('/api/v1/showroom', showroomProfileRoutes);
 app.use('/api/app', appInfoRoutes);
 
 // Mount CMS API Routes
 app.use('/api/cms/mining', miningProfileRoutes);
 app.use('/api/cms/manufacturer', manufacturerProfileRoutes);
-app.use('/api/cms/showroom', showroomCmsRoutes);
+app.use('/api/cms/showroom', showroomProfileRoutes);
 app.use('/api/cms/trader', traderCmsRoutes);
 
 // Root Routes (for frontend compatibility)

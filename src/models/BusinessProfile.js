@@ -96,6 +96,7 @@ const businessProfileSchema = new mongoose.Schema({
     url: { type: String, required: true },
     is_cover: { type: Boolean, default: false },
     title: { type: String },
+    category: { type: String, default: 'showroom' },
     uploaded_at: { type: Date, default: Date.now }
   }],
   gallery_videos: [{
@@ -104,6 +105,7 @@ const businessProfileSchema = new mongoose.Schema({
     youtube_url: { type: String },
     thumbnail: { type: String },
     duration: { type: String },
+    video_type: { type: String, default: 'walkthrough' },
     source_type: { type: String, enum: ['upload', 'youtube'], default: 'upload' },
     uploaded_at: { type: Date, default: Date.now }
   }],
@@ -170,6 +172,14 @@ const businessProfileSchema = new mongoose.Schema({
   monthly_capacity: { type: Number }, // tons or sqft
   capacity_unit: { type: String },
   display_area: { type: Number }, // sqft
+  showroom_type: { type: String, default: 'Retail Showroom' },
+  total_display_area: { type: Number },
+  display_area_unit: { type: String, default: 'Sq.ft' },
+  total_storage_capacity: { type: Number },
+  storage_capacity_unit: { type: String, default: 'Sq.ft' },
+  stone_categories_available: [{ type: String }],
+  short_description: { type: String },
+  business_registration_number: { type: String },
   team_size_min: { type: Number },
   team_size_max: { type: Number },
   machines: [machineSchema],

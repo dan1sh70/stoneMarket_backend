@@ -15935,6 +15935,1337 @@
           ]
         }
       ]
+    },
+    {
+      "name": "Showroom Business Module (Phase 1)",
+      "description": "Complete Showroom Business Module for STONE MARKET INDIA: Dashboard, Business Profile, Showroom Specifications, 4-Step Product Wizard, Inventory Management & Stock History, Gallery, Verification Center, Analytics and Submodules integration.",
+      "item": [
+        {
+          "name": "1. Business Type Switching",
+          "description": "Business switcher enabling transition to Godown & Showrooms identity",
+          "item": [
+            {
+              "name": "Get Available Business Types",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/showroom/business-types",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "showroom",
+                    "business-types"
+                  ]
+                },
+                "description": "Fetch available business types (Customer, Manufacturer, Mining, Showroom, Trader) with active state."
+              }
+            },
+            {
+              "name": "Switch Business Type to Showroom",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"target_type\": \"showroom\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/showroom/switch-business-type",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "showroom",
+                    "switch-business-type"
+                  ]
+                },
+                "description": "Switch active user context to Godown & Showrooms and get dashboard redirect."
+              }
+            }
+          ]
+        },
+        {
+          "name": "2. Showroom Business Dashboard",
+          "description": "Showroom dashboard matching Manufacturer & Mining layout",
+          "item": [
+            {
+              "name": "Get Showroom Dashboard",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/showroom/dashboard",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "showroom",
+                    "dashboard"
+                  ]
+                },
+                "description": "Retrieve profile card, quick stats (products, stock, low stock, out of stock, inquiries, leads), and 4 main menus."
+              }
+            }
+          ]
+        },
+        {
+          "name": "3. Showroom Business Profile & Specifications",
+          "description": "Showroom profile info, display area, storage capacity, operating hours, and stone categories",
+          "item": [
+            {
+              "name": "Get Showroom Profile",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/showroom/profile",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "showroom",
+                    "profile"
+                  ]
+                },
+                "description": "Retrieve comprehensive showroom business profile, operational specs, enterprise tax, and addresses."
+              }
+            },
+            {
+              "name": "Update Showroom Profile",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company_name\": \"Royal Stone Gallery & Godown\",\n  \"short_description\": \"Premier stone gallery with massive live displays and warehouse stock.\",\n  \"about_business\": \"Leading destination in Jaipur for imported marbles, exotic onyx and luxury granite live displays.\",\n  \"showroom_type\": \"Retail & Wholesale\",\n  \"gst_number\": \"08AAAAA0000A1Z5\",\n  \"business_registration_number\": \"REG-RJ-2018-7821\",\n  \"address\": {\n    \"full_address\": \"E-210, Mansarovar Industrial Area, Jaipur, Rajasthan\",\n    \"showroom_address\": \"E-210, Mansarovar Industrial Area, Jaipur, Rajasthan\",\n    \"commercial_area\": \"Mansarovar Commercial Stone Hub\",\n    \"district\": \"Jaipur\",\n    \"state\": \"Rajasthan\",\n    \"postal_code\": \"302020\"\n  }\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/showroom/profile",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "showroom",
+                    "profile"
+                  ]
+                },
+                "description": "Update showroom general information, address, and enterprise tax details."
+              }
+            },
+            {
+              "name": "Update Showroom Specifications",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"showroom_type\": \"Wholesale Godown\",\n  \"total_display_area\": 18000,\n  \"display_area_unit\": \"Sq.ft\",\n  \"total_storage_capacity\": 75000,\n  \"storage_capacity_unit\": \"Sq.ft\",\n  \"stone_categories_available\": [\n    \"Granite\",\n    \"Marble\",\n    \"Sandstone\",\n    \"Limestone\",\n    \"Quartzite\",\n    \"Tiles\",\n    \"Engineered Stone\"\n  ],\n  \"factory_timings\": \"09:00 AM - 08:00 PM\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/showroom/specs",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "showroom",
+                    "specs"
+                  ]
+                },
+                "description": "Update showroom display area, storage capacity, operating timings, and stone categories."
+              }
+            }
+          ]
+        },
+        {
+          "name": "4. Ownership & Key Contacts",
+          "description": "Manage showroom owners, partners, and directors",
+          "item": [
+            {
+              "name": "Get Showroom Contacts",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/showroom/contacts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "showroom",
+                    "contacts"
+                  ]
+                },
+                "description": "List all registered owners, partners, and key contacts with contact actions."
+              }
+            },
+            {
+              "name": "Add Showroom Contact",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Vikas Sharma\",\n  \"designation\": \"Operations Director\",\n  \"phone\": \"9829099887\",\n  \"email\": \"vikas.sharma@mockstonemarket.com\",\n  \"is_primary\": false\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/showroom/contacts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "showroom",
+                    "contacts"
+                  ]
+                },
+                "description": "Add a new showroom partner or director."
+              }
+            },
+            {
+              "name": "Update Showroom Contact",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"designation\": \"Senior Showroom Director\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/showroom/contacts/{{contactId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "showroom",
+                    "contacts",
+                    "{{contactId}}"
+                  ]
+                },
+                "description": "Update existing showroom partner details."
+              }
+            },
+            {
+              "name": "Delete Showroom Contact",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/showroom/contacts/{{contactId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "showroom",
+                    "contacts",
+                    "{{contactId}}"
+                  ]
+                },
+                "description": "Remove a showroom contact."
+              }
+            }
+          ]
+        },
+        {
+          "name": "5. Showroom Product Management & 4-Step Wizard",
+          "description": "4-step product creation wizard, listing, details, duplicate, and image management",
+          "item": [
+            {
+              "name": "List Showroom Products",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/showroom/products?status=all&material=Granite",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "showroom",
+                    "products"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "all"
+                    },
+                    {
+                      "key": "material",
+                      "value": "Granite"
+                    }
+                  ]
+                },
+                "description": "List showroom products with search, material filter, status chips, low stock flags."
+              }
+            },
+            {
+              "name": "Create Product (4-Step Wizard)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Alaska White Granite Slabs\",\n  \"material\": \"Granite\",\n  \"short_description\": \"Exquisite Alaska White Granite polished slabs for luxury interiors and kitchen islands.\",\n  \"description\": \"Premium grade Alaska White Granite with crystalline quartz patterns.\",\n  \"product_origin\": \"Rajasthan, India\",\n  \"images\": [\n    \"https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80\"\n  ],\n  \"cover_image\": \"https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80\",\n  \"pattern\": \"Natural Pattern\",\n  \"finish\": \"High Gloss Polished\",\n  \"size\": \"10 × 6 ft\",\n  \"thickness\": \"20 mm\",\n  \"quality\": \"Premium\",\n  \"application\": \"Flooring, Countertops, Wall Cladding\",\n  \"approx_weight\": \"75 Kg / Sq.m\",\n  \"country_of_origin\": \"India\",\n  \"selling_price\": 210,\n  \"pricing_unit\": \"Per Sq.ft\",\n  \"quantity\": 5000,\n  \"quantity_unit\": \"Sq.ft\",\n  \"available_stock\": 5000,\n  \"stock_unit\": \"Sq.ft\",\n  \"availability_status\": \"In Stock\",\n  \"low_stock_threshold\": 200,\n  \"target_publishing\": {\n    \"states\": [\n      \"Rajasthan\",\n      \"Delhi NCR\",\n      \"Maharashtra\",\n      \"Gujarat\"\n    ],\n    \"districts\": [\n      \"All India\"\n    ],\n    \"categories\": [\n      \"Manufacturer\",\n      \"Showroom\",\n      \"Customer\",\n      \"Trader\"\n    ]\n  },\n  \"status\": \"active\",\n  \"publishing_status\": \"published\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/showroom/products",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "showroom",
+                    "products"
+                  ]
+                },
+                "description": "Publish product via 4-step wizard: Basic & Media, Specs, Pricing & Stock, Review & Publish. Auto-generates unique SKU and logs initial stock."
+              }
+            },
+            {
+              "name": "Get Showroom Product Details",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/showroom/products/{{productId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "showroom",
+                    "products",
+                    "{{productId}}"
+                  ]
+                },
+                "description": "Get product overview, gallery, specs grid, pricing, inventory, and target publish settings."
+              }
+            },
+            {
+              "name": "Update Showroom Product",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"selling_price\": 220,\n  \"short_description\": \"Updated description for luxury polished slabs.\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/showroom/products/{{productId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "showroom",
+                    "products",
+                    "{{productId}}"
+                  ]
+                },
+                "description": "Update showroom product details."
+              }
+            },
+            {
+              "name": "Publish / Activate Showroom Product",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/showroom/products/{{productId}}/publish",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "showroom",
+                    "products",
+                    "{{productId}}",
+                    "publish"
+                  ]
+                },
+                "description": "Set product status to active."
+              }
+            },
+            {
+              "name": "Duplicate Showroom Product",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/showroom/products/{{productId}}/duplicate",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "showroom",
+                    "products",
+                    "{{productId}}",
+                    "duplicate"
+                  ]
+                },
+                "description": "Clone product with a fresh unique SKU, (Copy) suffix, and draft status."
+              }
+            },
+            {
+              "name": "Delete Showroom Product",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/showroom/products/{{productId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "showroom",
+                    "products",
+                    "{{productId}}"
+                  ]
+                },
+                "description": "Delete showroom product and clean up stock logs."
+              }
+            }
+          ]
+        },
+        {
+          "name": "6. Inventory Management & Stock History",
+          "description": "Stock adjustment, low stock & out of stock evaluation, stock history ledger",
+          "item": [
+            {
+              "name": "Adjust Product Stock",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"change_type\": \"increase\",\n  \"stock_value\": 1500,\n  \"change_reason\": \"Received fresh consignment from Kishangarh gangsaw unit\",\n  \"updated_by\": \"Suresh Sharma\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/showroom/products/{{productId}}/stock",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "showroom",
+                    "products",
+                    "{{productId}}",
+                    "stock"
+                  ]
+                },
+                "description": "Update stock (set, increase, decrease, adjustment), auto-compute availability indicators, and write StockHistory ledger."
+              }
+            },
+            {
+              "name": "Get Showroom Inventory Overview",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/showroom/inventory/overview",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "showroom",
+                    "inventory",
+                    "overview"
+                  ]
+                },
+                "description": "Get inventory counts, available stock sum, low stock products, out of stock products, and category distribution."
+              }
+            },
+            {
+              "name": "Get Showroom Stock History Ledger",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/showroom/inventory/history",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "showroom",
+                    "inventory",
+                    "history"
+                  ]
+                },
+                "description": "Audit log of all stock movements, changes, reasons, and actors across the showroom."
+              }
+            },
+            {
+              "name": "Get Product Stock History",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/showroom/products/{{productId}}/stock-history",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "showroom",
+                    "products",
+                    "{{productId}}",
+                    "stock-history"
+                  ]
+                },
+                "description": "Detailed stock change history for a single product."
+              }
+            }
+          ]
+        },
+        {
+          "name": "7. Gallery Management",
+          "description": "Photos, Walkthrough Videos, and Owners gallery",
+          "item": [
+            {
+              "name": "Get Showroom Gallery",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/showroom/gallery",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "showroom",
+                    "gallery"
+                  ]
+                },
+                "description": "Fetch showroom photos, walkthrough videos, and owners gallery."
+              }
+            },
+            {
+              "name": "Add Showroom Photo",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"url\": \"https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80\",\n  \"title\": \"Main Showroom Display Floor\",\n  \"category\": \"product_display\",\n  \"is_cover\": false\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/showroom/gallery/photos",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "showroom",
+                    "gallery",
+                    "photos"
+                  ]
+                },
+                "description": "Upload showroom photo with categorized tag."
+              }
+            },
+            {
+              "name": "Delete Showroom Photo",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/showroom/gallery/photos/{{photoId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "showroom",
+                    "gallery",
+                    "photos",
+                    "{{photoId}}"
+                  ]
+                },
+                "description": "Remove gallery photo."
+              }
+            },
+            {
+              "name": "Add Showroom Video",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Royal Stone Gallery Walkthrough Tour\",\n  \"youtube_url\": \"https://www.youtube.com/watch?v=mockWalkthrough\",\n  \"duration\": \"3:45\",\n  \"video_type\": \"walkthrough\",\n  \"source_type\": \"youtube\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/showroom/gallery/videos",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "showroom",
+                    "gallery",
+                    "videos"
+                  ]
+                },
+                "description": "Add walkthrough video or warehouse tour."
+              }
+            },
+            {
+              "name": "Delete Showroom Video",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/showroom/gallery/videos/{{videoId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "showroom",
+                    "gallery",
+                    "videos",
+                    "{{videoId}}"
+                  ]
+                },
+                "description": "Remove showroom gallery video."
+              }
+            },
+            {
+              "name": "Get Gallery Owners",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/showroom/gallery/owners",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "showroom",
+                    "gallery",
+                    "owners"
+                  ]
+                },
+                "description": "Retrieve gallery owners list."
+              }
+            }
+          ]
+        },
+        {
+          "name": "8. Verification Center",
+          "description": "Phone OTP, Email, Business Registration, GST, Bank verification, and showroom regulatory documents",
+          "item": [
+            {
+              "name": "Get Verification Status",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/showroom/verification",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "showroom",
+                    "verification"
+                  ]
+                },
+                "description": "Get overall verification progress percentage, checklist, and required documents list."
+              }
+            },
+            {
+              "name": "Send Phone OTP",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"phone\": \"9829012345\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/showroom/verification/phone/send-otp",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "showroom",
+                    "verification",
+                    "phone",
+                    "send-otp"
+                  ]
+                },
+                "description": "Dispatch 6-digit verification OTP to mobile number."
+              }
+            },
+            {
+              "name": "Verify Phone OTP",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"phone\": \"9829012345\",\n  \"otp\": \"123456\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/showroom/verification/phone/verify-otp",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "showroom",
+                    "verification",
+                    "phone",
+                    "verify-otp"
+                  ]
+                },
+                "description": "Submit OTP to verify phone."
+              }
+            },
+            {
+              "name": "Submit GST Verification",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"gstin\": \"08AAAAA0000A1Z5\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/showroom/verification/gst",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "showroom",
+                    "verification",
+                    "gst"
+                  ]
+                },
+                "description": "Verify 15-character GSTIN."
+              }
+            },
+            {
+              "name": "Submit Business Registration Verification",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"registration_type\": \"Shop and Establishment Certificate\",\n  \"registration_number\": \"SE-RJ-2018-8871\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/showroom/verification/business",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "showroom",
+                    "verification",
+                    "business"
+                  ]
+                },
+                "description": "Verify Trade License or Shop & Establishment Certificate."
+              }
+            },
+            {
+              "name": "Submit Bank Account Verification",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account_holder_name\": \"Royal Stone Gallery & Godown\",\n  \"bank_name\": \"HDFC Bank\",\n  \"account_number\": \"50200012345678\",\n  \"ifsc_code\": \"HDFC0001234\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/showroom/verification/bank",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "showroom",
+                    "verification",
+                    "bank"
+                  ]
+                },
+                "description": "Verify showroom bank account details."
+              }
+            },
+            {
+              "name": "Get Verification Documents",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/showroom/verification/documents",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "showroom",
+                    "verification",
+                    "documents"
+                  ]
+                },
+                "description": "List uploaded compliance documents."
+              }
+            }
+          ]
+        },
+        {
+          "name": "9. Showroom Analytics Engine",
+          "description": "Overview, product performance, inventory breakdown, audience demographics, and event tracking",
+          "item": [
+            {
+              "name": "Get Overview Analytics",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/showroom/analytics/overview",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "showroom",
+                    "analytics",
+                    "overview"
+                  ]
+                },
+                "description": "Get profile views, product views, inquiries, quote requests, saves, and top products."
+              }
+            },
+            {
+              "name": "Get Product Analytics",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/showroom/analytics/products",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "showroom",
+                    "analytics",
+                    "products"
+                  ]
+                },
+                "description": "Performance breakdown per product."
+              }
+            },
+            {
+              "name": "Get Inventory Analytics",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/showroom/analytics/inventory",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "showroom",
+                    "analytics",
+                    "inventory"
+                  ]
+                },
+                "description": "Stock aggregation, low stock count, out of stock count, category breakdown."
+              }
+            },
+            {
+              "name": "Get Audience Analytics",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/showroom/analytics/audience",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "showroom",
+                    "analytics",
+                    "audience"
+                  ]
+                },
+                "description": "Visitor locations, new vs returning visitors, audience growth."
+              }
+            },
+            {
+              "name": "Record Showroom Analytics Event",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"event_type\": \"profile_view\",\n  \"entity_type\": \"profile\",\n  \"metadata\": {\n    \"device\": \"mobile\",\n    \"source\": \"showroom_directory\"\n  }\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/showroom/analytics/event",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "showroom",
+                    "analytics",
+                    "event"
+                  ]
+                },
+                "description": "Track interactive user events."
+              }
+            }
+          ]
+        },
+        {
+          "name": "10. Integrated Submodules (Shared Engines)",
+          "description": "Inquiries, Leads, Promotions, and Settings mounted for Showroom",
+          "item": [
+            {
+              "name": "Get Showroom Inquiries",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/showroom/inquiries",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "showroom",
+                    "inquiries"
+                  ]
+                },
+                "description": "Retrieve buyer inquiries routed to showroom."
+              }
+            },
+            {
+              "name": "Get Showroom Leads",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/showroom/leads",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "showroom",
+                    "leads"
+                  ]
+                },
+                "description": "Retrieve requirement leads assigned to showroom."
+              }
+            },
+            {
+              "name": "Get Showroom Promotions Dashboard",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/showroom/promotions/dashboard",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "showroom",
+                    "promotions",
+                    "dashboard"
+                  ]
+                },
+                "description": "Access shared promotion campaigns engine for showroom."
+              }
+            },
+            {
+              "name": "Get Showroom Account Settings",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/showroom/settings",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "showroom",
+                    "settings"
+                  ]
+                },
+                "description": "Access shared settings, notifications, and preferences engine."
+              }
+            }
+          ]
+        }
+      ]
     }
   ]
 }

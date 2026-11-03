@@ -58,8 +58,29 @@ const productSchema = new mongoose.Schema({
   quantity_unit: { type: String, default: 'Sq.ft' },
   stock: Number,
   available_stock: Number,
+  short_description: String,
+  product_origin: String,
+  low_stock_threshold: { type: Number, default: 10 },
+  is_low_stock: { type: Boolean, default: false },
+  is_out_of_stock: { type: Boolean, default: false },
   stock_unit: { type: String, default: 'Sq.ft' },
-  availability_status: { type: String, enum: ['in_stock', 'out_of_stock', 'made_to_order'], default: 'in_stock' },
+  availability_status: { 
+    type: String, 
+    enum: [
+      'in_stock', 
+      'limited_stock', 
+      'out_of_stock', 
+      'available_on_order', 
+      'discontinued', 
+      'made_to_order',
+      'In Stock', 
+      'Limited Stock', 
+      'Out of Stock', 
+      'Available on Order', 
+      'Discontinued'
+    ], 
+    default: 'in_stock' 
+  },
   target_publishing: {
     states: [String],
     districts: [String],
@@ -87,6 +108,10 @@ productSchema.pre('save', function (next) {
     this.available_stock = this.stock;
   } else if (this.available_stock !== undefined && this.stock === undefined) {
     this.stock = this.available_stock;
+  }
+  if (this.available_stock !== undefined) {
+    this.is_out_of_stock = this.available_stock <= 0;
+    this.is_low_stock = this.available_stock > 0 && this.available_stock <= (this.low_stock_threshold || 10);
   }
   next();
 });

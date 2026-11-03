@@ -20,10 +20,14 @@ const {
 const { submitQuoteSchema } = require('../validations/inquiryManagement.validation');
 const { successResponse, errorResponse } = require('../utils/apiResponse');
 
-// Helper: Get or initialize BusinessProfile (supports manufacturer & mining)
+// Helper: Get or initialize BusinessProfile (supports manufacturer, mining & showroom)
 async function getManufacturerProfile(userId) {
   const user = await User.findById(userId);
-  const targetType = (user && user.role === 'mining') ? 'mining' : 'manufacturer';
+  let targetType = 'manufacturer';
+  if (user) {
+    if (user.role === 'showroom') targetType = 'showroom';
+    else if (user.role === 'mining') targetType = 'mining';
+  }
 
   let profile = await BusinessProfile.findOne({
     userId,
@@ -36,7 +40,28 @@ async function getManufacturerProfile(userId) {
   }
 
   if (!profile && user) {
-    if (user.role === 'mining') {
+    if (user.role === 'showroom') {
+      profile = await BusinessProfile.create({
+        userId,
+        business_type: 'showroom',
+        company_name: user.name ? `${user.name} Stone Gallery & Godown` : 'Royal Stone Gallery & Godown',
+        established_year: 2018,
+        monthly_capacity: 50000,
+        capacity_unit: 'Sq.Ft',
+        total_display_area: 12000,
+        display_area_unit: 'Sq.ft',
+        total_storage_capacity: 50000,
+        storage_capacity_unit: 'Sq.ft',
+        showroom_type: 'Retail & Wholesale',
+        property_type: 'Owned',
+        premises_status: 'owned',
+        unit_status: 'domestic',
+        rating: 4.8,
+        review_count: 18,
+        status: 'active',
+        is_mock: false
+      });
+    } else if (user.role === 'mining') {
       profile = await BusinessProfile.create({
         userId,
         business_type: 'mining',
