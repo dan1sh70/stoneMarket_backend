@@ -17266,6 +17266,1155 @@
           ]
         }
       ]
+    },
+    {
+      "name": "Stone Trader Module (Phase 1)",
+      "description": "Complete Stone Trader Module for STONE MARKET INDIA: Dashboard, Business Profile, Trading Capabilities, Key Contacts, Gallery, Verification Center, Analytics, Inquiries, Leads, Settings, and strict Product Management Disabled enforcement.",
+      "item": [
+        {
+          "name": "1. Business Type Switching",
+          "description": "Business switcher enabling transition to Stone Trader identity",
+          "item": [
+            {
+              "name": "Get Available Business Types",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/trader/business-types",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "trader",
+                    "business-types"
+                  ]
+                },
+                "description": "Fetch available business types (Customer, Manufacturer, Mining, Showroom, Trader) with active state."
+              }
+            },
+            {
+              "name": "Switch Business Type to Trader",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"target_type\": \"trader\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/trader/switch-business-type",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "trader",
+                    "switch-business-type"
+                  ]
+                },
+                "description": "Switch active user role to trader and load trader business context."
+              }
+            }
+          ]
+        },
+        {
+          "name": "2. Trader Dashboard",
+          "description": "Trader Dashboard with profile card, quick stats, menus excluding Product Management",
+          "item": [
+            {
+              "name": "Get Trader Dashboard",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/trader/dashboard",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "trader",
+                    "dashboard"
+                  ]
+                },
+                "description": "Loads complete trader dashboard. Product management is strictly omitted."
+              }
+            }
+          ]
+        },
+        {
+          "name": "3. Product Management Disabled Enforcement",
+          "description": "Enforcement tests ensuring Product Management returns 403 Forbidden",
+          "item": [
+            {
+              "name": "Get Products (Blocked - 403)",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/trader/products",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "trader",
+                    "products"
+                  ]
+                },
+                "description": "Returns 403 Forbidden explaining that Stone Trader does not have Product Management."
+              }
+            },
+            {
+              "name": "Create Product (Blocked - 403)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Blocked Product\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/trader/products",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "trader",
+                    "products"
+                  ]
+                },
+                "description": "Returns 403 Forbidden for trader product creation."
+              }
+            },
+            {
+              "name": "Get Inventory Overview (Blocked - 403)",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/trader/inventory/overview",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "trader",
+                    "inventory",
+                    "overview"
+                  ]
+                },
+                "description": "Returns 403 Forbidden for trader inventory overview."
+              }
+            }
+          ]
+        },
+        {
+          "name": "4. Trader Business Profile & Trading Capabilities",
+          "description": "Trading business profile, trading specializations, capabilities, and capacity",
+          "item": [
+            {
+              "name": "Get Trader Profile",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/trader/profile",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "trader",
+                    "profile"
+                  ]
+                },
+                "description": "Get full business profile with trading specializations and capacities."
+              }
+            },
+            {
+              "name": "Update Trader Profile",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company_name\": \"Shree Shyam Marble & Granite Traders\",\n  \"short_description\": \"Premier stone trading company sourcing premium granite, marble, and sandstone across India and export markets.\",\n  \"established_year\": 2012,\n  \"address\": {\n    \"full_address\": \"Marble Mandi Road, Madanganj, Kishangarh, Ajmer District, Rajasthan\",\n    \"office_address\": \"Marble Mandi Road, Madanganj, Kishangarh, Ajmer District, Rajasthan\",\n    \"commercial_area\": \"Kishangarh Marble Market Mandi\",\n    \"district\": \"Ajmer\",\n    \"state\": \"Rajasthan\",\n    \"postal_code\": \"305801\"\n  }\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/trader/profile",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "trader",
+                    "profile"
+                  ]
+                },
+                "description": "Update trader basic information and registered office location."
+              }
+            },
+            {
+              "name": "Update Trading Capabilities & Capacity",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"trading_business_types\": [\n    \"Wholesale Stone Trader\",\n    \"Exporter\",\n    \"Bulk Material Supplier\"\n  ],\n  \"trading_specializations\": [\n    \"Granite\",\n    \"Marble\",\n    \"Sandstone\",\n    \"Limestone\",\n    \"Quartzite\"\n  ],\n  \"trading_capabilities\": [\n    \"Domestic Trading\",\n    \"International Trading\",\n    \"Exporting\",\n    \"Bulk Orders\"\n  ],\n  \"monthly_trading_volume\": 5000,\n  \"trading_volume_unit\": \"Metric Tons\",\n  \"min_order_quantity\": 50,\n  \"max_order_capacity\": 15000,\n  \"preferred_order_type\": \"Bulk Export & Container Shipments\",\n  \"supply_network_coverage\": \"Middle East, Europe, North America, Southeast Asia\",\n  \"operating_markets\": [\n    \"Domestic\",\n    \"International\"\n  ]\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/trader/trading-capabilities",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "trader",
+                    "trading-capabilities"
+                  ]
+                },
+                "description": "Update trading capabilities, volume, order constraints, and markets."
+              }
+            }
+          ]
+        },
+        {
+          "name": "5. Ownership & Key Contacts",
+          "description": "Management and director contacts with actions",
+          "item": [
+            {
+              "name": "Get Contacts",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/trader/contacts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "trader",
+                    "contacts"
+                  ]
+                },
+                "description": "List all partner, owner, and director contacts."
+              }
+            },
+            {
+              "name": "Add Contact",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Vikas Sharma\",\n  \"designation\": \"Commercial Trading Partner\",\n  \"phone\": \"9829099887\",\n  \"email\": \"vikas@shreeshyamtraders.com\",\n  \"birthday\": \"1985-07-15\",\n  \"anniversary\": \"2012-11-20\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/trader/contacts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "trader",
+                    "contacts"
+                  ]
+                },
+                "description": "Add partner/director contact."
+              }
+            },
+            {
+              "name": "Update Contact",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Vikas Sharma (Senior Partner)\",\n  \"designation\": \"Senior Commercial Partner\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/trader/contacts/CONTACT_ID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "trader",
+                    "contacts",
+                    "CONTACT_ID"
+                  ]
+                },
+                "description": "Update existing contact details."
+              }
+            },
+            {
+              "name": "Delete Contact",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/trader/contacts/CONTACT_ID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "trader",
+                    "contacts",
+                    "CONTACT_ID"
+                  ]
+                },
+                "description": "Delete contact."
+              }
+            }
+          ]
+        },
+        {
+          "name": "6. Gallery Management",
+          "description": "Categorized business photos and operations videos",
+          "item": [
+            {
+              "name": "Get Gallery",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/trader/gallery",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "trader",
+                    "gallery"
+                  ]
+                },
+                "description": "List all gallery photos, videos, categories, and owner profiles."
+              }
+            },
+            {
+              "name": "Upload Gallery Photo",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"category\": \"warehouse\",\n  \"title\": \"Kishangarh Central Godown\",\n  \"caption\": \"Massive stocking yard of pre-inspected granite slabs\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/trader/gallery/photos",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "trader",
+                    "gallery",
+                    "photos"
+                  ]
+                },
+                "description": "Upload categorized photo."
+              }
+            },
+            {
+              "name": "Delete Gallery Photo",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/trader/gallery/photos/PHOTO_ID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "trader",
+                    "gallery",
+                    "photos",
+                    "PHOTO_ID"
+                  ]
+                },
+                "description": "Delete photo."
+              }
+            },
+            {
+              "name": "Add Gallery Video",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"category\": \"walkthrough\",\n  \"title\": \"Warehouse & Inspection Walkthrough\",\n  \"video_url\": \"https://youtube.com/watch?v=sample123\",\n  \"duration\": \"3:45\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/trader/gallery/videos",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "trader",
+                    "gallery",
+                    "videos"
+                  ]
+                },
+                "description": "Add promotional or walkthrough video."
+              }
+            },
+            {
+              "name": "Delete Gallery Video",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/trader/gallery/videos/VIDEO_ID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "trader",
+                    "gallery",
+                    "videos",
+                    "VIDEO_ID"
+                  ]
+                },
+                "description": "Delete video."
+              }
+            },
+            {
+              "name": "Get Gallery Owners",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/trader/gallery/owners",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "trader",
+                    "gallery",
+                    "owners"
+                  ]
+                },
+                "description": "Retrieve owner profiles for gallery presentation."
+              }
+            }
+          ]
+        },
+        {
+          "name": "7. Verification Center",
+          "description": "Phone OTP, email, GST, business registration, and trade license verification",
+          "item": [
+            {
+              "name": "Get Verification Status",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/trader/verification",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "trader",
+                    "verification"
+                  ]
+                },
+                "description": "Get checklist status, percentage, badge, and documents."
+              }
+            },
+            {
+              "name": "Send Phone OTP",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"phone\": \"9829054321\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/trader/verification/phone/send-otp",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "trader",
+                    "verification",
+                    "phone",
+                    "send-otp"
+                  ]
+                },
+                "description": "Request OTP verification."
+              }
+            },
+            {
+              "name": "Verify Phone OTP",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"phone\": \"9829054321\",\n  \"otp\": \"123456\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/trader/verification/phone/verify-otp",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "trader",
+                    "verification",
+                    "phone",
+                    "verify-otp"
+                  ]
+                },
+                "description": "Verify OTP code."
+              }
+            },
+            {
+              "name": "Submit GST Verification",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"gst_number\": \"08AAAFS1234F1Z8\",\n  \"legal_business_name\": \"Shree Shyam Marble & Granite Traders\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/trader/verification/gst",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "trader",
+                    "verification",
+                    "gst"
+                  ]
+                },
+                "description": "Submit GST number and details."
+              }
+            },
+            {
+              "name": "Submit Business Registration",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"registration_type\": \"Partnership Firm\",\n  \"registration_number\": \"REG-TRADER-RJ-2012-9901\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/trader/verification/business",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "trader",
+                    "verification",
+                    "business"
+                  ]
+                },
+                "description": "Submit firm/company registration proof."
+              }
+            },
+            {
+              "name": "Submit Bank Verification",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account_holder_name\": \"Shree Shyam Marble & Granite Traders\",\n  \"account_number\": \"98765432109876\",\n  \"ifsc_code\": \"SBIN0001234\",\n  \"bank_name\": \"State Bank of India\",\n  \"branch_name\": \"Madanganj Kishangarh\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/trader/verification/bank",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "trader",
+                    "verification",
+                    "bank"
+                  ]
+                },
+                "description": "Submit bank account details."
+              }
+            },
+            {
+              "name": "Upload Trader Document (IEC / Trade License)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"document_type\": \"iec_certificate\",\n  \"document_name\": \"Import Export Code (IEC) Certificate\",\n  \"document_number\": \"IECRJ987654321\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/trader/verification/documents",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "trader",
+                    "verification",
+                    "documents"
+                  ]
+                },
+                "description": "Upload trade license or IEC document."
+              }
+            }
+          ]
+        },
+        {
+          "name": "8. Trader Analytics Engine",
+          "description": "Analytics for views, inquiries, leads, audience growth, and client events",
+          "item": [
+            {
+              "name": "Get Overview Analytics",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/trader/analytics/overview?period=30days",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "trader",
+                    "analytics",
+                    "overview"
+                  ],
+                  "query": [
+                    {
+                      "key": "period",
+                      "value": "30days"
+                    }
+                  ]
+                },
+                "description": "Retrieve aggregated metrics for views, inquiries, leads, and saves."
+              }
+            },
+            {
+              "name": "Get Inquiry Analytics",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/trader/analytics/inquiries?period=30days",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "trader",
+                    "analytics",
+                    "inquiries"
+                  ],
+                  "query": [
+                    {
+                      "key": "period",
+                      "value": "30days"
+                    }
+                  ]
+                },
+                "description": "Inquiries by stone material, locations, and conversion rate."
+              }
+            },
+            {
+              "name": "Get Lead Analytics",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/trader/analytics/leads?period=30days",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "trader",
+                    "analytics",
+                    "leads"
+                  ],
+                  "query": [
+                    {
+                      "key": "period",
+                      "value": "30days"
+                    }
+                  ]
+                },
+                "description": "Lead funnel stages, discussion status, and quote conversion."
+              }
+            },
+            {
+              "name": "Get Audience Analytics",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/trader/analytics/audience?period=30days",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "trader",
+                    "analytics",
+                    "audience"
+                  ],
+                  "query": [
+                    {
+                      "key": "period",
+                      "value": "30days"
+                    }
+                  ]
+                },
+                "description": "Visitor geographic locations, returning visitors, and growth."
+              }
+            },
+            {
+              "name": "Record Analytics Event",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"event_type\": \"business_save\",\n  \"city\": \"Mumbai\",\n  \"state\": \"Maharashtra\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/trader/analytics/event",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "trader",
+                    "analytics",
+                    "event"
+                  ]
+                },
+                "description": "Track client profile view, contact click, or save event."
+              }
+            }
+          ]
+        },
+        {
+          "name": "9. Inquiries & Lead Management",
+          "description": "Incoming and outgoing commercial inquiry & quotation operations",
+          "item": [
+            {
+              "name": "Get Trader Inquiries",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/trader/inquiries",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "trader",
+                    "inquiries"
+                  ]
+                },
+                "description": "List inquiries submitted by or visible to the trader."
+              }
+            },
+            {
+              "name": "Get Trader Leads",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/trader/leads",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "trader",
+                    "leads"
+                  ]
+                },
+                "description": "List buyer procurement leads assigned to trader."
+              }
+            }
+          ]
+        },
+        {
+          "name": "10. Shared Submodules Integration",
+          "description": "Shared Ad Promotions, Invoices, and Account Settings engines",
+          "item": [
+            {
+              "name": "Get Trader Promotions Dashboard",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/trader/promotions/dashboard",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "trader",
+                    "promotions",
+                    "dashboard"
+                  ]
+                },
+                "description": "Access shared ad management promotion dashboard."
+              }
+            },
+            {
+              "name": "Get Trader Invoices",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/trader/invoices",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "trader",
+                    "invoices"
+                  ]
+                },
+                "description": "Access shared billing and GST invoice history."
+              }
+            },
+            {
+              "name": "Get Trader Settings",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/trader/settings",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "trader",
+                    "settings"
+                  ]
+                },
+                "description": "Access shared account and security preferences."
+              }
+            }
+          ]
+        }
+      ]
     }
   ]
 }

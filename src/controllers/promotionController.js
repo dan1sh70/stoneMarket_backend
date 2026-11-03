@@ -17,20 +17,21 @@ const {
 } = require('../validations/promotion.validation');
 const { successResponse, errorResponse } = require('../utils/apiResponse');
 
-// Helper to get or create Manufacturer BusinessProfile
+// Helper to get or create Manufacturer/Trader/Showroom/Mining BusinessProfile
 async function getManufacturerProfile(userId) {
   let profile = await BusinessProfile.findOne({
     userId,
-    business_type: 'manufacturer'
+    business_type: { $in: ['manufacturer', 'mining', 'showroom', 'trader'] }
   });
 
   if (!profile) {
     const user = await User.findById(userId);
     if (user) {
+      const bType = ['manufacturer', 'mining', 'showroom', 'trader'].includes(user.role) ? user.role : 'manufacturer';
       profile = await BusinessProfile.create({
         userId,
-        business_type: 'manufacturer',
-        company_name: user.name ? `${user.name} Granite Processing` : 'Manufacturer Unit',
+        business_type: bType,
+        company_name: user.name ? `${user.name} Business Unit` : 'Business Unit',
         established_year: 2020,
         monthly_capacity: 50000,
         capacity_unit: 'Sq.Ft',

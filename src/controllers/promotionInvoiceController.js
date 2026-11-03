@@ -10,7 +10,10 @@ const { successResponse, errorResponse } = require('../utils/apiResponse');
 async function getManufacturerInvoices(req, res) {
   try {
     const userId = req.user.userId || req.user.id || req.user._id;
-    const profile = await BusinessProfile.findOne({ userId, business_type: 'manufacturer' });
+    const profile = await BusinessProfile.findOne({
+      userId,
+      business_type: { $in: ['manufacturer', 'mining', 'showroom', 'trader'] }
+    });
 
     const query = profile ? {
       $or: [{ manufacturer_id: profile._id }, { userId }]

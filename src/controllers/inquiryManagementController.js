@@ -16,12 +16,13 @@ const {
 } = require('../validations/inquiryManagement.validation');
 const { successResponse, errorResponse } = require('../utils/apiResponse');
 
-// Internal Helper: Get or initialize BusinessProfile (supports manufacturer & mining)
+// Internal Helper: Get or initialize BusinessProfile (supports manufacturer, mining, showroom, trader)
 async function getManufacturerProfile(userId) {
   const user = await User.findById(userId);
   let targetType = 'manufacturer';
   if (user) {
-    if (user.role === 'showroom') targetType = 'showroom';
+    if (user.role === 'trader') targetType = 'trader';
+    else if (user.role === 'showroom') targetType = 'showroom';
     else if (user.role === 'mining') targetType = 'mining';
   }
 
@@ -36,7 +37,35 @@ async function getManufacturerProfile(userId) {
   }
 
   if (!profile && user) {
-    if (user.role === 'showroom') {
+    if (user.role === 'trader') {
+      profile = await BusinessProfile.create({
+        userId,
+        business_type: 'trader',
+        company_name: user.name ? `${user.name} Marble & Granite Traders` : 'Shree Shyam Marble & Granite Traders',
+        business_category: 'Stone Trader',
+        business_subcategory: 'Wholesale Stone Trader & Exporter',
+        short_description: 'Leading commercial stone trading house sourcing and supplying natural stones across India and global markets.',
+        about_business: 'Specializing in commercial intermediary sourcing, bulk supply, block dispatch, slab trading, and project procurement.',
+        established_year: 2016,
+        trading_business_types: ['Wholesale Stone Trader', 'Exporter', 'Bulk Material Supplier'],
+        trading_specializations: ['Granite', 'Marble', 'Sandstone', 'Limestone', 'Tiles', 'Other Natural Stones'],
+        trading_capabilities: ['Domestic Trading', 'International Trading', 'Wholesale Supply', 'Bulk Orders'],
+        monthly_trading_volume: 8000,
+        trading_volume_unit: 'Tons',
+        min_order_quantity: 500,
+        max_order_capacity: 15000,
+        preferred_order_type: 'Full Truck Load & Container',
+        supply_network_coverage: 'Pan-India & Export Markets',
+        operating_markets: ['Domestic', 'International'],
+        gst_number: '08AAACS1234E1Z9',
+        iec_number: 'IEC-RJ-2016-8910',
+        business_registration_number: 'REG-RJ-2016-5541',
+        rating: 4.8,
+        review_count: 24,
+        status: 'active',
+        is_mock: false
+      });
+    } else if (user.role === 'showroom') {
       profile = await BusinessProfile.create({
         userId,
         business_type: 'showroom',
@@ -99,14 +128,17 @@ async function getManufacturerProfile(userId) {
   return profile;
 }
 
-// Helper to check inquiry visibility for manufacturer, mining, or showroom
+// Helper to check inquiry visibility for manufacturer, mining, showroom, or trader
 function buildInquiryVisibilityFilter(profile) {
   const isMining = profile.business_type === 'mining';
   const isShowroom = profile.business_type === 'showroom';
+  const isTrader = profile.business_type === 'trader';
   const categories = isMining
     ? ['Mining', 'Mines & Quarries', 'Raw Stone Blocks', 'Granite Blocks', 'Marble Blocks', 'Sandstone Blocks', 'Limestone Blocks', 'Natural Stone']
     : isShowroom
     ? ['Showroom', 'Godown & Showrooms', 'Godown', 'Slabs', 'Tiles', 'Granite', 'Marble', 'Sandstone', 'Limestone', 'Quartzite', 'Slate', 'Natural Stone', 'Manufacturer']
+    : isTrader
+    ? ['Trader', 'Stone Trader', 'Traders & Suppliers', 'Wholesale Supply', 'Granite', 'Marble', 'Sandstone', 'Limestone', 'Tiles', 'Natural Stone', 'Manufacturer', 'Showroom']
     : ['Granite', 'Marble', 'Granite Slabs', 'Marble & Granite Slabs', 'Granite & Marble Slabs', 'Natural Stone', 'Manufacturer'];
 
   return {

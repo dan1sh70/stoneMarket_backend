@@ -17,6 +17,10 @@ exports.successResponse = (res, message, data = {}, meta = {}, statusCode = 200)
 };
 
 exports.errorResponse = (res, message, errors = null, statusCode = 400, meta = {}) => {
+  if (typeof errors === 'number') {
+    statusCode = errors;
+    errors = null;
+  }
   return res.status(statusCode).json({
     success: false,
     message,
