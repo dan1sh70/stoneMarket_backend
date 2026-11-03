@@ -30,9 +30,10 @@ function generateInquiryPdf(inquiry) {
       doc.rect(40, currentY, 515, 30).fill('#F7FAFC');
       doc.rect(40, currentY, 515, 30).stroke('#E2E8F0');
       doc.fillColor('#2D3748').fontSize(10).font('Helvetica-Bold');
-      doc.text(`Inquiry Reference: ${inquiry.reference_number || inquiry._id}`, 50, currentY + 10);
+      const refNum = inquiry.inquiry_number || inquiry.reference_number || inquiry._id;
+      doc.text(`Inquiry Reference: ${refNum}`, 50, currentY + 10);
       
-      const statusText = (inquiry.status || 'pending').toUpperCase().replace(/_/g, ' ');
+      const statusText = (inquiry.inquiry_status || inquiry.status || 'pending').toUpperCase().replace(/_/g, ' ');
       doc.fillColor('#3182CE').text(`Status: ${statusText}`, 380, currentY + 10);
       currentY += 45;
 
@@ -82,7 +83,7 @@ function generateInquiryPdf(inquiry) {
       currentY += 22;
 
       const specs = [
-        ['Product / Material', inquiry.productId?.name || inquiry.subject || 'Stone Inquiry'],
+        ['Product / Material', inquiry.requirement_title || inquiry.productId?.name || inquiry.subject || 'Stone Inquiry'],
         ['Required Quantity', `${inquiry.quantity || 'N/A'} ${inquiry.unit || 'Sq.Ft'}`],
         ['Dimensions / Size', inquiry.size || 'Standard Slabs'],
         ['Thickness', inquiry.thickness || 'Standard (18mm)'],

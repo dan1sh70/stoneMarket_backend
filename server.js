@@ -81,6 +81,10 @@ const promotionInvoiceRoutes = require('./src/routes/promotionInvoiceRoutes');
 const adminPromotionRoutes = require('./src/routes/adminPromotionRoutes');
 const promotionController = require('./src/controllers/promotionController');
 
+// Phase 3 My Inquiries & Lead Management Routes
+const inquiryManagementRoutes = require('./src/routes/inquiryManagementRoutes');
+const quotationManagementRoutes = require('./src/routes/quotationManagementRoutes');
+
 // v1 Routes
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/customer', customerRoutes);
@@ -137,6 +141,12 @@ app.use('/api/v1/manufacturer/promotions', promotionRoutes);
 app.use('/api/v1/payments', paymentRoutes);
 app.use('/api/v1/manufacturer/invoices', promotionInvoiceRoutes);
 app.use('/api/v1/admin/promotions', adminPromotionRoutes);
+
+// Phase 3 My Inquiries & Lead Management Routes (mounted before /api/manufacturer)
+app.use('/api/manufacturer/inquiries', inquiryManagementRoutes);
+app.use('/api/manufacturer/quotes', quotationManagementRoutes);
+app.use('/api/v1/manufacturer/inquiries', inquiryManagementRoutes);
+app.use('/api/v1/manufacturer/quotes', quotationManagementRoutes);
 
 app.use('/api/customer', customerRoutes);
 app.use('/api/manufacturer', manufacturerProfileRoutes);

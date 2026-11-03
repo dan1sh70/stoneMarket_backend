@@ -38,7 +38,11 @@ const inquirySchema = new mongoose.Schema({
   attachments: [{
     url: String,
     filename: String,
+    file_name: String,
+    file_path: String,
+    file_type: String,
     size: Number,
+    file_size: Number,
     mimetype: String
   }],
   referralSource: String,
@@ -55,9 +59,30 @@ const inquirySchema = new mongoose.Schema({
   color_requirements: String,
   pattern_requirements: String,
   packaging_requirements: String,
-  budget_range: String,
+  // Phase 3 Extensions
+  inquiry_number: { type: String, index: true },
+  requirement_title: String,
+  material: String,
+  color: String,
+  pattern: String,
+  country_of_origin: { type: String, default: 'India' },
+  delivery_location: String,
+  response_deadline: Date,
+  assigned_manufacturers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'BusinessProfile' }],
+  recipients: [{
+    manufacturer_id: { type: mongoose.Schema.Types.ObjectId, ref: 'BusinessProfile' },
+    delivery_status: { type: String, default: 'delivered' },
+    viewed_at: Date,
+    responded_at: Date
+  }],
+  closure_reason: String,
+  closure_comments: String,
   closed_reason: String,
   closed_at: Date,
+  inquiry_status: {
+    type: String,
+    default: 'pending'
+  },
   status: { 
     type: String, 
     enum: [
@@ -66,6 +91,7 @@ const inquirySchema = new mongoose.Schema({
       'pending', 
       'in_review', 
       'quotes_received', 
+      'partially_quoted',
       'under_review', 
       'provider_contacted', 
       'quotation_received', 
@@ -75,7 +101,8 @@ const inquirySchema = new mongoose.Schema({
       'rejected', 
       'cancelled', 
       'completed', 
-      'closed'
+      'closed',
+      'expired'
     ], 
     default: 'pending' 
   },
@@ -95,8 +122,15 @@ const inquirySchema = new mongoose.Schema({
   is_mock: { type: Boolean, default: false }
 }, { timestamps: true });
 
-// Indexes
-inquirySchema.index({ vendorId: 1, senderId: 1, category: 1, status: 1, createdAt: -1 });
-inquirySchema.index({ businessId: 1, senderId: 1, status: 1, createdAt: -1 });
+// Pre-save synchronization between status and inquiry_status
+inquirySchema.pre('save', function(next) {
+  if (this.isModified('status') && !this.isModified('inquiry_status')) {
+    this.inquiry_status = this.status;
+  } else if (this.isModified('inquiry_status') && !this.isModified('status')) {
+    this.status = this.inquiry_status;
+  }
+  next();
+});
 
 module.exports = mongoose.model('Inquiry', inquirySchema);
+

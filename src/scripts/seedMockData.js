@@ -47,6 +47,9 @@ const Payment = require('../models/Payment');
 const PromotionInvoice = require('../models/PromotionInvoice');
 const PromotionAnalytics = require('../models/PromotionAnalytics');
 const CampaignActivityLog = require('../models/CampaignActivityLog');
+const InquiryQuotation = require('../models/InquiryQuotation');
+const InquiryActivityLog = require('../models/InquiryActivityLog');
+const InquiryMessage = require('../models/InquiryMessage');
 
 const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/stone_market';
 
@@ -98,7 +101,10 @@ const cleanMockData = async () => {
     Payment.deleteMany({ is_mock: true }),
     PromotionInvoice.deleteMany({ is_mock: true }),
     PromotionAnalytics.deleteMany({ is_mock: true }),
-    CampaignActivityLog.deleteMany({})
+    CampaignActivityLog.deleteMany({}),
+    InquiryQuotation.deleteMany({ is_mock: true }),
+    InquiryActivityLog.deleteMany({}),
+    InquiryMessage.deleteMany({ is_mock: true })
   ]);
   console.log('All mock data has been successfully deleted.');
 };
@@ -2660,6 +2666,256 @@ const seedMockData = async () => {
       }
       await PromotionAnalytics.insertMany(analyticsRows);
       console.log(`Seeded active campaigns, orders, payments, invoices, and ${analyticsRows.length} analytics events for Mfg 1.`);
+    }
+
+    // 16. Seeding Phase 3: My Inquiries & Lead Management Data
+    console.log('\n16. Seeding Phase 3: My Inquiries & Lead Management Data...');
+    const mfg1Prof = await BusinessProfile.findOne({ company_name: { $regex: 'Royal Rajasthan Granite', $options: 'i' } });
+    const mfg2Prof = await BusinessProfile.findOne({ company_name: { $regex: 'Kishangarh Marble', $options: 'i' } });
+    const buyer1User = await User.findOne({ mobile: '9111111112' });
+    const buyer2User = await User.findOne({ mobile: '9111111113' });
+    const buyer3User = await User.findOne({ mobile: '9111111114' });
+    const blackGalaxyProd = await Product.findOne({ name: { $regex: 'Black Galaxy', $options: 'i' } });
+
+    if (mfg1Prof && buyer1User) {
+      // Inquiry 1: Quotes Received (Black Galaxy Granite Gangsaw Slabs)
+      const inq1 = await Inquiry.create({
+        inquiry_number: 'INQ-2026-9041',
+        buyer_id: buyer1User._id,
+        senderId: buyer1User._id,
+        productId: blackGalaxyProd?._id,
+        requirement_title: 'Black Galaxy Granite Gangsaw Slabs',
+        subject: 'Black Galaxy Granite Gangsaw Slabs',
+        category: 'Granite & Marble Slabs',
+        description: 'Require export quality Black Galaxy granite slabs for luxury villa flooring project in Jaipur.',
+        requirements: 'Polished finish, consistent golden speckles, zero hairline cracks.',
+        required_quantity: 500,
+        quantity: 500,
+        quantity_unit: 'Sq.ft',
+        unit: 'Sq.ft',
+        required_size: '10 × 6 ft',
+        size: '10 × 6 ft',
+        thickness: '18 mm',
+        finish: 'Mirror Polished',
+        quality: 'Premium Grade A',
+        grade: 'Grade A',
+        edge_profile: 'Straight Cut',
+        material: 'Granite',
+        color: 'Black Galaxy',
+        pattern: 'Golden Flecks',
+        country_of_origin: 'India',
+        delivery_location: 'Jaipur, Rajasthan',
+        deliveryLocation: {
+          address: 'Plot 45, Tonk Road',
+          city: 'Jaipur',
+          state: 'Rajasthan',
+          pincode: '302015'
+        },
+        contactInfo: {
+          name: buyer1User.name || 'Global Infra Buildcon',
+          mobile: buyer1User.mobile,
+          email: buyer1User.email,
+          city: 'Jaipur'
+        },
+        supplierType: 'manufacturer',
+        assigned_manufacturers: [mfg1Prof._id, ...(mfg2Prof ? [mfg2Prof._id] : [])],
+        recipients: [
+          { manufacturer_id: mfg1Prof._id, delivery_status: 'delivered', viewed_at: new Date() },
+          ...(mfg2Prof ? [{ manufacturer_id: mfg2Prof._id, delivery_status: 'delivered', viewed_at: new Date() }] : [])
+        ],
+        inquiry_status: 'quotes_received',
+        status: 'quotes_received',
+        quotations_count: 2,
+        attachments: [
+          {
+            file_name: 'villa_elevation_specs.pdf',
+            file_path: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80',
+            file_type: 'application/pdf',
+            file_size: 1450000
+          }
+        ],
+        is_mock: true
+      });
+
+      // Inquiry 2: Pending Requirement (Steel Grey Granite Cut-to-Size)
+      const inq2 = await Inquiry.create({
+        inquiry_number: 'INQ-2026-9042',
+        buyer_id: buyer2User?._id || buyer1User._id,
+        senderId: buyer2User?._id || buyer1User._id,
+        requirement_title: 'Steel Grey Granite Cut-to-Size',
+        subject: 'Steel Grey Granite Cut-to-Size',
+        category: 'Granite & Marble Slabs',
+        description: 'Need Steel Grey granite cut to size for commercial office staircase.',
+        required_quantity: 1200,
+        quantity: 1200,
+        quantity_unit: 'Sq.ft',
+        unit: 'Sq.ft',
+        required_size: '4 × 1 ft',
+        size: '4 × 1 ft',
+        thickness: '20 mm',
+        finish: 'Flamed / Lapato',
+        quality: 'Standard Commercial',
+        material: 'Granite',
+        color: 'Steel Grey',
+        delivery_location: 'Udaipur, Rajasthan',
+        deliveryLocation: {
+          city: 'Udaipur',
+          state: 'Rajasthan'
+        },
+        supplierType: 'manufacturer',
+        assigned_manufacturers: [mfg1Prof._id],
+        recipients: [{ manufacturer_id: mfg1Prof._id, delivery_status: 'delivered' }],
+        inquiry_status: 'pending',
+        status: 'pending',
+        quotations_count: 0,
+        is_mock: true
+      });
+
+      // Inquiry 3: Closed (Makrana White Marble Blocks)
+      const inq3 = await Inquiry.create({
+        inquiry_number: 'INQ-2026-8800',
+        buyer_id: buyer3User?._id || buyer1User._id,
+        senderId: buyer3User?._id || buyer1User._id,
+        requirement_title: 'Makrana White Marble Blocks',
+        category: 'Granite & Marble Slabs',
+        required_quantity: 80,
+        quantity: 80,
+        quantity_unit: 'Tons',
+        delivery_location: 'Makrana, Rajasthan',
+        supplierType: 'manufacturer',
+        assigned_manufacturers: [mfg1Prof._id],
+        inquiry_status: 'closed',
+        status: 'closed',
+        closed_at: new Date(Date.now() - 3 * 86400000),
+        closure_reason: 'Requirement finalized with offline supplier',
+        closure_comments: 'Project schedule moved earlier, material procured locally.',
+        is_mock: true
+      });
+
+      // Quotation 1 by Mfg 1 on Inquiry 1
+      const quote1 = await InquiryQuotation.create({
+        quote_number: 'QTE-2026-9041-A',
+        inquiry_id: inq1._id,
+        manufacturer_id: mfg1Prof._id,
+        manufacturer_user_id: mfg1Prof.userId,
+        buyer_id: buyer1User._id,
+        product_id: blackGalaxyProd?._id,
+        quoted_quantity: 500,
+        quantity_unit: 'Sq.ft',
+        unit_price: 175,
+        subtotal: 87500,
+        tax_rate: 18,
+        tax_amount: 15570,
+        shipping_charges: 4500,
+        discount: 1000,
+        total_amount: 106570,
+        material: 'Granite',
+        size: '10 × 6 ft',
+        thickness: '18 mm',
+        finish: 'Mirror Polished',
+        quality: 'Export Quality Grade A',
+        delivery_timeline: '7-10 Business Days',
+        payment_terms: '50% Advance, 50% on Dispatch',
+        advance_payment: 53285,
+        balance_payment: 53285,
+        validity_date: new Date(Date.now() + 15 * 86400000),
+        warranty: '1 Year Quality Guarantee',
+        quote_status: 'submitted',
+        notes: 'Premium export Gangsaw cut Black Galaxy slabs from Jalore facility.',
+        is_mock: true
+      });
+
+      // Quotation 2 by Mfg 2 on Inquiry 1 (Competing Quotation)
+      if (mfg2Prof) {
+        await InquiryQuotation.create({
+          quote_number: 'QTE-2026-9041-B',
+          inquiry_id: inq1._id,
+          manufacturer_id: mfg2Prof._id,
+          manufacturer_user_id: mfg2Prof.userId,
+          buyer_id: buyer1User._id,
+          quoted_quantity: 500,
+          quantity_unit: 'Sq.ft',
+          unit_price: 180,
+          subtotal: 90000,
+          tax_rate: 18,
+          tax_amount: 16200,
+          shipping_charges: 3000,
+          discount: 0,
+          total_amount: 109200,
+          material: 'Granite',
+          size: '10 × 6 ft',
+          thickness: '18 mm',
+          finish: 'High Gloss Polish',
+          quality: 'First Choice Quality',
+          delivery_timeline: '5-7 Days',
+          payment_terms: '100% on Dispatch',
+          advance_payment: 0,
+          balance_payment: 109200,
+          validity_date: new Date(Date.now() + 20 * 86400000),
+          warranty: 'Standard Crack & Polish Warranty',
+          quote_status: 'submitted',
+          notes: 'Freshly cut Gangsaw stock available for inspection at Kishangarh unit.',
+          is_mock: true
+        });
+      }
+
+      // Activity logs for Inquiry 1
+      await InquiryActivityLog.create([
+        {
+          inquiry_id: inq1._id,
+          performed_by: buyer1User._id,
+          actor_type: 'buyer',
+          activity_type: 'inquiry_created',
+          stage: 1,
+          title: 'Inquiry Requested',
+          description: 'Buyer submitted new requirement inquiry INQ-2026-9041.'
+        },
+        {
+          inquiry_id: inq1._id,
+          performed_by: mfg1Prof.userId,
+          actor_type: 'manufacturer',
+          activity_type: 'inquiry_reviewed',
+          stage: 2,
+          title: 'Requirement Placed Under Review',
+          description: `${mfg1Prof.company_name} placed the inquiry under technical review.`
+        },
+        {
+          inquiry_id: inq1._id,
+          performed_by: mfg1Prof.userId,
+          actor_type: 'manufacturer',
+          activity_type: 'quote_submitted',
+          stage: 3,
+          title: 'Quotation Submitted',
+          description: `${mfg1Prof.company_name} submitted quotation QTE-2026-9041-A at ₹175/Sq.ft (Total: ₹1,06,570).`,
+          metadata: { quote_id: quote1._id, quote_number: 'QTE-2026-9041-A', total_amount: 106570 }
+        }
+      ]);
+
+      // Seed chat messages
+      await InquiryMessage.create([
+        {
+          inquiry_id: inq1._id,
+          quotation_id: quote1._id,
+          sender_id: mfg1Prof.userId,
+          sender_type: 'manufacturer',
+          receiver_id: buyer1User._id,
+          message: 'Hello Ramesh, we have ready stock of 10x6 ft Black Galaxy slabs at our Jalore unit. Let us know if you need physical sample dispatch.',
+          is_read: true,
+          is_mock: true
+        },
+        {
+          inquiry_id: inq1._id,
+          quotation_id: quote1._id,
+          sender_id: buyer1User._id,
+          sender_type: 'buyer',
+          receiver_id: mfg1Prof.userId,
+          message: 'Thank you Vikram! Can you confirm if wooden crate export packaging is included in the quoted freight?',
+          is_read: false,
+          is_mock: true
+        }
+      ]);
+
+      console.log('Seeded Phase 3 Inquiries (INQ-2026-9041, INQ-2026-9042, INQ-2026-8800), Quotations, Activity Logs, and Messages.');
     }
 
     console.log('\n======================================================');

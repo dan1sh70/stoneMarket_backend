@@ -12739,6 +12739,732 @@
           ]
         }
       ]
+    },
+    {
+      "name": "Inquiry & Lead Management Module",
+      "description": "Complete Phase 3 Inquiry & Lead Management module for Manufacturer dashboard with search, 4 status tabs, requirement details, 4-stage progress tracker, quotation calculations, side-by-side comparison matrix, communication threads, and branded PDF generation.",
+      "item": [
+        {
+          "name": "1. Main Screen & Listing",
+          "item": [
+            {
+              "name": "Get All Inquiries (Cards & Pagination)",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/inquiries?status=all&page=1&limit=15",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "inquiries"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "all"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "15"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Filter Quotes Received Tab",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/inquiries?status=quotes_received",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "inquiries"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "quotes_received"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Filter Pending Tab",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/inquiries?status=pending",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "inquiries"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "pending"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Filter Closed Tab",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/inquiries?status=closed",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "inquiries"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "closed"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Search Inquiries (Requirement, City, ID)",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/inquiries?search=Jaipur",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "inquiries"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "Jaipur"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Dedicated Search Endpoint",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/inquiries/search?q=Galaxy",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "inquiries",
+                    "search"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "Galaxy"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Inquiry Tab Counts & Lead Statistics",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/inquiries/statistics",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "inquiries",
+                    "statistics"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "2. Inquiry Details Screen",
+          "item": [
+            {
+              "name": "Get Complete Inquiry Details (Summary & 4-Stage Progress Tracker)",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/inquiries/{{inquiry_id}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "inquiries",
+                    "{{inquiry_id}}"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Requirement Specifications & Delivery Info",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/inquiries/{{inquiry_id}}/requirements",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "inquiries",
+                    "{{inquiry_id}}",
+                    "requirements"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Inquiry Attachments",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/inquiries/{{inquiry_id}}/attachments",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "inquiries",
+                    "{{inquiry_id}}",
+                    "attachments"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Inquiry Activity History Logs",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/inquiries/{{inquiry_id}}/activity",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "inquiries",
+                    "{{inquiry_id}}",
+                    "activity"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Download Branded Inquiry PDF Stream",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/inquiries/{{inquiry_id}}/download",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "inquiries",
+                    "{{inquiry_id}}",
+                    "download"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "3. Quotations Management & Comparison",
+          "item": [
+            {
+              "name": "Submit Quotation against Requirement",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/inquiries/{{inquiry_id}}/quotes",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "inquiries",
+                    "{{inquiry_id}}",
+                    "quotes"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"quoted_quantity\": 500,\n  \"quantity_unit\": \"Sq.ft\",\n  \"unit_price\": 175,\n  \"tax_rate\": 18,\n  \"shipping_charges\": 4500,\n  \"discount\": 1000,\n  \"material\": \"Granite\",\n  \"size\": \"10 × 6 ft\",\n  \"thickness\": \"18 mm\",\n  \"finish\": \"Mirror Polished\",\n  \"quality\": \"Export Quality Grade A\",\n  \"delivery_timeline\": \"7-10 Business Days\",\n  \"payment_terms\": \"50% Advance, 50% on Dispatch\",\n  \"advance_payment\": 50,\n  \"balance_payment\": 50,\n  \"validity_days\": 15,\n  \"warranty\": \"1 Year Quality Guarantee\",\n  \"notes\": \"Premium export Gangsaw cut Black Galaxy slabs from Jalore facility.\"\n}"
+                }
+              }
+            },
+            {
+              "name": "Get Quotations Received List",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/inquiries/{{inquiry_id}}/quotes",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "inquiries",
+                    "{{inquiry_id}}",
+                    "quotes"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Compare Competing Quotations Matrix",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/inquiries/{{inquiry_id}}/quotes/compare",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "inquiries",
+                    "{{inquiry_id}}",
+                    "quotes",
+                    "compare"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Quotation Detailed View Screen",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/quotes/{{quote_id}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "quotes",
+                    "{{quote_id}}"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Update Quotation",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/quotes/{{quote_id}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "quotes",
+                    "{{quote_id}}"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"unit_price\": 170,\n  \"discount\": 1500,\n  \"notes\": \"Special revised offer with priority factory loading.\"\n}"
+                }
+              }
+            },
+            {
+              "name": "Withdraw Quotation",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/quotes/{{quote_id}}/withdraw",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "quotes",
+                    "{{quote_id}}",
+                    "withdraw"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reason\": \"Raw block inventory allocated to export order\"\n}"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "4. Inquiry Lifecycle Management",
+          "item": [
+            {
+              "name": "Mark Requirement In Review (Stage 2)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/inquiries/{{inquiry_id}}/review",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "inquiries",
+                    "{{inquiry_id}}",
+                    "review"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Close Inquiry with Reason & Confirmation Dialog",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/inquiries/{{inquiry_id}}/close",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "inquiries",
+                    "{{inquiry_id}}",
+                    "close"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"closure_reason\": \"Order finalized with offline buyer\",\n  \"comments\": \"Material dispatched directly from factory.\"\n}"
+                }
+              }
+            },
+            {
+              "name": "Reopen Closed Inquiry",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/inquiries/{{inquiry_id}}/reopen",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "inquiries",
+                    "{{inquiry_id}}",
+                    "reopen"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "5. Inquiry-Linked Messaging Thread",
+          "item": [
+            {
+              "name": "Get Conversation Thread & Unread Count",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/inquiries/{{inquiry_id}}/messages",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "inquiries",
+                    "{{inquiry_id}}",
+                    "messages"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Send Message Linked to Inquiry",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/inquiries/{{inquiry_id}}/messages",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "inquiries",
+                    "{{inquiry_id}}",
+                    "messages"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"message\": \"Hello, we have ready stock of 10x6 ft Black Galaxy slabs at our Jalore unit. Let us know if you need physical sample dispatch.\"\n}"
+                }
+              }
+            },
+            {
+              "name": "Mark Unread Messages as Read",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/manufacturer/inquiries/{{inquiry_id}}/messages/read",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "manufacturer",
+                    "inquiries",
+                    "{{inquiry_id}}",
+                    "messages",
+                    "read"
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
     }
   ]
 }
