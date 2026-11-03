@@ -46,6 +46,9 @@ const productSchema = new mongoose.Schema({
   publishing_status: { type: String, enum: ['draft', 'published', 'archived'], default: 'published' },
   inquiry_count: { type: Number, default: 0 },
   featured: { type: Boolean, default: false },
+  is_promoted: { type: Boolean, default: false },
+  active_promotion_id: { type: mongoose.Schema.Types.ObjectId, ref: 'PromotionCampaign' },
+  promotion_priority: { type: Number, default: 0 },
   status: { type: String, enum: ['active', 'inactive', 'draft'], default: 'active' },
   views: { type: Number, default: 0 },
   is_mock: { type: Boolean, default: false }

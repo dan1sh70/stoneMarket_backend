@@ -40,6 +40,13 @@ const SupportTicket = require('../models/SupportTicket');
 const SupportFaq = require('../models/SupportFaq');
 const AppConfig = require('../models/AppConfig');
 const AnalyticsEvent = require('../models/AnalyticsEvent');
+const PromotionPackage = require('../models/PromotionPackage');
+const PromotionCampaign = require('../models/PromotionCampaign');
+const PromotionOrder = require('../models/PromotionOrder');
+const Payment = require('../models/Payment');
+const PromotionInvoice = require('../models/PromotionInvoice');
+const PromotionAnalytics = require('../models/PromotionAnalytics');
+const CampaignActivityLog = require('../models/CampaignActivityLog');
 
 const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/stone_market';
 
@@ -84,7 +91,14 @@ const cleanMockData = async () => {
     UserSession.deleteMany({ is_mock: true }),
     SupportTicket.deleteMany({ is_mock: true }),
     SupportFaq.deleteMany({ is_mock: true }),
-    AppConfig.deleteMany({ is_mock: true })
+    AppConfig.deleteMany({ is_mock: true }),
+    PromotionPackage.deleteMany({ is_mock: true }),
+    PromotionCampaign.deleteMany({ is_mock: true }),
+    PromotionOrder.deleteMany({ is_mock: true }),
+    Payment.deleteMany({ is_mock: true }),
+    PromotionInvoice.deleteMany({ is_mock: true }),
+    PromotionAnalytics.deleteMany({ is_mock: true }),
+    CampaignActivityLog.deleteMany({})
   ]);
   console.log('All mock data has been successfully deleted.');
 };
@@ -2254,6 +2268,399 @@ const seedMockData = async () => {
       { upsert: true, new: true }
     );
     console.log('Created Customer Account (Vikram Malhotra - 9111111118) with addresses, favorites, notifications, tickets & config.');
+
+    // ==========================================
+    // 17. Seeding Promotion Packages & Campaigns (Phase 2)
+    // ==========================================
+    console.log('\n17. Seeding Ads & Promotion Packages, Campaigns, Orders & Analytics...');
+    const feedPackages = await PromotionPackage.insertMany([
+      {
+        promotion_type: 'feed',
+        package_name: 'Starter Feed Blast',
+        description: 'Promote selected product across discovery feed with 2.5x inquiry potential.',
+        price: 499,
+        duration_days: 7,
+        promotional_multiplier: '2.5x Inquiries',
+        badge_label: 'Sponsored',
+        theme_color: 'blue',
+        display_order: 1,
+        benefits: [
+          'Promote selected product across discovery feed.',
+          'Direct inquiry button for buyers.',
+          '2.5x inquiry potential versus standard posts.'
+        ],
+        status: 'active',
+        is_mock: true
+      },
+      {
+        promotion_type: 'feed',
+        package_name: 'Growth Feed Blast',
+        description: 'Priority placement in buyer home feed with WhatsApp and Call action buttons.',
+        price: 999,
+        duration_days: 15,
+        promotional_multiplier: '5x Inquiries',
+        badge_label: 'Sponsored',
+        theme_color: 'blue',
+        display_order: 2,
+        benefits: [
+          'Priority placement in buyer home feed.',
+          'Direct WhatsApp and Call action buttons.',
+          '5x inquiry potential and higher engagement.'
+        ],
+        status: 'active',
+        is_mock: true
+      },
+      {
+        promotion_type: 'feed',
+        package_name: 'Mega Domination',
+        description: 'Maximum priority in relevant stone discovery feeds with verified sponsored tag.',
+        price: 1799,
+        duration_days: 30,
+        promotional_multiplier: '10x Inquiries',
+        badge_label: 'Sponsored',
+        theme_color: 'blue',
+        display_order: 3,
+        benefits: [
+          'Maximum priority in relevant stone discovery feeds.',
+          'Verified sponsored tag on product cards.',
+          '10x high-volume trade inquiry potential.'
+        ],
+        status: 'active',
+        is_mock: true
+      }
+    ]);
+
+    const listingPackages = await PromotionPackage.insertMany([
+      {
+        promotion_type: 'listing',
+        package_name: 'Starter Top Rank',
+        description: 'Guaranteed Top 5 placement in eligible directory searches with Featured Supplier badge.',
+        price: 499,
+        duration_days: 7,
+        promotional_multiplier: 'Guaranteed Top 5',
+        badge_label: 'Featured Supplier',
+        theme_color: 'orange',
+        display_order: 1,
+        benefits: [
+          'Guaranteed Top 5 placement in eligible directory searches.',
+          'Featured Supplier profile badge.',
+          'Increased profile visibility.',
+          'Direct WhatsApp link.'
+        ],
+        status: 'active',
+        is_mock: true
+      },
+      {
+        promotion_type: 'listing',
+        package_name: 'Diamond Visibility',
+        description: 'Guaranteed Top 3 placement in eligible directory searches with direct Call/Inquiry priority.',
+        price: 999,
+        duration_days: 15,
+        promotional_multiplier: 'Guaranteed Top 3',
+        badge_label: 'Featured Supplier',
+        theme_color: 'orange',
+        display_order: 2,
+        benefits: [
+          'Guaranteed Top 3 placement in eligible directory searches.',
+          'Premium profile visibility badge.',
+          'Direct Call and Inquiry priority buttons.',
+          'Increased buyer inquiries and phone calls.'
+        ],
+        status: 'active',
+        is_mock: true
+      },
+      {
+        promotion_type: 'listing',
+        package_name: 'State Dominance',
+        description: 'Priority placement across selected target districts with homepage supplier spotlight.',
+        price: 1799,
+        duration_days: 30,
+        promotional_multiplier: 'State Spotlight',
+        badge_label: 'Featured Supplier',
+        theme_color: 'orange',
+        display_order: 3,
+        benefits: [
+          'Priority placement across selected target districts.',
+          'Premium sponsored badge.',
+          'Homepage featured supplier spotlight eligibility.',
+          'Maximum visibility and lead generation opportunities.'
+        ],
+        status: 'active',
+        is_mock: true
+      }
+    ]);
+    console.log(`Created 3 Feed Packages and 3 Listing Boost Packages.`);
+
+    const mfg1Profile = createdBusinesses[2];
+    const mfg1Products = await Product.find({ businessProfileId: mfg1Profile._id });
+    const targetProduct = mfg1Products[0] || (await Product.findOne({ name: /Steel Grey/ }));
+
+    if (mfg1Profile && targetProduct) {
+      const feedPkg = feedPackages[1];
+      const feedGst = 179.82;
+      const feedTotal = 1178.82;
+
+      const startDateFeed = new Date();
+      const endDateFeed = new Date(Date.now() + 15 * 86400000);
+
+      const campaignFeed = await PromotionCampaign.create({
+        campaign_id: 'CMP-2026-F001',
+        manufacturer_id: mfg1Profile._id,
+        userId: uMfg1._id,
+        product_id: targetProduct._id,
+        package_id: feedPkg._id,
+        campaign_type: 'feed',
+        campaign_name: 'Steel Grey Granite Discovery Feed Blast',
+        campaign_status: 'active',
+        duration_days: 15,
+        start_date: startDateFeed,
+        end_date: endDateFeed,
+        target_type: 'states',
+        targeting_configuration: {
+          all_india: false,
+          states: ['Rajasthan', 'Gujarat', 'Maharashtra'],
+          districts: ['Jaipur', 'Kishangarh', 'Ahmedabad', 'Mumbai']
+        },
+        subtotal: 999,
+        gst_rate: 18,
+        gst_amount: feedGst,
+        total_amount: feedTotal,
+        daily_budget: 67,
+        priority_score: 20,
+        impressions_count: 3420,
+        clicks_count: 245,
+        inquiries_count: 38,
+        quote_requests_count: 14,
+        whatsapp_clicks_count: 52,
+        call_clicks_count: 29,
+        is_mock: true
+      });
+
+      await Product.findByIdAndUpdate(targetProduct._id, {
+        is_promoted: true,
+        active_promotion_id: campaignFeed._id,
+        promotion_priority: 20
+      });
+
+      const orderFeed = await PromotionOrder.create({
+        order_number: 'ORD-PRM-2026-001',
+        campaign_id: campaignFeed._id,
+        manufacturer_id: mfg1Profile._id,
+        userId: uMfg1._id,
+        package_id: feedPkg._id,
+        subtotal: 999,
+        gst_rate: 18,
+        gst_amount: feedGst,
+        total_amount: feedTotal,
+        order_status: 'completed',
+        payment_gateway: 'razorpay',
+        gateway_order_id: 'order_mock_growth_feed_01',
+        is_mock: true
+      });
+
+      const paymentFeed = await Payment.create({
+        payment_reference: 'PAY-SMI-2026-001',
+        order_id: orderFeed._id,
+        campaign_id: campaignFeed._id,
+        manufacturer_id: mfg1Profile._id,
+        userId: uMfg1._id,
+        payment_gateway: 'razorpay',
+        gateway_order_id: 'order_mock_growth_feed_01',
+        gateway_payment_id: 'pay_mock_feed_999',
+        transaction_reference: 'pay_mock_feed_999',
+        amount: feedTotal,
+        payment_status: 'successful',
+        payment_verified_at: new Date(),
+        is_mock: true
+      });
+
+      await PromotionInvoice.create({
+        invoice_number: 'INV-SMI-2026-0001',
+        invoice_date: new Date(),
+        manufacturer_id: mfg1Profile._id,
+        userId: uMfg1._id,
+        campaign_id: campaignFeed._id,
+        order_id: orderFeed._id,
+        payment_id: paymentFeed._id,
+        seller_details: {
+          company_name: 'Stone Market India Pvt. Ltd.',
+          address: 'RIICO Industrial Area, Kishangarh, Rajasthan - 305801',
+          gstin: '08AAAAA0000A1Z5',
+          email: 'billing@stonemarketindia.com'
+        },
+        buyer_details: {
+          company_name: mfg1Profile.company_name,
+          billing_address: mfg1Profile.address?.full_address || 'Jalore Industrial Area, Rajasthan',
+          state: 'Rajasthan',
+          gstin: mfg1Profile.gst_number || '08AAACR1234F1Z9',
+          phone: '9111111104'
+        },
+        promotion_type: 'feed',
+        package_name: feedPkg.package_name,
+        duration_days: 15,
+        taxable_amount: 999,
+        gst_rate: 18,
+        cgst_rate: 9,
+        cgst_amount: 89.91,
+        sgst_rate: 9,
+        sgst_amount: 89.91,
+        gst_amount: 179.82,
+        total_amount: feedTotal,
+        payment_status: 'paid',
+        transaction_reference: 'pay_mock_feed_999',
+        is_mock: true
+      });
+
+      const listPkg = listingPackages[1];
+      const campaignListing = await PromotionCampaign.create({
+        campaign_id: 'CMP-2026-L002',
+        manufacturer_id: mfg1Profile._id,
+        userId: uMfg1._id,
+        package_id: listPkg._id,
+        campaign_type: 'listing',
+        campaign_name: `${mfg1Profile.company_name} Top 3 Directory Boost`,
+        campaign_status: 'active',
+        duration_days: 15,
+        start_date: startDateFeed,
+        end_date: endDateFeed,
+        target_type: 'all_india',
+        targeting_configuration: { all_india: true },
+        subtotal: 999,
+        gst_rate: 18,
+        gst_amount: 179.82,
+        total_amount: 1178.82,
+        daily_budget: 67,
+        priority_score: 25,
+        impressions_count: 5120,
+        clicks_count: 410,
+        inquiries_count: 56,
+        quote_requests_count: 22,
+        whatsapp_clicks_count: 78,
+        call_clicks_count: 45,
+        is_mock: true
+      });
+
+      await BusinessProfile.findByIdAndUpdate(mfg1Profile._id, {
+        is_promoted: true,
+        active_promotion_id: campaignListing._id,
+        promotion_priority: 25,
+        promoted_badge: 'Featured Supplier'
+      });
+
+      const orderList = await PromotionOrder.create({
+        order_number: 'ORD-PRM-2026-002',
+        campaign_id: campaignListing._id,
+        manufacturer_id: mfg1Profile._id,
+        userId: uMfg1._id,
+        package_id: listPkg._id,
+        subtotal: 999,
+        gst_rate: 18,
+        gst_amount: 179.82,
+        total_amount: 1178.82,
+        order_status: 'completed',
+        payment_gateway: 'razorpay',
+        gateway_order_id: 'order_mock_diamond_list_02',
+        is_mock: true
+      });
+
+      const paymentList = await Payment.create({
+        payment_reference: 'PAY-SMI-2026-002',
+        order_id: orderList._id,
+        campaign_id: campaignListing._id,
+        manufacturer_id: mfg1Profile._id,
+        userId: uMfg1._id,
+        payment_gateway: 'razorpay',
+        gateway_order_id: 'order_mock_diamond_list_02',
+        gateway_payment_id: 'pay_mock_list_999',
+        transaction_reference: 'pay_mock_list_999',
+        amount: 1178.82,
+        payment_status: 'successful',
+        payment_verified_at: new Date(),
+        is_mock: true
+      });
+
+      await PromotionInvoice.create({
+        invoice_number: 'INV-SMI-2026-0002',
+        invoice_date: new Date(),
+        manufacturer_id: mfg1Profile._id,
+        userId: uMfg1._id,
+        campaign_id: campaignListing._id,
+        order_id: orderList._id,
+        payment_id: paymentList._id,
+        seller_details: {
+          company_name: 'Stone Market India Pvt. Ltd.',
+          address: 'RIICO Industrial Area, Kishangarh, Rajasthan - 305801',
+          gstin: '08AAAAA0000A1Z5',
+          email: 'billing@stonemarketindia.com'
+        },
+        buyer_details: {
+          company_name: mfg1Profile.company_name,
+          billing_address: mfg1Profile.address?.full_address || 'Jalore Industrial Area, Rajasthan',
+          state: 'Rajasthan',
+          gstin: mfg1Profile.gst_number || '08AAACR1234F1Z9',
+          phone: '9111111104'
+        },
+        promotion_type: 'listing',
+        package_name: listPkg.package_name,
+        duration_days: 15,
+        taxable_amount: 999,
+        gst_rate: 18,
+        cgst_rate: 9,
+        cgst_amount: 89.91,
+        sgst_rate: 9,
+        sgst_amount: 89.91,
+        gst_amount: 179.82,
+        total_amount: 1178.82,
+        payment_status: 'paid',
+        transaction_reference: 'pay_mock_list_999',
+        is_mock: true
+      });
+
+      // Seed 30 days of daily analytics events for chart data
+      const analyticsRows = [];
+      for (let dayOffset = 0; dayOffset < 30; dayOffset++) {
+        const evDate = new Date();
+        evDate.setDate(evDate.getDate() - (29 - dayOffset));
+        evDate.setHours(12, 0, 0, 0);
+
+        const dailyImpr = 60 + Math.floor(Math.random() * 80);
+        const dailyClicks = Math.floor(dailyImpr * 0.08) + 2;
+        const dailyInq = Math.floor(dailyClicks * 0.2) + 1;
+
+        for (let i = 0; i < dailyImpr; i++) {
+          analyticsRows.push({
+            campaign_id: campaignFeed._id,
+            event_type: 'impression',
+            product_id: targetProduct._id,
+            source: 'buyer_feed',
+            event_date: evDate,
+            is_mock: true
+          });
+        }
+        for (let i = 0; i < dailyClicks; i++) {
+          analyticsRows.push({
+            campaign_id: campaignFeed._id,
+            event_type: 'click',
+            product_id: targetProduct._id,
+            source: 'buyer_feed',
+            event_date: evDate,
+            is_mock: true
+          });
+        }
+        for (let i = 0; i < dailyInq; i++) {
+          analyticsRows.push({
+            campaign_id: campaignFeed._id,
+            event_type: 'inquiry',
+            product_id: targetProduct._id,
+            source: 'buyer_feed',
+            event_date: evDate,
+            is_mock: true
+          });
+        }
+      }
+      await PromotionAnalytics.insertMany(analyticsRows);
+      console.log(`Seeded active campaigns, orders, payments, invoices, and ${analyticsRows.length} analytics events for Mfg 1.`);
+    }
 
     console.log('\n======================================================');
     console.log('>>> MOCK DATA SEEDING COMPLETED SUCCESSFULLY! <<<');

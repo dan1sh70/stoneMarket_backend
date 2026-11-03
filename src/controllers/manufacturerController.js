@@ -105,6 +105,7 @@ exports.getManufacturers = async (req, res, next) => {
 
     const manufacturers = await BusinessProfile.find(query)
       .populate('manufacturer_category', 'name')
+      .sort({ is_promoted: -1, promotion_priority: -1, createdAt: -1 })
       .skip(skip)
       .limit(limit)
       .lean();
@@ -114,13 +115,16 @@ exports.getManufacturers = async (req, res, next) => {
     const items = manufacturers.map(m => ({
       id: m._id,
       company_name: m.company_name,
-      logo: m.owners?.[0]?.photo || null,
+      logo: m.logo || m.owners?.[0]?.photo || null,
       short_description: m.company_details?.substring(0, 50) || '',
       category: m.manufacturer_category?.name || 'Manufacturer',
       state: m.address?.state,
       district: m.address?.district,
       area: m.address?.area,
-      is_verified: m.status === 'active'
+      is_verified: m.is_verified || m.status === 'active',
+      is_promoted: m.is_promoted || false,
+      sponsored_badge: m.is_promoted ? (m.promoted_badge || 'Featured Supplier') : null,
+      promotion_priority: m.promotion_priority || 0
     }));
 
     return res.status(200).json({

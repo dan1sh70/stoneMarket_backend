@@ -74,6 +74,13 @@ const manufacturerCmsRoutes = require('./src/routes/cms/manufacturer');
 const showroomCmsRoutes = require('./src/routes/cms/showroom');
 const traderCmsRoutes = require('./src/routes/cms/trader');
 
+// Phase 2 Ads & Promotion Management Routes
+const promotionRoutes = require('./src/routes/promotionRoutes');
+const paymentRoutes = require('./src/routes/paymentRoutes');
+const promotionInvoiceRoutes = require('./src/routes/promotionInvoiceRoutes');
+const adminPromotionRoutes = require('./src/routes/adminPromotionRoutes');
+const promotionController = require('./src/controllers/promotionController');
+
 // v1 Routes
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/customer', customerRoutes);
@@ -116,7 +123,21 @@ app.use('/api/admin/buyers', adminBuyerRoutes);
 app.use('/api', transportPublicRoutes);
 app.use('/api/provider', providerTransportRoutes);
 app.use('/api/admin', adminTransportRoutes);
-app.use('/api/estimates', estimateRoutes);
+// Phase 2 Ads & Promotion Management Routes (mounted before /api/manufacturer)
+app.use('/api/manufacturer/promotions', promotionRoutes);
+app.use('/api/promotions', promotionRoutes);
+app.get('/api/promotion-packages', promotionController.getPromotionPackages);
+app.get('/api/promotion-packages/:id', promotionController.getPromotionPackageById);
+app.use('/api/payments', paymentRoutes);
+app.use('/api/manufacturer/invoices', promotionInvoiceRoutes);
+app.use('/api/admin/promotions', adminPromotionRoutes);
+
+// v1 aliases
+app.use('/api/v1/manufacturer/promotions', promotionRoutes);
+app.use('/api/v1/payments', paymentRoutes);
+app.use('/api/v1/manufacturer/invoices', promotionInvoiceRoutes);
+app.use('/api/v1/admin/promotions', adminPromotionRoutes);
+
 app.use('/api/customer', customerRoutes);
 app.use('/api/manufacturer', manufacturerProfileRoutes);
 app.use('/api/app', appInfoRoutes);

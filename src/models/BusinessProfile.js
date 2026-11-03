@@ -229,6 +229,12 @@ const businessProfileSchema = new mongoose.Schema({
   privacy_policy_accepted: { type: Boolean, default: false },
   privacy_policy_accepted_at: { type: Date },
 
+  // Promotion Boost Fields (Phase 2)
+  is_promoted: { type: Boolean, default: false },
+  active_promotion_id: { type: mongoose.Schema.Types.ObjectId, ref: 'PromotionCampaign' },
+  promotion_priority: { type: Number, default: 0 },
+  promoted_badge: { type: String, default: 'Featured Supplier' },
+
   status: {
     type: String,
     enum: ['pending', 'active', 'suspended'],

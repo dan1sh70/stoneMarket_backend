@@ -25,13 +25,14 @@ exports.getFeed = async (req, res, next) => {
       productQuery.$text = { $search: search };
     }
 
-    // Sort mapping
-    let sortQuery = { createdAt: -1 }; // latest
-    if (sort === 'popular') sortQuery = { views: -1 };
-    if (sort === 'most_interested') sortQuery = { views: -1 }; // fallback
+    // Sort mapping: Sponsored items prioritized first, then specified sort criteria
+    let sortQuery = { is_promoted: -1, promotion_priority: -1, createdAt: -1 };
+    if (sort === 'popular') sortQuery = { is_promoted: -1, promotion_priority: -1, views: -1 };
+    if (sort === 'most_interested') sortQuery = { is_promoted: -1, promotion_priority: -1, views: -1 };
 
     const products = await Product.find(productQuery)
       .populate('vendorId', 'businessName logo coverImage address')
+      .populate('businessProfileId', 'company_name logo address is_verified')
       .sort(sortQuery)
       .skip(skip)
       .limit(limit)
@@ -40,28 +41,33 @@ exports.getFeed = async (req, res, next) => {
     const total = await Product.countDocuments(productQuery);
 
     const items = products.map(p => {
-      const vendor = p.vendorId || {};
+      const vendor = p.vendorId || p.businessProfileId || {};
+      const companyName = vendor.company_name || vendor.businessName || 'Natural Stone Supplier';
       return {
         type: 'product',
         id: p._id,
         name: p.name,
+        is_sponsored: p.is_promoted || false,
+        sponsored_badge: p.is_promoted ? 'Sponsored' : null,
+        promotion_campaign_id: p.active_promotion_id || null,
+        priority_score: p.promotion_priority || 0,
         category: {
           id: p.category, // Assuming it's a string/ID
           name: p.category
         },
         business: {
           id: vendor._id,
-          name: vendor.businessName,
-          type: vendor.category || 'mining',
-          verified: true,
+          name: companyName,
+          type: vendor.category || 'manufacturer',
+          verified: vendor.is_verified || true,
           logo: vendor.logo
         },
         location: {
-          state: vendor.address?.state || 'Unknown',
-          district: vendor.address?.city || 'Unknown',
-          area: vendor.address?.line1 || 'Unknown'
+          state: vendor.address?.state || 'Rajasthan',
+          district: vendor.address?.district || vendor.address?.city || 'Jaipur',
+          area: vendor.address?.area || vendor.address?.line1 || 'Industrial Area'
         },
-        main_image: p.images?.[0],
+        main_image: p.cover_image || p.images?.[0],
         images: p.images,
         post: {
           title: p.name,
