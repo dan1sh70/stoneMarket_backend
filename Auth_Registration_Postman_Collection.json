@@ -20017,6 +20017,917 @@
           ]
         }
       ]
+    },
+    {
+      "name": "Stone Brazing & Tooling Service Module",
+      "description": "Complete Brazing & Tooling Service Module: Dashboard, Operational Specifications (Daily Capacity, Blade Size Coverage, Technology, Pricing Range), 4-Step Brazing Services Management Wizard, Contacts, Gallery, Verification, Analytics, Inquiries, Leads and Shared Services.",
+      "item": [
+        {
+          "name": "1. Dashboard & Business Switcher",
+          "item": [
+            {
+              "name": "Get Brazing Dashboard",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/brazing/dashboard",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "brazing",
+                    "dashboard"
+                  ]
+                },
+                "description": "Loads Brazing & Tooling Service dashboard with Business Profile Card, 4 Operational Summary Cards (Daily Brazing Capacity, Blade Size Coverage, Brazing Technology, Service Pricing), My Business (6 items), Business Activity (2 items), and Capabilities."
+              }
+            },
+            {
+              "name": "Get Business Types",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/brazing/business-types",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "brazing",
+                    "business-types"
+                  ]
+                },
+                "description": "Retrieves all available business types with Brazing & Tooling Service marked as current."
+              }
+            },
+            {
+              "name": "Switch Business Type",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"target_business_type\": \"brazing\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/brazing/switch-business-type",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "brazing",
+                    "switch-business-type"
+                  ]
+                },
+                "description": "Switches the current active business profile and user role."
+              }
+            },
+            {
+              "name": "Product Management Disabled Check (403)",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/brazing/products",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "brazing",
+                    "products"
+                  ]
+                },
+                "description": "Verifies product management is disabled for service-based brazing module (returns 403 Forbidden)."
+              }
+            }
+          ]
+        },
+        {
+          "name": "2. Business Profile & Operational Specifications",
+          "item": [
+            {
+              "name": "Get Brazing Business Profile",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/brazing/profile",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "brazing",
+                    "profile"
+                  ]
+                },
+                "description": "Retrieves the complete profile including operational specifications: capacity, blade sizes, alloy grade, technology, and pricing."
+              }
+            },
+            {
+              "name": "Update Brazing Profile & Operational Specs",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company_name\": \"Apex Precision Diamond Tooling & Brazing\",\n  \"daily_brazing_capacity\": \"200 Blades / Day\",\n  \"blade_size_coverage\": \"12\\\" – 84\\\" (300mm – 2100mm)\",\n  \"brazing_technology\": \"CNC Automated Multi-Frequency Induction\",\n  \"service_pricing_range\": \"₹400 – ₹1,500 per Blade\",\n  \"silver_solder_alloy_grade\": \"Premium Silver (56% Ag) Alloy\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/brazing/profile",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "brazing",
+                    "profile"
+                  ]
+                },
+                "description": "Updates operational specifications and business metadata."
+              }
+            }
+          ]
+        },
+        {
+          "name": "3. Brazing Services Management (4-Step Wizard & CRUD)",
+          "item": [
+            {
+              "name": "Get All Brazing Services (Status Filters & Search)",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/brazing/services?status=all&search=Blade&page=1&limit=10",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "brazing",
+                    "services"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "all"
+                    },
+                    {
+                      "key": "search",
+                      "value": "Blade"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ]
+                },
+                "description": "Lists services with status breakdown (all, active, inactive, draft) and search filters."
+              }
+            },
+            {
+              "name": "Create Brazing Service (4-Step Wizard)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"service_name\": \"Circular Multi-Blade Retipping & Brazing\",\n  \"brazing_service_type\": \"Circular Blade Brazing\",\n  \"description\": \"Complete inspection, silver alloy brazing, and tension balance alignment.\",\n  \"images\": [\n    \"https://stonemarket.com/brazing/img1.jpg\"\n  ],\n  \"cover_image\": \"https://stonemarket.com/brazing/img1.jpg\",\n  \"blade_size_supported\": \"24\\\" – 48\\\" (600mm – 1200mm)\",\n  \"daily_brazing_capacity\": \"80 Blades / Day\",\n  \"silver_solder_grade\": \"High Silver (49% Ag) Alloy & Flux\",\n  \"brazing_machine_model\": \"Automated High-Frequency Induction Machine\",\n  \"brazing_technology\": \"Automatic Induction Heating\",\n  \"heating_method\": \"High-Frequency Induction\",\n  \"segment_type\": \"Sandwich & Multilayer Diamond Segments\",\n  \"diamond_segment_compatibility\": \"Granite & Sandstone Segments\",\n  \"supported_blade_materials\": [\n    \"Hardened Steel Core\",\n    \"Carbon Steel 75Cr1\"\n  ],\n  \"quality_standards\": \"ISO 9001:2015 & FEPA Safety Standards\",\n  \"service_price\": 650,\n  \"pricing_unit\": \"Per Blade\",\n  \"turnaround_time\": \"24 Hours Dispatch\",\n  \"minimum_order_quantity\": 5,\n  \"bulk_order_pricing\": \"10% discount for orders above 25 blades\",\n  \"pickup_delivery_availability\": true,\n  \"service_warranty\": \"30-Day Segment Retention Guarantee\",\n  \"terms_and_conditions\": \"Worn-out blades must be free of major structural cracks before re-tipping.\",\n  \"target_areas\": [\n    {\n      \"state_name\": \"Rajasthan\",\n      \"districts\": [\n        \"Jaipur\",\n        \"Ajmer\",\n        \"Kishangarh\"\n      ]\n    }\n  ],\n  \"target_categories\": [\n    \"Manufacturer\",\n    \"Mining\",\n    \"Showroom\"\n  ],\n  \"status\": \"active\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/brazing/services",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "brazing",
+                    "services"
+                  ]
+                },
+                "description": "Creates a new brazing service with auto-assigned service_id (e.g. BRZ-2026-XXXX)."
+              }
+            },
+            {
+              "name": "Get Brazing Service Details",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/brazing/services/{{service_id}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "brazing",
+                    "services",
+                    "{{service_id}}"
+                  ]
+                },
+                "description": "Fetches complete specifications, pricing, terms, and performance counters for a specific service."
+              }
+            },
+            {
+              "name": "Update Brazing Service",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"service_price\": 700,\n  \"turnaround_time\": \"Same Day Dispatch\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/brazing/services/{{service_id}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "brazing",
+                    "services",
+                    "{{service_id}}"
+                  ]
+                },
+                "description": "Updates service fields and specifications."
+              }
+            },
+            {
+              "name": "Duplicate Brazing Service (as Draft)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/brazing/services/{{service_id}}/duplicate",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "brazing",
+                    "services",
+                    "{{service_id}}",
+                    "duplicate"
+                  ]
+                },
+                "description": "Clones an existing service as draft with \"(Copy)\" suffix and new service_id."
+              }
+            },
+            {
+              "name": "Toggle Service Status (Active / Inactive)",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"inactive\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/brazing/services/{{service_id}}/status",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "brazing",
+                    "services",
+                    "{{service_id}}",
+                    "status"
+                  ]
+                },
+                "description": "Toggles or sets the active/inactive status of a brazing service."
+              }
+            },
+            {
+              "name": "Delete Brazing Service",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/brazing/services/{{service_id}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "brazing",
+                    "services",
+                    "{{service_id}}"
+                  ]
+                },
+                "description": "Permanently deletes a brazing service listing."
+              }
+            }
+          ]
+        },
+        {
+          "name": "4. Contacts, Gallery & Verification Center",
+          "item": [
+            {
+              "name": "Get Contacts",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/brazing/contacts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "brazing",
+                    "contacts"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Add Contact",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Sunil Verma\",\n  \"designation\": \"Senior Induction Brazing Technician\",\n  \"phone\": \"+91 98290 88888\",\n  \"whatsapp\": \"+91 98290 88888\",\n  \"email\": \"sunil@apexbrazing.com\",\n  \"is_primary\": false\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/brazing/contacts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "brazing",
+                    "contacts"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Gallery Items",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/brazing/gallery",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "brazing",
+                    "gallery"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Upload Gallery Photo",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"url\": \"https://stonemarket.com/uploads/workshop-machine-1.jpg\",\n  \"title\": \"High-Frequency Induction Brazing Unit\",\n  \"caption\": \"Automated temperature controller\",\n  \"category\": \"machine\",\n  \"is_cover\": true\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/brazing/gallery/photos",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "brazing",
+                    "gallery",
+                    "photos"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Add Gallery Video",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Gangsaw Blade Re-tipping Live Demo\",\n  \"video_url\": \"https://stonemarket.com/videos/brazing-demo.mp4\",\n  \"source_type\": \"upload\",\n  \"category\": \"brazing_demo\",\n  \"duration\": \"3:15\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/brazing/gallery/videos",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "brazing",
+                    "gallery",
+                    "videos"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Verification Status",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/brazing/verification",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "brazing",
+                    "verification"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Send Phone OTP",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/brazing/verification/phone/send-otp",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "brazing",
+                    "verification",
+                    "phone",
+                    "send-otp"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Verify Phone OTP",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"phone\": \"+91 98290 54321\",\n  \"otp\": \"123456\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/brazing/verification/phone/verify-otp",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "brazing",
+                    "verification",
+                    "phone",
+                    "verify-otp"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Submit GST Verification",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"gstin\": \"08AABCB1234F1Z9\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/brazing/verification/gst",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "brazing",
+                    "verification",
+                    "gst"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Upload Verification Document",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"document_name\": \"Factory Inspectorate Registration\",\n  \"document_type\": \"Factory License\",\n  \"document_number\": \"FAC-RJ-2022-881\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/brazing/verification/documents",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "brazing",
+                    "verification",
+                    "documents"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "5. Analytics, Inquiries & Lead Management",
+          "item": [
+            {
+              "name": "Get Brazing Analytics",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/brazing/analytics",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "brazing",
+                    "analytics"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Record Analytics Event",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"event_type\": \"contact_click\",\n  \"metadata\": {\n    \"source\": \"dashboard_profile_card\"\n  }\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/brazing/analytics/event",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "brazing",
+                    "analytics",
+                    "event"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get My Inquiries",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/brazing/inquiries",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "brazing",
+                    "inquiries"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Matching Leads",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/brazing/leads",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "brazing",
+                    "leads"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "6. Shared Promotions, Invoices & Settings",
+          "item": [
+            {
+              "name": "Get Ad Promotions",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/brazing/promotions",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "brazing",
+                    "promotions"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Account Settings",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/brazing/settings",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "brazing",
+                    "settings"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Promotion Invoices",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/brazing/invoices",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "brazing",
+                    "invoices"
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
     }
   ]
 }

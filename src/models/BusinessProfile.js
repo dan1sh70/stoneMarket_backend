@@ -25,7 +25,7 @@ const businessProfileSchema = new mongoose.Schema({
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   business_type: { 
     type: String, 
-    enum: ['mining', 'manufacturer', 'showroom', 'trader', 'buyer', 'transport_national', 'transport_local', 'customer', 'service_provider'],
+    enum: ['mining', 'manufacturer', 'showroom', 'trader', 'buyer', 'transport_national', 'transport_local', 'brazing', 'customer', 'service_provider'],
     required: true,
     index: true
   },
@@ -266,8 +266,14 @@ const businessProfileSchema = new mongoose.Schema({
   operational_cities: [{ type: String }], // List of city names e.g. ["Jaipur", "Kishangarh", "Ahmedabad"]
 
 
-  // Specific to Service Providers
+  // Specific to Service Providers / Brazing & Tooling
   service_categories: [{ type: mongoose.Schema.Types.ObjectId, ref: 'ServiceCategory' }],
+  daily_brazing_capacity: { type: String, default: '150 Blades / Day' },
+  blade_size_coverage: { type: String, default: '14" – 72" (350mm – 1800mm)' },
+  brazing_technology: { type: String, default: 'Automatic Induction Heating' },
+  service_pricing_range: { type: String, default: '₹350 – ₹1,200 per Blade' },
+  silver_solder_alloy_grade: { type: String, default: 'High Silver (49% Ag) Alloy & Flux' },
+  brazing_machine_model: { type: String, default: 'Automated High-Frequency Induction Machine' },
 
   // Owners (Step 2)
   owners: [ownerSchema], // Usually up to 2

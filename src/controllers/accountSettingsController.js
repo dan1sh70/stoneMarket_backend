@@ -27,6 +27,7 @@ async function getManufacturerProfile(userId) {
     else if (user.role === 'trader') targetType = 'trader';
     else if (user.role === 'showroom') targetType = 'showroom';
     else if (user.role === 'mining') targetType = 'mining';
+    else if (user.role === 'brazing' || user.role === 'service_provider') targetType = 'brazing';
   }
 
   let profile = await BusinessProfile.findOne({
@@ -162,6 +163,35 @@ async function getManufacturerProfile(userId) {
         unit_status: 'both',
         rating: 4.8,
         review_count: 14,
+        status: 'active',
+        is_mock: false
+      });
+    } else if (user.role === 'brazing' || user.role === 'service_provider') {
+      profile = await BusinessProfile.create({
+        userId,
+        business_type: 'brazing',
+        company_name: user.name ? `${user.name} Diamond Brazing Works` : 'Apex Diamond Brazing & Retipping Works',
+        business_category: 'Brazing & Tooling Service',
+        business_subcategory: 'Diamond Blade Retipping & Induction Brazing',
+        short_description: 'Precision diamond blade brazing, re-tipping and segment tooling services for granite and marble cutting.',
+        about_business: 'Apex Diamond Brazing & Retipping Works is a specialized tooling center providing high-frequency automated induction brazing, gangsaw blade re-tipping, and circular diamond saw segment services.',
+        established_year: 2018,
+        daily_brazing_capacity: '150 Blades / Day',
+        blade_size_coverage: '14" – 72" (350mm – 1800mm)',
+        brazing_technology: 'Automatic Induction Heating',
+        service_pricing_range: '₹350 – ₹1,200 per Blade',
+        silver_solder_alloy_grade: 'High Silver (49% Ag) Alloy & Flux',
+        brazing_machine_model: 'Automated High-Frequency Induction Machine',
+        address: {
+          state: 'Rajasthan',
+          district: 'Jaipur',
+          area: 'VKI Area',
+          full_address: 'Plot 12-A, Road No. 5, VKI Industrial Area, Jaipur, Rajasthan 302013',
+          postal_code: '302013',
+          country: 'India'
+        },
+        rating: 4.9,
+        review_count: 38,
         status: 'active',
         is_mock: false
       });

@@ -16,6 +16,8 @@ const userSchema = new mongoose.Schema({
       'buyer', 
       'transport_national', 
       'transport_local', 
+      'brazing',
+      'service_provider',
       'customer'
     ], 
     default: 'customer' 

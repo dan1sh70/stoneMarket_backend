@@ -12,7 +12,7 @@ async function getManufacturerInvoices(req, res) {
     const userId = req.user.userId || req.user.id || req.user._id;
     const profile = await BusinessProfile.findOne({
       userId,
-      business_type: { $in: ['manufacturer', 'mining', 'showroom', 'trader', 'buyer', 'transport_national', 'transport_local'] }
+      business_type: { $in: ['manufacturer', 'mining', 'showroom', 'trader', 'buyer', 'transport_national', 'transport_local', 'brazing'] }
     });
 
     const query = profile ? {

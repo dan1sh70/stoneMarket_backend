@@ -25,6 +25,7 @@ async function getManufacturerProfile(userId) {
     else if (user.role === 'trader') targetType = 'trader';
     else if (user.role === 'showroom') targetType = 'showroom';
     else if (user.role === 'mining') targetType = 'mining';
+    else if (user.role === 'brazing' || user.role === 'service_provider') targetType = 'brazing';
   }
 
   let profile = await BusinessProfile.findOne({
@@ -140,6 +141,23 @@ async function getManufacturerProfile(userId) {
         status: 'active',
         is_mock: false
       });
+    } else if (user.role === 'brazing' || user.role === 'service_provider') {
+      profile = await BusinessProfile.create({
+        userId,
+        business_type: 'brazing',
+        company_name: user.name ? `${user.name} Diamond Brazing Works` : 'Apex Diamond Brazing & Retipping Works',
+        business_category: 'Brazing & Tooling Service',
+        business_subcategory: 'Diamond Blade Retipping & Induction Brazing',
+        established_year: 2018,
+        daily_brazing_capacity: '150 Blades / Day',
+        blade_size_coverage: '14" – 72" (350mm – 1800mm)',
+        brazing_technology: 'Automatic Induction Heating',
+        service_pricing_range: '₹350 – ₹1,200 per Blade',
+        rating: 4.9,
+        review_count: 38,
+        status: 'active',
+        is_mock: false
+      });
     } else if (user.role === 'manufacturer' || user.role === 'admin' || user.role === 'vendor') {
       profile = await BusinessProfile.create({
         userId,
@@ -166,12 +184,15 @@ function buildInquiryVisibilityFilter(profile) {
   const isMining = profile.business_type === 'mining';
   const isShowroom = profile.business_type === 'showroom';
   const isTrader = profile.business_type === 'trader';
+  const isBrazing = profile.business_type === 'brazing' || profile.business_type === 'service_provider';
   const categories = isMining
     ? ['Mining', 'Mines & Quarries', 'Raw Stone Blocks', 'Granite Blocks', 'Marble Blocks', 'Sandstone Blocks', 'Limestone Blocks', 'Natural Stone']
     : isShowroom
     ? ['Showroom', 'Godown & Showrooms', 'Godown', 'Slabs', 'Tiles', 'Granite', 'Marble', 'Sandstone', 'Limestone', 'Quartzite', 'Slate', 'Natural Stone', 'Manufacturer']
     : isTrader
     ? ['Trader', 'Stone Trader', 'Traders & Suppliers', 'Wholesale Supply', 'Granite', 'Marble', 'Sandstone', 'Limestone', 'Tiles', 'Natural Stone', 'Manufacturer', 'Showroom']
+    : isBrazing
+    ? ['Brazing & Tooling Service', 'Brazing', 'Blade Retipping', 'Tooling', 'Diamond Blades', 'Circular Blades', 'Gangsaw Blades', 'Segments']
     : ['Granite', 'Marble', 'Granite Slabs', 'Marble & Granite Slabs', 'Granite & Marble Slabs', 'Natural Stone', 'Manufacturer'];
 
   return {
