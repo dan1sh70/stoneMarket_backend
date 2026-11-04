@@ -478,9 +478,15 @@ async function getProducts(req, res) {
         { name: searchRegex },
         { category: searchRegex },
         { brand_name: searchRegex },
+        { manufacturer: searchRegex },
         { model_number: searchRegex },
         { sku: searchRegex },
-        { description: searchRegex }
+        { description: searchRegex },
+        { 'technical_specifications.power_capacity': searchRegex },
+        { 'technical_specifications.panel_specifications': searchRegex },
+        { 'technical_specifications.inverter_specifications': searchRegex },
+        { 'technical_specifications.system_capacity': searchRegex },
+        { 'technical_specifications.application': searchRegex }
       ];
     }
 
@@ -505,6 +511,9 @@ async function getProducts(req, res) {
       brand_name: p.brand_name || 'SunStone Tier-1',
       manufacturer: p.brand_name || 'SunStone Tier-1',
       model_number: p.model_number,
+      system_capacity: p.technical_specifications?.system_capacity || p.technical_specifications?.installed_capacity || '100 kW System',
+      application: p.technical_specifications?.application || p.short_description || p.description || 'Stone Factory Power Cost Reduction',
+      technical_specification: p.technical_specifications?.panel_specifications || p.specifications_text || 'Tier-1 Mono PERC Bi-Facial Panels, IP66',
       warranty_guarantee: p.warranty_guarantee || '25 Years Panel Performance Warranty',
       panel_warranty: p.panel_warranty || '25 Years Linear Performance Warranty',
       inverter_warranty: p.inverter_warranty || '5–10 Years Inverter Warranty',
