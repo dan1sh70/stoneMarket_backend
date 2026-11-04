@@ -232,10 +232,22 @@ const businessProfileSchema = new mongoose.Schema({
   
   // Specific to Transport
   transport_category: { type: String, enum: ['national', 'local', 'both'], default: 'national' },
+  transport_subtypes: [{ type: String, enum: ['national', 'local'] }],
+  dispatch_timings: { type: String, default: '24x7 Dispatch Available' },
   fleet_summary: { type: String }, // e.g. "Fleet of 25+ 10-wheeler and 12-wheeler trailers"
   has_all_india_permit: { type: Boolean, default: true },
   has_national_coverage: { type: Boolean, default: true },
   supported_vehicle_types: [{ type: mongoose.Schema.Types.ObjectId, ref: 'VehicleType' }],
+  fleet_categories: [{
+    category_name: { type: String, required: true }, // e.g. "Heavy Trailer", "Multi-Axle Truck", "Hydraulic Dumper"
+    vehicle_type: { type: String },
+    max_payload_ton: { type: Number, required: true },
+    quantity: { type: Number, required: true, default: 1 }
+  }],
+  operational_coverage_states: [{
+    state_name: { type: String, required: true },
+    cities: [{ type: String }]
+  }],
   cover_images: [{ type: String }],
   gallery: [{ type: String }],
   vehicle_type: { type: String },

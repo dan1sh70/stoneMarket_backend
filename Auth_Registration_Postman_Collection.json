@@ -19322,6 +19322,701 @@
           ]
         }
       ]
+    },
+    {
+      "name": "Stone Transport Module (National & Local)",
+      "description": "Complete Transport Module for STONE MARKET INDIA: Unified Dashboard with National & Local Transport toggle, Business Profile with Operational Summary cards, Fleet Categories management, Operational Coverage States & Districts, Vehicle Management (with strict 1-vehicle limit for Local Transport), Vehicle Availability status toggle, Contacts, Gallery, Verification Center, Analytics, Inquiries, and Lead Management.",
+      "item": [
+        {
+          "name": "1. Dashboard & Subtype Switching",
+          "item": [
+            {
+              "name": "Get Transport Dashboard (National)",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/transport/dashboard?subtype=national",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "transport",
+                    "dashboard"
+                  ],
+                  "query": [
+                    {
+                      "key": "subtype",
+                      "value": "national"
+                    }
+                  ]
+                },
+                "description": "Loads National Transport dashboard with 4 summary cards: Fleet Specification, Operational Coverage, Maximum Payload, and Dispatch Timings."
+              }
+            },
+            {
+              "name": "Get Transport Dashboard (Local)",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/transport/dashboard?subtype=local",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "transport",
+                    "dashboard"
+                  ],
+                  "query": [
+                    {
+                      "key": "subtype",
+                      "value": "local"
+                    }
+                  ]
+                },
+                "description": "Loads Local Transport dashboard with 4 vehicle cards: Vehicle Type, Registration Number, Weight Capacity, and Driving Experience."
+              }
+            },
+            {
+              "name": "Get Transport Business Types",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/transport/business-types",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "transport",
+                    "business-types"
+                  ]
+                },
+                "description": "Returns available business types including Transport with national and local subtypes."
+              }
+            },
+            {
+              "name": "Switch Transport Subtype",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"subtype\": \"local\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/transport/switch-subtype",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "transport",
+                    "switch-subtype"
+                  ]
+                },
+                "description": "Switches between National Transport and Local Transport operational modes."
+              }
+            }
+          ]
+        },
+        {
+          "name": "2. Profile, Fleet Categories & Operational Coverage",
+          "item": [
+            {
+              "name": "Get Transport Profile",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/transport/profile?subtype=national",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "transport",
+                    "profile"
+                  ],
+                  "query": [
+                    {
+                      "key": "subtype",
+                      "value": "national"
+                    }
+                  ]
+                },
+                "description": "Fetch transport business profile details."
+              }
+            },
+            {
+              "name": "Update Transport Profile",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company_name\": \"Rajasthan Gujarat Express Logistics\",\n  \"gst_number\": \"08AAACL1234F1Z6\",\n  \"established_year\": 2014,\n  \"dispatch_timings\": \"24x7 Dispatch Available\",\n  \"about_business\": \"Leading heavy fleet logistics transporting raw granite blocks and polished slabs across India.\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/transport/profile",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "transport",
+                    "profile"
+                  ]
+                },
+                "description": "Update transport profile identity and enterprise details."
+              }
+            },
+            {
+              "name": "Get Fleet Categories (National)",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/transport/fleet-categories",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "transport",
+                    "fleet-categories"
+                  ]
+                },
+                "description": "List registered fleet categories for National Transport."
+              }
+            },
+            {
+              "name": "Add Fleet Category (National)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"category_name\": \"Flatbed Trailer\",\n  \"vehicle_type\": \"Flatbed Trailer\",\n  \"max_payload_ton\": 35,\n  \"quantity\": 6\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/transport/fleet-categories",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "transport",
+                    "fleet-categories"
+                  ]
+                },
+                "description": "Add a new vehicle category to national fleet."
+              }
+            },
+            {
+              "name": "Get Operational Coverage",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/transport/operational-coverage",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "transport",
+                    "operational-coverage"
+                  ]
+                },
+                "description": "Retrieve operational states and covered cities/districts."
+              }
+            },
+            {
+              "name": "Update Operational Coverage",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"coverage_states\": [\n    {\n      \"state_name\": \"Rajasthan\",\n      \"cities\": [\n        \"Jaipur\",\n        \"Ajmer (Kishangarh)\",\n        \"Udaipur\"\n      ]\n    },\n    {\n      \"state_name\": \"Gujarat\",\n      \"cities\": [\n        \"Ahmedabad\",\n        \"Surat\",\n        \"Morbi\"\n      ]\n    },\n    {\n      \"state_name\": \"Maharashtra\",\n      \"cities\": [\n        \"Mumbai\",\n        \"Pune\"\n      ]\n    }\n  ]\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/transport/operational-coverage",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "transport",
+                    "operational-coverage"
+                  ]
+                },
+                "description": "Update transportation coverage states and districts."
+              }
+            }
+          ]
+        },
+        {
+          "name": "3. Vehicle Management",
+          "item": [
+            {
+              "name": "Get Vehicles Listing",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/transport/vehicles?subtype=national&search=RJ14",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "transport",
+                    "vehicles"
+                  ],
+                  "query": [
+                    {
+                      "key": "subtype",
+                      "value": "national"
+                    },
+                    {
+                      "key": "search",
+                      "value": "RJ14"
+                    }
+                  ]
+                },
+                "description": "List registered vehicles with search and filter capabilities."
+              }
+            },
+            {
+              "name": "Add Vehicle (National / Local)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"vehicle_name\": \"Tata 407 Mini Truck\",\n  \"registration_number\": \"RJ14 EA 1234\",\n  \"payload_capacity\": 10,\n  \"weight_capacity_ton\": 10,\n  \"driving_experience_years\": 8,\n  \"driving_license_number\": \"RJ14 20150012345\",\n  \"driver_name\": \"Mukesh Gurjar\",\n  \"availability_status\": \"available_now\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/transport/vehicles?subtype=local",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "transport",
+                    "vehicles"
+                  ],
+                  "query": [
+                    {
+                      "key": "subtype",
+                      "value": "local"
+                    }
+                  ]
+                },
+                "description": "Register vehicle. Enforces max 1 vehicle for Local Transport."
+              }
+            },
+            {
+              "name": "Toggle Vehicle Availability",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"availability_status\": \"available_now\",\n  \"is_active\": true\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/transport/vehicles/{{vehicleId}}/availability",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "transport",
+                    "vehicles",
+                    "{{vehicleId}}",
+                    "availability"
+                  ]
+                },
+                "description": "Toggle between Available / Unavailable."
+              }
+            },
+            {
+              "name": "Delete Vehicle",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/transport/vehicles/{{vehicleId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "transport",
+                    "vehicles",
+                    "{{vehicleId}}"
+                  ]
+                },
+                "description": "Delete registered vehicle record."
+              }
+            }
+          ]
+        },
+        {
+          "name": "4. Gallery, Contacts & Verification",
+          "item": [
+            {
+              "name": "Get Transport Contacts",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/transport/contacts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "transport",
+                    "contacts"
+                  ]
+                },
+                "description": "List owners, partners and logistics managers."
+              }
+            },
+            {
+              "name": "Get Transport Gallery",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/transport/gallery",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "transport",
+                    "gallery"
+                  ]
+                },
+                "description": "List fleet, loading, and facility photos."
+              }
+            },
+            {
+              "name": "Get Verification Status",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/transport/verification?subtype=local",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "transport",
+                    "verification"
+                  ],
+                  "query": [
+                    {
+                      "key": "subtype",
+                      "value": "local"
+                    }
+                  ]
+                },
+                "description": "Check document and verification status for National or Local Transport."
+              }
+            }
+          ]
+        },
+        {
+          "name": "5. Analytics, Inquiries & Leads",
+          "item": [
+            {
+              "name": "Get Transport Analytics",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/transport/analytics?subtype=national",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "transport",
+                    "analytics"
+                  ],
+                  "query": [
+                    {
+                      "key": "subtype",
+                      "value": "national"
+                    }
+                  ]
+                },
+                "description": "Fetch transport fleet metrics, inquiries, and lead statistics."
+              }
+            },
+            {
+              "name": "Get My Inquiries",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/transport/inquiries",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "transport",
+                    "inquiries"
+                  ]
+                },
+                "description": "List inquiries submitted by the transport business."
+              }
+            },
+            {
+              "name": "Get Incoming Transport Leads",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/transport/leads?subtype=national",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "transport",
+                    "leads"
+                  ],
+                  "query": [
+                    {
+                      "key": "subtype",
+                      "value": "national"
+                    }
+                  ]
+                },
+                "description": "List matched transportation requirement leads from manufacturers, mining, showrooms, traders and buyers."
+              }
+            }
+          ]
+        },
+        {
+          "name": "6. Shared Promotions & Settings",
+          "item": [
+            {
+              "name": "Get Transport Promotions",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/transport/promotions",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "transport",
+                    "promotions"
+                  ]
+                },
+                "description": "Access ad management campaigns."
+              }
+            },
+            {
+              "name": "Get Transport Settings",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/transport/settings",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "transport",
+                    "settings"
+                  ]
+                },
+                "description": "Access shared account and security preferences."
+              }
+            }
+          ]
+        }
+      ]
     }
   ]
 }

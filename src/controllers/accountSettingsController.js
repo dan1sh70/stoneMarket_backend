@@ -22,7 +22,8 @@ async function getManufacturerProfile(userId) {
   const user = await User.findById(userId);
   let targetType = 'manufacturer';
   if (user) {
-    if (user.role === 'buyer') targetType = 'buyer';
+    if (user.role === 'transport_national' || user.role === 'transport_local') targetType = user.role;
+    else if (user.role === 'buyer') targetType = 'buyer';
     else if (user.role === 'trader') targetType = 'trader';
     else if (user.role === 'showroom') targetType = 'showroom';
     else if (user.role === 'mining') targetType = 'mining';
@@ -39,7 +40,30 @@ async function getManufacturerProfile(userId) {
   }
 
   if (!profile && user) {
-    if (user.role === 'buyer') {
+    if (user.role === 'transport_national' || user.role === 'transport_local') {
+      const isLocal = user.role === 'transport_local';
+      profile = await BusinessProfile.create({
+        userId,
+        business_type: user.role,
+        transport_category: isLocal ? 'local' : 'national',
+        company_name: isLocal
+          ? (user.name ? `${user.name} Local Stone Carrier` : 'Balaji Local Stone Carrier')
+          : (user.name ? `${user.name} Express Logistics` : 'Rajasthan Gujarat Express Logistics'),
+        business_category: isLocal ? 'Local Transport' : 'National Transport',
+        business_subcategory: isLocal ? 'City & District Stone Logistics' : 'Inter-State Multi-Axle Fleet Carrier',
+        established_year: isLocal ? 2019 : 2014,
+        dispatch_timings: isLocal ? '6:00 AM – 9:00 PM (All Days)' : '24x7 Dispatch Available',
+        address: {
+          state: 'Rajasthan',
+          district: 'Jaipur',
+          full_address: isLocal ? 'Transport Nagar, Jaipur' : 'VKI Area, Jaipur'
+        },
+        rating: 4.8,
+        review_count: 15,
+        status: 'active',
+        is_mock: false
+      });
+    } else if (user.role === 'buyer') {
       profile = await BusinessProfile.create({
         userId,
         business_type: 'buyer',

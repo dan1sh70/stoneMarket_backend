@@ -21,13 +21,13 @@ const { successResponse, errorResponse } = require('../utils/apiResponse');
 async function getManufacturerProfile(userId) {
   let profile = await BusinessProfile.findOne({
     userId,
-    business_type: { $in: ['manufacturer', 'mining', 'showroom', 'trader', 'buyer'] }
+    business_type: { $in: ['manufacturer', 'mining', 'showroom', 'trader', 'buyer', 'transport_national', 'transport_local'] }
   });
 
   if (!profile) {
     const user = await User.findById(userId);
     if (user) {
-      const bType = ['manufacturer', 'mining', 'showroom', 'trader', 'buyer'].includes(user.role) ? user.role : 'manufacturer';
+      const bType = ['manufacturer', 'mining', 'showroom', 'trader', 'buyer', 'transport_national', 'transport_local'].includes(user.role) ? user.role : 'manufacturer';
       profile = await BusinessProfile.create({
         userId,
         business_type: bType,
