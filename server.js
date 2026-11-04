@@ -80,6 +80,14 @@ const solarSolutionsProfileRoutes = require('./src/routes/solarSolutionsProfileR
 const diamondBladesProfileRoutes = require('./src/routes/diamondBladesProfileRoutes');
 const machineManufacturerProfileRoutes = require('./src/routes/machineManufacturerProfileRoutes');
 const powderSupplierProfileRoutes = require('./src/routes/powderSupplierProfileRoutes');
+const {
+  machineRepairingRoutes,
+  electricalPanelRoutes,
+  waterSupplierRoutes,
+  caTaxAdvisorRoutes,
+  bankingLoanRoutes,
+  hotelRestaurantRoutes
+} = require('./src/routes/extendedServicesRoutes');
 
 // CMS Routes
 const miningCmsRoutes = require('./src/routes/cms/mining');
@@ -157,6 +165,12 @@ app.use('/api/solar/promotions', promotionRoutes);
 app.use('/api/diamond-blades/promotions', promotionRoutes);
 app.use('/api/machine-manufacturer/promotions', promotionRoutes);
 app.use('/api/powder-supplier/promotions', promotionRoutes);
+app.use('/api/machine-repairing/promotions', promotionRoutes);
+app.use('/api/electrical-panel/promotions', promotionRoutes);
+app.use('/api/water-supplier/promotions', promotionRoutes);
+app.use('/api/ca-tax-advisor/promotions', promotionRoutes);
+app.use('/api/banking-loan/promotions', promotionRoutes);
+app.use('/api/hotel-restaurant/promotions', promotionRoutes);
 app.use('/api/promotions', promotionRoutes);
 app.get('/api/promotion-packages', promotionController.getPromotionPackages);
 app.get('/api/promotion-packages/:id', promotionController.getPromotionPackageById);
@@ -175,6 +189,12 @@ app.use('/api/solar/invoices', promotionInvoiceRoutes);
 app.use('/api/diamond-blades/invoices', promotionInvoiceRoutes);
 app.use('/api/machine-manufacturer/invoices', promotionInvoiceRoutes);
 app.use('/api/powder-supplier/invoices', promotionInvoiceRoutes);
+app.use('/api/machine-repairing/invoices', promotionInvoiceRoutes);
+app.use('/api/electrical-panel/invoices', promotionInvoiceRoutes);
+app.use('/api/water-supplier/invoices', promotionInvoiceRoutes);
+app.use('/api/ca-tax-advisor/invoices', promotionInvoiceRoutes);
+app.use('/api/banking-loan/invoices', promotionInvoiceRoutes);
+app.use('/api/hotel-restaurant/invoices', promotionInvoiceRoutes);
 app.use('/api/admin/promotions', adminPromotionRoutes);
 
 // v1 aliases
@@ -236,6 +256,12 @@ app.use('/api/solar/settings', accountSettingsRoutes);
 app.use('/api/diamond-blades/settings', accountSettingsRoutes);
 app.use('/api/machine-manufacturer/settings', accountSettingsRoutes);
 app.use('/api/powder-supplier/settings', accountSettingsRoutes);
+app.use('/api/machine-repairing/settings', accountSettingsRoutes);
+app.use('/api/electrical-panel/settings', accountSettingsRoutes);
+app.use('/api/water-supplier/settings', accountSettingsRoutes);
+app.use('/api/ca-tax-advisor/settings', accountSettingsRoutes);
+app.use('/api/banking-loan/settings', accountSettingsRoutes);
+app.use('/api/hotel-restaurant/settings', accountSettingsRoutes);
 app.use('/api/v1/manufacturer/leads', leadManagementRoutes);
 app.use('/api/v1/mining/leads', leadManagementRoutes);
 app.use('/api/v1/showroom/leads', leadManagementRoutes);
@@ -254,6 +280,12 @@ app.use('/api/v1/solar/settings', accountSettingsRoutes);
 app.use('/api/v1/diamond-blades/settings', accountSettingsRoutes);
 app.use('/api/v1/machine-manufacturer/settings', accountSettingsRoutes);
 app.use('/api/v1/powder-supplier/settings', accountSettingsRoutes);
+app.use('/api/v1/machine-repairing/settings', accountSettingsRoutes);
+app.use('/api/v1/electrical-panel/settings', accountSettingsRoutes);
+app.use('/api/v1/water-supplier/settings', accountSettingsRoutes);
+app.use('/api/v1/ca-tax-advisor/settings', accountSettingsRoutes);
+app.use('/api/v1/banking-loan/settings', accountSettingsRoutes);
+app.use('/api/v1/hotel-restaurant/settings', accountSettingsRoutes);
 app.use('/api/public/leads', leadManagementRoutes);
 app.use('/api/v1/public/leads', leadManagementRoutes);
 
@@ -288,6 +320,27 @@ app.use('/api/powder-supplier', powderSupplierProfileRoutes);
 app.use('/api/v1/powder-supplier', powderSupplierProfileRoutes);
 app.use('/api/mineral-supplier', powderSupplierProfileRoutes);
 app.use('/api/v1/mineral-supplier', powderSupplierProfileRoutes);
+
+// Additional 6 Business Types Routes
+app.use('/api/machine-repairing', machineRepairingRoutes);
+app.use('/api/v1/machine-repairing', machineRepairingRoutes);
+app.use('/api/electrical-panel', electricalPanelRoutes);
+app.use('/api/v1/electrical-panel', electricalPanelRoutes);
+app.use('/api/electrical-repairing', electricalPanelRoutes);
+app.use('/api/v1/electrical-repairing', electricalPanelRoutes);
+app.use('/api/water-supplier', waterSupplierRoutes);
+app.use('/api/v1/water-supplier', waterSupplierRoutes);
+app.use('/api/ca-tax-advisor', caTaxAdvisorRoutes);
+app.use('/api/v1/ca-tax-advisor', caTaxAdvisorRoutes);
+app.use('/api/banking-loan', bankingLoanRoutes);
+app.use('/api/v1/banking-loan', bankingLoanRoutes);
+app.use('/api/banking-services', bankingLoanRoutes);
+app.use('/api/v1/banking-services', bankingLoanRoutes);
+app.use('/api/hotel-restaurant', hotelRestaurantRoutes);
+app.use('/api/v1/hotel-restaurant', hotelRestaurantRoutes);
+app.use('/api/hospitality', hotelRestaurantRoutes);
+app.use('/api/v1/hospitality', hotelRestaurantRoutes);
+
 app.use('/api/app', appInfoRoutes);
 
 // Mount CMS API Routes
@@ -305,6 +358,12 @@ app.use('/api/cms/solar', solarSolutionsProfileRoutes);
 app.use('/api/cms/diamond-blades', diamondBladesProfileRoutes);
 app.use('/api/cms/machine-manufacturer', machineManufacturerProfileRoutes);
 app.use('/api/cms/powder-supplier', powderSupplierProfileRoutes);
+app.use('/api/cms/machine-repairing', machineRepairingRoutes);
+app.use('/api/cms/electrical-panel', electricalPanelRoutes);
+app.use('/api/cms/water-supplier', waterSupplierRoutes);
+app.use('/api/cms/ca-tax-advisor', caTaxAdvisorRoutes);
+app.use('/api/cms/banking-loan', bankingLoanRoutes);
+app.use('/api/cms/hotel-restaurant', hotelRestaurantRoutes);
 
 // Root Routes (for frontend compatibility)
 app.use('/auth', authRoutes);

@@ -26941,6 +26941,2094 @@
           ]
         }
       ]
+    },
+    {
+      "name": "Stone Machine Repairing Module",
+      "description": "API endpoints for Machine Repairing business type, Repair Service Management 4-step wizard, machine compatibility, and shared modules.",
+      "item": [
+        {
+          "name": "1. Dashboard & Switcher",
+          "item": [
+            {
+              "name": "Get Stone Machine Repairing Module Dashboard",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/machine-repairing/dashboard",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "machine-repairing",
+                    "dashboard"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Business Types List",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/machine-repairing/business-types",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "machine-repairing",
+                    "business-types"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "2. Catalogue Management (4-Step Wizard)",
+          "item": [
+            {
+              "name": "List services",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/machine-repairing/services",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "machine-repairing",
+                    "services"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Publish Listing (services)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Industrial Granite Gangsaw Repair & Maintenance\",\n  \"category\": \"Granite Gangsaw Repair\",\n  \"supported_machine_types\": [\n    \"Granite Gangsaw\",\n    \"Multi-Blade Cutter\"\n  ],\n  \"supported_brands\": [\n    \"Rajendra Machine Tools\",\n    \"Barsanti\"\n  ],\n  \"repair_specialization\": [\n    \"Hydraulic Systems\",\n    \"Gearbox Overhaul\"\n  ],\n  \"mechanical_repair\": true,\n  \"hydraulic_repair\": true,\n  \"operating_base_location\": \"Rajsamand, Rajasthan\",\n  \"selling_price\": 8000,\n  \"pricing_unit\": \"Per Service Visit\"\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/machine-repairing/services",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "machine-repairing",
+                    "services"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Listing by ID",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/machine-repairing/services/{{item_id}}",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "machine-repairing",
+                    "services",
+                    "{{item_id}}"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Duplicate Listing as Draft",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/machine-repairing/services/{{item_id}}/duplicate",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "machine-repairing",
+                    "services",
+                    "{{item_id}}",
+                    "duplicate"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Toggle Listing Status",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/machine-repairing/services/{{item_id}}/status",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "machine-repairing",
+                    "services",
+                    "{{item_id}}",
+                    "status"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Delete Listing",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/machine-repairing/services/{{item_id}}",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "machine-repairing",
+                    "services",
+                    "{{item_id}}"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "3. Shared Modules (Settings, Inquiries, Leads, Promotions)",
+          "item": [
+            {
+              "name": "Get Inquiries",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/machine-repairing/inquiries",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "machine-repairing",
+                    "inquiries"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Leads",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/machine-repairing/leads",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "machine-repairing",
+                    "leads"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Account Settings",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/machine-repairing/settings",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "machine-repairing",
+                    "settings"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Promotions",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/machine-repairing/promotions",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "machine-repairing",
+                    "promotions"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Invoices",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/machine-repairing/invoices",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "machine-repairing",
+                    "invoices"
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Stone Electrical Panel & Repairing Module",
+      "description": "API endpoints for Electrical Panel & Repairing business type, Electrical Service Management 4-step wizard, voltage & current ratings, and shared modules.",
+      "item": [
+        {
+          "name": "1. Dashboard & Switcher",
+          "item": [
+            {
+              "name": "Get Stone Electrical Panel & Repairing Module Dashboard",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/electrical-panel/dashboard",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "electrical-panel",
+                    "dashboard"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Business Types List",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/electrical-panel/business-types",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "electrical-panel",
+                    "business-types"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "2. Catalogue Management (4-Step Wizard)",
+          "item": [
+            {
+              "name": "List services",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/electrical-panel/services",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "electrical-panel",
+                    "services"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Publish Listing (services)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Industrial LT Electrical Control Panel Manufacturing\",\n  \"category\": \"LT Control Panel\",\n  \"panel_type\": \"LT Control Panel\",\n  \"voltage_rating\": \"415V\",\n  \"phase\": \"Three Phase\",\n  \"rated_current_amp\": \"800A\",\n  \"busbar_material\": \"Electrolytic Copper\",\n  \"selling_price\": 85000,\n  \"pricing_unit\": \"Per Unit\"\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/electrical-panel/services",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "electrical-panel",
+                    "services"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Listing by ID",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/electrical-panel/services/{{item_id}}",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "electrical-panel",
+                    "services",
+                    "{{item_id}}"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Duplicate Listing as Draft",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/electrical-panel/services/{{item_id}}/duplicate",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "electrical-panel",
+                    "services",
+                    "{{item_id}}",
+                    "duplicate"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Toggle Listing Status",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/electrical-panel/services/{{item_id}}/status",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "electrical-panel",
+                    "services",
+                    "{{item_id}}",
+                    "status"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Delete Listing",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/electrical-panel/services/{{item_id}}",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "electrical-panel",
+                    "services",
+                    "{{item_id}}"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "3. Shared Modules (Settings, Inquiries, Leads, Promotions)",
+          "item": [
+            {
+              "name": "Get Inquiries",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/electrical-panel/inquiries",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "electrical-panel",
+                    "inquiries"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Leads",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/electrical-panel/leads",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "electrical-panel",
+                    "leads"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Account Settings",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/electrical-panel/settings",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "electrical-panel",
+                    "settings"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Promotions",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/electrical-panel/promotions",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "electrical-panel",
+                    "promotions"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Invoices",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/electrical-panel/invoices",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "electrical-panel",
+                    "invoices"
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Stone Water Supplier Module",
+      "description": "API endpoints for Water Supplier business type, Water Supply Management 4-step wizard, tanker capacity, TDS/pH quality, and shared modules.",
+      "item": [
+        {
+          "name": "1. Dashboard & Switcher",
+          "item": [
+            {
+              "name": "Get Stone Water Supplier Module Dashboard",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/water-supplier/dashboard",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "water-supplier",
+                    "dashboard"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Business Types List",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/water-supplier/business-types",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "water-supplier",
+                    "business-types"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "2. Catalogue Management (4-Step Wizard)",
+          "item": [
+            {
+              "name": "List supplies",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/water-supplier/supplies",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "water-supplier",
+                    "supplies"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Publish Listing (supplies)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Industrial Water Tanker Supply (12,000 Litres)\",\n  \"category\": \"Industrial Water Supply\",\n  \"water_source\": \"Borewell & RO Plant\",\n  \"water_type\": \"Industrial Water\",\n  \"supply_capacity\": \"12,000 Litres\",\n  \"tanker_capacity\": \"12,000 Litres\",\n  \"operating_base_location\": \"Makrana Industrial Area\",\n  \"selling_price\": 2500,\n  \"pricing_unit\": \"Per Tanker\"\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/water-supplier/supplies",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "water-supplier",
+                    "supplies"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Listing by ID",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/water-supplier/supplies/{{item_id}}",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "water-supplier",
+                    "supplies",
+                    "{{item_id}}"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Duplicate Listing as Draft",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/water-supplier/supplies/{{item_id}}/duplicate",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "water-supplier",
+                    "supplies",
+                    "{{item_id}}",
+                    "duplicate"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Toggle Listing Status",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/water-supplier/supplies/{{item_id}}/status",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "water-supplier",
+                    "supplies",
+                    "{{item_id}}",
+                    "status"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Delete Listing",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/water-supplier/supplies/{{item_id}}",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "water-supplier",
+                    "supplies",
+                    "{{item_id}}"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "3. Shared Modules (Settings, Inquiries, Leads, Promotions)",
+          "item": [
+            {
+              "name": "Get Inquiries",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/water-supplier/inquiries",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "water-supplier",
+                    "inquiries"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Leads",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/water-supplier/leads",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "water-supplier",
+                    "leads"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Account Settings",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/water-supplier/settings",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "water-supplier",
+                    "settings"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Promotions",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/water-supplier/promotions",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "water-supplier",
+                    "promotions"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Invoices",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/water-supplier/invoices",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "water-supplier",
+                    "invoices"
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Stone CA & Tax Advisor Module",
+      "description": "API endpoints for CA & Tax Advisor business type, Professional Services Management 4-step wizard, CA qualification, GST/ROC compliance, and shared modules.",
+      "item": [
+        {
+          "name": "1. Dashboard & Switcher",
+          "item": [
+            {
+              "name": "Get Stone CA & Tax Advisor Module Dashboard",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/ca-tax-advisor/dashboard",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "ca-tax-advisor",
+                    "dashboard"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Business Types List",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/ca-tax-advisor/business-types",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "ca-tax-advisor",
+                    "business-types"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "2. Catalogue Management (4-Step Wizard)",
+          "item": [
+            {
+              "name": "List services",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/ca-tax-advisor/services",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "ca-tax-advisor",
+                    "services"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Publish Listing (services)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"GST Registration & Monthly Return Filing Package\",\n  \"category\": \"GST Return Filing\",\n  \"professional_name\": \"CA Rajesh Singhal\",\n  \"qualification\": \"FCA, DISA (ICAI)\",\n  \"areas_of_expertise\": [\n    \"GST Compliance\",\n    \"GSTR-1 & 3B\"\n  ],\n  \"consultation_fee\": 1500,\n  \"selling_price\": 1500,\n  \"pricing_unit\": \"Per Month\"\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/ca-tax-advisor/services",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "ca-tax-advisor",
+                    "services"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Listing by ID",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/ca-tax-advisor/services/{{item_id}}",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "ca-tax-advisor",
+                    "services",
+                    "{{item_id}}"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Duplicate Listing as Draft",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/ca-tax-advisor/services/{{item_id}}/duplicate",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "ca-tax-advisor",
+                    "services",
+                    "{{item_id}}",
+                    "duplicate"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Toggle Listing Status",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/ca-tax-advisor/services/{{item_id}}/status",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "ca-tax-advisor",
+                    "services",
+                    "{{item_id}}",
+                    "status"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Delete Listing",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/ca-tax-advisor/services/{{item_id}}",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "ca-tax-advisor",
+                    "services",
+                    "{{item_id}}"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "3. Shared Modules (Settings, Inquiries, Leads, Promotions)",
+          "item": [
+            {
+              "name": "Get Inquiries",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/ca-tax-advisor/inquiries",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "ca-tax-advisor",
+                    "inquiries"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Leads",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/ca-tax-advisor/leads",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "ca-tax-advisor",
+                    "leads"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Account Settings",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/ca-tax-advisor/settings",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "ca-tax-advisor",
+                    "settings"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Promotions",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/ca-tax-advisor/promotions",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "ca-tax-advisor",
+                    "promotions"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Invoices",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/ca-tax-advisor/invoices",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "ca-tax-advisor",
+                    "invoices"
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Stone Banking & Loan Services Module",
+      "description": "API endpoints for Banking & Loan Services business type, Financial Services Management 4-step wizard, MSME machinery loans, interest disclosures, and shared modules.",
+      "item": [
+        {
+          "name": "1. Dashboard & Switcher",
+          "item": [
+            {
+              "name": "Get Stone Banking & Loan Services Module Dashboard",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/banking-loan/dashboard",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "banking-loan",
+                    "dashboard"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Business Types List",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/banking-loan/business-types",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "banking-loan",
+                    "business-types"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "2. Catalogue Management (4-Step Wizard)",
+          "item": [
+            {
+              "name": "List services",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/banking-loan/services",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "banking-loan",
+                    "services"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Publish Listing (services)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"MSME Machinery Purchase & Working Capital Finance Assistance\",\n  \"category\": \"Machinery Loans\",\n  \"financial_product_type\": \"Equipment & Term Loan\",\n  \"lending_institution\": \"State Bank of India / HDFC Bank\",\n  \"loan_purpose\": \"Purchase of CNC Bridge Saws and Granite Gangsaws\",\n  \"min_loan_amount\": 1000000,\n  \"max_loan_amount\": 50000000,\n  \"terms_disclosure\": \"Indicative\"\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/banking-loan/services",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "banking-loan",
+                    "services"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Listing by ID",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/banking-loan/services/{{item_id}}",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "banking-loan",
+                    "services",
+                    "{{item_id}}"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Duplicate Listing as Draft",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/banking-loan/services/{{item_id}}/duplicate",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "banking-loan",
+                    "services",
+                    "{{item_id}}",
+                    "duplicate"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Toggle Listing Status",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/banking-loan/services/{{item_id}}/status",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "banking-loan",
+                    "services",
+                    "{{item_id}}",
+                    "status"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Delete Listing",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/banking-loan/services/{{item_id}}",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "banking-loan",
+                    "services",
+                    "{{item_id}}"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "3. Shared Modules (Settings, Inquiries, Leads, Promotions)",
+          "item": [
+            {
+              "name": "Get Inquiries",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/banking-loan/inquiries",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "banking-loan",
+                    "inquiries"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Leads",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/banking-loan/leads",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "banking-loan",
+                    "leads"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Account Settings",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/banking-loan/settings",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "banking-loan",
+                    "settings"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Promotions",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/banking-loan/promotions",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "banking-loan",
+                    "promotions"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Invoices",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/banking-loan/invoices",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "banking-loan",
+                    "invoices"
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Stone Hotel & Restaurant Module",
+      "description": "API endpoints for Hotel & Restaurant business type, Hospitality Management 4-step wizard, room inventory, dining capacity, tariffs, and shared modules.",
+      "item": [
+        {
+          "name": "1. Dashboard & Switcher",
+          "item": [
+            {
+              "name": "Get Stone Hotel & Restaurant Module Dashboard",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/hotel-restaurant/dashboard",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "hotel-restaurant",
+                    "dashboard"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Business Types List",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/hotel-restaurant/business-types",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "hotel-restaurant",
+                    "business-types"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "2. Catalogue Management (4-Step Wizard)",
+          "item": [
+            {
+              "name": "List listings",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/hotel-restaurant/listings",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "hotel-restaurant",
+                    "listings"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Publish Listing (listings)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"The Royal Granito Executive Business Hotel\",\n  \"category\": \"Business Hotel\",\n  \"establishment_type\": \"Hotel\",\n  \"business_address\": \"Kishangarh Marble Industrial Belt, NH-8, Kishangarh\",\n  \"total_rooms\": 45,\n  \"room_types\": [\n    \"Deluxe Executive Room\"\n  ],\n  \"total_guest_capacity\": 90,\n  \"starting_room_price\": 2500,\n  \"selling_price\": 2500,\n  \"pricing_unit\": \"Per Night\"\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/hotel-restaurant/listings",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "hotel-restaurant",
+                    "listings"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Listing by ID",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/hotel-restaurant/listings/{{item_id}}",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "hotel-restaurant",
+                    "listings",
+                    "{{item_id}}"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Duplicate Listing as Draft",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/hotel-restaurant/listings/{{item_id}}/duplicate",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "hotel-restaurant",
+                    "listings",
+                    "{{item_id}}",
+                    "duplicate"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Toggle Listing Status",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/hotel-restaurant/listings/{{item_id}}/status",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "hotel-restaurant",
+                    "listings",
+                    "{{item_id}}",
+                    "status"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Delete Listing",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/hotel-restaurant/listings/{{item_id}}",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "hotel-restaurant",
+                    "listings",
+                    "{{item_id}}"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "3. Shared Modules (Settings, Inquiries, Leads, Promotions)",
+          "item": [
+            {
+              "name": "Get Inquiries",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/hotel-restaurant/inquiries",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "hotel-restaurant",
+                    "inquiries"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Leads",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/hotel-restaurant/leads",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "hotel-restaurant",
+                    "leads"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Account Settings",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/hotel-restaurant/settings",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "hotel-restaurant",
+                    "settings"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Promotions",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/hotel-restaurant/promotions",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "hotel-restaurant",
+                    "promotions"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Invoices",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/hotel-restaurant/invoices",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "hotel-restaurant",
+                    "invoices"
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
     }
   ]
 }

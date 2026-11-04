@@ -21,13 +21,34 @@ const { successResponse, errorResponse } = require('../utils/apiResponse');
 async function getManufacturerProfile(userId) {
   let profile = await BusinessProfile.findOne({
     userId,
-    business_type: { $in: ['manufacturer', 'mining', 'showroom', 'trader', 'buyer', 'transport_national', 'transport_local', 'brazing', 'abrasives_epoxy', 'abrasives', 'machinery_parts', 'machinery', 'mining_equipment', 'heavy_mining_equipment', 'solar_solutions', 'industrial_solar', 'diamond_blades', 'blades_segments', 'machine_manufacturer', 'stone_machinery', 'powder_supplier', 'mineral_supplier'] }
+    business_type: { $in: [
+      'manufacturer', 'mining', 'showroom', 'trader', 'buyer', 
+      'transport_national', 'transport_local', 'brazing', 
+      'abrasives_epoxy', 'abrasives', 'machinery_parts', 'machinery', 
+      'mining_equipment', 'heavy_mining_equipment', 'solar_solutions', 'industrial_solar', 
+      'diamond_blades', 'blades_segments', 'machine_manufacturer', 'stone_machinery', 
+      'powder_supplier', 'mineral_supplier',
+      'machine_repairing', 'electrical_panel', 'electrical_repairing',
+      'water_supplier', 'ca_tax_advisor', 'banking_loan', 'banking_services',
+      'hotel_restaurant', 'hospitality'
+    ] }
   });
 
   if (!profile) {
     const user = await User.findById(userId);
     if (user) {
-      const bType = ['manufacturer', 'mining', 'showroom', 'trader', 'buyer', 'transport_national', 'transport_local', 'brazing', 'abrasives_epoxy', 'abrasives', 'machinery_parts', 'machinery', 'mining_equipment', 'heavy_mining_equipment', 'solar_solutions', 'industrial_solar', 'diamond_blades', 'blades_segments', 'machine_manufacturer', 'stone_machinery', 'powder_supplier', 'mineral_supplier'].includes(user.role) ? user.role : 'manufacturer';
+      const validTypes = [
+        'manufacturer', 'mining', 'showroom', 'trader', 'buyer', 
+        'transport_national', 'transport_local', 'brazing', 
+        'abrasives_epoxy', 'abrasives', 'machinery_parts', 'machinery', 
+        'mining_equipment', 'heavy_mining_equipment', 'solar_solutions', 'industrial_solar', 
+        'diamond_blades', 'blades_segments', 'machine_manufacturer', 'stone_machinery', 
+        'powder_supplier', 'mineral_supplier',
+        'machine_repairing', 'electrical_panel', 'electrical_repairing',
+        'water_supplier', 'ca_tax_advisor', 'banking_loan', 'banking_services',
+        'hotel_restaurant', 'hospitality'
+      ];
+      const bType = validTypes.includes(user.role) ? user.role : 'manufacturer';
       profile = await BusinessProfile.create({
         userId,
         business_type: bType,

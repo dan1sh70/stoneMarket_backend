@@ -35,6 +35,12 @@ async function getManufacturerProfile(userId) {
     else if (user.role === 'diamond_blades' || user.role === 'blades_segments') targetType = 'diamond_blades';
     else if (user.role === 'machine_manufacturer' || user.role === 'stone_machinery') targetType = 'machine_manufacturer';
     else if (user.role === 'powder_supplier' || user.role === 'mineral_supplier') targetType = 'powder_supplier';
+    else if (user.role === 'machine_repairing') targetType = 'machine_repairing';
+    else if (user.role === 'electrical_panel' || user.role === 'electrical_repairing') targetType = 'electrical_panel';
+    else if (user.role === 'water_supplier') targetType = 'water_supplier';
+    else if (user.role === 'ca_tax_advisor') targetType = 'ca_tax_advisor';
+    else if (user.role === 'banking_loan' || user.role === 'banking_services') targetType = 'banking_loan';
+    else if (user.role === 'hotel_restaurant' || user.role === 'hospitality') targetType = 'hotel_restaurant';
   }
 
   let profile = await BusinessProfile.findOne({
