@@ -31,6 +31,7 @@ async function getManufacturerProfile(userId) {
     else if (user.role === 'mining_equipment' || user.role === 'heavy_mining_equipment') targetType = 'mining_equipment';
     else if (user.role === 'solar_solutions' || user.role === 'industrial_solar') targetType = 'solar_solutions';
     else if (user.role === 'diamond_blades' || user.role === 'blades_segments') targetType = 'diamond_blades';
+    else if (user.role === 'machine_manufacturer' || user.role === 'stone_machinery') targetType = 'machine_manufacturer';
   }
 
   let profile = await BusinessProfile.findOne({
@@ -228,6 +229,19 @@ async function getManufacturerProfile(userId) {
         status: 'active',
         is_mock: false
       });
+    } else if (user.role === 'machine_manufacturer' || user.role === 'stone_machinery') {
+      profile = await BusinessProfile.create({
+        userId,
+        business_type: 'machine_manufacturer',
+        company_name: user.name ? `${user.name} Machine Tools` : 'Rajendra Machine Tools & Heavy Machinery',
+        business_category: 'Stone Machine Manufacturer',
+        business_subcategory: 'Automatic Multi-Cutter Granite Gangsaws, 5-Axis CNC Bridge Cutters & Polishing Lines',
+        established_year: 2008,
+        rating: 4.9,
+        review_count: 64,
+        status: 'active',
+        is_mock: false
+      });
     } else if (user.role === 'manufacturer' || user.role === 'admin' || user.role === 'vendor') {
       profile = await BusinessProfile.create({
         userId,
@@ -260,6 +274,7 @@ function buildInquiryVisibilityFilter(profile) {
   const isMiningEquipment = profile.business_type === 'mining_equipment' || profile.business_type === 'heavy_mining_equipment';
   const isSolar = profile.business_type === 'solar_solutions' || profile.business_type === 'industrial_solar';
   const isDiamondBlades = profile.business_type === 'diamond_blades' || profile.business_type === 'blades_segments';
+  const isMachineManufacturer = profile.business_type === 'machine_manufacturer' || profile.business_type === 'stone_machinery';
   const categories = isMining
     ? ['Mining', 'Mines & Quarries', 'Raw Stone Blocks', 'Granite Blocks', 'Marble Blocks', 'Sandstone Blocks', 'Limestone Blocks', 'Natural Stone']
     : isShowroom
@@ -278,6 +293,8 @@ function buildInquiryVisibilityFilter(profile) {
     ? ['Industrial Solar Solutions', 'Solar Solutions', 'Rooftop Solar', 'Captive Solar Plant', 'Solar EPC', 'Solar Panels', 'Solar Inverters', 'Solar Battery Storage Systems', 'Solar Power Plants for Stone Factories']
     : isDiamondBlades
     ? ['Diamond Blades & Segments', 'Diamond Blades', 'Diamond Segments', 'Diamond Tools', 'Circular Saw Blades', 'Gangsaw Segments', 'Wire Saw Beads', 'Core Drill Bits']
+    : isMachineManufacturer
+    ? ['Stone Machine Manufacturer', 'Machine Manufacturer', 'Machinery', 'Stone Cutting Machines', 'Gangsaw Machine', 'CNC Bridge Cutting Machine', 'Stone Processing Equipment', 'Slab Polishing Machines', 'Wire Saw Machine', 'Water Recycling Plant']
     : ['Granite', 'Marble', 'Granite Slabs', 'Marble & Granite Slabs', 'Granite & Marble Slabs', 'Natural Stone', 'Manufacturer'];
 
   return {

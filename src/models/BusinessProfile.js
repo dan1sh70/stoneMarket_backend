@@ -25,7 +25,7 @@ const businessProfileSchema = new mongoose.Schema({
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   business_type: { 
     type: String, 
-    enum: ['mining', 'manufacturer', 'showroom', 'trader', 'buyer', 'transport_national', 'transport_local', 'brazing', 'abrasives_epoxy', 'abrasives', 'machinery_parts', 'machinery', 'mining_equipment', 'heavy_mining_equipment', 'solar_solutions', 'industrial_solar', 'diamond_blades', 'blades_segments', 'customer', 'service_provider'],
+    enum: ['mining', 'manufacturer', 'showroom', 'trader', 'buyer', 'transport_national', 'transport_local', 'brazing', 'abrasives_epoxy', 'abrasives', 'machinery_parts', 'machinery', 'mining_equipment', 'heavy_mining_equipment', 'solar_solutions', 'industrial_solar', 'diamond_blades', 'blades_segments', 'machine_manufacturer', 'stone_machinery', 'customer', 'service_provider'],
     required: true,
     index: true
   },
@@ -308,6 +308,12 @@ const businessProfileSchema = new mongoose.Schema({
   daily_segment_production_capacity: { type: String, default: '15,000+ Segments / Day' },
   custom_matrix_formulation: { type: String, default: 'Custom Cobalt & Bronze Bond Matrices Engineered for Indian Granites' },
   laser_welding_facility: { type: String, default: 'Automated Multi-Axis Laser Welding & High-Frequency Induction Line' },
+
+  // Stone Machine Manufacturer Operational Specifications
+  machine_categories: [{ type: String }],
+  manufacturing_plant_capacity: { type: String, default: '25+ Heavy Duty Gangsaws & CNC Cutters / Year' },
+  in_house_fabrication_setup: { type: String, default: 'Heavy Casting, Stress Relieving Furnace, CNC Machining Centers' },
+  annual_production_volume: { type: String, default: '50+ Complete Stone Processing Lines Delivered' },
 
   // Owners (Step 2)
   owners: [ownerSchema], // Usually up to 2

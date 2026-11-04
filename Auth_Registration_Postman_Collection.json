@@ -25249,6 +25249,868 @@
           ]
         }
       ]
+    },
+    {
+      "name": "Stone Machine Manufacturer Module",
+      "description": "Complete API endpoints for Stone Machine Manufacturer business type, Machinery Catalog Management 4-step wizard, machinery specifications, stock & availability adjustment, and shared modules.",
+      "item": [
+        {
+          "name": "1. Dashboard & Business Switcher",
+          "item": [
+            {
+              "name": "Get Stone Machine Manufacturer Dashboard",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/machine-manufacturer/dashboard",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "machine-manufacturer",
+                    "dashboard"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Business Types List",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/machine-manufacturer/business-types",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "machine-manufacturer",
+                    "business-types"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Switch Business Type to Stone Machine Manufacturer",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"target_type\": \"machine_manufacturer\"\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/machine-manufacturer/switch-business-type",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "machine-manufacturer",
+                    "switch-business-type"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "2. Profile & Operational Specifications",
+          "item": [
+            {
+              "name": "Get Machine Manufacturer Business Profile",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/machine-manufacturer/profile",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "machine-manufacturer",
+                    "profile"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Update Machine Manufacturer Profile & Plant Capacity",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company_name\": \"Rajendra Machine Tools & Heavy Machinery\",\n  \"manufacturing_plant_capacity\": \"30+ Heavy Duty Gangsaws & CNC Cutters / Year\",\n  \"in_house_fabrication_setup\": \"Heavy Casting, Stress Relieving Furnace, 5-Axis CNC Milling\",\n  \"annual_production_volume\": \"60+ Complete Stone Processing Lines Delivered\",\n  \"machine_categories\": [\n    \"Granite Gangsaw Machine (80 Blades)\",\n    \"5-Axis CNC Bridge Cutting Machine\",\n    \"Automatic Slab Polishing Machine\",\n    \"Waterjet Cutting Machine\"\n  ]\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/machine-manufacturer/profile",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "machine-manufacturer",
+                    "profile"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "3. Machinery Catalog Management",
+          "item": [
+            {
+              "name": "List Machinery Catalog (with Search & Filters)",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/machine-manufacturer/catalog?status=active&search=Titan&page=1&limit=20",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "machine-manufacturer",
+                    "catalog"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "active"
+                    },
+                    {
+                      "key": "search",
+                      "value": "Titan"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "List via /machines Alias",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/machine-manufacturer/machines",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "machine-manufacturer",
+                    "machines"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Create Machine - Automatic Multi-Cutter Granite Gangsaw (80 Blades)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Automatic Multi-Cutter Granite Gangsaw (80 Blades)\",\n  \"category\": \"Granite Gangsaw Machine (80 Blades)\",\n  \"brand_name\": \"Rajendra Machine Tools\",\n  \"manufacturer\": \"Rajendra Machine Tools\",\n  \"model_number\": \"Rajendra Titan-80\",\n  \"connected_power_hp\": 100,\n  \"connected_power_kw\": 75,\n  \"production_capacity\": \"1,800 Sq.ft / Shift\",\n  \"working_dimensions\": \"3500 × 2000 × 2000 mm Block\",\n  \"working_size\": \"3500 × 2000 × 2000 mm Block\",\n  \"selling_price\": 4800000,\n  \"pricing_unit\": \"Per Complete Machine\",\n  \"lead_time\": \"3–4 Weeks Fabrication & Dispatch\",\n  \"manufacturing_status\": \"Ready Stock\",\n  \"availability_status\": \"Ready Stock\",\n  \"installation_type\": \"On-Site Commissioning Available\",\n  \"transportation_terms\": \"Transportation Extra\",\n  \"dispatch_location\": \"Rajsamand, Rajasthan\",\n  \"warranty_guarantee\": \"1 Year Comprehensive + 2 Years Frame Warranty\",\n  \"min_order_quantity\": 1,\n  \"available_stock\": 2,\n  \"stock_unit\": \"Units\",\n  \"target_categories\": [\n    \"Manufacturer\",\n    \"Mining\",\n    \"Stone Processing Unit\",\n    \"Granite Factory\"\n  ],\n  \"target_areas\": [\n    {\n      \"state_name\": \"Rajasthan\",\n      \"districts\": [\n        \"Rajsamand\",\n        \"Udaipur\",\n        \"Jaipur\"\n      ]\n    }\n  ],\n  \"images\": [\n    \"https://stonemarket.com/defaults/gangsaw-machine.jpg\"\n  ],\n  \"cover_image\": \"https://stonemarket.com/defaults/gangsaw-machine.jpg\",\n  \"status\": \"active\"\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/machine-manufacturer/catalog",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "machine-manufacturer",
+                    "catalog"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Create Machine - 5-Axis CNC Bridge Cutting Machine",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"5-Axis CNC Bridge Cutting Machine\",\n  \"category\": \"CNC Bridge Cutting Machine\",\n  \"brand_name\": \"RockMaster CNC-500\",\n  \"manufacturer\": \"RockMaster CNC-500\",\n  \"model_number\": \"RockMaster CNC-500\",\n  \"connected_power_hp\": 25,\n  \"connected_power_kw\": 18.5,\n  \"production_capacity\": \"550 Sq.ft / Shift\",\n  \"working_dimensions\": \"3200 × 2000 mm Bed Size\",\n  \"working_size\": \"3200 × 2000 mm Bed Size\",\n  \"selling_price\": 1650000,\n  \"pricing_unit\": \"Per Unit\",\n  \"lead_time\": \"2–3 Weeks Fabrication & Dispatch\",\n  \"manufacturing_status\": \"Ready Stock\",\n  \"availability_status\": \"Ready Stock\",\n  \"installation_type\": \"On-Site Commissioning Available\",\n  \"transportation_terms\": \"Transportation Extra\",\n  \"dispatch_location\": \"Rajsamand, Rajasthan\",\n  \"warranty_guarantee\": \"1 Year Comprehensive Warranty with Italian Spindle Support\",\n  \"min_order_quantity\": 1,\n  \"available_stock\": 1,\n  \"stock_unit\": \"Units\",\n  \"target_categories\": [\n    \"Manufacturer\",\n    \"Marble Factory\",\n    \"Granite Factory\"\n  ],\n  \"target_areas\": [\n    {\n      \"state_name\": \"Rajasthan\",\n      \"districts\": [\n        \"Kishangarh\",\n        \"Jaipur\"\n      ]\n    }\n  ],\n  \"images\": [\n    \"https://stonemarket.com/defaults/cnc-bridge-saw.jpg\"\n  ],\n  \"cover_image\": \"https://stonemarket.com/defaults/cnc-bridge-saw.jpg\",\n  \"videos\": [\n    \"https://youtube.com/watch?v=cnc-cutting-demo\"\n  ],\n  \"status\": \"active\"\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/machine-manufacturer/catalog",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "machine-manufacturer",
+                    "catalog"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Machine Details by ID",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/machine-manufacturer/catalog/{{machine_id}}",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "machine-manufacturer",
+                    "catalog",
+                    "{{machine_id}}"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Update Machine Specifications",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"selling_price\": 4950000,\n  \"lead_time\": \"2 Weeks Quick Dispatch\"\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/machine-manufacturer/catalog/{{machine_id}}",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "machine-manufacturer",
+                    "catalog",
+                    "{{machine_id}}"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Adjust Machine Stock & Manufacturing Status",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"stock\": 3,\n  \"availability_status\": \"Under Manufacturing\",\n  \"manufacturing_status\": \"Under Manufacturing\",\n  \"change_type\": \"set\",\n  \"notes\": \"New gangsaw batch framed in workshop\"\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/machine-manufacturer/catalog/{{machine_id}}/stock",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "machine-manufacturer",
+                    "catalog",
+                    "{{machine_id}}",
+                    "stock"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Duplicate Machine as Draft (Copy)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/machine-manufacturer/catalog/{{machine_id}}/duplicate",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "machine-manufacturer",
+                    "catalog",
+                    "{{machine_id}}",
+                    "duplicate"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Toggle Machine Active / Inactive Status",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/machine-manufacturer/catalog/{{machine_id}}/status",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "machine-manufacturer",
+                    "catalog",
+                    "{{machine_id}}",
+                    "status"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Delete Machine",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/machine-manufacturer/catalog/{{machine_id}}",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "machine-manufacturer",
+                    "catalog",
+                    "{{machine_id}}"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "4. Contacts & Gallery",
+          "item": [
+            {
+              "name": "Get Business Contacts",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/machine-manufacturer/contacts",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "machine-manufacturer",
+                    "contacts"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Add Contact",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Mahesh Kumawat\",\n  \"designation\": \"Senior Project Engineer & Erection Lead\",\n  \"phone\": \"+91 98290 44332\",\n  \"whatsapp\": \"+91 98290 44332\",\n  \"email\": \"mahesh.projects@rajendratools.com\",\n  \"is_primary\": false\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/machine-manufacturer/contacts",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "machine-manufacturer",
+                    "contacts"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Gallery Photos & Videos",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/machine-manufacturer/gallery",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "machine-manufacturer",
+                    "gallery"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Add Gallery Photo",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"url\": \"https://stonemarket.com/gallery/gangsaw-assembly-bay.jpg\",\n  \"title\": \"Heavy Gangsaw Machine Assembly Bay\",\n  \"category\": \"facility\",\n  \"is_cover\": true\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/machine-manufacturer/gallery/photos",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "machine-manufacturer",
+                    "gallery",
+                    "photos"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Add Gallery Video Demo",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"80-Blade Granite Gangsaw Live Cutting 1800 Sqft/Shift\",\n  \"video_url\": \"https://youtube.com/watch?v=titan-80-cutting-demo\",\n  \"source_type\": \"youtube\",\n  \"category\": \"demonstration\",\n  \"duration\": \"05:40\"\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/machine-manufacturer/gallery/videos",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "machine-manufacturer",
+                    "gallery",
+                    "videos"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "5. Verification & Analytics",
+          "item": [
+            {
+              "name": "Get Verification Center Status",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/machine-manufacturer/verification",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "machine-manufacturer",
+                    "verification"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Verify GSTIN",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"gstin\": \"08AABCR7766D1Z4\"\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/machine-manufacturer/verification/gst",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "machine-manufacturer",
+                    "verification",
+                    "gst"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Analytics Dashboard",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/machine-manufacturer/analytics",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "machine-manufacturer",
+                    "analytics"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Record Analytics Event",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"event_type\": \"machine_view\",\n  \"machine_id\": \"6aeb52db378b433a2e9118a8\",\n  \"metadata\": {\n    \"source\": \"mobile_catalog\"\n  }\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/machine-manufacturer/analytics/event",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "machine-manufacturer",
+                    "analytics",
+                    "event"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "6. Inquiries, Leads & Shared Settings",
+          "item": [
+            {
+              "name": "Get Incoming Machinery Inquiries",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/machine-manufacturer/inquiries",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "machine-manufacturer",
+                    "inquiries"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Machinery Leads Pool",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/machine-manufacturer/leads",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "machine-manufacturer",
+                    "leads"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Account Settings for Machine Manufacturer",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/machine-manufacturer/settings",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "machine-manufacturer",
+                    "settings"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Active Promotions for Machine Manufacturer",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/machine-manufacturer/promotions",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "machine-manufacturer",
+                    "promotions"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Invoices for Machine Manufacturer",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/machine-manufacturer/invoices",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "machine-manufacturer",
+                    "invoices"
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
     }
   ]
 }

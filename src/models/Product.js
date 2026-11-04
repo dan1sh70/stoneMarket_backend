@@ -21,7 +21,7 @@ const productSchema = new mongoose.Schema({
   miningLocation: String, // Source location for mining products
   stock_status: { type: String, enum: ['in_stock', 'out_of_stock', 'on_order'], default: 'in_stock' },
   businessProfileId: { type: mongoose.Schema.Types.ObjectId, ref: 'BusinessProfile' },
-  business_type: { type: String, enum: ['manufacturer', 'mining', 'showroom', 'trader', 'abrasives_epoxy', 'abrasives', 'machinery_parts', 'machinery', 'mining_equipment', 'heavy_mining_equipment', 'solar_solutions', 'industrial_solar', 'diamond_blades', 'blades_segments'], default: 'manufacturer', index: true },
+  business_type: { type: String, enum: ['manufacturer', 'mining', 'showroom', 'trader', 'abrasives_epoxy', 'abrasives', 'machinery_parts', 'machinery', 'mining_equipment', 'heavy_mining_equipment', 'solar_solutions', 'industrial_solar', 'diamond_blades', 'blades_segments', 'machine_manufacturer', 'stone_machinery'], default: 'manufacturer', index: true },
   sku: { type: String, index: true },
   brand_name: String,
   grit_grade: String,
@@ -51,6 +51,18 @@ const productSchema = new mongoose.Schema({
   bond_hardness: String,
   cutting_method: { type: String, enum: ['Wet', 'Dry', 'Wet / Dry', 'Wet/Dry'], default: 'Wet' },
   compatible_material: [String],
+  // Stone Machine Manufacturer Fields
+  connected_power_hp: Number,
+  connected_power_kw: Number,
+  production_capacity: String,
+  working_dimensions: String,
+  working_size: String,
+  lead_time: String,
+  manufacturing_status: { type: String, default: 'Ready Stock' },
+  installation_type: { type: String, default: 'Installation Available' },
+  transportation_terms: { type: String, default: 'Transportation Extra' },
+  dispatch_location: String,
+  videos: [String],
   technical_drawings: [String],
   equipment_brochures: [String],
   certification_documents: [String],
@@ -128,7 +140,13 @@ const productSchema = new mongoose.Schema({
       'Limited Stock', 
       'Out of Stock', 
       'Available on Order', 
-      'Discontinued'
+      'Discontinued',
+      'Ready Stock',
+      'Made to Order',
+      'Under Manufacturing',
+      'Available on Request',
+      'Project-Based Availability',
+      'Pre-booking Available'
     ], 
     default: 'in_stock' 
   },

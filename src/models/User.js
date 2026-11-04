@@ -27,6 +27,8 @@ const userSchema = new mongoose.Schema({
       'industrial_solar',
       'diamond_blades',
       'blades_segments',
+      'machine_manufacturer',
+      'stone_machinery',
       'service_provider',
       'customer'
     ], 

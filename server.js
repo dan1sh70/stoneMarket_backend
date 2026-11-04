@@ -78,6 +78,7 @@ const machineryProfileRoutes = require('./src/routes/machineryProfileRoutes');
 const miningEquipmentProfileRoutes = require('./src/routes/miningEquipmentProfileRoutes');
 const solarSolutionsProfileRoutes = require('./src/routes/solarSolutionsProfileRoutes');
 const diamondBladesProfileRoutes = require('./src/routes/diamondBladesProfileRoutes');
+const machineManufacturerProfileRoutes = require('./src/routes/machineManufacturerProfileRoutes');
 
 // CMS Routes
 const miningCmsRoutes = require('./src/routes/cms/mining');
@@ -153,6 +154,7 @@ app.use('/api/machinery/promotions', promotionRoutes);
 app.use('/api/mining-equipment/promotions', promotionRoutes);
 app.use('/api/solar/promotions', promotionRoutes);
 app.use('/api/diamond-blades/promotions', promotionRoutes);
+app.use('/api/machine-manufacturer/promotions', promotionRoutes);
 app.use('/api/promotions', promotionRoutes);
 app.get('/api/promotion-packages', promotionController.getPromotionPackages);
 app.get('/api/promotion-packages/:id', promotionController.getPromotionPackageById);
@@ -169,6 +171,7 @@ app.use('/api/machinery/invoices', promotionInvoiceRoutes);
 app.use('/api/mining-equipment/invoices', promotionInvoiceRoutes);
 app.use('/api/solar/invoices', promotionInvoiceRoutes);
 app.use('/api/diamond-blades/invoices', promotionInvoiceRoutes);
+app.use('/api/machine-manufacturer/invoices', promotionInvoiceRoutes);
 app.use('/api/admin/promotions', adminPromotionRoutes);
 
 // v1 aliases
@@ -228,6 +231,7 @@ app.use('/api/machinery/settings', accountSettingsRoutes);
 app.use('/api/mining-equipment/settings', accountSettingsRoutes);
 app.use('/api/solar/settings', accountSettingsRoutes);
 app.use('/api/diamond-blades/settings', accountSettingsRoutes);
+app.use('/api/machine-manufacturer/settings', accountSettingsRoutes);
 app.use('/api/v1/manufacturer/leads', leadManagementRoutes);
 app.use('/api/v1/mining/leads', leadManagementRoutes);
 app.use('/api/v1/showroom/leads', leadManagementRoutes);
@@ -244,6 +248,7 @@ app.use('/api/v1/machinery/settings', accountSettingsRoutes);
 app.use('/api/v1/mining-equipment/settings', accountSettingsRoutes);
 app.use('/api/v1/solar/settings', accountSettingsRoutes);
 app.use('/api/v1/diamond-blades/settings', accountSettingsRoutes);
+app.use('/api/v1/machine-manufacturer/settings', accountSettingsRoutes);
 app.use('/api/public/leads', leadManagementRoutes);
 app.use('/api/v1/public/leads', leadManagementRoutes);
 
@@ -272,6 +277,8 @@ app.use('/api/solar', solarSolutionsProfileRoutes);
 app.use('/api/v1/solar', solarSolutionsProfileRoutes);
 app.use('/api/diamond-blades', diamondBladesProfileRoutes);
 app.use('/api/v1/diamond-blades', diamondBladesProfileRoutes);
+app.use('/api/machine-manufacturer', machineManufacturerProfileRoutes);
+app.use('/api/v1/machine-manufacturer', machineManufacturerProfileRoutes);
 app.use('/api/app', appInfoRoutes);
 
 // Mount CMS API Routes
@@ -287,6 +294,7 @@ app.use('/api/cms/machinery', machineryProfileRoutes);
 app.use('/api/cms/mining-equipment', miningEquipmentProfileRoutes);
 app.use('/api/cms/solar', solarSolutionsProfileRoutes);
 app.use('/api/cms/diamond-blades', diamondBladesProfileRoutes);
+app.use('/api/cms/machine-manufacturer', machineManufacturerProfileRoutes);
 
 // Root Routes (for frontend compatibility)
 app.use('/auth', authRoutes);

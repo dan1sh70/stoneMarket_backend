@@ -33,6 +33,7 @@ async function getManufacturerProfile(userId) {
     else if (user.role === 'mining_equipment' || user.role === 'heavy_mining_equipment') targetType = 'mining_equipment';
     else if (user.role === 'solar_solutions' || user.role === 'industrial_solar') targetType = 'solar_solutions';
     else if (user.role === 'diamond_blades' || user.role === 'blades_segments') targetType = 'diamond_blades';
+    else if (user.role === 'machine_manufacturer' || user.role === 'stone_machinery') targetType = 'machine_manufacturer';
   }
 
   let profile = await BusinessProfile.findOne({
@@ -399,6 +400,43 @@ async function getManufacturerProfile(userId) {
         },
         rating: 4.9,
         review_count: 58,
+        status: 'active',
+        is_mock: false
+      });
+    } else if (user.role === 'machine_manufacturer' || user.role === 'stone_machinery') {
+      profile = await BusinessProfile.create({
+        userId,
+        business_type: 'machine_manufacturer',
+        company_name: user.name ? `${user.name} Machine Tools` : 'Rajendra Machine Tools & Heavy Machinery',
+        business_category: 'Stone Machine Manufacturer',
+        business_subcategory: 'Automatic Multi-Cutter Granite Gangsaws, 5-Axis CNC Bridge Cutters & Polishing Lines',
+        short_description: 'Pioneer manufacturer and exporter of heavy-duty stone processing machinery, computerized multi-blade granite gangsaws, CNC bridge cutters, and automatic multi-head slab polishing lines.',
+        about_business: 'Rajendra Machine Tools & Heavy Machinery specializes in high-precision stone machinery with heavy structural casting, stress-relieved frames, Siemens PLC automation, and Italian cutting spindle technology.',
+        established_year: 2008,
+        machine_categories: [
+          'Granite Gangsaw Machine (80 Blades)',
+          'Granite Gangsaw Machine (Multi-Blade)',
+          'Marble Gangsaw Machine',
+          '5-Axis CNC Bridge Cutting Machine',
+          'CNC Bridge Cutting Machine',
+          'Multi-Blade Block Cutting Machine',
+          'Automatic Slab Polishing Machine',
+          'Wire Saw Machine',
+          'Water Recycling Plant'
+        ],
+        manufacturing_plant_capacity: '25+ Heavy Duty Gangsaws & CNC Cutters / Year',
+        in_house_fabrication_setup: 'Heavy Casting, Stress Relieving Furnace, CNC Machining Centers',
+        annual_production_volume: '50+ Complete Stone Processing Lines Delivered',
+        address: {
+          state: 'Rajasthan',
+          district: 'Rajsamand',
+          area: 'RIICO Industrial Area',
+          full_address: 'Plot 45-48, Machinery Complex, RIICO Industrial Area, Rajsamand, Rajasthan 313324',
+          postal_code: '313324',
+          country: 'India'
+        },
+        rating: 4.9,
+        review_count: 64,
         status: 'active',
         is_mock: false
       });
