@@ -409,6 +409,7 @@ app.use('/api/cms/hotel-restaurant', hotelRestaurantRoutes);
 const adminSuperRoutes = require('./src/routes/adminSuperRoutes');
 app.use('/api/admin/super', adminSuperRoutes);
 app.use('/api/v1/admin/super', adminSuperRoutes);
+app.use('/api/admin', protect, authorize('admin'), adminRoutes);
 
 app.use('/api/business-types', businessManagementRoutes);
 app.use('/api/v1/business-types', businessManagementRoutes);
