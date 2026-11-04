@@ -26,6 +26,7 @@ async function getManufacturerProfile(userId) {
     else if (user.role === 'showroom') targetType = 'showroom';
     else if (user.role === 'mining') targetType = 'mining';
     else if (user.role === 'brazing' || user.role === 'service_provider') targetType = 'brazing';
+    else if (user.role === 'abrasives_epoxy' || user.role === 'abrasives') targetType = 'abrasives_epoxy';
   }
 
   let profile = await BusinessProfile.findOne({
@@ -158,6 +159,19 @@ async function getManufacturerProfile(userId) {
         status: 'active',
         is_mock: false
       });
+    } else if (user.role === 'abrasives_epoxy' || user.role === 'abrasives') {
+      profile = await BusinessProfile.create({
+        userId,
+        business_type: 'abrasives_epoxy',
+        company_name: user.name ? `${user.name} Abrasives & Chemicals` : 'Apex Diamond Abrasives & Epoxy Chemicals',
+        business_category: 'Abrasives & Epoxy Chemicals',
+        business_subcategory: 'Industrial Stone Diamond Abrasives, Epoxy Resins & Adhesives',
+        established_year: 2016,
+        rating: 4.8,
+        review_count: 42,
+        status: 'active',
+        is_mock: false
+      });
     } else if (user.role === 'manufacturer' || user.role === 'admin' || user.role === 'vendor') {
       profile = await BusinessProfile.create({
         userId,
@@ -185,6 +199,7 @@ function buildInquiryVisibilityFilter(profile) {
   const isShowroom = profile.business_type === 'showroom';
   const isTrader = profile.business_type === 'trader';
   const isBrazing = profile.business_type === 'brazing' || profile.business_type === 'service_provider';
+  const isAbrasives = profile.business_type === 'abrasives_epoxy' || profile.business_type === 'abrasives';
   const categories = isMining
     ? ['Mining', 'Mines & Quarries', 'Raw Stone Blocks', 'Granite Blocks', 'Marble Blocks', 'Sandstone Blocks', 'Limestone Blocks', 'Natural Stone']
     : isShowroom
@@ -193,6 +208,8 @@ function buildInquiryVisibilityFilter(profile) {
     ? ['Trader', 'Stone Trader', 'Traders & Suppliers', 'Wholesale Supply', 'Granite', 'Marble', 'Sandstone', 'Limestone', 'Tiles', 'Natural Stone', 'Manufacturer', 'Showroom']
     : isBrazing
     ? ['Brazing & Tooling Service', 'Brazing', 'Blade Retipping', 'Tooling', 'Diamond Blades', 'Circular Blades', 'Gangsaw Blades', 'Segments']
+    : isAbrasives
+    ? ['Abrasives & Epoxy Chemicals', 'Abrasives', 'Epoxy Chemical', 'Epoxy Resin', 'Adhesives', 'Diamond Abrasives', 'Polishing Powder', 'Stone Bonding Adhesive']
     : ['Granite', 'Marble', 'Granite Slabs', 'Marble & Granite Slabs', 'Granite & Marble Slabs', 'Natural Stone', 'Manufacturer'];
 
   return {

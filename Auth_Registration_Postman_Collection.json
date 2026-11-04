@@ -20928,6 +20928,928 @@
           ]
         }
       ]
+    },
+    {
+      "name": "Stone Abrasives & Epoxy Chemicals Module",
+      "description": "Complete Abrasives & Epoxy Chemicals Business Module: Product & Spares Management, 4-Step Creation Wizard with Dynamic Category Technical Specifications, Stock History, Public Catalogue, Operational Specifications, Gallery, Verification, Analytics, Inquiries, Leads, and Shared Services.",
+      "item": [
+        {
+          "name": "1. Dashboard & Business Switcher",
+          "item": [
+            {
+              "name": "Get Abrasives Dashboard",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/abrasives/dashboard",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "abrasives",
+                    "dashboard"
+                  ]
+                },
+                "description": "Loads Abrasives & Epoxy Chemicals dashboard with Business Profile Card, 4 Operational Summary Cards (Product Range, Brands Available, Product Categories, Distribution Capability), My Business (6 items), Business Activity (2 items), and Capabilities."
+              }
+            },
+            {
+              "name": "Get Business Types",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/abrasives/business-types",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "abrasives",
+                    "business-types"
+                  ]
+                },
+                "description": "Retrieves all available business types with Abrasives & Epoxy Chemicals marked as current."
+              }
+            },
+            {
+              "name": "Switch Business Type",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"target_business_type\": \"abrasives_epoxy\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/abrasives/switch-business-type",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "abrasives",
+                    "switch-business-type"
+                  ]
+                },
+                "description": "Switches the current active business profile and user role."
+              }
+            }
+          ]
+        },
+        {
+          "name": "2. Profile & Operational Specifications",
+          "item": [
+            {
+              "name": "Get Abrasives Business Profile",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/abrasives/profile",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "abrasives",
+                    "profile"
+                  ]
+                },
+                "description": "Retrieves profile, operational specifications (Product Categories, Brands Available, Product Range, Distribution Capability), and public Products & Spares Catalogue."
+              }
+            },
+            {
+              "name": "Update Abrasives Profile & Operational Specs",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company_name\": \"Apex Global Diamond Tools & Chemical Technologies\",\n  \"product_range\": \"High-Precision Polishing Bricks, UV Epoxies & Adhesives\",\n  \"distribution_capability\": \"International Export & Pan-India Logistics\",\n  \"brands_available\": [\n    \"Tenax\",\n    \"Akemi\",\n    \"Bellinzoni\",\n    \"Diamond Tech\",\n    \"Sika\"\n  ]\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/abrasives/profile",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "abrasives",
+                    "profile"
+                  ]
+                },
+                "description": "Updates business identity and operational information."
+              }
+            }
+          ]
+        },
+        {
+          "name": "3. Product & Spares Management (4-Step Wizard & CRUD)",
+          "item": [
+            {
+              "name": "List All Products (Status Tabs & Search)",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/abrasives/products?status=all&search=Epoxy&page=1&limit=10",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "abrasives",
+                    "products"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "all"
+                    },
+                    {
+                      "key": "search",
+                      "value": "Epoxy"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ]
+                },
+                "description": "Lists products with status breakdown (All Items, Active, Inactive / Draft) and keyword search."
+              }
+            },
+            {
+              "name": "Create Product (4-Step Wizard)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Epoxy Resin Mastic 3:1 Ultra Clear\",\n  \"category\": \"Epoxy Resin Mastic\",\n  \"description\": \"Premium transparent knife-grade epoxy mastic for filling cracks, holes and laminating granite and marble slabs.\",\n  \"images\": [\n    \"https://stonemarket.com/abrasives/epoxy1.jpg\"\n  ],\n  \"cover_image\": \"https://stonemarket.com/abrasives/epoxy1.jpg\",\n  \"grit_grade\": \"UV Resistant Ultra Gloss Grade\",\n  \"brand_name\": \"Tenax\",\n  \"packaging_standard\": \"20 Kg Bucket\",\n  \"technical_specifications\": {\n    \"chemical_type\": \"Liquid Epoxy Resin System\",\n    \"mixing_ratio\": \"3:1 by Weight\",\n    \"viscosity\": \"Medium Thixotropic Paste\",\n    \"curing_time\": \"24 Hours Full Cure (Gel time 25 mins)\",\n    \"shelf_life\": \"12 Months in Cool Storage\"\n  },\n  \"selling_price\": 380,\n  \"pricing_unit\": \"Per Kg\",\n  \"min_order_quantity\": 20,\n  \"available_stock\": 500,\n  \"stock_unit\": \"Kg\",\n  \"availability_status\": \"In Stock\",\n  \"target_areas\": [\n    {\n      \"state_name\": \"Rajasthan\",\n      \"districts\": [\n        \"Jaipur\",\n        \"Kishangarh\",\n        \"Udaipur\"\n      ]\n    },\n    {\n      \"state_name\": \"Gujarat\",\n      \"districts\": [\n        \"Ahmedabad\",\n        \"Morbi\"\n      ]\n    }\n  ],\n  \"target_categories\": [\n    \"Manufacturer\",\n    \"Mining\",\n    \"Showroom\",\n    \"Abrasive & Epoxy\"\n  ],\n  \"status\": \"active\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/abrasives/products",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "abrasives",
+                    "products"
+                  ]
+                },
+                "description": "Creates a product through the 4-step wizard with auto-generated SKU (e.g. EPX-2026-XXXX or ABR-2026-XXXX)."
+              }
+            },
+            {
+              "name": "Get Product Details by ID",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/abrasives/products/{{product_id}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "abrasives",
+                    "products",
+                    "{{product_id}}"
+                  ]
+                },
+                "description": "Fetches product details, pricing, packaging, brand, and category-specific dynamic specifications."
+              }
+            },
+            {
+              "name": "Update Product Details",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"selling_price\": 400,\n  \"packaging_standard\": \"20 Kg Sealed Metallic Drum\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/abrasives/products/{{product_id}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "abrasives",
+                    "products",
+                    "{{product_id}}"
+                  ]
+                },
+                "description": "Updates product fields and pricing."
+              }
+            },
+            {
+              "name": "Update Product Stock & Availability",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"stock\": 750,\n  \"change_type\": \"set\",\n  \"notes\": \"Received bulk shipment from manufacturing facility\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/abrasives/products/{{product_id}}/stock",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "abrasives",
+                    "products",
+                    "{{product_id}}",
+                    "stock"
+                  ]
+                },
+                "description": "Updates stock and creates a StockHistory audit entry."
+              }
+            },
+            {
+              "name": "Duplicate Product (as Draft)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/abrasives/products/{{product_id}}/duplicate",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "abrasives",
+                    "products",
+                    "{{product_id}}",
+                    "duplicate"
+                  ]
+                },
+                "description": "Clones an existing product with \"(Copy)\" suffix, new SKU, and draft status."
+              }
+            },
+            {
+              "name": "Toggle Product Status (Active / Inactive)",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"inactive\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/abrasives/products/{{product_id}}/status",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "abrasives",
+                    "products",
+                    "{{product_id}}",
+                    "status"
+                  ]
+                },
+                "description": "Activates or deactivates product visibility."
+              }
+            },
+            {
+              "name": "Delete Product",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/abrasives/products/{{product_id}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "abrasives",
+                    "products",
+                    "{{product_id}}"
+                  ]
+                },
+                "description": "Deletes product record from database and catalogue."
+              }
+            }
+          ]
+        },
+        {
+          "name": "4. Contacts, Gallery & Verification Center",
+          "item": [
+            {
+              "name": "Get Contacts",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/abrasives/contacts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "abrasives",
+                    "contacts"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Add Contact",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Prakash Sharma\",\n  \"designation\": \"Senior Chemical Application Engineer\",\n  \"phone\": \"+91 98290 77777\",\n  \"whatsapp\": \"+91 98290 77777\",\n  \"email\": \"prakash@apextools.com\",\n  \"is_primary\": false\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/abrasives/contacts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "abrasives",
+                    "contacts"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Gallery Items",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/abrasives/gallery",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "abrasives",
+                    "gallery"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Upload Gallery Photo",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"url\": \"https://stonemarket.com/uploads/epoxy-display.jpg\",\n  \"title\": \"Epoxy & Mastic Display Rack\",\n  \"caption\": \"Ready stock of Tenax and Akemi products\",\n  \"category\": \"epoxy\",\n  \"is_cover\": false\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/abrasives/gallery/photos",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "abrasives",
+                    "gallery",
+                    "photos"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Add Gallery Video",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Diamond Polishing Brick Live Test\",\n  \"video_url\": \"https://stonemarket.com/videos/brick-test.mp4\",\n  \"source_type\": \"upload\",\n  \"category\": \"product_demo\",\n  \"duration\": \"3:45\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/abrasives/gallery/videos",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "abrasives",
+                    "gallery",
+                    "videos"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Verification Status",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/abrasives/verification",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "abrasives",
+                    "verification"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Send Phone OTP",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/abrasives/verification/phone/send-otp",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "abrasives",
+                    "verification",
+                    "phone",
+                    "send-otp"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Verify Phone OTP",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"phone\": \"+91 98290 65432\",\n  \"otp\": \"123456\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/abrasives/verification/phone/verify-otp",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "abrasives",
+                    "verification",
+                    "phone",
+                    "verify-otp"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Submit GST Verification",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"gstin\": \"08AAACA9876E1Z5\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/abrasives/verification/gst",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "abrasives",
+                    "verification",
+                    "gst"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Upload Verification Document",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"document_name\": \"Brand Authorization Certificate\",\n  \"document_type\": \"Brand Authorization\",\n  \"document_number\": \"AUTH-TNX-2026-99\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/abrasives/verification/documents",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "abrasives",
+                    "verification",
+                    "documents"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "5. Analytics, Inquiries & Lead Management",
+          "item": [
+            {
+              "name": "Get Abrasives Analytics",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/abrasives/analytics",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "abrasives",
+                    "analytics"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Record Analytics Event",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"event_type\": \"product_view\",\n  \"product_id\": \"{{product_id}}\",\n  \"metadata\": {\n    \"source\": \"product_listing\"\n  }\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/abrasives/analytics/event",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "abrasives",
+                    "analytics",
+                    "event"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get My Inquiries",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/abrasives/inquiries",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "abrasives",
+                    "inquiries"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Matching Leads",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/abrasives/leads",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "abrasives",
+                    "leads"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "6. Shared Promotions, Invoices & Settings",
+          "item": [
+            {
+              "name": "Get Ad Promotions",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/abrasives/promotions",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "abrasives",
+                    "promotions"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Account Settings",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/abrasives/settings",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "abrasives",
+                    "settings"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Promotion Invoices",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/abrasives/invoices",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "abrasives",
+                    "invoices"
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
     }
   ]
 }

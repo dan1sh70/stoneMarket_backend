@@ -28,6 +28,7 @@ async function getManufacturerProfile(userId) {
     else if (user.role === 'showroom') targetType = 'showroom';
     else if (user.role === 'mining') targetType = 'mining';
     else if (user.role === 'brazing' || user.role === 'service_provider') targetType = 'brazing';
+    else if (user.role === 'abrasives_epoxy' || user.role === 'abrasives') targetType = 'abrasives_epoxy';
   }
 
   let profile = await BusinessProfile.findOne({
@@ -192,6 +193,39 @@ async function getManufacturerProfile(userId) {
         },
         rating: 4.9,
         review_count: 38,
+        status: 'active',
+        is_mock: false
+      });
+    } else if (user.role === 'abrasives_epoxy' || user.role === 'abrasives') {
+      profile = await BusinessProfile.create({
+        userId,
+        business_type: 'abrasives_epoxy',
+        company_name: user.name ? `${user.name} Abrasives & Chemicals` : 'Apex Diamond Abrasives & Epoxy Chemicals',
+        business_category: 'Abrasives & Epoxy Chemicals',
+        business_subcategory: 'Industrial Stone Diamond Abrasives, Epoxy Resins & Adhesives',
+        short_description: 'Authorized distributor and manufacturer of diamond abrasives, epoxy resins, and mastic adhesives for marble and granite processing.',
+        about_business: 'Apex Diamond Abrasives & Epoxy Chemicals provides high-performance Frankfurt & Fickert diamond polishing bricks, ultra-clear UV resistant epoxy mastic, and stone bonding joint adhesives.',
+        established_year: 2016,
+        abrasive_product_categories: [
+          'Diamond Abrasive Brick (Fickert/Frankfurt)',
+          'Epoxy Chemical',
+          'Epoxy Resin Mastic',
+          'Stone Bonding Adhesive',
+          'Polishing Powder'
+        ],
+        brands_available: ['Tenax', 'Akemi', 'Bellinzoni', 'Diamond Tech'],
+        product_range: 'Industrial Diamond Abrasives & Epoxy Chemicals',
+        distribution_capability: 'Pan-India Distribution & Wholesale Supply',
+        address: {
+          state: 'Rajasthan',
+          district: 'Jaipur',
+          area: 'VKI Area',
+          full_address: 'Plot 88, Road No. 9, VKI Industrial Area, Jaipur, Rajasthan 302013',
+          postal_code: '302013',
+          country: 'India'
+        },
+        rating: 4.8,
+        review_count: 42,
         status: 'active',
         is_mock: false
       });

@@ -17,6 +17,8 @@ const userSchema = new mongoose.Schema({
       'transport_national', 
       'transport_local', 
       'brazing',
+      'abrasives_epoxy',
+      'abrasives',
       'service_provider',
       'customer'
     ], 

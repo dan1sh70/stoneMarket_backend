@@ -21,8 +21,17 @@ const productSchema = new mongoose.Schema({
   miningLocation: String, // Source location for mining products
   stock_status: { type: String, enum: ['in_stock', 'out_of_stock', 'on_order'], default: 'in_stock' },
   businessProfileId: { type: mongoose.Schema.Types.ObjectId, ref: 'BusinessProfile' },
-  business_type: { type: String, enum: ['manufacturer', 'mining', 'showroom', 'trader'], default: 'manufacturer', index: true },
+  business_type: { type: String, enum: ['manufacturer', 'mining', 'showroom', 'trader', 'abrasives_epoxy', 'abrasives'], default: 'manufacturer', index: true },
   sku: { type: String, index: true },
+  brand_name: String,
+  grit_grade: String,
+  packaging_standard: String,
+  technical_specifications: { type: mongoose.Schema.Types.Mixed, default: {} },
+  target_areas: [{
+    state_name: String,
+    districts: [String]
+  }],
+  target_categories: [String],
   color_name: String,
   block_dimensions: {
     length: Number,

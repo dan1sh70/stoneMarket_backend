@@ -25,7 +25,7 @@ const businessProfileSchema = new mongoose.Schema({
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   business_type: { 
     type: String, 
-    enum: ['mining', 'manufacturer', 'showroom', 'trader', 'buyer', 'transport_national', 'transport_local', 'brazing', 'customer', 'service_provider'],
+    enum: ['mining', 'manufacturer', 'showroom', 'trader', 'buyer', 'transport_national', 'transport_local', 'brazing', 'abrasives_epoxy', 'abrasives', 'customer', 'service_provider'],
     required: true,
     index: true
   },
@@ -274,6 +274,12 @@ const businessProfileSchema = new mongoose.Schema({
   service_pricing_range: { type: String, default: '₹350 – ₹1,200 per Blade' },
   silver_solder_alloy_grade: { type: String, default: 'High Silver (49% Ag) Alloy & Flux' },
   brazing_machine_model: { type: String, default: 'Automated High-Frequency Induction Machine' },
+
+  // Abrasives & Epoxy Chemicals Operational Specifications
+  abrasive_product_categories: [{ type: String }],
+  brands_available: [{ type: String }],
+  product_range: { type: String, default: 'Industrial Diamond Abrasives & Epoxy Chemicals' },
+  distribution_capability: { type: String, default: 'Pan-India Distribution & Wholesale Supply' },
 
   // Owners (Step 2)
   owners: [ownerSchema], // Usually up to 2
