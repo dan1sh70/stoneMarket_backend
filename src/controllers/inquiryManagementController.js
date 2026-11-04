@@ -32,6 +32,7 @@ async function getManufacturerProfile(userId) {
     else if (user.role === 'solar_solutions' || user.role === 'industrial_solar') targetType = 'solar_solutions';
     else if (user.role === 'diamond_blades' || user.role === 'blades_segments') targetType = 'diamond_blades';
     else if (user.role === 'machine_manufacturer' || user.role === 'stone_machinery') targetType = 'machine_manufacturer';
+    else if (user.role === 'powder_supplier' || user.role === 'mineral_supplier') targetType = 'powder_supplier';
   }
 
   let profile = await BusinessProfile.findOne({
@@ -242,6 +243,19 @@ async function getManufacturerProfile(userId) {
         status: 'active',
         is_mock: false
       });
+    } else if (user.role === 'powder_supplier' || user.role === 'mineral_supplier') {
+      profile = await BusinessProfile.create({
+        userId,
+        business_type: 'powder_supplier',
+        company_name: user.name ? `${user.name} Micron Minerals` : 'Shree Krishna Micron Minerals & Chemicals',
+        business_category: 'Mineral & Powder Supplier',
+        business_subcategory: 'Super White Micronized Calcite, Surface Coated CaCO3, Dolomite & Quartz Powders',
+        established_year: 2011,
+        rating: 4.9,
+        review_count: 72,
+        status: 'active',
+        is_mock: false
+      });
     } else if (user.role === 'manufacturer' || user.role === 'admin' || user.role === 'vendor') {
       profile = await BusinessProfile.create({
         userId,
@@ -275,6 +289,7 @@ function buildInquiryVisibilityFilter(profile) {
   const isSolar = profile.business_type === 'solar_solutions' || profile.business_type === 'industrial_solar';
   const isDiamondBlades = profile.business_type === 'diamond_blades' || profile.business_type === 'blades_segments';
   const isMachineManufacturer = profile.business_type === 'machine_manufacturer' || profile.business_type === 'stone_machinery';
+  const isPowderSupplier = profile.business_type === 'powder_supplier' || profile.business_type === 'mineral_supplier';
   const categories = isMining
     ? ['Mining', 'Mines & Quarries', 'Raw Stone Blocks', 'Granite Blocks', 'Marble Blocks', 'Sandstone Blocks', 'Limestone Blocks', 'Natural Stone']
     : isShowroom
@@ -295,6 +310,8 @@ function buildInquiryVisibilityFilter(profile) {
     ? ['Diamond Blades & Segments', 'Diamond Blades', 'Diamond Segments', 'Diamond Tools', 'Circular Saw Blades', 'Gangsaw Segments', 'Wire Saw Beads', 'Core Drill Bits']
     : isMachineManufacturer
     ? ['Stone Machine Manufacturer', 'Machine Manufacturer', 'Machinery', 'Stone Cutting Machines', 'Gangsaw Machine', 'CNC Bridge Cutting Machine', 'Stone Processing Equipment', 'Slab Polishing Machines', 'Wire Saw Machine', 'Water Recycling Plant']
+    : isPowderSupplier
+    ? ['Mineral & Powder Supplier', 'Powder Supplier', 'Minerals', 'Calcite Powder', 'Dolomite Powder', 'Quartz Powder', 'Silica Powder', 'Industrial Stone Powders', 'Mineral Filler Powder', 'Micronized Calcite Powder', 'Coated Calcite Powder']
     : ['Granite', 'Marble', 'Granite Slabs', 'Marble & Granite Slabs', 'Granite & Marble Slabs', 'Natural Stone', 'Manufacturer'];
 
   return {

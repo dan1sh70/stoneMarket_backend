@@ -25,7 +25,7 @@ const businessProfileSchema = new mongoose.Schema({
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   business_type: { 
     type: String, 
-    enum: ['mining', 'manufacturer', 'showroom', 'trader', 'buyer', 'transport_national', 'transport_local', 'brazing', 'abrasives_epoxy', 'abrasives', 'machinery_parts', 'machinery', 'mining_equipment', 'heavy_mining_equipment', 'solar_solutions', 'industrial_solar', 'diamond_blades', 'blades_segments', 'machine_manufacturer', 'stone_machinery', 'customer', 'service_provider'],
+    enum: ['mining', 'manufacturer', 'showroom', 'trader', 'buyer', 'transport_national', 'transport_local', 'brazing', 'abrasives_epoxy', 'abrasives', 'machinery_parts', 'machinery', 'mining_equipment', 'heavy_mining_equipment', 'solar_solutions', 'industrial_solar', 'diamond_blades', 'blades_segments', 'machine_manufacturer', 'stone_machinery', 'powder_supplier', 'mineral_supplier', 'customer', 'service_provider'],
     required: true,
     index: true
   },
@@ -314,6 +314,12 @@ const businessProfileSchema = new mongoose.Schema({
   manufacturing_plant_capacity: { type: String, default: '25+ Heavy Duty Gangsaws & CNC Cutters / Year' },
   in_house_fabrication_setup: { type: String, default: 'Heavy Casting, Stress Relieving Furnace, CNC Machining Centers' },
   annual_production_volume: { type: String, default: '50+ Complete Stone Processing Lines Delivered' },
+
+  // Mineral & Powder Supplier Operational Specifications
+  mineral_categories: [{ type: String }],
+  monthly_grinding_capacity: { type: String, default: '10,000+ MT / Month' },
+  micronizing_facility: { type: String, default: 'Ball Mills, Classifiers, Surface Coating Plant' },
+  annual_mineral_supply_volume: { type: String, default: '1,00,000+ Metric Tons Supplied' },
 
   // Owners (Step 2)
   owners: [ownerSchema], // Usually up to 2

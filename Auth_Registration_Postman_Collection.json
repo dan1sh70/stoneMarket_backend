@@ -26111,6 +26111,836 @@
           ]
         }
       ]
+    },
+    {
+      "name": "Stone Mineral & Powder Supplier Module",
+      "description": "Complete API endpoints for Mineral & Powder Supplier business type, Powder Catalog Management 4-step wizard, mineral particle specifications (mesh, micron rating, CaCO3 purity %, whiteness %), stock & supply management, and shared modules.",
+      "item": [
+        {
+          "name": "1. Dashboard & Business Switcher",
+          "item": [
+            {
+              "name": "Get Mineral & Powder Supplier Dashboard",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/powder-supplier/dashboard",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "powder-supplier",
+                    "dashboard"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Business Types List",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/powder-supplier/business-types",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "powder-supplier",
+                    "business-types"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Switch Active Business Type",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"target_type\": \"powder_supplier\"\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/powder-supplier/switch-business-type",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "powder-supplier",
+                    "switch-business-type"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "2. Profile & Operational Specifications",
+          "item": [
+            {
+              "name": "Get Powder Supplier Profile",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/powder-supplier/profile",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "powder-supplier",
+                    "profile"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Update Grinding Capacity & Micronizing Setup",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"monthly_grinding_capacity\": \"12,000+ MT / Month\",\n  \"micronizing_facility\": \"Continuous Raymond Mills, Dynamic Air Classifiers & Pin Mill Coater\",\n  \"annual_mineral_supply_volume\": \"1,20,000+ Metric Tons Supplied\"\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/powder-supplier/profile",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "powder-supplier",
+                    "profile"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "3. Powder Catalog Management (4-Step Wizard)",
+          "item": [
+            {
+              "name": "List Powder Catalog (with multi-attribute search & filters)",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/powder-supplier/catalog?search=500 Mesh&status=active",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "powder-supplier",
+                    "catalog"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "500 Mesh"
+                    },
+                    {
+                      "key": "status",
+                      "value": "active"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Publish Mineral Powder - Step 1 to 4 Wizard (Example 1: 500 Mesh Calcite)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"500 Mesh Natural Ground Calcium Carbonate (Calcite)\",\n  \"category\": \"Calcium Carbonate & Calcite\",\n  \"chemical_name\": \"Calcium Carbonate\",\n  \"chemical_formula\": \"CaCO3\",\n  \"mesh_size\": \"500 Mesh\",\n  \"micron_rating\": \"25 Microns (D97)\",\n  \"whiteness_percentage\": 97.5,\n  \"brightness_percentage\": 96,\n  \"chemical_purity\": \"98.5% CaCO3\",\n  \"calcium_carbonate_purity\": \"98.5%\",\n  \"moisture_percentage\": 0.15,\n  \"coating_type\": \"Uncoated\",\n  \"selling_price\": 3800,\n  \"pricing_unit\": \"Per Metric Ton (MT)\",\n  \"monthly_supply_capacity\": \"5,000 MT / Month\",\n  \"min_order_quantity\": 10,\n  \"available_stock\": 450,\n  \"stock_unit\": \"MT\",\n  \"availability_status\": \"Ready Stock\",\n  \"packaging_type\": \"50 KG HDPE Bags\",\n  \"packaging_standard\": \"50 Kg HDPE Bags / 1 Ton Jumbo Bags\",\n  \"dispatch_location\": \"Alwar / Makrana, Rajasthan\",\n  \"application_type\": \"Engineered Quartz Countertops, Artificial Marble, Tiles\",\n  \"description\": \"Manufactured with high-speed air classifiers, offering uniform particle size distribution.\",\n  \"target_areas\": [\n    {\n      \"state_name\": \"Rajasthan\",\n      \"districts\": [\n        \"Makrana\",\n        \"Udaipur\",\n        \"Jaipur\"\n      ]\n    }\n  ],\n  \"target_categories\": [\n    \"Engineered Stone Manufacturer\",\n    \"Tile Manufacturer\",\n    \"Paint & Coating\"\n  ],\n  \"status\": \"active\"\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/powder-supplier/catalog",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "powder-supplier",
+                    "catalog"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Publish Surface-Coated Powder (Example 2: 800 Mesh Stearic Acid Calcite)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"800 Mesh Stearic Acid Surface-Coated Calcite Powder\",\n  \"category\": \"Calcium Carbonate & Calcite\",\n  \"chemical_name\": \"Calcium Carbonate (Treated)\",\n  \"chemical_formula\": \"CaCO3 + C18H36O2\",\n  \"mesh_size\": \"800 Mesh\",\n  \"micron_rating\": \"15 Microns (D97)\",\n  \"whiteness_percentage\": 98,\n  \"brightness_percentage\": 97,\n  \"chemical_purity\": \"99.0% CaCO3\",\n  \"calcium_carbonate_purity\": \"99.0%\",\n  \"moisture_percentage\": 0.08,\n  \"coating_type\": \"Stearic Acid Coated (1.2% - 1.5%)\",\n  \"selling_price\": 5200,\n  \"pricing_unit\": \"Per Metric Ton (MT)\",\n  \"monthly_supply_capacity\": \"3,000 MT / Month\",\n  \"min_order_quantity\": 15,\n  \"available_stock\": 300,\n  \"stock_unit\": \"MT\",\n  \"availability_status\": \"Ready Stock\",\n  \"packaging_type\": \"25 KG Bags\",\n  \"packaging_standard\": \"25 KG HDPE Bags with inner LDPE liner\",\n  \"dispatch_location\": \"Alwar, Rajasthan\",\n  \"application_type\": \"PVC Pipes, Cable Compounds, Masterbatches, Polymer Compounding\",\n  \"status\": \"active\"\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/powder-supplier/catalog",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "powder-supplier",
+                    "catalog"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Powder Product Details by ID",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/powder-supplier/catalog/{{powder_id}}",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "powder-supplier",
+                    "catalog",
+                    "{{powder_id}}"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Update Mineral Powder Details",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"selling_price\": 4100,\n  \"monthly_supply_capacity\": \"7,500 MT / Month\"\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/powder-supplier/catalog/{{powder_id}}",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "powder-supplier",
+                    "catalog",
+                    "{{powder_id}}"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Adjust Mineral Powder Stock & Availability",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"stock\": 600,\n  \"availability_status\": \"Ready Stock\",\n  \"change_type\": \"set\",\n  \"notes\": \"New production batch received from Ball Mill #3\"\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/powder-supplier/catalog/{{powder_id}}/stock",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "powder-supplier",
+                    "catalog",
+                    "{{powder_id}}",
+                    "stock"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Duplicate Powder Product as Draft",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/powder-supplier/catalog/{{powder_id}}/duplicate",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "powder-supplier",
+                    "catalog",
+                    "{{powder_id}}",
+                    "duplicate"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Toggle Powder Active/Inactive Status",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/powder-supplier/catalog/{{powder_id}}/status",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "powder-supplier",
+                    "catalog",
+                    "{{powder_id}}",
+                    "status"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Delete Powder Product",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/powder-supplier/catalog/{{powder_id}}",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "powder-supplier",
+                    "catalog",
+                    "{{powder_id}}"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "4. Contacts Management",
+          "item": [
+            {
+              "name": "Get Supplier Contacts",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/powder-supplier/contacts",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "powder-supplier",
+                    "contacts"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Add Secondary Technical Contact",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Mukesh Choudhary\",\n  \"designation\": \"Chief Quality Control & Lab Chemist\",\n  \"phone\": \"+91 98290 44556\",\n  \"email\": \"mukesh.qc@shreekrishnaminerals.com\",\n  \"whatsapp\": \"+91 98290 44556\",\n  \"is_primary\": false\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/powder-supplier/contacts",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "powder-supplier",
+                    "contacts"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "5. Gallery & Verification Center",
+          "item": [
+            {
+              "name": "Get Plant Gallery Photos & Videos",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/powder-supplier/gallery",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "powder-supplier",
+                    "gallery"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Add Plant Gallery Photo",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"url\": \"https://stonemarket.com/gallery/powder-ballmill-line.jpg\",\n  \"title\": \"Raymond Ball Mill Grinding Line\",\n  \"category\": \"facility\"\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/powder-supplier/gallery/photos",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "powder-supplier",
+                    "gallery",
+                    "photos"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Add Plant Video Demo",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Automated 50 KG Bagging Line Demo\",\n  \"video_url\": \"https://youtube.com/watch?v=powderbagging999\",\n  \"source_type\": \"youtube\",\n  \"category\": \"demonstration\",\n  \"duration\": \"03:45\"\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/powder-supplier/gallery/videos",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "powder-supplier",
+                    "gallery",
+                    "videos"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Verification Status",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/powder-supplier/verification",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "powder-supplier",
+                    "verification"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Verify GSTIN",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"gstin\": \"08AABCS3344D1Z5\"\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/powder-supplier/verification/gst",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "powder-supplier",
+                    "verification",
+                    "gst"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "6. Analytics, Inquiries & Shared Modules",
+          "item": [
+            {
+              "name": "Get Powder Analytics Overview",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/powder-supplier/analytics",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "powder-supplier",
+                    "analytics"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Record Powder View Event",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"event_type\": \"powder_view\",\n  \"product_id\": \"{{powder_id}}\",\n  \"metadata\": {\n    \"source\": \"catalog_search\"\n  }\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/powder-supplier/analytics/event",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "powder-supplier",
+                    "analytics",
+                    "event"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Powder Inquiries",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/powder-supplier/inquiries",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "powder-supplier",
+                    "inquiries"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Powder Leads",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/powder-supplier/leads",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "powder-supplier",
+                    "leads"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Account Settings",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/powder-supplier/settings",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "powder-supplier",
+                    "settings"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Promotions",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/powder-supplier/promotions",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "powder-supplier",
+                    "promotions"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Invoices",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/powder-supplier/invoices",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "powder-supplier",
+                    "invoices"
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
     }
   ]
 }

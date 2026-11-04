@@ -34,6 +34,7 @@ async function getManufacturerProfile(userId) {
     else if (user.role === 'solar_solutions' || user.role === 'industrial_solar') targetType = 'solar_solutions';
     else if (user.role === 'diamond_blades' || user.role === 'blades_segments') targetType = 'diamond_blades';
     else if (user.role === 'machine_manufacturer' || user.role === 'stone_machinery') targetType = 'machine_manufacturer';
+    else if (user.role === 'powder_supplier' || user.role === 'mineral_supplier') targetType = 'powder_supplier';
   }
 
   let profile = await BusinessProfile.findOne({
@@ -437,6 +438,43 @@ async function getManufacturerProfile(userId) {
         },
         rating: 4.9,
         review_count: 64,
+        status: 'active',
+        is_mock: false
+      });
+    } else if (user.role === 'powder_supplier' || user.role === 'mineral_supplier') {
+      profile = await BusinessProfile.create({
+        userId,
+        business_type: 'powder_supplier',
+        company_name: user.name ? `${user.name} Micron Minerals` : 'Shree Krishna Micron Minerals & Chemicals',
+        business_category: 'Mineral & Powder Supplier',
+        business_subcategory: 'Super White Micronized Calcite, Surface Coated CaCO3, Dolomite & Quartz Powders',
+        short_description: 'Leading processor and bulk supplier of ultra-pure micronized calcite powders, surface-coated calcium carbonate, quartz silica fillers, and dolomite for stone adhesive, artificial marble, and composite manufacturing.',
+        about_business: 'Shree Krishna Micron Minerals & Chemicals operates state-of-the-art automated ball mill grinding and air classifier systems producing 300 to 1250 mesh micronized powders with over 98% whiteness and extreme chemical purity.',
+        established_year: 2011,
+        mineral_categories: [
+          'Calcite Powder',
+          'Micronized Calcite Powder',
+          'Coated Calcite Powder',
+          'Ground Calcium Carbonate (GCC)',
+          'Dolomite Powder',
+          'Quartz Powder',
+          'Silica Powder',
+          'Marble Powder',
+          'Mineral Filler Powder'
+        ],
+        monthly_grinding_capacity: '10,000+ MT / Month',
+        micronizing_facility: 'Continuous Ball Mills, Dynamic Air Classifiers & Pin Mill Coating Units',
+        annual_mineral_supply_volume: '1,00,000+ Metric Tons Supplied',
+        address: {
+          state: 'Rajasthan',
+          district: 'Alwar',
+          area: 'MIA Industrial Area',
+          full_address: 'Plot G-112 to 115, Phase-I, Matsya Industrial Area, Alwar, Rajasthan 301030',
+          postal_code: '301030',
+          country: 'India'
+        },
+        rating: 4.9,
+        review_count: 72,
         status: 'active',
         is_mock: false
       });
