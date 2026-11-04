@@ -29,6 +29,7 @@ async function getManufacturerProfile(userId) {
     else if (user.role === 'mining') targetType = 'mining';
     else if (user.role === 'brazing' || user.role === 'service_provider') targetType = 'brazing';
     else if (user.role === 'abrasives_epoxy' || user.role === 'abrasives') targetType = 'abrasives_epoxy';
+    else if (user.role === 'machinery_parts' || user.role === 'machinery') targetType = 'machinery_parts';
   }
 
   let profile = await BusinessProfile.findOne({
@@ -226,6 +227,41 @@ async function getManufacturerProfile(userId) {
         },
         rating: 4.8,
         review_count: 42,
+        status: 'active',
+        is_mock: false
+      });
+    } else if (user.role === 'machinery_parts' || user.role === 'machinery') {
+      profile = await BusinessProfile.create({
+        userId,
+        business_type: 'machinery_parts',
+        company_name: user.name ? `${user.name} Machinery Spares` : 'Apex Industrial Machinery Spares & Components',
+        business_category: 'Stone Machinery Parts & Spares',
+        business_subcategory: 'Heavy Stone Machinery Replacement Parts, Hydraulics & Bearings',
+        short_description: 'Precision engineered spare parts, hydraulic cylinders, heavy bearings, and electrical accessories for stone processing machinery.',
+        about_business: 'Apex Industrial Machinery Spares & Components provides OEM-grade replacement parts, CNC precision fabrication, hydraulic systems, and emergency breakdown spares for granite gangsaw, bridge cutter, and polishing lines across India.',
+        established_year: 2015,
+        machinery_categories: [
+          'Gangsaw & Multi-Cutter Spare Parts',
+          'Circular Saw Machine Parts',
+          'Bridge Cutter Spare Parts',
+          'Hydraulic Components',
+          'Bearings & Industrial Components',
+          'Motors & Gearboxes'
+        ],
+        oem_brands_supported: ['Gaspari Menotti', 'Breton', 'Pedrini', 'Simec', 'Barsanti', 'Universal'],
+        parts_manufacturing_capability: 'CNC Machining & Precision Fabrication',
+        industrial_supply_capability: 'Pan-India Industrial Dispatch & Break-Down Support',
+        service_replacement_support: 'Available on-site & express courier service',
+        address: {
+          state: 'Rajasthan',
+          district: 'Jaipur',
+          area: 'VKI Area',
+          full_address: 'Plot 42, Road No. 11, VKI Industrial Area, Jaipur, Rajasthan 302013',
+          postal_code: '302013',
+          country: 'India'
+        },
+        rating: 4.9,
+        review_count: 46,
         status: 'active',
         is_mock: false
       });

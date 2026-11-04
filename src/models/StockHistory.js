@@ -32,8 +32,12 @@ const stockHistorySchema = new mongoose.Schema({
   },
   change_type: {
     type: String,
-    enum: ['set', 'increase', 'decrease', 'adjustment'],
+    enum: ['set', 'increase', 'decrease', 'adjustment', 'add', 'subtract'],
     default: 'adjustment'
+  },
+  notes: {
+    type: String,
+    default: ''
   },
   change_reason: {
     type: String,

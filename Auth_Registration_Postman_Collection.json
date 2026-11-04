@@ -21850,6 +21850,829 @@
           ]
         }
       ]
+    },
+    {
+      "name": "Stone Machinery Parts & Spares Module",
+      "description": "Complete endpoints for Stone Machinery Parts & Spares Business Type including Dashboard, Switcher, 4-step Product Wizard, Stock Management, Contacts, Gallery, Verification, Analytics, Inquiries, and Leads.",
+      "item": [
+        {
+          "name": "1. Dashboard & Business Switcher",
+          "item": [
+            {
+              "name": "Get Machinery Dashboard",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/machinery/dashboard",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "machinery",
+                    "dashboard"
+                  ]
+                },
+                "description": "Loads the Stone Machinery Parts & Spares dashboard with 4 operational summary cards, metrics, and navigation."
+              }
+            },
+            {
+              "name": "Get Available Business Types",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/machinery/business-types",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "machinery",
+                    "business-types"
+                  ]
+                },
+                "description": "Returns all available business types with Stone Machinery Parts & Spares marked as current."
+              }
+            },
+            {
+              "name": "Switch Business Type",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"business_type\": \"machinery_parts\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/machinery/switch-business-type",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "machinery",
+                    "switch-business-type"
+                  ]
+                },
+                "description": "Switches the authenticated user context to Stone Machinery Parts & Spares."
+              }
+            }
+          ]
+        },
+        {
+          "name": "2. Profile & Operational Specifications",
+          "item": [
+            {
+              "name": "Get Machinery Profile",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/machinery/profile",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "machinery",
+                    "profile"
+                  ]
+                },
+                "description": "Fetches the comprehensive Stone Machinery Parts & Spares business profile and operational specs."
+              }
+            },
+            {
+              "name": "Update Machinery Profile",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company_name\": \"Apex Industrial Machinery Spares & Components\",\n  \"established_year\": 2015,\n  \"parts_manufacturing_capability\": \"CNC Machining & Precision Fabrication\",\n  \"industrial_supply_capability\": \"Pan-India Industrial Dispatch & Break-Down Support\",\n  \"service_replacement_support\": \"Available on-site & express courier service\",\n  \"oem_brands_supported\": [\n    \"Gaspari Menotti\",\n    \"Breton\",\n    \"Pedrini\",\n    \"Simec\",\n    \"Barsanti\",\n    \"Universal\"\n  ]\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/machinery/profile",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "machinery",
+                    "profile"
+                  ]
+                },
+                "description": "Updates machinery operational capabilities, supported OEM brands, and specifications."
+              }
+            }
+          ]
+        },
+        {
+          "name": "3. Product & Spares Management",
+          "item": [
+            {
+              "name": "Create Machinery Spare Part (4-Step Wizard)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"High Pressure Hydraulic Cylinder for Bridge Saw\",\n  \"sku\": \"HYD-2026-0045\",\n  \"category\": \"Hydraulic Components\",\n  \"subcategory\": \"Hydraulic Cylinders & Power Packs\",\n  \"model_number\": \"HC-250-BR\",\n  \"part_number\": \"SP-HYD-250\",\n  \"oem_number\": \"BR-HYD-991\",\n  \"material_grade\": \"Hard Chrome Plated ST52 Hone Tube\",\n  \"oem_brand_compatibility\": \"Breton, Pedrini, Gaspari Menotti\",\n  \"warranty_guarantee\": \"18 Months Manufacturer Guarantee\",\n  \"selling_price\": 32500,\n  \"pricing_unit\": \"Per Piece\",\n  \"min_order_quantity\": 1,\n  \"available_stock\": 20,\n  \"technical_specifications\": {\n    \"bore_diameter\": \"120 mm\",\n    \"stroke_length\": \"650 mm\",\n    \"max_working_pressure\": \"250 Bar\",\n    \"seal_kit_type\": \"Parker High Temp Polyurethane\"\n  },\n  \"technical_drawings\": [\n    \"https://stonemarket.com/uploads/blueprints/hc-250-br.pdf\"\n  ],\n  \"images\": [\n    \"https://stonemarket.com/uploads/products/hyd-cyl-1.jpg\"\n  ]\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/machinery/products",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "machinery",
+                    "products"
+                  ]
+                },
+                "description": "Publishes a new machinery spare part product through the 4-step wizard."
+              }
+            },
+            {
+              "name": "List Machinery Spare Parts",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/machinery/products?category=Gangsaw & Multi-Cutter Spare Parts&status=active&page=1&limit=10",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "machinery",
+                    "products"
+                  ],
+                  "query": [
+                    {
+                      "key": "category",
+                      "value": "Gangsaw & Multi-Cutter Spare Parts"
+                    },
+                    {
+                      "key": "status",
+                      "value": "active"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ]
+                },
+                "description": "Lists spare parts and products with status breakdown and stock summaries."
+              }
+            },
+            {
+              "name": "Get Spare Part Details",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/machinery/products/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "machinery",
+                    "products",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "65e9abcd1234ef0000000001"
+                    }
+                  ]
+                },
+                "description": "Retrieves complete details, technical drawings, specifications and compatibility for a single spare part."
+              }
+            },
+            {
+              "name": "Update Spare Part Details",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"selling_price\": 34000,\n  \"warranty_guarantee\": \"24 Months Extended Warranty\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/machinery/products/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "machinery",
+                    "products",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "65e9abcd1234ef0000000001"
+                    }
+                  ]
+                },
+                "description": "Updates product specifications, warranties, or prices."
+              }
+            },
+            {
+              "name": "Update Spare Part Stock (Stock Management)",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"stock\": 70,\n  \"change_type\": \"set\",\n  \"notes\": \"Received batch shipment from CNC precision workshop\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/machinery/products/:id/stock",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "machinery",
+                    "products",
+                    ":id",
+                    "stock"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "65e9abcd1234ef0000000001"
+                    }
+                  ]
+                },
+                "description": "Updates stock and creates a historical audit entry in StockHistory."
+              }
+            },
+            {
+              "name": "Duplicate Spare Part as Draft",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/machinery/products/:id/duplicate",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "machinery",
+                    "products",
+                    ":id",
+                    "duplicate"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "65e9abcd1234ef0000000001"
+                    }
+                  ]
+                },
+                "description": "Duplicates an existing part as a draft with (Copy) appended to name."
+              }
+            },
+            {
+              "name": "Toggle Spare Part Status (Active/Inactive)",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"inactive\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/machinery/products/:id/status",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "machinery",
+                    "products",
+                    ":id",
+                    "status"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "65e9abcd1234ef0000000001"
+                    }
+                  ]
+                },
+                "description": "Toggles a spare part status between active and inactive."
+              }
+            },
+            {
+              "name": "Delete Spare Part",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/machinery/products/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "machinery",
+                    "products",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "65e9abcd1234ef0000000001"
+                    }
+                  ]
+                },
+                "description": "Permanently deletes a spare part from the catalogue."
+              }
+            }
+          ]
+        },
+        {
+          "name": "4. Contacts & Gallery",
+          "item": [
+            {
+              "name": "Add Contact Person",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Manoj Sharma\",\n  \"designation\": \"Technical Breakdown Lead\",\n  \"phone\": \"+91 94140 12345\",\n  \"email\": \"service@apexspares.com\",\n  \"whatsapp\": \"+91 94140 12345\",\n  \"is_primary\": false\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/machinery/contacts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "machinery",
+                    "contacts"
+                  ]
+                },
+                "description": "Adds an authorized key contact / breakdown support engineer to the business profile."
+              }
+            },
+            {
+              "name": "Get All Contacts",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/machinery/contacts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "machinery",
+                    "contacts"
+                  ]
+                },
+                "description": "Fetches all registered contacts for the machinery business."
+              }
+            },
+            {
+              "name": "Add Gallery Photo",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"url\": \"https://stonemarket.com/uploads/gallery/hydraulic-test-bench.jpg\",\n  \"title\": \"High Pressure Hydraulic Test Bench\",\n  \"category\": \"machinery\",\n  \"is_cover\": false\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/machinery/gallery/photos",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "machinery",
+                    "gallery",
+                    "photos"
+                  ]
+                },
+                "description": "Uploads or links a photo to the workshop and parts gallery."
+              }
+            },
+            {
+              "name": "Add Gallery Video",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"video_url\": \"https://stonemarket.com/uploads/gallery/spares-production.mp4\",\n  \"title\": \"Automated CNC Pin Fabrication Line\",\n  \"category\": \"workshop_tour\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/machinery/gallery/videos",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "machinery",
+                    "gallery",
+                    "videos"
+                  ]
+                },
+                "description": "Adds an industrial workshop walkthrough or product demo video."
+              }
+            }
+          ]
+        },
+        {
+          "name": "5. Verification & Analytics",
+          "item": [
+            {
+              "name": "Get Verification Center Status",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/machinery/verification",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "machinery",
+                    "verification"
+                  ]
+                },
+                "description": "Retrieves KYC verification step completion, GST, and MSME statuses."
+              }
+            },
+            {
+              "name": "Verify GST Number",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"gstin\": \"08AAACM4567D1Z8\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/machinery/verification/gst",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "machinery",
+                    "verification",
+                    "gst"
+                  ]
+                },
+                "description": "Submits and verifies GST identification number."
+              }
+            },
+            {
+              "name": "Get Machinery Analytics",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/machinery/analytics?timeframe=30d",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "machinery",
+                    "analytics"
+                  ],
+                  "query": [
+                    {
+                      "key": "timeframe",
+                      "value": "30d"
+                    }
+                  ]
+                },
+                "description": "Returns profile impressions, catalog views, top parts demand, and metrics."
+              }
+            }
+          ]
+        },
+        {
+          "name": "6. Inquiries, Leads & Shared Settings",
+          "item": [
+            {
+              "name": "Get Machinery Inquiries",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/machinery/inquiries",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "machinery",
+                    "inquiries"
+                  ]
+                },
+                "description": "Lists all incoming spare parts inquiries from factory owners and stone processors."
+              }
+            },
+            {
+              "name": "Get Machinery Leads",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/machinery/leads",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "machinery",
+                    "leads"
+                  ]
+                },
+                "description": "Fetches relevant buyer leads matching stone machinery parts and replacements."
+              }
+            },
+            {
+              "name": "Get Machinery Settings Overview",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/machinery/settings",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "machinery",
+                    "settings"
+                  ]
+                },
+                "description": "Fetches account settings, security sessions, and notification preferences."
+              }
+            },
+            {
+              "name": "Get Machinery Promotions (Ad Management)",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/machinery/promotions",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "machinery",
+                    "promotions"
+                  ]
+                },
+                "description": "Fetches available promotional advertising packages for machinery parts businesses."
+              }
+            },
+            {
+              "name": "Get Machinery Invoices",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/machinery/invoices",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "machinery",
+                    "invoices"
+                  ]
+                },
+                "description": "Lists all tax invoices for ad promotions and platform subscriptions."
+              }
+            }
+          ]
+        }
+      ]
     }
   ]
 }

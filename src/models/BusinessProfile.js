@@ -25,7 +25,7 @@ const businessProfileSchema = new mongoose.Schema({
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   business_type: { 
     type: String, 
-    enum: ['mining', 'manufacturer', 'showroom', 'trader', 'buyer', 'transport_national', 'transport_local', 'brazing', 'abrasives_epoxy', 'abrasives', 'customer', 'service_provider'],
+    enum: ['mining', 'manufacturer', 'showroom', 'trader', 'buyer', 'transport_national', 'transport_local', 'brazing', 'abrasives_epoxy', 'abrasives', 'machinery_parts', 'machinery', 'customer', 'service_provider'],
     required: true,
     index: true
   },
@@ -280,6 +280,13 @@ const businessProfileSchema = new mongoose.Schema({
   brands_available: [{ type: String }],
   product_range: { type: String, default: 'Industrial Diamond Abrasives & Epoxy Chemicals' },
   distribution_capability: { type: String, default: 'Pan-India Distribution & Wholesale Supply' },
+
+  // Stone Machinery Parts & Spares Operational Specifications
+  machinery_categories: [{ type: String }],
+  oem_brands_supported: [{ type: String }],
+  parts_manufacturing_capability: { type: String, default: 'CNC Machining & Precision Fabrication' },
+  industrial_supply_capability: { type: String, default: 'Pan-India Industrial Dispatch & Break-Down Support' },
+  service_replacement_support: { type: String, default: 'Immediate Replacement & Field Technical Support' },
 
   // Owners (Step 2)
   owners: [ownerSchema], // Usually up to 2

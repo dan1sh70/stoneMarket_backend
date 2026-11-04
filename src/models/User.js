@@ -19,6 +19,8 @@ const userSchema = new mongoose.Schema({
       'brazing',
       'abrasives_epoxy',
       'abrasives',
+      'machinery_parts',
+      'machinery',
       'service_provider',
       'customer'
     ], 
