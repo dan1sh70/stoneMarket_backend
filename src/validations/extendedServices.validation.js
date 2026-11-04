@@ -240,6 +240,57 @@ const updateWaterSupplierSchema = createWaterSupplierSchema.fork(
 );
 
 // ==========================================
+// 3B. HYDRO & HEAVY CRANE SERVICE VALIDATIONS
+// ==========================================
+const createHydroCraneSchema = Joi.object({
+  // STEP 1 – BASIC & MEDIA
+  name: Joi.string().trim().required(), // Equipment Name *
+  category: Joi.string().trim().required(), // Crane / Hydra Type *
+  crane_hydra_type: Joi.string().trim().allow('', null),
+  description: Joi.string().trim().allow('', null),
+  images: Joi.array().items(Joi.string().trim()),
+  cover_image: Joi.string().trim().allow('', null),
+  equipment_images: Joi.array().items(Joi.string().trim()),
+  worksite_images: Joi.array().items(Joi.string().trim()),
+  videos: Joi.array().items(Joi.string().trim()),
+
+  // STEP 2 – EQUIPMENT SPECIFICATIONS
+  lifting_capacity: Joi.string().trim().required(), // Lifting Capacity *
+  lifting_capacity_tonnes: Joi.number().min(0).allow(null),
+  boom_length: Joi.string().trim().allow('', null),
+  height_reach: Joi.string().trim().allow('', null),
+  operator_availability: Joi.boolean().default(true),
+  fuel_included: Joi.boolean().default(false),
+  equipment_specifications: Joi.string().trim().allow('', null),
+
+  // STEP 3 – PRICING & AVAILABILITY
+  selling_price: Joi.alternatives().try(Joi.number().min(0), Joi.string().trim()).allow(null),
+  price: Joi.alternatives().try(Joi.number().min(0), Joi.string().trim()).allow(null),
+  pricing_unit: Joi.string().valid('Per Hour', 'Per Day', 'Per Shift', 'Per Project', 'On Quotation').default('Per Shift'),
+  minimum_rental_duration: Joi.string().trim().allow('', null),
+  operating_base_location: Joi.string().trim().required(), // Operating Base Location *
+  service_radius: Joi.string().trim().allow('', null),
+  availability_status: Joi.string().trim().default('Ready Stock'),
+
+  // STEP 4 – REVIEW & PUBLISH
+  target_areas: Joi.array().items(
+    Joi.object({
+      state_name: Joi.string().trim().required(),
+      districts: Joi.array().items(Joi.string().trim())
+    })
+  ),
+  target_categories: Joi.array().items(Joi.string().trim()),
+  status: Joi.string().valid('active', 'inactive', 'draft').default('active'),
+  publishing_status: Joi.string().valid('draft', 'published', 'archived').default('published'),
+  sku: Joi.string().trim().allow('', null)
+}).unknown(true);
+
+const updateHydroCraneSchema = createHydroCraneSchema.fork(
+  ['name', 'category', 'lifting_capacity', 'operating_base_location'],
+  (schema) => schema.optional()
+);
+
+// ==========================================
 // 4. CA & TAX ADVISOR VALIDATIONS
 // ==========================================
 const createCaTaxAdvisorSchema = Joi.object({
@@ -548,6 +599,8 @@ module.exports = {
   updateElectricalPanelSchema,
   createWaterSupplierSchema,
   updateWaterSupplierSchema,
+  createHydroCraneSchema,
+  updateHydroCraneSchema,
   createCaTaxAdvisorSchema,
   updateCaTaxAdvisorSchema,
   createBankingLoanSchema,

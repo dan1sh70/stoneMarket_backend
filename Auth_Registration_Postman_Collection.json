@@ -29029,6 +29029,472 @@
           ]
         }
       ]
+    },
+    {
+      "name": "Stone Hydro & Heavy Crane Service Module",
+      "item": [
+        {
+          "name": "Hydro Crane Dashboard",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/hydro-crane/dashboard",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "hydro-crane",
+                "dashboard"
+              ]
+            }
+          }
+        },
+        {
+          "name": "List Crane Fleet & Equipment",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/hydro-crane/equipment",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "hydro-crane",
+                "equipment"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create Crane Equipment Listing",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"ACE 15-Ton Hydra Crane for Granite Block Loading\",\n  \"crane_hydra_type\": \"Hydra Crane\",\n  \"lifting_capacity_tonnes\": 15,\n  \"boom_length\": \"40 Feet\",\n  \"height_reach\": \"45 Feet\",\n  \"selling_price\": 1800,\n  \"pricing_unit\": \"Hour\",\n  \"operator_availability\": true,\n  \"fuel_included\": true\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/hydro-crane/equipment",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "hydro-crane",
+                "equipment"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Universal Business Management & Catalogue Engine",
+      "item": [
+        {
+          "name": "Get All System Business Types",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/business-types",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "business-types"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get User Businesses",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/businesses",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "businesses"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Active Business Context",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/businesses/active",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "businesses",
+                "active"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Switch Active Business Context",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"business_type\": \"hydro_crane\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/businesses/switch",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "businesses",
+                "switch"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Initialize Catalogue Draft Listing",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Granite Processing Diamond Blade 350mm\",\n  \"category\": \"Diamond Blades\",\n  \"business_type\": \"diamond_blades\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/catalogue",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "catalogue"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Step 1 - Basic Information & Media",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Granite Processing Diamond Blade 350mm (Laser Welded)\",\n  \"description\": \"Premium silent core blade for granite block and slab slicing.\",\n  \"images\": [\n    \"https://stonemarket.com/media/diamond-blade-350.jpg\"\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/catalogue/{{listingId}}/steps/basic",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "catalogue",
+                "{{listingId}}",
+                "steps",
+                "basic"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Step 2 - Technical Specifications",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dimensions\": \"350 mm Dia x 50 mm Bore\",\n  \"blade_type\": \"Silent Core Circular Saw\",\n  \"segment_height\": \"15 mm\",\n  \"grit_grade\": \"Premium Diamond 40/50 Mesh\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/catalogue/{{listingId}}/steps/specifications",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "catalogue",
+                "{{listingId}}",
+                "steps",
+                "specifications"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Step 3 - Pricing & Availability",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"selling_price\": 4500,\n  \"pricing_unit\": \"Piece\",\n  \"min_order_quantity\": 2,\n  \"stock\": 120,\n  \"availability_status\": \"Ready Stock\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/catalogue/{{listingId}}/steps/pricing",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "catalogue",
+                "{{listingId}}",
+                "steps",
+                "pricing"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Step 4 - Review Summary & Preview",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/catalogue/{{listingId}}/review",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "catalogue",
+                "{{listingId}}",
+                "review"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Step 4 - Publish Listing with Target Areas & Categories",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"target_areas\": [\n    {\n      \"state_name\": \"Rajasthan\",\n      \"districts\": [\n        \"Rajsamand\",\n        \"Udaipur\",\n        \"Jaipur\"\n      ]\n    },\n    {\n      \"state_name\": \"Gujarat\",\n      \"districts\": [\n        \"Ahmedabad\",\n        \"Surat\"\n      ]\n    }\n  ],\n  \"target_categories\": [\n    \"Stone Manufacturer\",\n    \"Stone Machinery Parts & Spares\"\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/catalogue/{{listingId}}/publish",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "catalogue",
+                "{{listingId}}",
+                "publish"
+              ]
+            }
+          }
+        },
+        {
+          "name": "List Universal Catalogue Items",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/catalogue?search=Blade&status=active&page=1&limit=20",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "catalogue"
+              ],
+              "query": [
+                {
+                  "key": "search",
+                  "value": "Blade"
+                },
+                {
+                  "key": "status",
+                  "value": "active"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "20"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Duplicate Listing as Draft",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/catalogue/{{listingId}}/duplicate",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "catalogue",
+                "{{listingId}}",
+                "duplicate"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Toggle Listing Status (Active / Inactive)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"inactive\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/catalogue/{{listingId}}/status",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "catalogue",
+                "{{listingId}}",
+                "status"
+              ]
+            }
+          }
+        }
+      ]
     }
   ]
 }

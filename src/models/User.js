@@ -31,6 +31,8 @@ const userSchema = new mongoose.Schema({
       'stone_machinery',
       'powder_supplier',
       'mineral_supplier',
+      'hydro_crane',
+      'crane_service',
       'machine_repairing',
       'electrical_panel',
       'electrical_repairing',

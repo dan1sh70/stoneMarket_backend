@@ -29,6 +29,7 @@ const productSchema = new mongoose.Schema({
       'mining_equipment', 'heavy_mining_equipment', 'solar_solutions', 'industrial_solar', 
       'diamond_blades', 'blades_segments', 'machine_manufacturer', 'stone_machinery', 
       'powder_supplier', 'mineral_supplier',
+      'hydro_crane', 'crane_service',
       'machine_repairing', 'electrical_panel', 'electrical_repairing',
       'water_supplier', 'ca_tax_advisor', 'banking_loan', 'banking_services',
       'hotel_restaurant', 'hospitality'
@@ -90,6 +91,19 @@ const productSchema = new mongoose.Schema({
   coating_type: String,
   packaging_type: String,
   monthly_supply_capacity: String,
+
+  // Hydro & Heavy Crane Service Fields
+  crane_hydra_type: String,
+  lifting_capacity: String,
+  lifting_capacity_tonnes: Number,
+  boom_length: String,
+  height_reach: String,
+  operator_availability: { type: Boolean, default: true },
+  fuel_included: { type: Boolean, default: false },
+  equipment_specifications: String,
+  minimum_rental_duration: String,
+  equipment_images: [String],
+  worksite_images: [String],
 
   // 1. Machine Repairing Fields
   repair_category: String,

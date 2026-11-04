@@ -32,6 +32,7 @@ const businessProfileSchema = new mongoose.Schema({
       'mining_equipment', 'heavy_mining_equipment', 'solar_solutions', 'industrial_solar', 
       'diamond_blades', 'blades_segments', 'machine_manufacturer', 'stone_machinery', 
       'powder_supplier', 'mineral_supplier', 'customer', 'service_provider',
+      'hydro_crane', 'crane_service',
       'machine_repairing', 'electrical_panel', 'electrical_repairing',
       'water_supplier', 'ca_tax_advisor', 'banking_loan', 'banking_services',
       'hotel_restaurant', 'hospitality'
@@ -330,6 +331,12 @@ const businessProfileSchema = new mongoose.Schema({
   monthly_grinding_capacity: { type: String, default: '10,000+ MT / Month' },
   micronizing_facility: { type: String, default: 'Ball Mills, Classifiers, Surface Coating Plant' },
   annual_mineral_supply_volume: { type: String, default: '1,00,000+ Metric Tons Supplied' },
+
+  // Hydro & Heavy Crane Service Operational Specifications
+  crane_fleet_types: [{ type: String }],
+  max_lifting_capacity_tonnes: { type: Number, default: 50 },
+  crane_fleet_count: { type: Number, default: 8 },
+  certified_riggers_operators_count: { type: Number, default: 12 },
 
   // Machine Repairing Operational Specifications
   supported_machine_types: [{ type: String }],

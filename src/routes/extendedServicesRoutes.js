@@ -7,6 +7,7 @@ const {
   machineRepairingController,
   electricalPanelController,
   waterSupplierController,
+  hydroCraneController,
   caTaxAdvisorController,
   bankingLoanController,
   hotelRestaurantController
@@ -19,6 +20,8 @@ const {
   updateElectricalPanelSchema,
   createWaterSupplierSchema,
   updateWaterSupplierSchema,
+  createHydroCraneSchema,
+  updateHydroCraneSchema,
   createCaTaxAdvisorSchema,
   updateCaTaxAdvisorSchema,
   createBankingLoanSchema,
@@ -115,6 +118,7 @@ function buildServiceRouter(controller, createSchema, updateSchema, resourcePlur
 const machineRepairingRoutes = buildServiceRouter(machineRepairingController, createMachineRepairingSchema, updateMachineRepairingSchema, 'services');
 const electricalPanelRoutes = buildServiceRouter(electricalPanelController, createElectricalPanelSchema, updateElectricalPanelSchema, 'services');
 const waterSupplierRoutes = buildServiceRouter(waterSupplierController, createWaterSupplierSchema, updateWaterSupplierSchema, 'supplies');
+const hydroCraneRoutes = buildServiceRouter(hydroCraneController, createHydroCraneSchema, updateHydroCraneSchema, 'equipment');
 const caTaxAdvisorRoutes = buildServiceRouter(caTaxAdvisorController, createCaTaxAdvisorSchema, updateCaTaxAdvisorSchema, 'services');
 const bankingLoanRoutes = buildServiceRouter(bankingLoanController, createBankingLoanSchema, updateBankingLoanSchema, 'services');
 const hotelRestaurantRoutes = buildServiceRouter(hotelRestaurantController, createHotelRestaurantSchema, updateHotelRestaurantSchema, 'listings');
@@ -123,6 +127,7 @@ module.exports = {
   machineRepairingRoutes,
   electricalPanelRoutes,
   waterSupplierRoutes,
+  hydroCraneRoutes,
   caTaxAdvisorRoutes,
   bankingLoanRoutes,
   hotelRestaurantRoutes

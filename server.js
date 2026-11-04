@@ -84,10 +84,13 @@ const {
   machineRepairingRoutes,
   electricalPanelRoutes,
   waterSupplierRoutes,
+  hydroCraneRoutes,
   caTaxAdvisorRoutes,
   bankingLoanRoutes,
   hotelRestaurantRoutes
 } = require('./src/routes/extendedServicesRoutes');
+const businessManagementRoutes = require('./src/routes/businessManagementRoutes');
+const universalCatalogueRoutes = require('./src/routes/universalCatalogueRoutes');
 
 // CMS Routes
 const miningCmsRoutes = require('./src/routes/cms/mining');
@@ -168,6 +171,7 @@ app.use('/api/powder-supplier/promotions', promotionRoutes);
 app.use('/api/machine-repairing/promotions', promotionRoutes);
 app.use('/api/electrical-panel/promotions', promotionRoutes);
 app.use('/api/water-supplier/promotions', promotionRoutes);
+app.use('/api/hydro-crane/promotions', promotionRoutes);
 app.use('/api/ca-tax-advisor/promotions', promotionRoutes);
 app.use('/api/banking-loan/promotions', promotionRoutes);
 app.use('/api/hotel-restaurant/promotions', promotionRoutes);
@@ -192,6 +196,7 @@ app.use('/api/powder-supplier/invoices', promotionInvoiceRoutes);
 app.use('/api/machine-repairing/invoices', promotionInvoiceRoutes);
 app.use('/api/electrical-panel/invoices', promotionInvoiceRoutes);
 app.use('/api/water-supplier/invoices', promotionInvoiceRoutes);
+app.use('/api/hydro-crane/invoices', promotionInvoiceRoutes);
 app.use('/api/ca-tax-advisor/invoices', promotionInvoiceRoutes);
 app.use('/api/banking-loan/invoices', promotionInvoiceRoutes);
 app.use('/api/hotel-restaurant/invoices', promotionInvoiceRoutes);
@@ -259,6 +264,7 @@ app.use('/api/powder-supplier/settings', accountSettingsRoutes);
 app.use('/api/machine-repairing/settings', accountSettingsRoutes);
 app.use('/api/electrical-panel/settings', accountSettingsRoutes);
 app.use('/api/water-supplier/settings', accountSettingsRoutes);
+app.use('/api/hydro-crane/settings', accountSettingsRoutes);
 app.use('/api/ca-tax-advisor/settings', accountSettingsRoutes);
 app.use('/api/banking-loan/settings', accountSettingsRoutes);
 app.use('/api/hotel-restaurant/settings', accountSettingsRoutes);
@@ -283,6 +289,7 @@ app.use('/api/v1/powder-supplier/settings', accountSettingsRoutes);
 app.use('/api/v1/machine-repairing/settings', accountSettingsRoutes);
 app.use('/api/v1/electrical-panel/settings', accountSettingsRoutes);
 app.use('/api/v1/water-supplier/settings', accountSettingsRoutes);
+app.use('/api/v1/hydro-crane/settings', accountSettingsRoutes);
 app.use('/api/v1/ca-tax-advisor/settings', accountSettingsRoutes);
 app.use('/api/v1/banking-loan/settings', accountSettingsRoutes);
 app.use('/api/v1/hotel-restaurant/settings', accountSettingsRoutes);
@@ -330,6 +337,10 @@ app.use('/api/electrical-repairing', electricalPanelRoutes);
 app.use('/api/v1/electrical-repairing', electricalPanelRoutes);
 app.use('/api/water-supplier', waterSupplierRoutes);
 app.use('/api/v1/water-supplier', waterSupplierRoutes);
+app.use('/api/hydro-crane', hydroCraneRoutes);
+app.use('/api/v1/hydro-crane', hydroCraneRoutes);
+app.use('/api/crane-service', hydroCraneRoutes);
+app.use('/api/v1/crane-service', hydroCraneRoutes);
 app.use('/api/ca-tax-advisor', caTaxAdvisorRoutes);
 app.use('/api/v1/ca-tax-advisor', caTaxAdvisorRoutes);
 app.use('/api/banking-loan', bankingLoanRoutes);
@@ -361,9 +372,20 @@ app.use('/api/cms/powder-supplier', powderSupplierProfileRoutes);
 app.use('/api/cms/machine-repairing', machineRepairingRoutes);
 app.use('/api/cms/electrical-panel', electricalPanelRoutes);
 app.use('/api/cms/water-supplier', waterSupplierRoutes);
+app.use('/api/cms/hydro-crane', hydroCraneRoutes);
 app.use('/api/cms/ca-tax-advisor', caTaxAdvisorRoutes);
 app.use('/api/cms/banking-loan', bankingLoanRoutes);
 app.use('/api/cms/hotel-restaurant', hotelRestaurantRoutes);
+
+// Universal Business Management & Catalogue Engine Routes
+app.use('/api/business-types', businessManagementRoutes);
+app.use('/api/v1/business-types', businessManagementRoutes);
+app.use('/api/businesses', businessManagementRoutes);
+app.use('/api/v1/businesses', businessManagementRoutes);
+app.use('/api/catalogue', universalCatalogueRoutes);
+app.use('/api/v1/catalogue', universalCatalogueRoutes);
+app.use('/api/catalog', universalCatalogueRoutes);
+app.use('/api/v1/catalog', universalCatalogueRoutes);
 
 // Root Routes (for frontend compatibility)
 app.use('/auth', authRoutes);

@@ -19,6 +19,7 @@ async function getManufacturerInvoices(req, res) {
         'mining_equipment', 'heavy_mining_equipment', 'solar_solutions', 'industrial_solar', 
         'diamond_blades', 'blades_segments', 'machine_manufacturer', 'stone_machinery', 
         'powder_supplier', 'mineral_supplier',
+        'hydro_crane', 'crane_service',
         'machine_repairing', 'electrical_panel', 'electrical_repairing',
         'water_supplier', 'ca_tax_advisor', 'banking_loan', 'banking_services',
         'hotel_restaurant', 'hospitality'

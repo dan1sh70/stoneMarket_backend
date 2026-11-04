@@ -59,6 +59,23 @@ const SERVICE_TYPE_CONFIGS = {
       { title: 'Delivery Coverage', value: 'Industrial Zones & Quarries', subtitle: 'Same-Day Fast Turnaround' }
     ]
   },
+  hydro_crane: {
+    primaryType: 'hydro_crane',
+    aliases: ['hydro_crane', 'crane_service'],
+    dashboardMenuTitle: 'Equipment & Rental Management',
+    dashboardMenuPath: '/hydro-crane/equipment',
+    businessCategory: 'Hydro & Heavy Crane Service',
+    skuPrefix: 'CRN',
+    exampleCompany: 'Bajrang Hydro & Heavy Crane Services',
+    exampleSubcategory: 'Hydra 12T to 25T Pick & Carry, Mobile Telescopic & Heavy Slicing Cranes',
+    itemKey: 'equipment',
+    operationalCards: (p) => [
+      { title: 'Fleet Capacity', value: '12T to 150T Heavy Lift', subtitle: 'Hydra, Farana & Mobile Cranes' },
+      { title: 'Fleet Size', value: `${p.crane_fleet_count || 14} Commercial Cranes`, subtitle: 'Quarry & Heavy Slab Handling' },
+      { title: 'Certified Operators', value: `${p.certified_riggers_operators_count || 18} Certified Riggers`, subtitle: 'Safety Compliant Heavy Lift Crew' },
+      { title: 'Service Reach', value: 'Quarries, Processing Units & Rail Yards', subtitle: '24/7 Breakdown & Rental Dispatch' }
+    ]
+  },
   ca_tax_advisor: {
     primaryType: 'ca_tax_advisor',
     aliases: ['ca_tax_advisor'],
@@ -774,6 +791,7 @@ module.exports = {
   machineRepairingController: createServiceModuleController('machine_repairing'),
   electricalPanelController: createServiceModuleController('electrical_panel'),
   waterSupplierController: createServiceModuleController('water_supplier'),
+  hydroCraneController: createServiceModuleController('hydro_crane'),
   caTaxAdvisorController: createServiceModuleController('ca_tax_advisor'),
   bankingLoanController: createServiceModuleController('banking_loan'),
   hotelRestaurantController: createServiceModuleController('hotel_restaurant')
