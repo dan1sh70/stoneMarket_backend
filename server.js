@@ -21,15 +21,39 @@ if (process.env.NODE_ENV !== 'test') {
 }
 
 // Middleware
-app.use(helmet());
-app.use(cors({ origin: process.env.CLIENT_URL ? process.env.CLIENT_URL.split(',') : '*' }));
+app.use(helmet({
+  crossOriginResourcePolicy: { policy: "cross-origin" }
+}));
+const allowedOrigins = process.env.CLIENT_URL 
+  ? process.env.CLIENT_URL.split(',').map(o => o.trim()) 
+  : ['http://localhost:3000', 'http://localhost:5173', 'http://127.0.0.1:5173'];
+
+app.use(cors({
+  origin: (origin, callback) => {
+    // allow requests with no origin (like mobile apps, curl, or server-to-server)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) !== -1 || allowedOrigins.includes('*')) {
+      return callback(null, true);
+    }
+    // allow localhost development ports dynamically
+    if (/^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin)) {
+      return callback(null, true);
+    }
+    return callback(new Error('Not allowed by CORS'));
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'x-business-id']
+}));
+app.options('*', cors());
 app.use(express.json());
 app.use(morgan('dev'));
 
 // Rate Limiting
+const isDev = process.env.NODE_ENV !== 'production';
 const limiter = rateLimit({
   windowMs: process.env.RATE_LIMIT_WINDOW_MS || 60000,
-  max: process.env.RATE_LIMIT_MAX || 100,
+  max: isDev ? 10000 : (process.env.RATE_LIMIT_MAX || 100),
 });
 app.use(limiter);
 
@@ -378,6 +402,10 @@ app.use('/api/cms/banking-loan', bankingLoanRoutes);
 app.use('/api/cms/hotel-restaurant', hotelRestaurantRoutes);
 
 // Universal Business Management & Catalogue Engine Routes
+const adminSuperRoutes = require('./src/routes/adminSuperRoutes');
+app.use('/api/admin/super', adminSuperRoutes);
+app.use('/api/v1/admin/super', adminSuperRoutes);
+
 app.use('/api/business-types', businessManagementRoutes);
 app.use('/api/v1/business-types', businessManagementRoutes);
 app.use('/api/businesses', businessManagementRoutes);
