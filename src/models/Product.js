@@ -21,7 +21,7 @@ const productSchema = new mongoose.Schema({
   miningLocation: String, // Source location for mining products
   stock_status: { type: String, enum: ['in_stock', 'out_of_stock', 'on_order'], default: 'in_stock' },
   businessProfileId: { type: mongoose.Schema.Types.ObjectId, ref: 'BusinessProfile' },
-  business_type: { type: String, enum: ['manufacturer', 'mining', 'showroom', 'trader', 'abrasives_epoxy', 'abrasives', 'machinery_parts', 'machinery'], default: 'manufacturer', index: true },
+  business_type: { type: String, enum: ['manufacturer', 'mining', 'showroom', 'trader', 'abrasives_epoxy', 'abrasives', 'machinery_parts', 'machinery', 'mining_equipment', 'heavy_mining_equipment'], default: 'manufacturer', index: true },
   sku: { type: String, index: true },
   brand_name: String,
   grit_grade: String,
@@ -34,6 +34,14 @@ const productSchema = new mongoose.Schema({
   warranty_guarantee: String,
   machine_compatibility: String,
   technical_drawings: [String],
+  equipment_brochures: [String],
+  certification_documents: [String],
+  equipment_condition: { type: String, enum: ['Brand New', 'Used', 'Refurbished', 'Reconditioned'], default: 'Brand New' },
+  delivery_available: { type: Boolean, default: true },
+  installation_available: { type: Boolean, default: true },
+  onsite_demonstration: { type: Boolean, default: false },
+  after_sales_support: { type: Boolean, default: true },
+  service_support: { type: Boolean, default: true },
   technical_specifications: { type: mongoose.Schema.Types.Mixed, default: {} },
   target_areas: [{
     state_name: String,

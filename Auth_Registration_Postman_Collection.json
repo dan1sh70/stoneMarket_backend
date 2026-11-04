@@ -22673,6 +22673,863 @@
           ]
         }
       ]
+    },
+    {
+      "name": "Stone Heavy Mining Equipment Module",
+      "description": "Complete endpoints for Heavy Mining Equipment Business Type including Dashboard, Switcher, 4-step Equipment Wizard, Stock Management, Technical Specs & Drawings, Gallery, Verification, Analytics, Inquiries, and Leads.",
+      "item": [
+        {
+          "name": "1. Dashboard & Business Switcher",
+          "item": [
+            {
+              "name": "Get Heavy Mining Equipment Dashboard",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/mining-equipment/dashboard",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "mining-equipment",
+                    "dashboard"
+                  ]
+                },
+                "description": "Loads the Heavy Mining Equipment dashboard with 4 operational summary cards, metrics, and navigation."
+              }
+            },
+            {
+              "name": "Get Available Business Types",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/mining-equipment/business-types",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "mining-equipment",
+                    "business-types"
+                  ]
+                },
+                "description": "Returns all available business types with Heavy Mining Equipment marked as current."
+              }
+            },
+            {
+              "name": "Switch Business Type",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"business_type\": \"mining_equipment\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/mining-equipment/switch-business-type",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "mining-equipment",
+                    "switch-business-type"
+                  ]
+                },
+                "description": "Switches the authenticated user context to Heavy Mining Equipment."
+              }
+            }
+          ]
+        },
+        {
+          "name": "2. Profile & Operational Specifications",
+          "item": [
+            {
+              "name": "Get Heavy Mining Equipment Profile",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/mining-equipment/profile",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "mining-equipment",
+                    "profile"
+                  ]
+                },
+                "description": "Fetches the comprehensive Heavy Mining Equipment profile and operational specs."
+              }
+            },
+            {
+              "name": "Update Heavy Mining Equipment Profile",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company_name\": \"Atlas Mining Equipment & Heavy Quarry Machineries\",\n  \"established_year\": 2012,\n  \"heavy_equipment_fleet_size\": \"35+ Heavy Mining Units in Stock & Yard\",\n  \"maintenance_refurbishment_capability\": \"Full Heavy Mechanical Overhaul & Hydraulic System Rebuild Facility\",\n  \"field_service_support\": \"Pan-India On-Site Commissioning, Rigging & Field Engineers Available 24x7\",\n  \"authorized_manufacturers_brands\": [\n    \"Atlas-X Pro\",\n    \"Deccan Wire-Master\",\n    \"Komatsu Quarry Spec\",\n    \"CAT Mining\",\n    \"Sandvik Compatible\",\n    \"Volvo Heavy\"\n  ]\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/mining-equipment/profile",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "mining-equipment",
+                    "profile"
+                  ]
+                },
+                "description": "Updates heavy equipment operational capabilities, brands, and rebuild capacity."
+              }
+            }
+          ]
+        },
+        {
+          "name": "3. Product & Spares Management",
+          "item": [
+            {
+              "name": "Create Heavy Equipment (4-Step Wizard - DTH Rig)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Hydraulic Crawler DTH Rock Drilling Rig\",\n  \"category\": \"Hydraulic Crawler Drilling Rigs\",\n  \"brand_name\": \"Atlas-X Pro 115\",\n  \"model_number\": \"AXP-115-CR\",\n  \"warranty_guarantee\": \"12 Months Manufacturer Warranty\",\n  \"selling_price\": 1850000,\n  \"pricing_unit\": \"Per Unit\",\n  \"min_order_quantity\": 1,\n  \"available_stock\": 3,\n  \"equipment_condition\": \"Brand New\",\n  \"delivery_available\": true,\n  \"installation_available\": true,\n  \"onsite_demonstration\": true,\n  \"technical_specifications\": {\n    \"drilling_method\": \"DTH Down-The-Hole Hammer\",\n    \"drilling_diameter\": \"4.5\\\" – 6.5\\\" (115mm – 165mm)\",\n    \"max_drilling_depth\": \"35 Meters\",\n    \"engine_power\": \"194 HP / 145 kW Cummins Turbo Diesel\",\n    \"hydraulic_pressure\": \"240 Bar Heavy Duty\",\n    \"air_consumption\": \"650 CFM @ 18 Bar\",\n    \"operating_weight\": \"7,800 kg\",\n    \"application\": \"Deep bench block drilling\"\n  },\n  \"technical_drawings\": [\n    \"https://stonemarket.com/uploads/blueprints/atlas-x-pro-115-rig.pdf\"\n  ],\n  \"equipment_brochures\": [\n    \"https://stonemarket.com/uploads/brochures/atlas-x-pro-specs.pdf\"\n  ],\n  \"images\": [\n    \"https://stonemarket.com/uploads/products/dth-rig-1.jpg\"\n  ]\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/mining-equipment/products",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "mining-equipment",
+                    "products"
+                  ]
+                },
+                "description": "Publishes a new heavy mining equipment unit through the 4-step wizard."
+              }
+            },
+            {
+              "name": "Create Heavy Equipment (4-Step Wizard - Wire Saw)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Diamond Wire Saw Quarry Cutting Machine (75 HP)\",\n  \"category\": \"Diamond Wire Saw Machines\",\n  \"brand_name\": \"Deccan Wire-Master\",\n  \"model_number\": \"DWM-75-INV\",\n  \"warranty_guarantee\": \"12 Months Manufacturer Warranty\",\n  \"selling_price\": 920000,\n  \"pricing_unit\": \"Per Machine\",\n  \"min_order_quantity\": 1,\n  \"available_stock\": 4,\n  \"equipment_condition\": \"Brand New\",\n  \"technical_specifications\": {\n    \"motor_power\": \"75 HP Inverter Driven\",\n    \"wire_speed\": \"0–40 m/s Vector Inverter Controlled\",\n    \"max_cutting_length\": \"50 Meters\",\n    \"cutting_capacity\": \"8–14 m²/hour Granite Cutting\",\n    \"inverter_type\": \"Yaskawa Heavy Duty Industrial Inverter\",\n    \"application\": \"Bench slicing and block squaring\"\n  },\n  \"images\": [\n    \"https://stonemarket.com/uploads/products/wire-saw-1.jpg\"\n  ]\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/mining-equipment/products",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "mining-equipment",
+                    "products"
+                  ]
+                },
+                "description": "Publishes a 75 HP diamond wire saw quarry cutting machine."
+              }
+            },
+            {
+              "name": "List Heavy Mining Equipment",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/mining-equipment/products?category=Hydraulic Crawler Drilling Rigs&status=active&page=1&limit=10",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "mining-equipment",
+                    "products"
+                  ],
+                  "query": [
+                    {
+                      "key": "category",
+                      "value": "Hydraulic Crawler Drilling Rigs"
+                    },
+                    {
+                      "key": "status",
+                      "value": "active"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ]
+                },
+                "description": "Lists heavy equipment items with status filters, pricing, and counts."
+              }
+            },
+            {
+              "name": "Get Equipment Details",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/mining-equipment/products/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "mining-equipment",
+                    "products",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "65e9abcd1234ef0000000001"
+                    }
+                  ]
+                },
+                "description": "Retrieves complete specifications, drawings, and brochures for single equipment."
+              }
+            },
+            {
+              "name": "Update Equipment Details",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"selling_price\": 1950000,\n  \"warranty_guarantee\": \"24 Months Complete Power Train Guarantee\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/mining-equipment/products/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "mining-equipment",
+                    "products",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "65e9abcd1234ef0000000001"
+                    }
+                  ]
+                },
+                "description": "Updates equipment pricing, specifications, or terms."
+              }
+            },
+            {
+              "name": "Update Equipment Stock",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"stock\": 6,\n  \"change_type\": \"set\",\n  \"notes\": \"Received shipment of 3 additional crawler units from manufacturing plant\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/mining-equipment/products/:id/stock",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "mining-equipment",
+                    "products",
+                    ":id",
+                    "stock"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "65e9abcd1234ef0000000001"
+                    }
+                  ]
+                },
+                "description": "Updates stock and creates a historical audit entry in StockHistory."
+              }
+            },
+            {
+              "name": "Duplicate Equipment as Draft",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/mining-equipment/products/:id/duplicate",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "mining-equipment",
+                    "products",
+                    ":id",
+                    "duplicate"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "65e9abcd1234ef0000000001"
+                    }
+                  ]
+                },
+                "description": "Duplicates an existing equipment item as a draft with (Copy) appended to name."
+              }
+            },
+            {
+              "name": "Toggle Equipment Status (Active/Inactive)",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"inactive\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/mining-equipment/products/:id/status",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "mining-equipment",
+                    "products",
+                    ":id",
+                    "status"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "65e9abcd1234ef0000000001"
+                    }
+                  ]
+                },
+                "description": "Toggles an equipment status between active and inactive."
+              }
+            },
+            {
+              "name": "Delete Equipment",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/mining-equipment/products/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "mining-equipment",
+                    "products",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "65e9abcd1234ef0000000001"
+                    }
+                  ]
+                },
+                "description": "Permanently deletes an equipment item from the catalogue."
+              }
+            }
+          ]
+        },
+        {
+          "name": "4. Contacts & Gallery",
+          "item": [
+            {
+              "name": "Add Contact Person",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Naveen Choudhary\",\n  \"designation\": \"Quarry Field Rigging & Rig Services Lead\",\n  \"phone\": \"+91 94140 88990\",\n  \"email\": \"fieldservice@atlasheavy.com\",\n  \"whatsapp\": \"+91 94140 88990\",\n  \"is_primary\": false\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/mining-equipment/contacts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "mining-equipment",
+                    "contacts"
+                  ]
+                },
+                "description": "Adds an authorized key contact / rigging engineer to the business profile."
+              }
+            },
+            {
+              "name": "Get All Contacts",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/mining-equipment/contacts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "mining-equipment",
+                    "contacts"
+                  ]
+                },
+                "description": "Fetches all registered contacts for the heavy mining equipment business."
+              }
+            },
+            {
+              "name": "Add Gallery Photo",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"url\": \"https://stonemarket.com/uploads/gallery/heavy-excavator-quarry.jpg\",\n  \"title\": \"Komatsu Quarry Excavator 45-Ton in Granite Pit\",\n  \"category\": \"equipment\",\n  \"is_cover\": false\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/mining-equipment/gallery/photos",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "mining-equipment",
+                    "gallery",
+                    "photos"
+                  ]
+                },
+                "description": "Uploads or links a photo to the equipment yard and quarry pit gallery."
+              }
+            },
+            {
+              "name": "Add Gallery Video",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"video_url\": \"https://stonemarket.com/uploads/gallery/wire-saw-bench-demo.mp4\",\n  \"title\": \"75 HP Wire Saw Granite Bench Slicing\",\n  \"category\": \"field_quarry_action\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/mining-equipment/gallery/videos",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "mining-equipment",
+                    "gallery",
+                    "videos"
+                  ]
+                },
+                "description": "Adds an equipment quarry demonstration or live bench action video."
+              }
+            }
+          ]
+        },
+        {
+          "name": "5. Verification & Analytics",
+          "item": [
+            {
+              "name": "Get Verification Center Status",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/mining-equipment/verification",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "mining-equipment",
+                    "verification"
+                  ]
+                },
+                "description": "Retrieves KYC verification step completion, GST, and MSME statuses."
+              }
+            },
+            {
+              "name": "Verify GST Number",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"gstin\": \"08AAACH8912E1Z2\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/mining-equipment/verification/gst",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "mining-equipment",
+                    "verification",
+                    "gst"
+                  ]
+                },
+                "description": "Submits and verifies GST identification number."
+              }
+            },
+            {
+              "name": "Get Heavy Mining Equipment Analytics",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/mining-equipment/analytics?timeframe=30d",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "mining-equipment",
+                    "analytics"
+                  ],
+                  "query": [
+                    {
+                      "key": "timeframe",
+                      "value": "30d"
+                    }
+                  ]
+                },
+                "description": "Returns profile impressions, equipment views, top units demand, and metrics."
+              }
+            }
+          ]
+        },
+        {
+          "name": "6. Inquiries, Leads & Shared Settings",
+          "item": [
+            {
+              "name": "Get Equipment Inquiries",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/mining-equipment/inquiries",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "mining-equipment",
+                    "inquiries"
+                  ]
+                },
+                "description": "Lists all incoming equipment inquiries from quarry owners and mining contractors."
+              }
+            },
+            {
+              "name": "Get Equipment Leads",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/mining-equipment/leads",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "mining-equipment",
+                    "leads"
+                  ]
+                },
+                "description": "Fetches relevant buyer leads matching drilling rigs, wire saws, and excavators."
+              }
+            },
+            {
+              "name": "Get Settings Overview",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/mining-equipment/settings",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "mining-equipment",
+                    "settings"
+                  ]
+                },
+                "description": "Fetches account settings, security sessions, and notification preferences."
+              }
+            },
+            {
+              "name": "Get Promotions (Ad Management)",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/mining-equipment/promotions",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "mining-equipment",
+                    "promotions"
+                  ]
+                },
+                "description": "Fetches available promotional advertising packages for equipment businesses."
+              }
+            },
+            {
+              "name": "Get Invoices",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/mining-equipment/invoices",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "mining-equipment",
+                    "invoices"
+                  ]
+                },
+                "description": "Lists all tax invoices for ad promotions and platform subscriptions."
+              }
+            }
+          ]
+        }
+      ]
     }
   ]
 }

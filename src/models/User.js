@@ -21,6 +21,8 @@ const userSchema = new mongoose.Schema({
       'abrasives',
       'machinery_parts',
       'machinery',
+      'mining_equipment',
+      'heavy_mining_equipment',
       'service_provider',
       'customer'
     ], 

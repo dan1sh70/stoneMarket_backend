@@ -25,7 +25,7 @@ const businessProfileSchema = new mongoose.Schema({
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   business_type: { 
     type: String, 
-    enum: ['mining', 'manufacturer', 'showroom', 'trader', 'buyer', 'transport_national', 'transport_local', 'brazing', 'abrasives_epoxy', 'abrasives', 'machinery_parts', 'machinery', 'customer', 'service_provider'],
+    enum: ['mining', 'manufacturer', 'showroom', 'trader', 'buyer', 'transport_national', 'transport_local', 'brazing', 'abrasives_epoxy', 'abrasives', 'machinery_parts', 'machinery', 'mining_equipment', 'heavy_mining_equipment', 'customer', 'service_provider'],
     required: true,
     index: true
   },
@@ -287,6 +287,13 @@ const businessProfileSchema = new mongoose.Schema({
   parts_manufacturing_capability: { type: String, default: 'CNC Machining & Precision Fabrication' },
   industrial_supply_capability: { type: String, default: 'Pan-India Industrial Dispatch & Break-Down Support' },
   service_replacement_support: { type: String, default: 'Immediate Replacement & Field Technical Support' },
+
+  // Heavy Mining Equipment Operational Specifications
+  mining_equipment_categories: [{ type: String }],
+  authorized_manufacturers_brands: [{ type: String }],
+  heavy_equipment_fleet_size: { type: String, default: '25+ Heavy Mining Units' },
+  maintenance_refurbishment_capability: { type: String, default: 'Full Heavy Mechanical Overhaul & Hydraulic Rebuild' },
+  field_service_support: { type: String, default: 'Pan-India On-Site Commissioning, Rigging & Field Engineers' },
 
   // Owners (Step 2)
   owners: [ownerSchema], // Usually up to 2

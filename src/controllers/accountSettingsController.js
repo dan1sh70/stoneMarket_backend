@@ -30,6 +30,7 @@ async function getManufacturerProfile(userId) {
     else if (user.role === 'brazing' || user.role === 'service_provider') targetType = 'brazing';
     else if (user.role === 'abrasives_epoxy' || user.role === 'abrasives') targetType = 'abrasives_epoxy';
     else if (user.role === 'machinery_parts' || user.role === 'machinery') targetType = 'machinery_parts';
+    else if (user.role === 'mining_equipment' || user.role === 'heavy_mining_equipment') targetType = 'mining_equipment';
   }
 
   let profile = await BusinessProfile.findOne({
@@ -262,6 +263,50 @@ async function getManufacturerProfile(userId) {
         },
         rating: 4.9,
         review_count: 46,
+        status: 'active',
+        is_mock: false
+      });
+    } else if (user.role === 'mining_equipment' || user.role === 'heavy_mining_equipment') {
+      profile = await BusinessProfile.create({
+        userId,
+        business_type: 'mining_equipment',
+        company_name: user.name ? `${user.name} Heavy Mining Equipment` : 'Atlas Mining Equipment & Heavy Quarry Machineries',
+        business_category: 'Heavy Mining Equipment',
+        business_subcategory: 'DTH Drilling Rigs, Diamond Wire Saws, Quarry Excavators & Crushers',
+        short_description: 'Authorized OEM supplier and distributor of hydraulic crawler DTH rock drilling rigs, 75 HP diamond wire saw machines, quarry excavators and crushing plants.',
+        about_business: 'Atlas Mining Equipment provides heavy industrial quarry machinery, hydraulic crawler drilling units, variable speed diamond wire saws, and mobile crushing systems with complete Pan-India on-site commissioning and breakdown support.',
+        established_year: 2012,
+        mining_equipment_categories: [
+          'Hydraulic Crawler Drilling Rigs',
+          'DTH Drilling Equipment',
+          'Diamond Wire Saw Machines',
+          'Quarry Excavators',
+          'Wheel Loaders',
+          'Stone Mining Crushers',
+          'Mining Compressors',
+          'Conveyor Systems'
+        ],
+        authorized_manufacturers_brands: [
+          'Atlas-X Pro',
+          'Deccan Wire-Master',
+          'Komatsu Quarry Spec',
+          'CAT Mining',
+          'Sandvik Compatible',
+          'Volvo Heavy'
+        ],
+        heavy_equipment_fleet_size: '35+ Heavy Mining Units in Stock & Yard',
+        maintenance_refurbishment_capability: 'Full Heavy Mechanical Overhaul & Hydraulic System Rebuild Facility',
+        field_service_support: 'Pan-India On-Site Commissioning, Rigging & Field Engineers Available 24x7',
+        address: {
+          state: 'Rajasthan',
+          district: 'Jaipur',
+          area: 'VKI Area',
+          full_address: 'Plot 180, Road No. 17, VKI Industrial Area, Jaipur, Rajasthan 302013',
+          postal_code: '302013',
+          country: 'India'
+        },
+        rating: 4.9,
+        review_count: 58,
         status: 'active',
         is_mock: false
       });

@@ -28,6 +28,7 @@ async function getManufacturerProfile(userId) {
     else if (user.role === 'brazing' || user.role === 'service_provider') targetType = 'brazing';
     else if (user.role === 'abrasives_epoxy' || user.role === 'abrasives') targetType = 'abrasives_epoxy';
     else if (user.role === 'machinery_parts' || user.role === 'machinery') targetType = 'machinery_parts';
+    else if (user.role === 'mining_equipment' || user.role === 'heavy_mining_equipment') targetType = 'mining_equipment';
   }
 
   let profile = await BusinessProfile.findOne({
@@ -186,6 +187,19 @@ async function getManufacturerProfile(userId) {
         status: 'active',
         is_mock: false
       });
+    } else if (user.role === 'mining_equipment' || user.role === 'heavy_mining_equipment') {
+      profile = await BusinessProfile.create({
+        userId,
+        business_type: 'mining_equipment',
+        company_name: user.name ? `${user.name} Heavy Mining Equipment` : 'Atlas Mining Equipment & Heavy Quarry Machineries',
+        business_category: 'Heavy Mining Equipment',
+        business_subcategory: 'DTH Drilling Rigs, Diamond Wire Saws, Quarry Excavators & Crushers',
+        established_year: 2012,
+        rating: 4.9,
+        review_count: 58,
+        status: 'active',
+        is_mock: false
+      });
     } else if (user.role === 'manufacturer' || user.role === 'admin' || user.role === 'vendor') {
       profile = await BusinessProfile.create({
         userId,
@@ -215,6 +229,7 @@ function buildInquiryVisibilityFilter(profile) {
   const isBrazing = profile.business_type === 'brazing' || profile.business_type === 'service_provider';
   const isAbrasives = profile.business_type === 'abrasives_epoxy' || profile.business_type === 'abrasives';
   const isMachinery = profile.business_type === 'machinery_parts' || profile.business_type === 'machinery';
+  const isMiningEquipment = profile.business_type === 'mining_equipment' || profile.business_type === 'heavy_mining_equipment';
   const categories = isMining
     ? ['Mining', 'Mines & Quarries', 'Raw Stone Blocks', 'Granite Blocks', 'Marble Blocks', 'Sandstone Blocks', 'Limestone Blocks', 'Natural Stone']
     : isShowroom
@@ -227,6 +242,8 @@ function buildInquiryVisibilityFilter(profile) {
     ? ['Abrasives & Epoxy Chemicals', 'Abrasives', 'Epoxy Chemical', 'Epoxy Resin', 'Adhesives', 'Diamond Abrasives', 'Polishing Powder', 'Stone Bonding Adhesive']
     : isMachinery
     ? ['Stone Machinery Parts & Spares', 'Machinery Parts', 'Spares', 'Gangsaw Spares', 'Hydraulic Components', 'Bearings', 'Motors', 'Pumps', 'Bridge Cutter Parts', 'Multi-Cutter Parts']
+    : isMiningEquipment
+    ? ['Heavy Mining Equipment', 'Mining Equipment', 'DTH Drilling', 'Hydraulic Crawler Drilling Rigs', 'Diamond Wire Saw Machines', 'Quarry Excavators', 'Wheel Loaders', 'Stone Mining Crushers', 'Mining Compressors', 'Conveyor Systems']
     : ['Granite', 'Marble', 'Granite Slabs', 'Marble & Granite Slabs', 'Granite & Marble Slabs', 'Natural Stone', 'Manufacturer'];
 
   return {
