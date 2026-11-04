@@ -32,6 +32,7 @@ async function getManufacturerProfile(userId) {
     else if (user.role === 'machinery_parts' || user.role === 'machinery') targetType = 'machinery_parts';
     else if (user.role === 'mining_equipment' || user.role === 'heavy_mining_equipment') targetType = 'mining_equipment';
     else if (user.role === 'solar_solutions' || user.role === 'industrial_solar') targetType = 'solar_solutions';
+    else if (user.role === 'diamond_blades' || user.role === 'blades_segments') targetType = 'diamond_blades';
   }
 
   let profile = await BusinessProfile.findOne({
@@ -353,6 +354,51 @@ async function getManufacturerProfile(userId) {
         },
         rating: 4.9,
         review_count: 62,
+        status: 'active',
+        is_mock: false
+      });
+    } else if (user.role === 'diamond_blades' || user.role === 'blades_segments') {
+      profile = await BusinessProfile.create({
+        userId,
+        business_type: 'diamond_blades',
+        company_name: user.name ? `${user.name} Diamond Blades & Segments` : 'DiamondEdge Blades & Segment Works',
+        business_category: 'Diamond Blades & Segments',
+        business_subcategory: 'High-Performance Diamond Gangsaw Segments, Silent Laser Saw Blades & Core Drills',
+        short_description: 'Premier manufacturer and distributor of high-performance diamond gangsaw segments, silent circular saw blades, diamond wire saw beads, and core bits for hard granite, marble, and quartzite processing.',
+        about_business: 'DiamondEdge Blades & Segment Works produces cutting-edge industrial diamond tools utilizing premium cobalt bond matrices, De Beers grit, and computerized automated laser welding.',
+        established_year: 2015,
+        blade_segment_categories: [
+          'Diamond Blades',
+          'Diamond Segments',
+          'Diamond Wire Saw Beads',
+          'Core Drill Bits',
+          'Diamond Gangsaw Segments',
+          'Silent Laser Core Blades',
+          'Bridge Saw Blades',
+          'Multi-Blade Slicing Segments'
+        ],
+        authorized_blade_brands: [
+          'DiamondEdge X7',
+          'SilentCut Pro-16',
+          'CobaltMatrix King',
+          'StoneRazor Laser',
+          'GraniteBuster Extreme',
+          'Tyrolit Industrial',
+          'Norton Clipper'
+        ],
+        daily_segment_production_capacity: '15,000+ Segments / Day',
+        custom_matrix_formulation: 'Proprietary Cobalt-Bronze Matrix for Hard South Black Granite',
+        laser_welding_facility: 'Automated 6-Axis Robotic German Laser Welding Line',
+        address: {
+          state: 'Rajasthan',
+          district: 'Udaipur',
+          area: 'Sukher Industrial Area',
+          full_address: 'Plot 88-90, Phase II, Sukher Industrial Area, Udaipur, Rajasthan 313001',
+          postal_code: '313001',
+          country: 'India'
+        },
+        rating: 4.9,
+        review_count: 58,
         status: 'active',
         is_mock: false
       });

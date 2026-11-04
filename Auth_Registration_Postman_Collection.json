@@ -24387,6 +24387,868 @@
           ]
         }
       ]
+    },
+    {
+      "name": "Stone Diamond Blades & Segments Module",
+      "description": "Complete API endpoints for Diamond Blades & Segments business type, Product & Spares 4-step wizard, blade/segment specifications, stock adjustment, and shared modules.",
+      "item": [
+        {
+          "name": "1. Dashboard & Business Switcher",
+          "item": [
+            {
+              "name": "Get Diamond Blades Dashboard",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/diamond-blades/dashboard",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "diamond-blades",
+                    "dashboard"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Business Types List",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/diamond-blades/business-types",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "diamond-blades",
+                    "business-types"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Switch Business Type to Diamond Blades",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"target_type\": \"diamond_blades\"\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/diamond-blades/switch-business-type",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "diamond-blades",
+                    "switch-business-type"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "2. Profile & Operational Specifications",
+          "item": [
+            {
+              "name": "Get Diamond Blades Business Profile",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/diamond-blades/profile",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "diamond-blades",
+                    "profile"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Update Diamond Blades Profile & Production Capacity",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company_name\": \"DiamondEdge Blades & Segment Works\",\n  \"daily_segment_production_capacity\": \"18,000+ Segments / Day\",\n  \"custom_matrix_formulation\": \"Proprietary Ultra-Cobalt Hardened Matrix for Hard South Black Granite\",\n  \"laser_welding_facility\": \"Automated 6-Axis Robotic German Laser Welding Line\",\n  \"authorized_blade_brands\": [\n    \"DiamondEdge X7\",\n    \"SilentCut Pro-16\",\n    \"CobaltMatrix King\",\n    \"StoneRazor Laser\",\n    \"GraniteBuster Extreme\"\n  ]\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/diamond-blades/profile",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "diamond-blades",
+                    "profile"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "3. Product & Spares Management",
+          "item": [
+            {
+              "name": "List Products & Spares (with Filters & Search)",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/diamond-blades/products?status=active&search=Gangsaw&page=1&limit=20",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "diamond-blades",
+                    "products"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "active"
+                    },
+                    {
+                      "key": "search",
+                      "value": "Gangsaw"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "List via /spares Alias",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/diamond-blades/spares",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "diamond-blades",
+                    "spares"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Create Product - Gangsaw Blade Segments (Set of 100 Pcs)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Diamond Gangsaw Blade Segments (Set of 100 Pcs)\",\n  \"category\": \"Diamond Segments\",\n  \"brand_name\": \"DiamondEdge X7\",\n  \"manufacturer\": \"DiamondEdge X7\",\n  \"model_number\": \"DE-GS-X7\",\n  \"material_grade\": \"Premium Cobalt Bond Matrix with DeBeers Grit\",\n  \"segment_length_mm\": 20,\n  \"segment_thickness_mm\": 5,\n  \"segment_height_mm\": 12,\n  \"segment_width_mm\": 5,\n  \"diamond_grit_size\": \"40/50 US Mesh\",\n  \"diamond_concentration\": \"35%\",\n  \"bond_type\": \"Cobalt Matrix\",\n  \"bond_hardness\": \"Hard (M4)\",\n  \"cutting_method\": \"Wet\",\n  \"compatible_material\": [\n    \"Hard Black Granite\",\n    \"Quartzite\",\n    \"Chittoor Granite\"\n  ],\n  \"short_description\": \"Hard Black Granite & Quartzite Slicing Gangsaw Segments\",\n  \"description\": \"Engineered for extreme wear resistance and fast cut rates in multi-blade gangsaw frames processing high-silica granites.\",\n  \"selling_price\": 28000,\n  \"pricing_unit\": \"Per Set\",\n  \"min_order_quantity\": 1,\n  \"available_stock\": 40,\n  \"stock_unit\": \"Sets\",\n  \"availability_status\": \"In Stock\",\n  \"target_categories\": [\n    \"granite factory\",\n    \"stone processing unit\",\n    \"exporter\"\n  ],\n  \"target_areas\": [\n    {\n      \"state_name\": \"Rajasthan\",\n      \"districts\": [\n        \"Udaipur\",\n        \"Rajsamand\"\n      ]\n    }\n  ],\n  \"images\": [\n    \"https://stonemarket.com/defaults/diamond-gangsaw-segment.jpg\"\n  ],\n  \"cover_image\": \"https://stonemarket.com/defaults/diamond-gangsaw-segment.jpg\",\n  \"status\": \"active\"\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/diamond-blades/products",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "diamond-blades",
+                    "products"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Create Product - 16\" Silent Laser Core Circular Saw Blade",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"16\\\" Silent Laser Core Circular Saw Blade\",\n  \"category\": \"Diamond Blades\",\n  \"brand_name\": \"SilentCut Pro-16\",\n  \"manufacturer\": \"SilentCut Pro-16\",\n  \"model_number\": \"SC-16-SILENT\",\n  \"material_grade\": \"15mm Segment Height Sandwich Core\",\n  \"blade_diameter_mm\": 400,\n  \"bore_diameter_mm\": 50,\n  \"segment_height_mm\": 15,\n  \"segment_thickness_mm\": 3.6,\n  \"segment_length_mm\": 40,\n  \"core_thickness_mm\": 2.8,\n  \"number_of_segments\": 28,\n  \"diamond_grit_size\": \"40/45 Mesh\",\n  \"diamond_concentration\": \"40%\",\n  \"bond_type\": \"Sandwich Multi-Layer Bronze-Cobalt\",\n  \"bond_hardness\": \"Medium-Hard\",\n  \"cutting_method\": \"Wet\",\n  \"compatible_material\": [\n    \"Granite\",\n    \"Quartzite\",\n    \"Sandstone\"\n  ],\n  \"short_description\": \"Bridge cutting and edge profiling silent saw blade\",\n  \"description\": \"Laser welded high-performance 400mm circular blade featuring a sandwich sound-deadening core for silent indoor bridge cutting.\",\n  \"selling_price\": 4800,\n  \"pricing_unit\": \"Per Piece\",\n  \"min_order_quantity\": 1,\n  \"available_stock\": 25,\n  \"stock_unit\": \"Pieces\",\n  \"availability_status\": \"In Stock\",\n  \"target_categories\": [\n    \"granite factory\",\n    \"marble factory\",\n    \"stone processing unit\"\n  ],\n  \"target_areas\": [\n    {\n      \"state_name\": \"Rajasthan\",\n      \"districts\": [\n        \"Kishangarh\",\n        \"Jaipur\"\n      ]\n    }\n  ],\n  \"images\": [\n    \"https://stonemarket.com/defaults/silent-saw-blade.jpg\"\n  ],\n  \"cover_image\": \"https://stonemarket.com/defaults/silent-saw-blade.jpg\",\n  \"status\": \"active\"\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/diamond-blades/products",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "diamond-blades",
+                    "products"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Product Details by ID",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/diamond-blades/products/{{product_id}}",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "diamond-blades",
+                    "products",
+                    "{{product_id}}"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Update Product Specifications",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"selling_price\": 29500,\n  \"description\": \"Updated high-performance cobalt bond matrix formulation.\"\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/diamond-blades/products/{{product_id}}",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "diamond-blades",
+                    "products",
+                    "{{product_id}}"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Adjust Product Stock & Log History",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"stock\": 50,\n  \"change_type\": \"set\",\n  \"notes\": \"Stock adjustment after fresh manufacturing sintering batch\"\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/diamond-blades/products/{{product_id}}/stock",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "diamond-blades",
+                    "products",
+                    "{{product_id}}",
+                    "stock"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Duplicate Product as Draft (Copy)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/diamond-blades/products/{{product_id}}/duplicate",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "diamond-blades",
+                    "products",
+                    "{{product_id}}",
+                    "duplicate"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Toggle Product Active / Inactive Status",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/diamond-blades/products/{{product_id}}/status",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "diamond-blades",
+                    "products",
+                    "{{product_id}}",
+                    "status"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Delete Product",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/diamond-blades/products/{{product_id}}",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "diamond-blades",
+                    "products",
+                    "{{product_id}}"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "4. Contacts & Gallery",
+          "item": [
+            {
+              "name": "Get Business Contacts",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/diamond-blades/contacts",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "diamond-blades",
+                    "contacts"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Add Contact",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Rajesh Sharma\",\n  \"designation\": \"Head of Tooling Field Support & Sales\",\n  \"phone\": \"+91 98290 55443\",\n  \"whatsapp\": \"+91 98290 55443\",\n  \"email\": \"rajesh.sales@diamondedge.com\",\n  \"is_primary\": false\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/diamond-blades/contacts",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "diamond-blades",
+                    "contacts"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Gallery Photos & Videos",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/diamond-blades/gallery",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "diamond-blades",
+                    "gallery"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Add Gallery Photo",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"url\": \"https://stonemarket.com/gallery/gangsaw-cutting-demo.jpg\",\n  \"title\": \"High-Speed Gangsaw Cutting Demo\",\n  \"category\": \"cutting_demo\",\n  \"is_cover\": true\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/diamond-blades/gallery/photos",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "diamond-blades",
+                    "gallery",
+                    "photos"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Add Gallery Video Demo",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Automated Laser Blade Welding in Action\",\n  \"video_url\": \"https://youtube.com/watch?v=laser-welding-demo\",\n  \"source_type\": \"youtube\",\n  \"category\": \"segment_brazing\",\n  \"duration\": \"03:15\"\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/diamond-blades/gallery/videos",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "diamond-blades",
+                    "gallery",
+                    "videos"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "5. Verification & Analytics",
+          "item": [
+            {
+              "name": "Get Verification Center Status",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/diamond-blades/verification",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "diamond-blades",
+                    "verification"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Verify GSTIN",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"gstin\": \"08AABCD8877E1Z5\"\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/diamond-blades/verification/gst",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "diamond-blades",
+                    "verification",
+                    "gst"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Analytics Dashboard",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/diamond-blades/analytics",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "diamond-blades",
+                    "analytics"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Record Analytics Event",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"event_type\": \"product_view\",\n  \"product_id\": \"6aeb1b2468951d56c0c18db8\",\n  \"metadata\": {\n    \"source\": \"marketplace_filter\"\n  }\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/diamond-blades/analytics/event",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "diamond-blades",
+                    "analytics",
+                    "event"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "6. Inquiries, Leads & Shared Settings",
+          "item": [
+            {
+              "name": "Get Incoming Diamond Blades Inquiries",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/diamond-blades/inquiries",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "diamond-blades",
+                    "inquiries"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Diamond Blades Leads Pool",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/diamond-blades/leads",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "diamond-blades",
+                    "leads"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Account Settings for Diamond Blades",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/diamond-blades/settings",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "diamond-blades",
+                    "settings"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Active Promotions for Diamond Blades",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/diamond-blades/promotions",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "diamond-blades",
+                    "promotions"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Invoices for Diamond Blades",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/diamond-blades/invoices",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "diamond-blades",
+                    "invoices"
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
     }
   ]
 }

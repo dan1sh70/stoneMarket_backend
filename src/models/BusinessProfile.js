@@ -25,7 +25,7 @@ const businessProfileSchema = new mongoose.Schema({
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   business_type: { 
     type: String, 
-    enum: ['mining', 'manufacturer', 'showroom', 'trader', 'buyer', 'transport_national', 'transport_local', 'brazing', 'abrasives_epoxy', 'abrasives', 'machinery_parts', 'machinery', 'mining_equipment', 'heavy_mining_equipment', 'solar_solutions', 'industrial_solar', 'customer', 'service_provider'],
+    enum: ['mining', 'manufacturer', 'showroom', 'trader', 'buyer', 'transport_national', 'transport_local', 'brazing', 'abrasives_epoxy', 'abrasives', 'machinery_parts', 'machinery', 'mining_equipment', 'heavy_mining_equipment', 'solar_solutions', 'industrial_solar', 'diamond_blades', 'blades_segments', 'customer', 'service_provider'],
     required: true,
     index: true
   },
@@ -301,6 +301,13 @@ const businessProfileSchema = new mongoose.Schema({
   solar_epc_experience: { type: String, default: '50+ MW Cumulative Industrial & Captive Installations' },
   grid_approval_support: { type: String, default: 'End-to-End DISCOM Net-Metering & CEIG Clearances' },
   operation_and_maintenance_scope: { type: String, default: '25 Years Performance Ratio (PR) & SCADA Telemetry Support' },
+
+  // Diamond Blades & Segments Operational Specifications
+  blade_segment_categories: [{ type: String }],
+  authorized_blade_brands: [{ type: String }],
+  daily_segment_production_capacity: { type: String, default: '15,000+ Segments / Day' },
+  custom_matrix_formulation: { type: String, default: 'Custom Cobalt & Bronze Bond Matrices Engineered for Indian Granites' },
+  laser_welding_facility: { type: String, default: 'Automated Multi-Axis Laser Welding & High-Frequency Induction Line' },
 
   // Owners (Step 2)
   owners: [ownerSchema], // Usually up to 2

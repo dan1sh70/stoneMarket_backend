@@ -30,6 +30,7 @@ async function getManufacturerProfile(userId) {
     else if (user.role === 'machinery_parts' || user.role === 'machinery') targetType = 'machinery_parts';
     else if (user.role === 'mining_equipment' || user.role === 'heavy_mining_equipment') targetType = 'mining_equipment';
     else if (user.role === 'solar_solutions' || user.role === 'industrial_solar') targetType = 'solar_solutions';
+    else if (user.role === 'diamond_blades' || user.role === 'blades_segments') targetType = 'diamond_blades';
   }
 
   let profile = await BusinessProfile.findOne({
@@ -214,6 +215,19 @@ async function getManufacturerProfile(userId) {
         status: 'active',
         is_mock: false
       });
+    } else if (user.role === 'diamond_blades' || user.role === 'blades_segments') {
+      profile = await BusinessProfile.create({
+        userId,
+        business_type: 'diamond_blades',
+        company_name: user.name ? `${user.name} Diamond Blades & Segments` : 'DiamondEdge Blades & Segment Works',
+        business_category: 'Diamond Blades & Segments',
+        business_subcategory: 'High-Performance Diamond Gangsaw Segments, Silent Laser Saw Blades & Core Drills',
+        established_year: 2015,
+        rating: 4.9,
+        review_count: 58,
+        status: 'active',
+        is_mock: false
+      });
     } else if (user.role === 'manufacturer' || user.role === 'admin' || user.role === 'vendor') {
       profile = await BusinessProfile.create({
         userId,
@@ -245,6 +259,7 @@ function buildInquiryVisibilityFilter(profile) {
   const isMachinery = profile.business_type === 'machinery_parts' || profile.business_type === 'machinery';
   const isMiningEquipment = profile.business_type === 'mining_equipment' || profile.business_type === 'heavy_mining_equipment';
   const isSolar = profile.business_type === 'solar_solutions' || profile.business_type === 'industrial_solar';
+  const isDiamondBlades = profile.business_type === 'diamond_blades' || profile.business_type === 'blades_segments';
   const categories = isMining
     ? ['Mining', 'Mines & Quarries', 'Raw Stone Blocks', 'Granite Blocks', 'Marble Blocks', 'Sandstone Blocks', 'Limestone Blocks', 'Natural Stone']
     : isShowroom
@@ -261,6 +276,8 @@ function buildInquiryVisibilityFilter(profile) {
     ? ['Heavy Mining Equipment', 'Mining Equipment', 'DTH Drilling', 'Hydraulic Crawler Drilling Rigs', 'Diamond Wire Saw Machines', 'Quarry Excavators', 'Wheel Loaders', 'Stone Mining Crushers', 'Mining Compressors', 'Conveyor Systems']
     : isSolar
     ? ['Industrial Solar Solutions', 'Solar Solutions', 'Rooftop Solar', 'Captive Solar Plant', 'Solar EPC', 'Solar Panels', 'Solar Inverters', 'Solar Battery Storage Systems', 'Solar Power Plants for Stone Factories']
+    : isDiamondBlades
+    ? ['Diamond Blades & Segments', 'Diamond Blades', 'Diamond Segments', 'Diamond Tools', 'Circular Saw Blades', 'Gangsaw Segments', 'Wire Saw Beads', 'Core Drill Bits']
     : ['Granite', 'Marble', 'Granite Slabs', 'Marble & Granite Slabs', 'Granite & Marble Slabs', 'Natural Stone', 'Manufacturer'];
 
   return {

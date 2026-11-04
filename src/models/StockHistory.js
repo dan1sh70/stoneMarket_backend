@@ -22,6 +22,9 @@ const stockHistorySchema = new mongoose.Schema({
     type: Number,
     required: true
   },
+  new_stock: {
+    type: Number
+  },
   updated_stock: {
     type: Number,
     required: true
