@@ -23530,6 +23530,863 @@
           ]
         }
       ]
+    },
+    {
+      "name": "Stone Industrial Solar Solutions Module",
+      "description": "Complete endpoints for Industrial Solar Solutions Business Type including Dashboard, Switcher, 4-step Turnkey Solar Wizard, Stock Management, SLD Diagrams, Gallery, Verification, Analytics, Inquiries, and Leads.",
+      "item": [
+        {
+          "name": "1. Dashboard & Business Switcher",
+          "item": [
+            {
+              "name": "Get Industrial Solar Dashboard",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/solar/dashboard",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "solar",
+                    "dashboard"
+                  ]
+                },
+                "description": "Loads the Industrial Solar Solutions dashboard with 4 operational summary cards, metrics, and navigation."
+              }
+            },
+            {
+              "name": "Get Available Business Types",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/solar/business-types",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "solar",
+                    "business-types"
+                  ]
+                },
+                "description": "Returns all available business types with Industrial Solar Solutions marked as current."
+              }
+            },
+            {
+              "name": "Switch Business Type",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"business_type\": \"solar_solutions\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/solar/switch-business-type",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "solar",
+                    "switch-business-type"
+                  ]
+                },
+                "description": "Switches the authenticated user context to Industrial Solar Solutions."
+              }
+            }
+          ]
+        },
+        {
+          "name": "2. Profile & Operational Specifications",
+          "item": [
+            {
+              "name": "Get Industrial Solar Profile",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/solar/profile",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "solar",
+                    "profile"
+                  ]
+                },
+                "description": "Fetches the comprehensive Industrial Solar Solutions business profile and operational specs."
+              }
+            },
+            {
+              "name": "Update Industrial Solar Profile",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company_name\": \"SunStone Industrial Solar EPC\",\n  \"established_year\": 2016,\n  \"solar_epc_experience\": \"50+ MW Cumulative Industrial & Captive Installations\",\n  \"grid_approval_support\": \"End-to-End DISCOM Net-Metering & CEIG Clearances\",\n  \"operation_and_maintenance_scope\": \"25 Years Performance Ratio (PR) & SCADA Telemetry Support\",\n  \"authorized_solar_brands\": [\n    \"SunStone Tier-1\",\n    \"SunStone MegaPower\",\n    \"Sungrow\",\n    \"Huawei Solar\",\n    \"Waaree\",\n    \"Adani Solar\",\n    \"Growatt\"\n  ]\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/solar/profile",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "solar",
+                    "profile"
+                  ]
+                },
+                "description": "Updates solar EPC operational capabilities, brand authorizations, and DISCOM net-metering track record."
+              }
+            }
+          ]
+        },
+        {
+          "name": "3. Product & Spares Management",
+          "item": [
+            {
+              "name": "Create Solar Product (4-Step Wizard - 100 kW Rooftop)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"100 kW Industrial Rooftop Solar Power Plant\",\n  \"category\": \"Industrial Rooftop Solar Systems\",\n  \"brand_name\": \"SunStone Tier-1\",\n  \"model_number\": \"SS-IND-100K\",\n  \"warranty_guarantee\": \"25 Years Panel Performance Warranty\",\n  \"panel_warranty\": \"25 Years Linear Performance Warranty\",\n  \"inverter_warranty\": \"10 Years Standard Inverter Warranty\",\n  \"workmanship_warranty\": \"5 Years Turnkey Installation Warranty\",\n  \"selling_price\": 3800000,\n  \"pricing_unit\": \"Turnkey\",\n  \"min_order_quantity\": 1,\n  \"available_stock\": 5,\n  \"technical_specifications\": {\n    \"installed_capacity\": \"100 kW Grid-Tied System\",\n    \"panel_technology\": \"550W Mono PERC Bi-Facial Panels, IP66\",\n    \"inverter_capacity\": \"100 kW Sungrow Multi-MPPT Industrial Inverter\",\n    \"estimated_daily_generation\": \"450–500 Units (kWh) / Day\",\n    \"application\": \"Factory power cost reduction\"\n  },\n  \"images\": [\n    \"https://stonemarket.com/uploads/products/solar-100kw-roof.jpg\"\n  ]\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/solar/products",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "solar",
+                    "products"
+                  ]
+                },
+                "description": "Publishes a 100 kW industrial rooftop solar power plant."
+              }
+            },
+            {
+              "name": "Create Solar Product (4-Step Wizard - 500 kW Captive Plant)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"500 kW Captive Solar Plant for Gangsaw Factories\",\n  \"category\": \"Captive Solar Power Plants\",\n  \"brand_name\": \"SunStone MegaPower\",\n  \"model_number\": \"SS-CPT-500K\",\n  \"warranty_guarantee\": \"25 Years Module Performance Warranty\",\n  \"selling_price\": 18500000,\n  \"pricing_unit\": \"Turnkey\",\n  \"min_order_quantity\": 1,\n  \"available_stock\": 2,\n  \"technical_specifications\": {\n    \"installed_capacity\": \"500 kW System\",\n    \"total_dc_capacity\": \"550 kWp Tier-1 TOPCon Bi-Facial Modules\",\n    \"inverter_type\": \"Sungrow Multi-MPPT 125kW x 4 Units\",\n    \"application\": \"Heavy granite factory continuous load\"\n  },\n  \"images\": [\n    \"https://stonemarket.com/uploads/products/solar-500kw-plant.jpg\"\n  ]\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/solar/products",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "solar",
+                    "products"
+                  ]
+                },
+                "description": "Publishes a 500 kW captive solar plant for stone factories."
+              }
+            },
+            {
+              "name": "List Solar Solutions",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/solar/products?category=Industrial Rooftop Solar Systems&status=active&page=1&limit=10",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "solar",
+                    "products"
+                  ],
+                  "query": [
+                    {
+                      "key": "category",
+                      "value": "Industrial Rooftop Solar Systems"
+                    },
+                    {
+                      "key": "status",
+                      "value": "active"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ]
+                },
+                "description": "Lists solar solutions with status filters, capacity, and pricing."
+              }
+            },
+            {
+              "name": "Get Solar Product Details",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/solar/products/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "solar",
+                    "products",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "65e9abcd1234ef0000000001"
+                    }
+                  ]
+                },
+                "description": "Retrieves complete specifications, drawings, and datasheets for single solar product."
+              }
+            },
+            {
+              "name": "Update Solar Product Details",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"selling_price\": 3950000,\n  \"inverter_warranty\": \"12 Years Extended Sungrow Warranty\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/solar/products/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "solar",
+                    "products",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "65e9abcd1234ef0000000001"
+                    }
+                  ]
+                },
+                "description": "Updates solar system pricing, warranties, or specifications."
+              }
+            },
+            {
+              "name": "Update Solar Stock",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"stock\": 8,\n  \"change_type\": \"set\",\n  \"notes\": \"Added allocation for 3 turnkey projects in Kishangarh zone\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/solar/products/:id/stock",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "solar",
+                    "products",
+                    ":id",
+                    "stock"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "65e9abcd1234ef0000000001"
+                    }
+                  ]
+                },
+                "description": "Updates stock and creates a historical audit entry in StockHistory."
+              }
+            },
+            {
+              "name": "Duplicate Solar Product as Draft",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/solar/products/:id/duplicate",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "solar",
+                    "products",
+                    ":id",
+                    "duplicate"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "65e9abcd1234ef0000000001"
+                    }
+                  ]
+                },
+                "description": "Duplicates an existing solar product as a draft with (Copy) appended to name."
+              }
+            },
+            {
+              "name": "Toggle Solar Product Status (Active/Inactive)",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"inactive\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/solar/products/:id/status",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "solar",
+                    "products",
+                    ":id",
+                    "status"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "65e9abcd1234ef0000000001"
+                    }
+                  ]
+                },
+                "description": "Toggles a solar product status between active and inactive."
+              }
+            },
+            {
+              "name": "Delete Solar Product",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/solar/products/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "solar",
+                    "products",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "65e9abcd1234ef0000000001"
+                    }
+                  ]
+                },
+                "description": "Permanently deletes a solar solution from the catalogue."
+              }
+            }
+          ]
+        },
+        {
+          "name": "4. Contacts & Gallery",
+          "item": [
+            {
+              "name": "Add Contact Person",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Er. Rajesh Mathur\",\n  \"designation\": \"Chief Solar Electrical Engineer & Grid Net-Metering Head\",\n  \"phone\": \"+91 94140 77889\",\n  \"email\": \"engineering@sunstone.com\",\n  \"whatsapp\": \"+91 94140 77889\",\n  \"is_primary\": false\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/solar/contacts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "solar",
+                    "contacts"
+                  ]
+                },
+                "description": "Adds an authorized key contact / solar engineer to the business profile."
+              }
+            },
+            {
+              "name": "Get All Contacts",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/solar/contacts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "solar",
+                    "contacts"
+                  ]
+                },
+                "description": "Fetches all registered contacts for the solar EPC business."
+              }
+            },
+            {
+              "name": "Add Gallery Photo",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"url\": \"https://stonemarket.com/uploads/gallery/1mw-ground-mounted-solar.jpg\",\n  \"title\": \"1 MW Ground-Mounted Solar Plant for Gangsaw Cluster\",\n  \"category\": \"ground_mounted\",\n  \"is_cover\": false\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/solar/gallery/photos",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "solar",
+                    "gallery",
+                    "photos"
+                  ]
+                },
+                "description": "Uploads or links a photo to the solar installations gallery."
+              }
+            },
+            {
+              "name": "Add Gallery Video",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"video_url\": \"https://stonemarket.com/uploads/gallery/solar-factory-timelapse.mp4\",\n  \"title\": \"Factory Rooftop Solar Installation Time-Lapse\",\n  \"category\": \"installation_demo\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/solar/gallery/videos",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "solar",
+                    "gallery",
+                    "videos"
+                  ]
+                },
+                "description": "Adds an installation walkthrough or project drone footage video."
+              }
+            }
+          ]
+        },
+        {
+          "name": "5. Verification & Analytics",
+          "item": [
+            {
+              "name": "Get Verification Center Status",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/solar/verification",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "solar",
+                    "verification"
+                  ]
+                },
+                "description": "Retrieves KYC verification step completion, GST, and MSME statuses."
+              }
+            },
+            {
+              "name": "Verify GST Number",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"gstin\": \"08AAACS9988F1Z9\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/solar/verification/gst",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "solar",
+                    "verification",
+                    "gst"
+                  ]
+                },
+                "description": "Submits and verifies GST identification number."
+              }
+            },
+            {
+              "name": "Get Industrial Solar Analytics",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/solar/analytics?timeframe=30d",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "solar",
+                    "analytics"
+                  ],
+                  "query": [
+                    {
+                      "key": "timeframe",
+                      "value": "30d"
+                    }
+                  ]
+                },
+                "description": "Returns profile impressions, solar system views, top installations demand, and metrics."
+              }
+            }
+          ]
+        },
+        {
+          "name": "6. Inquiries, Leads & Shared Settings",
+          "item": [
+            {
+              "name": "Get Solar Inquiries",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/solar/inquiries",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "solar",
+                    "inquiries"
+                  ]
+                },
+                "description": "Lists all incoming solar inquiries from factory owners and stone processing plants."
+              }
+            },
+            {
+              "name": "Get Solar Leads",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/solar/leads",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "solar",
+                    "leads"
+                  ]
+                },
+                "description": "Fetches relevant buyer leads matching rooftop solar, captive plants, and EPC installations."
+              }
+            },
+            {
+              "name": "Get Settings Overview",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/solar/settings",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "solar",
+                    "settings"
+                  ]
+                },
+                "description": "Fetches account settings, security sessions, and notification preferences."
+              }
+            },
+            {
+              "name": "Get Promotions (Ad Management)",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/solar/promotions",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "solar",
+                    "promotions"
+                  ]
+                },
+                "description": "Fetches available promotional advertising packages for solar EPC businesses."
+              }
+            },
+            {
+              "name": "Get Invoices",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{authToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/solar/invoices",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "solar",
+                    "invoices"
+                  ]
+                },
+                "description": "Lists all tax invoices for ad promotions and platform subscriptions."
+              }
+            }
+          ]
+        }
+      ]
     }
   ]
 }

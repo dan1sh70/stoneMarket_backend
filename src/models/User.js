@@ -23,6 +23,8 @@ const userSchema = new mongoose.Schema({
       'machinery',
       'mining_equipment',
       'heavy_mining_equipment',
+      'solar_solutions',
+      'industrial_solar',
       'service_provider',
       'customer'
     ], 

@@ -31,6 +31,7 @@ async function getManufacturerProfile(userId) {
     else if (user.role === 'abrasives_epoxy' || user.role === 'abrasives') targetType = 'abrasives_epoxy';
     else if (user.role === 'machinery_parts' || user.role === 'machinery') targetType = 'machinery_parts';
     else if (user.role === 'mining_equipment' || user.role === 'heavy_mining_equipment') targetType = 'mining_equipment';
+    else if (user.role === 'solar_solutions' || user.role === 'industrial_solar') targetType = 'solar_solutions';
   }
 
   let profile = await BusinessProfile.findOne({
@@ -307,6 +308,51 @@ async function getManufacturerProfile(userId) {
         },
         rating: 4.9,
         review_count: 58,
+        status: 'active',
+        is_mock: false
+      });
+    } else if (user.role === 'solar_solutions' || user.role === 'industrial_solar') {
+      profile = await BusinessProfile.create({
+        userId,
+        business_type: 'solar_solutions',
+        company_name: user.name ? `${user.name} Industrial Solar Solutions` : 'SunStone Industrial Solar EPC',
+        business_category: 'Industrial Solar Solutions',
+        business_subcategory: 'Industrial Rooftop Solar, Captive Plants for Stone Factories & High-Capacity EPC',
+        short_description: 'Premier turnkey industrial solar EPC specializing in 100kW – 5MW rooftop solar and captive power plants for heavy granite and marble processing factories.',
+        about_business: 'SunStone Industrial Solar EPC delivers end-to-end industrial solar power plants, Tier-1 Mono PERC bi-facial modules, high-efficiency string inverters, and DISCOM net-metering synchronization specifically engineered for stone manufacturing continuous electrical loads.',
+        established_year: 2016,
+        solar_solution_categories: [
+          'Industrial Rooftop Solar Systems',
+          'Captive Solar Power Plants',
+          'Ground-Mounted Solar Systems',
+          'Solar Power Plants for Stone Factories',
+          'Mono PERC Solar Panels',
+          'TOPCon Solar Panels',
+          'Solar Inverters',
+          'Solar EPC Projects'
+        ],
+        authorized_solar_brands: [
+          'SunStone Tier-1',
+          'SunStone MegaPower',
+          'Sungrow',
+          'Huawei Solar',
+          'Waaree',
+          'Adani Solar',
+          'Growatt'
+        ],
+        solar_epc_experience: '50+ MW Cumulative Industrial & Captive Installations',
+        grid_approval_support: 'End-to-End DISCOM Net-Metering & CEIG Clearances',
+        operation_and_maintenance_scope: '25 Years Performance Ratio (PR) & SCADA Telemetry Support',
+        address: {
+          state: 'Rajasthan',
+          district: 'Jaipur',
+          area: 'VKI Area',
+          full_address: 'Plot 240, Road No. 12, VKI Industrial Area, Jaipur, Rajasthan 302013',
+          postal_code: '302013',
+          country: 'India'
+        },
+        rating: 4.9,
+        review_count: 62,
         status: 'active',
         is_mock: false
       });

@@ -76,6 +76,7 @@ const brazingProfileRoutes = require('./src/routes/brazingProfileRoutes');
 const abrasivesProfileRoutes = require('./src/routes/abrasivesProfileRoutes');
 const machineryProfileRoutes = require('./src/routes/machineryProfileRoutes');
 const miningEquipmentProfileRoutes = require('./src/routes/miningEquipmentProfileRoutes');
+const solarSolutionsProfileRoutes = require('./src/routes/solarSolutionsProfileRoutes');
 
 // CMS Routes
 const miningCmsRoutes = require('./src/routes/cms/mining');
@@ -149,6 +150,7 @@ app.use('/api/brazing/promotions', promotionRoutes);
 app.use('/api/abrasives/promotions', promotionRoutes);
 app.use('/api/machinery/promotions', promotionRoutes);
 app.use('/api/mining-equipment/promotions', promotionRoutes);
+app.use('/api/solar/promotions', promotionRoutes);
 app.use('/api/promotions', promotionRoutes);
 app.get('/api/promotion-packages', promotionController.getPromotionPackages);
 app.get('/api/promotion-packages/:id', promotionController.getPromotionPackageById);
@@ -163,6 +165,7 @@ app.use('/api/brazing/invoices', promotionInvoiceRoutes);
 app.use('/api/abrasives/invoices', promotionInvoiceRoutes);
 app.use('/api/machinery/invoices', promotionInvoiceRoutes);
 app.use('/api/mining-equipment/invoices', promotionInvoiceRoutes);
+app.use('/api/solar/invoices', promotionInvoiceRoutes);
 app.use('/api/admin/promotions', adminPromotionRoutes);
 
 // v1 aliases
@@ -220,6 +223,7 @@ app.use('/api/brazing/settings', accountSettingsRoutes);
 app.use('/api/abrasives/settings', accountSettingsRoutes);
 app.use('/api/machinery/settings', accountSettingsRoutes);
 app.use('/api/mining-equipment/settings', accountSettingsRoutes);
+app.use('/api/solar/settings', accountSettingsRoutes);
 app.use('/api/v1/manufacturer/leads', leadManagementRoutes);
 app.use('/api/v1/mining/leads', leadManagementRoutes);
 app.use('/api/v1/showroom/leads', leadManagementRoutes);
@@ -234,6 +238,7 @@ app.use('/api/v1/brazing/settings', accountSettingsRoutes);
 app.use('/api/v1/abrasives/settings', accountSettingsRoutes);
 app.use('/api/v1/machinery/settings', accountSettingsRoutes);
 app.use('/api/v1/mining-equipment/settings', accountSettingsRoutes);
+app.use('/api/v1/solar/settings', accountSettingsRoutes);
 app.use('/api/public/leads', leadManagementRoutes);
 app.use('/api/v1/public/leads', leadManagementRoutes);
 
@@ -258,6 +263,8 @@ app.use('/api/machinery', machineryProfileRoutes);
 app.use('/api/v1/machinery', machineryProfileRoutes);
 app.use('/api/mining-equipment', miningEquipmentProfileRoutes);
 app.use('/api/v1/mining-equipment', miningEquipmentProfileRoutes);
+app.use('/api/solar', solarSolutionsProfileRoutes);
+app.use('/api/v1/solar', solarSolutionsProfileRoutes);
 app.use('/api/app', appInfoRoutes);
 
 // Mount CMS API Routes
@@ -271,6 +278,7 @@ app.use('/api/cms/brazing', brazingProfileRoutes);
 app.use('/api/cms/abrasives', abrasivesProfileRoutes);
 app.use('/api/cms/machinery', machineryProfileRoutes);
 app.use('/api/cms/mining-equipment', miningEquipmentProfileRoutes);
+app.use('/api/cms/solar', solarSolutionsProfileRoutes);
 
 // Root Routes (for frontend compatibility)
 app.use('/auth', authRoutes);

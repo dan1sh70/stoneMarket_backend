@@ -25,7 +25,7 @@ const businessProfileSchema = new mongoose.Schema({
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   business_type: { 
     type: String, 
-    enum: ['mining', 'manufacturer', 'showroom', 'trader', 'buyer', 'transport_national', 'transport_local', 'brazing', 'abrasives_epoxy', 'abrasives', 'machinery_parts', 'machinery', 'mining_equipment', 'heavy_mining_equipment', 'customer', 'service_provider'],
+    enum: ['mining', 'manufacturer', 'showroom', 'trader', 'buyer', 'transport_national', 'transport_local', 'brazing', 'abrasives_epoxy', 'abrasives', 'machinery_parts', 'machinery', 'mining_equipment', 'heavy_mining_equipment', 'solar_solutions', 'industrial_solar', 'customer', 'service_provider'],
     required: true,
     index: true
   },
@@ -294,6 +294,13 @@ const businessProfileSchema = new mongoose.Schema({
   heavy_equipment_fleet_size: { type: String, default: '25+ Heavy Mining Units' },
   maintenance_refurbishment_capability: { type: String, default: 'Full Heavy Mechanical Overhaul & Hydraulic Rebuild' },
   field_service_support: { type: String, default: 'Pan-India On-Site Commissioning, Rigging & Field Engineers' },
+
+  // Industrial Solar Solutions Operational Specifications
+  solar_solution_categories: [{ type: String }],
+  authorized_solar_brands: [{ type: String }],
+  solar_epc_experience: { type: String, default: '50+ MW Cumulative Industrial & Captive Installations' },
+  grid_approval_support: { type: String, default: 'End-to-End DISCOM Net-Metering & CEIG Clearances' },
+  operation_and_maintenance_scope: { type: String, default: '25 Years Performance Ratio (PR) & SCADA Telemetry Support' },
 
   // Owners (Step 2)
   owners: [ownerSchema], // Usually up to 2

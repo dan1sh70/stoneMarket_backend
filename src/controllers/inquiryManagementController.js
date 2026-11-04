@@ -29,6 +29,7 @@ async function getManufacturerProfile(userId) {
     else if (user.role === 'abrasives_epoxy' || user.role === 'abrasives') targetType = 'abrasives_epoxy';
     else if (user.role === 'machinery_parts' || user.role === 'machinery') targetType = 'machinery_parts';
     else if (user.role === 'mining_equipment' || user.role === 'heavy_mining_equipment') targetType = 'mining_equipment';
+    else if (user.role === 'solar_solutions' || user.role === 'industrial_solar') targetType = 'solar_solutions';
   }
 
   let profile = await BusinessProfile.findOne({
@@ -200,6 +201,19 @@ async function getManufacturerProfile(userId) {
         status: 'active',
         is_mock: false
       });
+    } else if (user.role === 'solar_solutions' || user.role === 'industrial_solar') {
+      profile = await BusinessProfile.create({
+        userId,
+        business_type: 'solar_solutions',
+        company_name: user.name ? `${user.name} Industrial Solar Solutions` : 'SunStone Industrial Solar EPC',
+        business_category: 'Industrial Solar Solutions',
+        business_subcategory: 'Industrial Rooftop Solar, Captive Plants for Stone Factories & High-Capacity EPC',
+        established_year: 2016,
+        rating: 4.9,
+        review_count: 62,
+        status: 'active',
+        is_mock: false
+      });
     } else if (user.role === 'manufacturer' || user.role === 'admin' || user.role === 'vendor') {
       profile = await BusinessProfile.create({
         userId,
@@ -230,6 +244,7 @@ function buildInquiryVisibilityFilter(profile) {
   const isAbrasives = profile.business_type === 'abrasives_epoxy' || profile.business_type === 'abrasives';
   const isMachinery = profile.business_type === 'machinery_parts' || profile.business_type === 'machinery';
   const isMiningEquipment = profile.business_type === 'mining_equipment' || profile.business_type === 'heavy_mining_equipment';
+  const isSolar = profile.business_type === 'solar_solutions' || profile.business_type === 'industrial_solar';
   const categories = isMining
     ? ['Mining', 'Mines & Quarries', 'Raw Stone Blocks', 'Granite Blocks', 'Marble Blocks', 'Sandstone Blocks', 'Limestone Blocks', 'Natural Stone']
     : isShowroom
@@ -244,6 +259,8 @@ function buildInquiryVisibilityFilter(profile) {
     ? ['Stone Machinery Parts & Spares', 'Machinery Parts', 'Spares', 'Gangsaw Spares', 'Hydraulic Components', 'Bearings', 'Motors', 'Pumps', 'Bridge Cutter Parts', 'Multi-Cutter Parts']
     : isMiningEquipment
     ? ['Heavy Mining Equipment', 'Mining Equipment', 'DTH Drilling', 'Hydraulic Crawler Drilling Rigs', 'Diamond Wire Saw Machines', 'Quarry Excavators', 'Wheel Loaders', 'Stone Mining Crushers', 'Mining Compressors', 'Conveyor Systems']
+    : isSolar
+    ? ['Industrial Solar Solutions', 'Solar Solutions', 'Rooftop Solar', 'Captive Solar Plant', 'Solar EPC', 'Solar Panels', 'Solar Inverters', 'Solar Battery Storage Systems', 'Solar Power Plants for Stone Factories']
     : ['Granite', 'Marble', 'Granite Slabs', 'Marble & Granite Slabs', 'Granite & Marble Slabs', 'Natural Stone', 'Manufacturer'];
 
   return {
