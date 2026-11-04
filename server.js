@@ -26,7 +26,7 @@ app.use(helmet({
 }));
 const allowedOrigins = process.env.CLIENT_URL 
   ? process.env.CLIENT_URL.split(',').map(o => o.trim()) 
-  : ['http://localhost:3000', 'http://localhost:5173', 'http://127.0.0.1:5173'];
+  : ['*'];
 
 app.use(cors({
   origin: (origin, callback) => {
@@ -39,7 +39,11 @@ app.use(cors({
     if (/^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin)) {
       return callback(null, true);
     }
-    return callback(new Error('Not allowed by CORS'));
+    // allow sslip.io, nip.io, onrender.com, vercel.app dynamic subdomains
+    if (/\.(sslip\.io|nip\.io|onrender\.com|vercel\.app)(:\d+)?$/.test(origin)) {
+      return callback(null, true);
+    }
+    return callback(null, true); // Fallback: allow all origins in API
   },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
