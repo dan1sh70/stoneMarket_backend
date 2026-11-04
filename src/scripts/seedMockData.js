@@ -894,11 +894,22 @@ const seedMockData = async () => {
       {
         userId: uBuyer1._id,
         business_type: 'buyer',
-        company_name: 'Global Infra Buildcon Pvt Ltd',
+        company_name: 'Apex Infra Buildcon Stone Sourcing',
+        business_category: 'Stone Buyer',
+        business_subcategory: 'Infrastructure & Commercial Procurement',
         gst_number: '08AAACG1122K1Z5',
         established_year: 2012,
+        company_type: 'Private Limited',
         company_details: 'Leading residential high-rise and commercial infrastructure developer in North & Western India. Procuring over 200,000 sqft granite and marble annually.',
         buyer_types: [btConst._id, btBuilder._id],
+        buyer_business_types: ['Infrastructure Company', 'Commercial Developer', 'Contractor'],
+        purchasing_specializations: ['Granite Slabs', 'Marble Blocks', 'Paving Stones', 'Cut-to-Size Tiles'],
+        ongoing_projects_count: 8,
+        annual_purchasing_volume: 250000,
+        purchasing_volume_unit: 'Sq.ft',
+        procurement_capacity: '25,000+ Sq.ft / Month',
+        sourcing_scope: 'Domestic',
+        procurement_regions: ['Rajasthan', 'Gujarat', 'Delhi NCR', 'Maharashtra'],
         preferred_materials: ['Granite', 'Sandstone', 'Limestone'],
         preferred_products: ['Slabs', 'Tiles', 'Cobbles'],
         requirement_summary: 'Bulk Slabs & Rough Blocks for Commercial Projects',
@@ -911,6 +922,16 @@ const seedMockData = async () => {
         rating: 4.9,
         review_count: 25,
         address: { state: 'Rajasthan', district: 'Jaipur', area: 'Mansarovar', full_address: 'Plot 101-105, Corporate Tower, Mansarovar, Jaipur, Rajasthan 302020' },
+        owners: [
+          {
+            name: 'Rajesh V. Patel',
+            designation: 'Head of Procurement',
+            phone: '+91 98765 11223',
+            email: 'procurement@apexinfra.com',
+            whatsapp: '+91 98765 11223',
+            is_primary: true
+          }
+        ],
         status: 'active',
         is_mock: true
       },

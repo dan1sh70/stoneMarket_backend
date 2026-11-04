@@ -18415,6 +18415,913 @@
           ]
         }
       ]
+    },
+    {
+      "name": "Stone Buyer Module (Phase 1)",
+      "description": "Complete Stone Buyer Module for STONE MARKET INDIA: Dashboard, Business Profile, Project Info, Key Contacts, Gallery, Sourcing Requirements Engine (7-step wizard, duplicate, close), My Purchase Inquiries, Quotation Comparison Matrix, Order History, Verification Center, Sourcing Analytics, Ad Management, and strict Product Management Disabled enforcement (403 Forbidden).",
+      "item": [
+        {
+          "name": "1. Dashboard & Business Switcher",
+          "item": [
+            {
+              "name": "Get Buyer Dashboard",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/buyer/dashboard",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "buyer",
+                    "dashboard"
+                  ]
+                },
+                "description": "Loads complete Stone Buyer dashboard with business profile card, quick KPIs, My Business (6 items), Business Activity (2 items), account support, and bottom navigation."
+              }
+            },
+            {
+              "name": "Get Business Types",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/buyer/business-types",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "buyer",
+                    "business-types"
+                  ]
+                },
+                "description": "Returns list of business types with buyer marked as current."
+              }
+            },
+            {
+              "name": "Switch Business Type",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"target_business_type\": \"trader\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/buyer/switch-business-type",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "buyer",
+                    "switch-business-type"
+                  ]
+                },
+                "description": "Safely switches user business context."
+              }
+            }
+          ]
+        },
+        {
+          "name": "2. Product Management Disabled Enforcement",
+          "item": [
+            {
+              "name": "Access Products (Must Return 403)",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/buyer/products",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "buyer",
+                    "products"
+                  ]
+                },
+                "description": "Stone Buyers do not list products. This endpoint strictly returns 403 Forbidden."
+              }
+            },
+            {
+              "name": "Access Inventory (Must Return 403)",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/buyer/inventory",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "buyer",
+                    "inventory"
+                  ]
+                },
+                "description": "Inventory management is disabled for Stone Buyers (403 Forbidden)."
+              }
+            }
+          ]
+        },
+        {
+          "name": "3. Buyer Profile & Project Information",
+          "item": [
+            {
+              "name": "Get Buyer Profile",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/buyer/profile",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "buyer",
+                    "profile"
+                  ]
+                },
+                "description": "Fetch full profile details for authenticated stone buyer."
+              }
+            },
+            {
+              "name": "Update Buyer Profile",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company_name\": \"Apex Infra Buildcon Stone Sourcing\",\n  \"company_type\": \"Private Limited\",\n  \"gst_number\": \"24AAACA5678B1Z2\",\n  \"established_year\": 2017,\n  \"about_business\": \"Nationwide institutional stone procurement partner.\",\n  \"buyer_business_types\": [\n    \"Infrastructure Company\",\n    \"Commercial Developer\",\n    \"Contractor\"\n  ],\n  \"purchasing_specializations\": [\n    \"Granite Slabs\",\n    \"Marble Blocks\",\n    \"Paving Stones\"\n  ]\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/buyer/profile",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "buyer",
+                    "profile"
+                  ]
+                },
+                "description": "Update stone buyer profile identity and company details."
+              }
+            },
+            {
+              "name": "Update Project Information",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ongoing_projects_count\": 12,\n  \"annual_purchasing_volume\": 350000,\n  \"purchasing_volume_unit\": \"Sq.ft\",\n  \"procurement_capacity\": \"30,000+ Sq.ft / Month\",\n  \"sourcing_scope\": \"Domestic\",\n  \"procurement_regions\": [\n    \"Gujarat\",\n    \"Rajasthan\",\n    \"Karnataka\"\n  ]\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/buyer/project-info",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "buyer",
+                    "project-info"
+                  ]
+                },
+                "description": "Update buyer procurement capacity, annual purchasing volume, and projects."
+              }
+            },
+            {
+              "name": "Get Buyer Contacts",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/buyer/contacts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "buyer",
+                    "contacts"
+                  ]
+                },
+                "description": "List procurement officers and key persons."
+              }
+            },
+            {
+              "name": "Add Buyer Contact",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Suresh Trivedi\",\n  \"designation\": \"Senior Purchase Officer\",\n  \"phone\": \"+91 98250 99881\",\n  \"email\": \"suresh@apexinfra.com\",\n  \"is_primary\": false\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/buyer/contacts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "buyer",
+                    "contacts"
+                  ]
+                },
+                "description": "Add a new contact person to buyer organization."
+              }
+            }
+          ]
+        },
+        {
+          "name": "4. Sourcing Requirements Engine",
+          "item": [
+            {
+              "name": "Get Requirements List",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/buyer/requirements?status=open&page=1&limit=20",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "buyer",
+                    "requirements"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "open"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ]
+                },
+                "description": "List buyer sourcing requirements with filtering and pagination."
+              }
+            },
+            {
+              "name": "Create & Publish Sourcing Requirement (7-Step Wizard)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"High-Grade Black Galaxy Granite for Airport Terminal\",\n  \"project_name\": \"Ahmedabad International Airport Terminal 3\",\n  \"project_type\": \"Infrastructure\",\n  \"material_category\": \"Granite\",\n  \"material_name\": \"Black Galaxy Granite\",\n  \"description\": \"High traffic flooring tiles with golden flecks, calibrated and mirror polished.\",\n  \"application_usage\": [\n    \"Flooring\",\n    \"Wall Cladding\"\n  ],\n  \"color\": \"Black with Gold Flecks\",\n  \"finish\": \"Polished\",\n  \"quality\": \"First Choice / Export Quality\",\n  \"size\": \"600x600 mm\",\n  \"thickness\": \"20 mm\",\n  \"edge_profile\": \"Straight / Beveled\",\n  \"preferred_origin\": \"Andhra Pradesh\",\n  \"quantity\": 45000,\n  \"quantity_unit\": \"sqft\",\n  \"budget_min\": 180,\n  \"budget_max\": 230,\n  \"budget_type\": \"Rate per Sq.ft\",\n  \"target_price\": 200,\n  \"delivery_address\": \"Site Terminal 3, Sardar Vallabhbhai Patel Airport, Ahmedabad\",\n  \"procurement_timeline\": \"15 - 30 Days\",\n  \"delivery_type\": \"FOR Project Site\",\n  \"special_requirements\": {\n    \"inspection_required\": true,\n    \"inspection_details\": \"Third party lab density testing required\",\n    \"packaging_type\": \"Wooden Crates\",\n    \"transportation_required\": true\n  },\n  \"supplier_targeting\": {\n    \"all_india\": true,\n    \"target_categories\": [\n      \"Manufacturer\",\n      \"Mining\",\n      \"Trader\"\n    ],\n    \"verified_suppliers_only\": true\n  },\n  \"status\": \"open\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/buyer/requirements",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "buyer",
+                    "requirements"
+                  ]
+                },
+                "description": "Submit full 7-step sourcing requirement wizard."
+              }
+            },
+            {
+              "name": "Get Requirement Details by ID",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/buyer/requirements/{{requirementId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "buyer",
+                    "requirements",
+                    "{{requirementId}}"
+                  ]
+                },
+                "description": "Fetch requirement details along with received supplier quotations."
+              }
+            },
+            {
+              "name": "Duplicate Requirement as Draft",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/buyer/requirements/{{requirementId}}/duplicate",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "buyer",
+                    "requirements",
+                    "{{requirementId}}",
+                    "duplicate"
+                  ]
+                },
+                "description": "Duplicate an existing requirement as a new draft."
+              }
+            },
+            {
+              "name": "Close Requirement",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"closing_reason\": \"Procurement quota filled\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/buyer/requirements/{{requirementId}}/close",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "buyer",
+                    "requirements",
+                    "{{requirementId}}",
+                    "close"
+                  ]
+                },
+                "description": "Close an open sourcing requirement."
+              }
+            }
+          ]
+        },
+        {
+          "name": "5. Inquiries & Quotation Comparison",
+          "item": [
+            {
+              "name": "Get My Purchase Inquiries",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/buyer/inquiries",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "buyer",
+                    "inquiries"
+                  ]
+                },
+                "description": "List buyer purchase inquiries and quote counts."
+              }
+            },
+            {
+              "name": "Compare Quotations Side-by-Side",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"quote_ids\": [\n    \"{{quoteId1}}\",\n    \"{{quoteId2}}\"\n  ]\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/buyer/quotes/compare",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "buyer",
+                    "quotes",
+                    "compare"
+                  ]
+                },
+                "description": "Compare multiple supplier quotes side-by-side in matrix format."
+              }
+            },
+            {
+              "name": "Accept Quotation & Generate Purchase Order",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"delivery_address\": {\n    \"site_name\": \"Terminal 3 Site\",\n    \"full_address\": \"Ahmedabad International Airport Site Office\",\n    \"city\": \"Ahmedabad\",\n    \"state\": \"Gujarat\",\n    \"pincode\": \"380022\",\n    \"contact_person\": \"Rajesh V. Patel\",\n    \"contact_phone\": \"+91 98765 11223\"\n  },\n  \"buyer_notes\": \"Urgent delivery required.\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/buyer/quotes/{{quoteId}}/accept",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "buyer",
+                    "quotes",
+                    "{{quoteId}}",
+                    "accept"
+                  ]
+                },
+                "description": "Accept supplier quotation and transition directly into a Purchase Order."
+              }
+            }
+          ]
+        },
+        {
+          "name": "6. Order History Engine",
+          "item": [
+            {
+              "name": "Get Order History",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/buyer/orders",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "buyer",
+                    "orders"
+                  ]
+                },
+                "description": "List buyer purchase orders with status filter."
+              }
+            },
+            {
+              "name": "Get Order Details & Timeline",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/buyer/orders/{{orderId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "buyer",
+                    "orders",
+                    "{{orderId}}"
+                  ]
+                },
+                "description": "Retrieve order details, status timeline, delivery details and invoice."
+              }
+            },
+            {
+              "name": "Confirm Order Delivery",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"rating\": 5,\n  \"review\": \"Superb quality and on-time delivery at the airport site.\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/buyer/orders/{{orderId}}/confirm-delivery",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "buyer",
+                    "orders",
+                    "{{orderId}}",
+                    "confirm-delivery"
+                  ]
+                },
+                "description": "Buyer confirms delivery and submits rating review."
+              }
+            }
+          ]
+        },
+        {
+          "name": "7. Verification Center",
+          "item": [
+            {
+              "name": "Get Verification Status",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/buyer/verification",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "buyer",
+                    "verification"
+                  ]
+                },
+                "description": "Check status of Phone, Email, Business CIN, GST, and Bank verifications."
+              }
+            },
+            {
+              "name": "Send Phone OTP",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"phone\": \"+91 98765 11223\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/buyer/verification/phone/send-otp",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "buyer",
+                    "verification",
+                    "phone",
+                    "send-otp"
+                  ]
+                },
+                "description": "Request verification OTP."
+              }
+            },
+            {
+              "name": "Verify Phone OTP",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"phone\": \"+91 98765 11223\",\n  \"otp\": \"123456\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/buyer/verification/phone/verify-otp",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "buyer",
+                    "verification",
+                    "phone",
+                    "verify-otp"
+                  ]
+                },
+                "description": "Submit and verify phone OTP."
+              }
+            }
+          ]
+        },
+        {
+          "name": "8. Sourcing & Procurement Analytics",
+          "item": [
+            {
+              "name": "Get Overview Analytics",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/buyer/analytics/overview",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "buyer",
+                    "analytics",
+                    "overview"
+                  ]
+                },
+                "description": "Summary of active requirements, quotes received, orders placed, and spend."
+              }
+            },
+            {
+              "name": "Get Sourcing Analytics",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/buyer/analytics/sourcing",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "buyer",
+                    "analytics",
+                    "sourcing"
+                  ]
+                },
+                "description": "Status breakdown of requirements and top requested materials."
+              }
+            },
+            {
+              "name": "Get Procurement Analytics",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/buyer/analytics/procurement",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "buyer",
+                    "analytics",
+                    "procurement"
+                  ]
+                },
+                "description": "Procurement order statuses and monthly spend trends."
+              }
+            }
+          ]
+        },
+        {
+          "name": "9. Shared Submodules Integration",
+          "item": [
+            {
+              "name": "Get Buyer Promotion Campaigns",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/buyer/promotions",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "buyer",
+                    "promotions"
+                  ]
+                },
+                "description": "Access ad management campaigns."
+              }
+            },
+            {
+              "name": "Get Buyer Settings",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/buyer/settings",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "buyer",
+                    "settings"
+                  ]
+                },
+                "description": "Access shared account and security preferences."
+              }
+            }
+          ]
+        }
+      ]
     }
   ]
 }

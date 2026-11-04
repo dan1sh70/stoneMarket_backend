@@ -45,6 +45,17 @@ const businessProfileSchema = new mongoose.Schema({
   unit_status: { type: String, enum: ['domestic', 'export', 'both'], default: 'domestic' },
   factory_timings: { type: String },
   
+  // Buyer Fields (Phase 1)
+  buyer_business_types: [{ type: String }],
+  purchasing_specializations: [{ type: String }],
+  company_type: { type: String }, // Private Limited, Public Limited, Partnership, Proprietorship, LLP, Government / PSU, Joint Venture
+  ongoing_projects_count: { type: Number, default: 0 },
+  annual_purchasing_volume: { type: Number, default: 0 },
+  purchasing_volume_unit: { type: String, default: 'Sq.ft' },
+  procurement_capacity: { type: String },
+  procurement_regions: [{ type: String }],
+  sourcing_scope: { type: String, enum: ['Domestic', 'International', 'Both'], default: 'Domestic' },
+  
   // Specific to Mining / Manufacturer / Showroom / Trader / Buyer
   manufacturer_category: { type: mongoose.Schema.Types.ObjectId, ref: 'ManufacturerCategory' },
   showroom_product_types: [{ type: mongoose.Schema.Types.ObjectId, ref: 'ShowroomProductType' }],

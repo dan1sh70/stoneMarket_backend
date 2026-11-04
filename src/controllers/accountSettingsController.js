@@ -22,7 +22,8 @@ async function getManufacturerProfile(userId) {
   const user = await User.findById(userId);
   let targetType = 'manufacturer';
   if (user) {
-    if (user.role === 'trader') targetType = 'trader';
+    if (user.role === 'buyer') targetType = 'buyer';
+    else if (user.role === 'trader') targetType = 'trader';
     else if (user.role === 'showroom') targetType = 'showroom';
     else if (user.role === 'mining') targetType = 'mining';
   }
@@ -38,7 +39,39 @@ async function getManufacturerProfile(userId) {
   }
 
   if (!profile && user) {
-    if (user.role === 'trader') {
+    if (user.role === 'buyer') {
+      profile = await BusinessProfile.create({
+        userId,
+        business_type: 'buyer',
+        company_name: user.name ? `${user.name} Stone Sourcing` : 'Apex Infra Buildcon Stone Sourcing',
+        business_category: 'Stone Buyer',
+        business_subcategory: 'Infrastructure & Commercial Procurement',
+        short_description: 'Premier infrastructure and commercial stone procurement organization sourcing high-grade marble, granite, and natural stones across India.',
+        about_business: 'Leading stone buyer executing nationwide infrastructure, institutional, and commercial real estate stone procurement with stringent quality standards.',
+        established_year: 2017,
+        company_type: 'Private Limited',
+        buyer_business_types: ['Infrastructure Company', 'Commercial Developer', 'Contractor'],
+        purchasing_specializations: ['Granite Slabs', 'Marble Blocks', 'Paving Stones', 'Cut-to-Size Tiles'],
+        ongoing_projects_count: 8,
+        annual_purchasing_volume: 250000,
+        purchasing_volume_unit: 'Sq.ft',
+        procurement_capacity: '25,000+ Sq.ft / Month',
+        sourcing_scope: 'Domestic',
+        address: {
+          state: 'Gujarat',
+          district: 'Ahmedabad',
+          area: 'SG Highway',
+          commercial_area: 'Infra Towers',
+          full_address: 'Level 6, Infra Towers, SG Highway, Ahmedabad, Gujarat 380054',
+          postal_code: '380054',
+          country: 'India'
+        },
+        rating: 4.9,
+        review_count: 19,
+        status: 'active',
+        is_mock: false
+      });
+    } else if (user.role === 'trader') {
       profile = await BusinessProfile.create({
         userId,
         business_type: 'trader',
