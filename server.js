@@ -157,6 +157,9 @@ app.use('/api/v1', transportPublicRoutes);
 app.use('/api/v1/provider', providerTransportRoutes);
 app.use('/api/v1/admin', adminTransportRoutes);
 app.use('/api/v1/estimates', estimateRoutes);
+const visionOcrRoutes = require('./src/routes/visionOcrRoutes');
+app.use('/api/v1/ocr', visionOcrRoutes);
+app.use('/api/ocr', visionOcrRoutes);
 
 // New unified /api routes for the upgrade
 app.use('/api', masterDataRoutes);
