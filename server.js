@@ -160,6 +160,12 @@ app.use('/api/v1/estimates', estimateRoutes);
 
 // New unified /api routes for the upgrade
 app.use('/api', masterDataRoutes);
+app.use('/api/app', appInfoRoutes);
+app.use('/api/pages', (req, res, next) => {
+  // Direct shortcut /api/pages -> appInfo pages handler
+  req.url = '/pages' + req.url;
+  return appInfoRoutes(req, res, next);
+});
 app.use('/api/home', homeRoutes);
 app.use('/api/feed', feedRoutes);
 app.use('/api/businesses', businessRoutes);

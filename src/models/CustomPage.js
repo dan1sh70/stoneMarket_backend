@@ -65,3 +65,4 @@ const customPageSchema = new mongoose.Schema({
 });
 
 module.exports = mongoose.model('CustomPage', customPageSchema);
+
