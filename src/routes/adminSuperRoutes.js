@@ -582,5 +582,284 @@ router.put('/businesses/:id/verify', async (req, res) => {
   }
 });
 
+/**
+ * ----------------------------------------------------
+ * CUSTOM PAGES (CMS / POLICY / STATIC PAGES)
+ * ----------------------------------------------------
+ */
+const CustomPage = require('../models/CustomPage');
+
+// Helper to seed initial default policy pages if database is empty
+async function seedDefaultCustomPages(adminUserId) {
+  const count = await CustomPage.countDocuments();
+  if (count === 0) {
+    const defaults = [
+      {
+        title: 'Privacy Policy',
+        slug: 'privacy-policy',
+        category: 'policy',
+        summary: 'How Stone Market India collects, handles, and protects user information and business trade data.',
+        content: `<h2>1. Information We Collect</h2><p>Stone Market India collects registration details, business documents (GST certificates, trade licenses), catalogue specifications, communication records, and geolocation coordinates to facilitate industrial stone trade networking.</p><h2>2. Use of Business Data</h2><p>Verified business information and catalogue details are published on our digital marketplace to connect verified stone suppliers, mining operators, fabricators, and buyers.</p><h2>3. Data Protection & Security</h2><p>We deploy enterprise-grade encryption, secure credential hashing, and restricted API access to safeguard transaction ledgers and confidential quotation agreements.</p><h2>4. Contact Grievance Officer</h2><p>For privacy queries, contact privacy@stonemarketindia.com.</p>`,
+        status: 'published',
+        meta_title: 'Privacy Policy | Stone Market India',
+        meta_description: 'Official Privacy Policy of Stone Market India - B2B Digital Stone & Mineral Marketplace.',
+        is_system: true,
+        created_by: adminUserId,
+      },
+      {
+        title: 'Terms & Conditions',
+        slug: 'terms-and-conditions',
+        category: 'legal',
+        summary: 'Platform usage agreement, trade obligations, verification policies, and seller guidelines.',
+        content: `<h2>1. Platform Eligibility</h2><p>By registering on Stone Market India, you certify that you represent an authentic business, proprietorship, or enterprise engaged in natural stone, machinery, minerals, or logistics services.</p><h2>2. Product Listings & Authenticity</h2><p>Suppliers must submit accurate stone specifications, dimensional measurements, pricing units, and authentic quarry or manufacturing imagery.</p><h2>3. Inquiry & Direct Quotation</h2><p>Discussions, pricing negotiations, and quotations sent through the platform constitute direct trade negotiations between buyers and sellers.</p><h2>4. Termination & De-listing</h2><p>Stone Market India reserves the right to suspend accounts displaying fraudulent credentials or non-compliant trade practices.</p>`,
+        status: 'published',
+        meta_title: 'Terms and Conditions | Stone Market India',
+        meta_description: 'Terms and conditions governing the use of Stone Market India digital marketplace.',
+        is_system: true,
+        created_by: adminUserId,
+      },
+      {
+        title: 'Refund & Cancellation Policy',
+        slug: 'refund-policy',
+        category: 'policy',
+        summary: 'Terms governing subscription plans, verified enterprise badges, and advertising promotion packages.',
+        content: `<h2>1. Subscription & Promotion Packages</h2><p>Payments made for featured marketplace listings, targeted billboard advertisements, or verified enterprise onboarding packages are non-refundable once activated.</p><h2>2. Technical Service Disruptions</h2><p>In the event of verified platform downtime impacting scheduled promotional banners, proportional ad runtime credits will be provided.</p><h2>3. Billing Assistance</h2><p>For payment disputes or tax invoice corrections, reach out to billing@stonemarketindia.com within 7 business days.</p>`,
+        status: 'published',
+        meta_title: 'Refund & Cancellation Policy | Stone Market India',
+        meta_description: 'Refund terms for marketplace promotions and vendor verification services on Stone Market India.',
+        is_system: true,
+        created_by: adminUserId,
+      },
+      {
+        title: 'About Stone Market India',
+        slug: 'about-us',
+        category: 'company',
+        summary: 'Overview of India’s premier digital stone, mineral, machinery, and logistics trade platform.',
+        content: `<h2>Empowering India's Natural Stone Industry</h2><p>Stone Market India is a high-performance industrial networking ecosystem uniting quarry owners, granite & marble manufacturers, processing machinery fabricators, mineral powder micronizers, and heavy freight logistics providers.</p><h3>Pan-India Industrial Coverage</h3><p>Connecting regional stone hubs across Kishangarh, Makrana, Rajsamand, Jalore, Morbi, Ilkal, Ongole, and Karimnagar to nationwide buyers and architecture firms.</p>`,
+        status: 'published',
+        meta_title: 'About Us | Stone Market India',
+        meta_description: 'Discover the mission, scale, and vision of Stone Market India.',
+        is_system: true,
+        created_by: adminUserId,
+      }
+    ];
+    await CustomPage.insertMany(defaults);
+  }
+}
+
+/**
+ * GET /api/admin/super/pages
+ * List all custom pages with optional search, category, and status filtering
+ */
+router.get('/pages', async (req, res) => {
+  try {
+    await seedDefaultCustomPages(req.user?._id);
+
+    const { search, category, status } = req.query;
+    const filter = {};
+
+    if (status && status !== 'all') {
+      filter.status = status;
+    }
+    if (category && category !== 'all') {
+      filter.category = category;
+    }
+    if (search && search.trim()) {
+      filter.$or = [
+        { title: { $regex: search.trim(), $options: 'i' } },
+        { slug: { $regex: search.trim(), $options: 'i' } },
+        { summary: { $regex: search.trim(), $options: 'i' } },
+      ];
+    }
+
+    const pages = await CustomPage.find(filter)
+      .populate('updated_by', 'name email')
+      .sort({ updatedAt: -1 });
+
+    return successResponse(res, 'Custom pages retrieved successfully', pages);
+  } catch (err) {
+    return errorResponse(res, err.message, err, 500);
+  }
+});
+
+/**
+ * GET /api/admin/super/pages/:idOrSlug
+ * Retrieve single page by ID or Slug
+ */
+router.get('/pages/:idOrSlug', async (req, res) => {
+  try {
+    const { idOrSlug } = req.params;
+    const isObjectId = idOrSlug.match(/^[0-9a-fA-F]{24}$/);
+    const query = isObjectId ? { _id: idOrSlug } : { slug: idOrSlug.toLowerCase() };
+
+    const page = await CustomPage.findOne(query).populate('updated_by', 'name email');
+    if (!page) {
+      return errorResponse(res, 'Custom page not found', null, 404);
+    }
+
+    return successResponse(res, 'Custom page details retrieved', page);
+  } catch (err) {
+    return errorResponse(res, err.message, err, 500);
+  }
+});
+
+/**
+ * POST /api/admin/super/pages
+ * Create a new custom page
+ */
+router.post('/pages', async (req, res) => {
+  try {
+    const {
+      title,
+      slug,
+      category,
+      content,
+      summary,
+      status,
+      meta_title,
+      meta_description
+    } = req.body;
+
+    if (!title || !content) {
+      return errorResponse(res, 'Title and content are required', null, 400);
+    }
+
+    // Auto-generate or sanitize slug
+    let finalSlug = slug ? slug.trim().toLowerCase() : title.trim().toLowerCase();
+    finalSlug = finalSlug.replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
+
+    // Check duplicate slug
+    const existing = await CustomPage.findOne({ slug: finalSlug });
+    if (existing) {
+      return errorResponse(res, `Page with slug '${finalSlug}' already exists. Please choose a different slug.`, null, 409);
+    }
+
+    const newPage = await CustomPage.create({
+      title: title.trim(),
+      slug: finalSlug,
+      category: category || 'policy',
+      content,
+      summary: summary || '',
+      status: status || 'published',
+      meta_title: meta_title || title.trim(),
+      meta_description: meta_description || summary || '',
+      created_by: req.user?._id,
+      updated_by: req.user?._id,
+      published_at: status === 'published' ? new Date() : undefined,
+    });
+
+    return successResponse(res, 'Custom page created successfully', newPage, 201);
+  } catch (err) {
+    return errorResponse(res, err.message, err, 500);
+  }
+});
+
+/**
+ * PUT /api/admin/super/pages/:id
+ * Update an existing custom page
+ */
+router.put('/pages/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const page = await CustomPage.findById(id);
+    if (!page) {
+      return errorResponse(res, 'Custom page not found', null, 404);
+    }
+
+    const {
+      title,
+      slug,
+      category,
+      content,
+      summary,
+      status,
+      meta_title,
+      meta_description
+    } = req.body;
+
+    if (title) page.title = title.trim();
+    if (category) page.category = category;
+    if (content !== undefined) page.content = content;
+    if (summary !== undefined) page.summary = summary;
+    if (status) {
+      if (status === 'published' && page.status !== 'published') {
+        page.published_at = new Date();
+      }
+      page.status = status;
+    }
+    if (meta_title !== undefined) page.meta_title = meta_title;
+    if (meta_description !== undefined) page.meta_description = meta_description;
+
+    if (slug && slug.trim().toLowerCase() !== page.slug) {
+      let finalSlug = slug.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
+      const existing = await CustomPage.findOne({ slug: finalSlug, _id: { $ne: page._id } });
+      if (existing) {
+        return errorResponse(res, `Page with slug '${finalSlug}' already exists.`, null, 409);
+      }
+      page.slug = finalSlug;
+    }
+
+    page.updated_by = req.user?._id;
+    await page.save();
+
+    return successResponse(res, 'Custom page updated successfully', page);
+  } catch (err) {
+    return errorResponse(res, err.message, err, 500);
+  }
+});
+
+/**
+ * PATCH /api/admin/super/pages/:id/status
+ * Toggle page status (published, draft, archived)
+ */
+router.patch('/pages/:id/status', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { status } = req.body;
+    if (!['published', 'draft', 'archived'].includes(status)) {
+      return errorResponse(res, 'Invalid status value', null, 400);
+    }
+
+    const page = await CustomPage.findById(id);
+    if (!page) {
+      return errorResponse(res, 'Custom page not found', null, 404);
+    }
+
+    page.status = status;
+    if (status === 'published' && !page.published_at) {
+      page.published_at = new Date();
+    }
+    page.updated_by = req.user?._id;
+    await page.save();
+
+    return successResponse(res, `Page status changed to ${status}`, page);
+  } catch (err) {
+    return errorResponse(res, err.message, err, 500);
+  }
+});
+
+/**
+ * DELETE /api/admin/super/pages/:id
+ * Delete a custom page
+ */
+router.delete('/pages/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const page = await CustomPage.findById(id);
+    if (!page) {
+      return errorResponse(res, 'Custom page not found', null, 404);
+    }
+
+    if (page.is_system) {
+      return errorResponse(res, 'System protected pages cannot be deleted. You can set them to draft instead.', null, 400);
+    }
+
+    await CustomPage.findByIdAndDelete(id);
+    return successResponse(res, 'Custom page deleted successfully');
+  } catch (err) {
+    return errorResponse(res, err.message, err, 500);
+  }
+});
+
 module.exports = router;
 
