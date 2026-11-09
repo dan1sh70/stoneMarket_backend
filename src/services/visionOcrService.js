@@ -1,10 +1,22 @@
 const { GoogleGenAI } = require('@google/genai');
 const Product = require('../models/Product');
 const GraniteColor = require('../models/GraniteColor');
+const AppConfig = require('../models/AppConfig');
 const { calculateSlabRowArea, calculateParticularTotals } = require('./estimationService');
 
-function getAIClient() {
-  const apiKey = process.env.GEMINI_API_KEY || process.env.GOOGLE_VISION_API_KEY;
+async function getAIClient() {
+  let apiKey = process.env.GEMINI_API_KEY || process.env.GOOGLE_VISION_API_KEY;
+  try {
+    const config = await AppConfig.findOne({ key: 'global_config' }).lean();
+    if (config?.api_keys?.gemini_api_key) {
+      apiKey = config.api_keys.gemini_api_key;
+    } else if (config?.api_keys?.google_vision_api_key) {
+      apiKey = config.api_keys.google_vision_api_key;
+    }
+  } catch (err) {
+    // fallback to process.env
+  }
+
   if (!apiKey) {
     return null;
   }
@@ -44,7 +56,7 @@ function parseJsonFromText(text) {
  * -------------------------------------------------------------
  */
 async function matchStoneByImage({ base64Image, mimeType = 'image/jpeg', maxResults = 8 }) {
-  const ai = getAIClient();
+  const ai = await getAIClient();
   let analysis = {
     stone_type: 'Granite / Marble',
     primary_color: 'Black / Grey',
@@ -167,7 +179,7 @@ Analyze this stone image in detail and return ONLY a valid JSON object matching 
  * ------------------------------------------------------------------------
  */
 async function parseEstimateFromImage({ base64Image, mimeType = 'image/jpeg', estimateType = 'auto' }) {
-  const ai = getAIClient();
+  const ai = await getAIClient();
   let parsedResult = null;
 
   if (ai) {
@@ -333,3 +345,4 @@ module.exports = {
   matchStoneByImage,
   parseEstimateFromImage
 };
+

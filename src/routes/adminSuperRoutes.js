@@ -334,6 +334,56 @@ router.put('/settings', async (req, res) => {
 });
 
 /**
+ * GET /api/admin/super/settings/keys
+ * Full API keys details for Super Admin
+ */
+router.get('/settings/keys', async (req, res) => {
+  try {
+    let config = await AppConfig.findOne({ key: 'global_config' });
+    if (!config) {
+      config = await AppConfig.create({ key: 'global_config' });
+    }
+    const keys = config.api_keys || {};
+    return successResponse(res, 'Super admin API keys retrieved', {
+      gemini_api_key: keys.gemini_api_key || process.env.GEMINI_API_KEY || '',
+      google_vision_api_key: keys.google_vision_api_key || process.env.GOOGLE_VISION_API_KEY || '',
+      google_maps_api_key: keys.google_maps_api_key || process.env.GOOGLE_MAPS_API_KEY || '',
+      aws_access_key: keys.aws_access_key || process.env.AWS_ACCESS_KEY_ID || '',
+      aws_secret_key: keys.aws_secret_key || process.env.AWS_SECRET_ACCESS_KEY || '',
+      aws_s3_bucket: keys.aws_s3_bucket || process.env.AWS_S3_BUCKET || '',
+      aws_region: keys.aws_region || process.env.AWS_REGION || 'ap-south-1',
+      twilio_account_sid: keys.twilio_account_sid || process.env.TWILIO_ACCOUNT_SID || '',
+      twilio_auth_token: keys.twilio_auth_token || process.env.TWILIO_AUTH_TOKEN || '',
+      twilio_phone_number: keys.twilio_phone_number || process.env.TWILIO_PHONE_NUMBER || ''
+    });
+  } catch (err) {
+    return errorResponse(res, err.message, err, 500);
+  }
+});
+
+/**
+ * PUT /api/admin/super/settings/keys
+ * Update API keys in database
+ */
+router.put('/settings/keys', async (req, res) => {
+  try {
+    const newKeys = req.body || {};
+    let config = await AppConfig.findOne({ key: 'global_config' });
+    if (!config) {
+      config = new AppConfig({ key: 'global_config' });
+    }
+    config.api_keys = {
+      ...(config.api_keys || {}),
+      ...newKeys
+    };
+    await config.save();
+    return successResponse(res, 'API keys updated successfully', config.api_keys);
+  } catch (err) {
+    return errorResponse(res, err.message, err, 500);
+  }
+});
+
+/**
  * 7. CATEGORIES CRUD MANAGEMENT
  * GET /api/admin/super/categories
  */
