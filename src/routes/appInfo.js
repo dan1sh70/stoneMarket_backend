@@ -75,4 +75,87 @@ router.get('/pages/:slug', async (req, res) => {
   }
 });
 
+/**
+ * --------------------------------------------------------------------------
+ * GOOGLE PLAY STORE MANDATORY ACCOUNT DELETION ENDPOINTS
+ * --------------------------------------------------------------------------
+ */
+const AccountDeletionRequest = require('../models/AccountDeletionRequest');
+const User = require('../models/User');
+
+// POST /api/v1/app/delete-account-request (Public URL for Play Store listing)
+router.post('/delete-account-request', async (req, res) => {
+  try {
+    const { identifier, reason, confirmUnderstand } = req.body;
+
+    if (!identifier || !identifier.trim()) {
+      return errorResponse(res, 'Please provide the registered mobile number or email address of the account.', null, 400);
+    }
+
+    if (!confirmUnderstand) {
+      return errorResponse(res, 'Please confirm that you understand account deletion will permanently remove your business profile and catalogue data.', null, 400);
+    }
+
+    const cleanIdentifier = identifier.trim();
+    // Check if user exists in database
+    const user = await User.findOne({
+      $or: [
+        { mobile: cleanIdentifier },
+        { email: cleanIdentifier.toLowerCase() }
+      ]
+    });
+
+    const requestIp = req.headers['x-forwarded-for'] || req.socket.remoteAddress || '';
+
+    // Create deletion ticket
+    const deletionRecord = await AccountDeletionRequest.create({
+      identifier: cleanIdentifier,
+      userId: user ? user._id : null,
+      reason: reason || 'Requested via Play Store public web page',
+      request_ip: String(requestIp),
+      status: 'pending',
+      data_types_to_delete: [
+        'User Personal Profile & Credentials',
+        'Business Profile & Factory Information',
+        'Stone Product Listings & Machinery Catalogues',
+        'Chat Messages, Inquiries & Lead Demands',
+        'Device FCM Push Tokens & Active Sessions'
+      ]
+    });
+
+    // If user found, mark status to pending_deletion
+    if (user) {
+      user.status = 'suspended';
+      await user.save();
+    }
+
+    return successResponse(res, 'Account deletion request submitted successfully. In accordance with Google Play Store guidelines, your account and associated data will be purged within the 7-day grace period.', {
+      request_id: deletionRecord._id,
+      identifier: deletionRecord.identifier,
+      scheduled_deletion_date: deletionRecord.scheduled_deletion_date,
+      status: 'pending'
+    }, 201);
+  } catch (err) {
+    return errorResponse(res, err.message, err, 500);
+  }
+});
+
+// GET /api/v1/app/delete-account-request/:idOrMobile (Check deletion status)
+router.get('/delete-account-request/:identifier', async (req, res) => {
+  try {
+    const { identifier } = req.params;
+    const isObjectId = identifier.match(/^[0-9a-fA-F]{24}$/);
+    const query = isObjectId ? { _id: identifier } : { identifier: identifier.trim() };
+
+    const record = await AccountDeletionRequest.findOne(query).sort({ createdAt: -1 });
+    if (!record) {
+      return errorResponse(res, 'No active account deletion request found for this identifier.', null, 404);
+    }
+
+    return successResponse(res, 'Account deletion request status retrieved', record);
+  } catch (err) {
+    return errorResponse(res, err.message, err, 500);
+  }
+});
+
 module.exports = router;
