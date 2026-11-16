@@ -29495,6 +29495,212 @@
           }
         }
       ]
+    },
+    {
+      "name": "Vision OCR & Image Recognition Module",
+      "description": "Dual Vision AI models for natural stone texture/color visual matching and document/estimate ledger OCR.",
+      "item": [
+        {
+          "name": "1. Match Stone by Image (Model A)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "image",
+                  "type": "file",
+                  "description": "Stone slab, tile or texture image"
+                },
+                {
+                  "key": "maxResults",
+                  "value": "8",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/ocr/stone-match",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "ocr",
+                "stone-match"
+              ]
+            },
+            "description": "Analyzes stone surface for color, texture, veining and returns top matching catalogue products and granite colors."
+          }
+        },
+        {
+          "name": "2. Parse Estimate Document / Measurement Slip (Model B)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "image",
+                  "type": "file",
+                  "description": "Handwritten ledger or printed measurement sheet image"
+                },
+                {
+                  "key": "estimateType",
+                  "value": "auto",
+                  "type": "text",
+                  "description": "slab | particular | auto"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/ocr/estimate-parse",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "ocr",
+                "estimate-parse"
+              ]
+            },
+            "description": "Extracts tabular stone measurements (length, height, quantity) or line-item particulars and calculates total area & cost."
+          }
+        },
+        {
+          "name": "3. Save Parsed Estimate to Ledger",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"slab\",\n  \"customer_name\": \"Amit Sharma\",\n  \"customer_mobile\": \"9876543210\",\n  \"measurement_unit\": \"inch\",\n  \"area_unit\": \"sqft\",\n  \"unit_price\": 185,\n  \"rows\": [\n    {\n      \"length\": 96,\n      \"height\": 60,\n      \"quantity\": 12,\n      \"sqft\": 480\n    }\n  ],\n  \"items\": [],\n  \"raw_notes\": \"Parsed from warehouse slip\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/ocr/save-parsed-estimate",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "ocr",
+                "save-parsed-estimate"
+              ]
+            },
+            "description": "Directly converts OCR-extracted measurement slip data into an official MongoDB Estimate record."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Compliance & App Public Config",
+      "description": "Public endpoints for Google Play Store account deletion and safe client API keys.",
+      "item": [
+        {
+          "name": "Get Safe App Keys (Public)",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/app/keys",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "app",
+                "keys"
+              ]
+            },
+            "description": "Returns public keys (Google Maps) and enabled feature flags without exposing AI secrets."
+          }
+        },
+        {
+          "name": "Submit Account Deletion Request (Play Store Compliance)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"identifier\": \"user@example.com\",\n  \"reason\": \"No longer needed\",\n  \"delete_documents\": true,\n  \"delete_business_profiles\": true,\n  \"delete_listings\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/app/delete-account-request",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "app",
+                "delete-account-request"
+              ]
+            },
+            "description": "Public portal API for users to request full account & data purge."
+          }
+        },
+        {
+          "name": "Check Deletion Request Status",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/app/delete-account-request/user@example.com",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "app",
+                "delete-account-request",
+                "user@example.com"
+              ]
+            },
+            "description": "Check status of an existing deletion request by identifier or reference ID."
+          }
+        }
+      ]
     }
   ]
 }

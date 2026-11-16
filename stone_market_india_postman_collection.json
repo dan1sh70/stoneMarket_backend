@@ -480,6 +480,121 @@
           }
         }
       ]
+    },
+    {
+      "name": "Vision OCR & Image Recognition Module",
+      "description": "Dual Vision AI models for natural stone visual matching and document OCR.",
+      "item": [
+        {
+          "name": "1. Match Stone by Image (Model A)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "image",
+                  "type": "file"
+                },
+                {
+                  "key": "maxResults",
+                  "value": "8",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/ocr/stone-match",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "ocr",
+                "stone-match"
+              ]
+            }
+          }
+        },
+        {
+          "name": "2. Parse Estimate Document (Model B)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "image",
+                  "type": "file"
+                },
+                {
+                  "key": "estimateType",
+                  "value": "auto",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/ocr/estimate-parse",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "ocr",
+                "estimate-parse"
+              ]
+            }
+          }
+        },
+        {
+          "name": "3. Save Parsed Estimate to Ledger",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"slab\",\n  \"customer_name\": \"Amit Sharma\",\n  \"customer_mobile\": \"9876543210\",\n  \"measurement_unit\": \"inch\",\n  \"area_unit\": \"sqft\",\n  \"unit_price\": 185,\n  \"rows\": [\n    {\n      \"length\": 96,\n      \"height\": 60,\n      \"quantity\": 12,\n      \"sqft\": 480\n    }\n  ],\n  \"items\": [],\n  \"raw_notes\": \"Parsed from warehouse slip\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/ocr/save-parsed-estimate",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "ocr",
+                "save-parsed-estimate"
+              ]
+            }
+          }
+        }
+      ]
     }
   ]
 }
