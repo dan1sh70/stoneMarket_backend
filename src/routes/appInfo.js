@@ -3,6 +3,7 @@ const router = express.Router();
 const appInfoController = require('../controllers/appInfoController');
 const CustomPage = require('../models/CustomPage');
 const AppConfig = require('../models/AppConfig');
+const Activity = require('../models/Activity');
 const { successResponse, errorResponse } = require('../utils/apiResponse');
 
 // Public App Info Routes
@@ -70,6 +71,71 @@ router.get('/pages/:slug', async (req, res) => {
     }
 
     return successResponse(res, 'Page retrieved successfully', page);
+  } catch (err) {
+    return errorResponse(res, err.message, err, 500);
+  }
+});
+
+/**
+ * --------------------------------------------------------------------------
+ * PUBLIC STONE MARKET ACTIVITIES & BLOGS ENDPOINTS (Mobile & Web)
+ * --------------------------------------------------------------------------
+ */
+
+// GET /api/v1/app/activities or /api/app/activities
+router.get('/activities', async (req, res) => {
+  try {
+    const { type, category, is_featured, limit = 20, page = 1 } = req.query;
+    const filter = { status: 'published' };
+
+    if (type && type !== 'all') filter.type = type;
+    if (category) filter.category = category;
+    if (is_featured === 'true') filter.is_featured = true;
+
+    const skip = (Number(page) - 1) * Number(limit);
+    const [total, activities] = await Promise.all([
+      Activity.countDocuments(filter),
+      Activity.find(filter)
+        .select('title slug description image type category tags author_name is_featured views_count published_at url createdAt')
+        .sort({ published_at: -1, createdAt: -1 })
+        .skip(skip)
+        .limit(Number(limit))
+    ]);
+
+    return successResponse(res, 'Published activities and blogs retrieved', {
+      activities,
+      pagination: {
+        total,
+        page: Number(page),
+        limit: Number(limit),
+        totalPages: Math.ceil(total / Number(limit))
+      }
+    });
+  } catch (err) {
+    return errorResponse(res, err.message, err, 500);
+  }
+});
+
+// GET /api/v1/app/activities/:idOrSlug
+router.get('/activities/:idOrSlug', async (req, res) => {
+  try {
+    const { idOrSlug } = req.params;
+    const isObjectId = idOrSlug.match(/^[0-9a-fA-F]{24}$/);
+    const query = isObjectId
+      ? { _id: idOrSlug, status: 'published' }
+      : { slug: idOrSlug.toLowerCase(), status: 'published' };
+
+    const activity = await Activity.findOneAndUpdate(
+      query,
+      { $inc: { views_count: 1 } },
+      { new: true }
+    );
+
+    if (!activity) {
+      return errorResponse(res, 'Activity or blog post not found', null, 404);
+    }
+
+    return successResponse(res, 'Activity details retrieved successfully', activity);
   } catch (err) {
     return errorResponse(res, err.message, err, 500);
   }

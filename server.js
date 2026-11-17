@@ -169,6 +169,11 @@ app.use('/api/pages', (req, res, next) => {
   req.url = '/pages' + req.url;
   return appInfoRoutes(req, res, next);
 });
+app.use('/api/activities', (req, res, next) => {
+  // Direct shortcut /api/activities -> appInfo activities handler
+  req.url = '/activities' + req.url;
+  return appInfoRoutes(req, res, next);
+});
 app.use('/api/home', homeRoutes);
 app.use('/api/feed', feedRoutes);
 app.use('/api/businesses', businessRoutes);

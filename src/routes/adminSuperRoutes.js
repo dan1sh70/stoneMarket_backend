@@ -11,6 +11,7 @@ const AppConfig = require('../models/AppConfig');
 const News = require('../models/News');
 const AdminLog = require('../models/AdminLog');
 const Advertisement = require('../models/Advertisement');
+const Activity = require('../models/Activity');
 const { successResponse, errorResponse } = require('../utils/apiResponse');
 
 // All routes require Super Admin authentication
@@ -906,6 +907,262 @@ router.delete('/pages/:id', async (req, res) => {
 
     await CustomPage.findByIdAndDelete(id);
     return successResponse(res, 'Custom page deleted successfully');
+  } catch (err) {
+    return errorResponse(res, err.message, err, 500);
+  }
+});
+
+/**
+ * --------------------------------------------------------------------------
+ * 12. STONE MARKET ACTIVITIES & BLOG CMS MANAGEMENT
+ * --------------------------------------------------------------------------
+ */
+
+/**
+ * GET /api/admin/super/activities
+ * List all activities & blogs with search, type, and status filtering
+ */
+router.get('/activities', async (req, res) => {
+  try {
+    const { search, type, status, page = 1, limit = 20 } = req.query;
+    const filter = {};
+
+    if (search) {
+      filter.$or = [
+        { title: { $regex: search, $options: 'i' } },
+        { description: { $regex: search, $options: 'i' } },
+        { content: { $regex: search, $options: 'i' } },
+        { tags: { $in: [new RegExp(search, 'i')] } }
+      ];
+    }
+
+    if (type && type !== 'all') {
+      filter.type = type;
+    }
+
+    if (status && status !== 'all') {
+      filter.status = status;
+    }
+
+    const skip = (Number(page) - 1) * Number(limit);
+    const [total, activities] = await Promise.all([
+      Activity.countDocuments(filter),
+      Activity.find(filter)
+        .sort({ published_at: -1, createdAt: -1 })
+        .skip(skip)
+        .limit(Number(limit))
+    ]);
+
+    return successResponse(res, 'Activities and blogs retrieved successfully', {
+      activities,
+      pagination: {
+        total,
+        page: Number(page),
+        limit: Number(limit),
+        totalPages: Math.ceil(total / Number(limit))
+      }
+    });
+  } catch (err) {
+    return errorResponse(res, err.message, err, 500);
+  }
+});
+
+/**
+ * GET /api/admin/super/activities/:idOrSlug
+ * Get a single activity/blog by Mongo ID or Slug
+ */
+router.get('/activities/:idOrSlug', async (req, res) => {
+  try {
+    const { idOrSlug } = req.params;
+    let query = {};
+    if (idOrSlug.match(/^[0-9a-fA-F]{24}$/)) {
+      query = { _id: idOrSlug };
+    } else {
+      query = { slug: idOrSlug.toLowerCase() };
+    }
+
+    const activity = await Activity.findOne(query);
+    if (!activity) {
+      return errorResponse(res, 'Activity / Blog post not found', null, 404);
+    }
+
+    return successResponse(res, 'Activity details retrieved', activity);
+  } catch (err) {
+    return errorResponse(res, err.message, err, 500);
+  }
+});
+
+/**
+ * POST /api/admin/super/activities
+ * Create a new Activity / Blog article
+ */
+router.post('/activities', async (req, res) => {
+  try {
+    const {
+      title,
+      slug,
+      description,
+      content,
+      image,
+      gallery_images,
+      type = 'blog',
+      category = 'General',
+      tags = [],
+      url,
+      author_name = 'Stone Market Editorial',
+      status = 'published',
+      is_featured = false,
+      published_at
+    } = req.body;
+
+    if (!title) {
+      return errorResponse(res, 'Title is required for an activity/blog post', null, 400);
+    }
+
+    let finalSlug = slug;
+    if (!finalSlug) {
+      finalSlug = title
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '') + '-' + Date.now().toString().slice(-4);
+    } else {
+      finalSlug = finalSlug.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+    }
+
+    // Check slug collision
+    const existing = await Activity.findOne({ slug: finalSlug });
+    if (existing) {
+      finalSlug = `${finalSlug}-${Date.now().toString().slice(-4)}`;
+    }
+
+    const newActivity = await Activity.create({
+      title,
+      slug: finalSlug,
+      description,
+      content,
+      image,
+      gallery_images: Array.isArray(gallery_images) ? gallery_images : [],
+      type,
+      category,
+      tags: Array.isArray(tags) ? tags : (typeof tags === 'string' ? tags.split(',').map(t => t.trim()).filter(Boolean) : []),
+      url,
+      author_name,
+      author_id: req.user._id,
+      status,
+      is_featured: !!is_featured,
+      published_at: published_at ? new Date(published_at) : new Date()
+    });
+
+    return successResponse(res, 'Activity/Blog post published successfully', newActivity, 201);
+  } catch (err) {
+    return errorResponse(res, err.message, err, 500);
+  }
+});
+
+/**
+ * PUT /api/admin/super/activities/:id
+ * Update an existing Activity / Blog article
+ */
+router.put('/activities/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const activity = await Activity.findById(id);
+    if (!activity) {
+      return errorResponse(res, 'Activity / Blog post not found', null, 404);
+    }
+
+    const {
+      title,
+      slug,
+      description,
+      content,
+      image,
+      gallery_images,
+      type,
+      category,
+      tags,
+      url,
+      author_name,
+      status,
+      is_featured,
+      published_at
+    } = req.body;
+
+    if (title) activity.title = title;
+    if (description !== undefined) activity.description = description;
+    if (content !== undefined) activity.content = content;
+    if (image !== undefined) activity.image = image;
+    if (gallery_images !== undefined) activity.gallery_images = Array.isArray(gallery_images) ? gallery_images : [];
+    if (type) activity.type = type;
+    if (category) activity.category = category;
+    if (tags !== undefined) {
+      activity.tags = Array.isArray(tags) ? tags : (typeof tags === 'string' ? tags.split(',').map(t => t.trim()).filter(Boolean) : []);
+    }
+    if (url !== undefined) activity.url = url;
+    if (author_name) activity.author_name = author_name;
+    if (status) activity.status = status;
+    if (is_featured !== undefined) activity.is_featured = !!is_featured;
+    if (published_at) activity.published_at = new Date(published_at);
+
+    if (slug && slug !== activity.slug) {
+      const cleanSlug = slug.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+      const existing = await Activity.findOne({ slug: cleanSlug, _id: { $ne: id } });
+      if (existing) {
+        activity.slug = `${cleanSlug}-${Date.now().toString().slice(-4)}`;
+      } else {
+        activity.slug = cleanSlug;
+      }
+    }
+
+    await activity.save();
+    return successResponse(res, 'Activity / Blog post updated successfully', activity);
+  } catch (err) {
+    return errorResponse(res, err.message, err, 500);
+  }
+});
+
+/**
+ * PATCH /api/admin/super/activities/:id/status
+ * Quickly toggle publication status (draft | published | archived)
+ */
+router.patch('/activities/:id/status', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { status } = req.body;
+
+    if (!['draft', 'published', 'archived'].includes(status)) {
+      return errorResponse(res, 'Invalid status. Must be draft, published, or archived', null, 400);
+    }
+
+    const activity = await Activity.findByIdAndUpdate(
+      id,
+      { $set: { status, updatedAt: new Date() } },
+      { new: true }
+    );
+
+    if (!activity) {
+      return errorResponse(res, 'Activity / Blog post not found', null, 404);
+    }
+
+    return successResponse(res, `Activity status changed to ${status}`, activity);
+  } catch (err) {
+    return errorResponse(res, err.message, err, 500);
+  }
+});
+
+/**
+ * DELETE /api/admin/super/activities/:id
+ * Delete an Activity / Blog post
+ */
+router.delete('/activities/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const activity = await Activity.findByIdAndDelete(id);
+    if (!activity) {
+      return errorResponse(res, 'Activity / Blog post not found', null, 404);
+    }
+
+    return successResponse(res, 'Activity / Blog post deleted successfully');
   } catch (err) {
     return errorResponse(res, err.message, err, 500);
   }
